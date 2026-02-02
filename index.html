@@ -1,0 +1,1023 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GTM Scenario Tool - Data Table</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+      .font-inter {
+        font-family: "Inter", sans-serif;
+      }
+      .icon-16 {
+        width: 16px;
+        height: 16px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .icon-20 {
+        width: 20px;
+        height: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .icon-sort {
+        font-size: 16px;
+        line-height: 16px;
+      }
+      .icon-caret {
+        font-size: 16px;
+        line-height: 16px;
+      }
+      .table-row.is-selected {
+        background-color: #d8e7fb;
+      }
+      .table-checkbox {
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 1.5px solid #2d2d2d;
+        border-radius: 3px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+      }
+      .table-checkbox:checked {
+        border-color: #004895;
+        background-color: #004895;
+      }
+      .table-checkbox:checked::after {
+        content: "";
+        width: 8px;
+        height: 5px;
+        border-left: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+        transform: rotate(-45deg);
+        display: block;
+      }
+      .table-checkbox:indeterminate {
+        border-color: #004895;
+        background-color: #004895;
+      }
+      .table-checkbox:indeterminate::after {
+        content: "";
+        width: 8px;
+        height: 2px;
+        background: #fff;
+        border-radius: 2px;
+        display: block;
+        transform: translateY(1px);
+      }
+      .filter-checkbox {
+        appearance: none;
+        width: 12px;
+        height: 12px;
+        border: 1.5px solid #2d2d2d;
+        border-radius: 2px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+      }
+      .filter-checkbox:checked {
+        border-color: #004895;
+        background-color: #004895;
+      }
+      .filter-checkbox:checked::after {
+        content: "";
+        width: 6px;
+        height: 4px;
+        border-left: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+        transform: rotate(-45deg);
+        display: block;
+      }
+      .filter-checkbox:indeterminate {
+        border-color: #004895;
+        background-color: #004895;
+      }
+      .filter-checkbox:indeterminate::after {
+        content: "";
+        width: 6px;
+        height: 2px;
+        background: #fff;
+        border-radius: 2px;
+        display: block;
+      }
+      .filter-chip-active {
+        background: #d8e7fb;
+        border-color: #004895;
+        color: #004895;
+      }
+      .filter-menu {
+        width: 240px;
+        border: 1px solid #d8e7fb;
+        border-radius: 4px;
+        box-shadow: 0 4px 24px rgba(58, 58, 58, 0.08);
+      }
+    </style>
+  </head>
+  <body class="bg-[#f5f9ff] text-[#2d2d2d]">
+    <div class="min-h-screen">
+      <header
+        class="bg-white border-b border-[#d8e7fb] shadow-[4px_0px_24px_0px_rgba(0,94,192,0.08)]"
+      >
+        <div class="mx-auto flex h-16 items-center justify-between px-16">
+          <div class="flex items-center gap-10">
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-28">
+                <img
+                  alt="PepsiCo Logo"
+                  class="h-10 w-28 object-contain"
+                  src="http://localhost:3845/assets/f94b3a152c5905b70bcd2f8485ceb752ec3f0213.svg"
+                />
+              </div>
+              <div class="h-6 w-px bg-[#dadada]"></div>
+              <div class="text-[16px] leading-[22px] text-[#2d2d2d]">
+                GTM Scenario Tool
+              </div>
+            </div>
+            <nav class="flex h-16 items-center gap-2">
+              <div class="flex h-16 items-center border-b-2 border-[#004895]">
+                <div class="flex items-center gap-2 px-2 py-1">
+                  <span
+                    class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none text-[#004895]"
+                  >
+                    dashboard
+                  </span>
+                  <span class="text-[16px] font-bold text-[#004895]">
+                    Workspace
+                  </span>
+                </div>
+              </div>
+              <div class="flex h-16 items-center">
+                <div class="flex items-center gap-2 px-2 py-1">
+                  <span
+                    class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none text-[#4b4b4b]"
+                  >
+                    add
+                  </span>
+                  <span class="text-[16px] text-[#4b4b4b]">Scenario</span>
+                </div>
+              </div>
+              <div class="flex h-16 items-center">
+                <div class="flex items-center gap-2 px-2 py-1">
+                  <span
+                    class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none text-[#4b4b4b]"
+                  >
+                    bar_chart
+                  </span>
+                  <span class="text-[16px] text-[#4b4b4b]">Analysis</span>
+                </div>
+              </div>
+            </nav>
+          </div>
+          <div class="flex items-center">
+            <div class="flex items-center gap-6 pr-6">
+              <div class="relative flex h-16 w-14 items-center justify-center">
+                <span
+                  class="material-icons inline-flex h-6 w-6 items-center justify-center text-[24px] leading-none text-[#2d2d2d]"
+                >
+                  notifications_none
+                </span>
+                <div
+                  class="absolute left-[26px] top-[17px] flex min-w-[18px] items-center justify-center rounded-full bg-[#c12c01] px-1"
+                >
+                  <span class="text-[12px] font-bold leading-[20px] text-white">
+                    10
+                  </span>
+                </div>
+              </div>
+              <div class="flex items-center gap-1">
+                <img
+                  alt="Avatar"
+                  class="h-10 w-10 rounded-full object-cover"
+                  src="http://localhost:3845/assets/2f1fd18b1e387532b46fa1a63c7da8ecd2eda62a.png"
+                />
+                <span
+                  class="material-icons inline-flex h-6 w-6 items-center justify-center text-[24px] leading-none text-[#2d2d2d]"
+                >
+                  arrow_drop_down
+                </span>
+              </div>
+            </div>
+            <div class="flex h-16 w-14 items-center justify-center bg-[#004895]">
+              <span
+                class="material-icons inline-flex h-6 w-6 items-center justify-center text-[24px] leading-none text-white"
+              >
+                apps
+              </span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="px-12 pb-16 pt-6">
+        <section class="mx-auto max-w-[1344px]">
+          <div
+            class="rounded-lg bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
+          >
+            <div class="border-b-2 border-[#d8e7fb]">
+              <div
+                class="flex items-start border-b-2 border-[#d8e7fb] bg-white px-2 pt-2"
+              >
+                <button
+                  id="tab-all"
+                  class="flex min-h-[32px] items-center border-b-2 border-[#004895] px-2 py-1 text-[14px] font-bold text-[#4b4b4b]"
+                >
+                  All
+                </button>
+                <button
+                  id="tab-my"
+                  class="flex min-h-[32px] items-center border-b border-[#d8e7fb] px-2 py-1 text-[14px] text-[#4b4b4b]"
+                >
+                  My workspace
+                </button>
+              </div>
+
+              <div class="flex flex-col gap-[2px] bg-[#d8e7fb]">
+                <div
+                  class="flex flex-wrap items-center justify-end gap-x-[200px] gap-y-3 bg-white px-2 py-5"
+                >
+                  <div class="flex flex-1 items-center gap-2">
+                    <div class="relative">
+                      <button
+                        id="portfolio-chip"
+                        class="filter-chip-active flex h-8 items-center gap-1 rounded-full border bg-white px-4 text-[14px]"
+                        type="button"
+                      >
+                        Portfolio
+                        <span class="icon-16">
+                          <span class="material-icons icon-caret">arrow_drop_down</span>
+                        </span>
+                      </button>
+                      <div
+                        id="portfolio-menu"
+                        class="filter-menu absolute left-0 top-[36px] hidden bg-white p-2 text-[14px] text-[#4b4b4b]"
+                      >
+                        <div class="flex items-center gap-2 rounded border border-[#c0c0c0] px-2 py-1">
+                          <input
+                            id="portfolio-search"
+                            class="w-full text-[14px] outline-none"
+                            placeholder="Search..."
+                            type="text"
+                          />
+                          <span
+                            class="material-icons text-[16px] text-[#4b4b4b]"
+                          >
+                            search
+                          </span>
+                        </div>
+                        <div
+                          id="portfolio-options"
+                          class="mt-2 max-h-[180px] overflow-auto"
+                        ></div>
+                        <div class="mt-2 flex items-center justify-end gap-4 border-t border-[#d8e7fb] pt-2 text-[12px] font-bold text-[#004895]">
+                          <button id="portfolio-cancel" type="button">Cancel</button>
+                          <button
+                            id="portfolio-apply"
+                            class="rounded-full bg-[#004895] px-3 py-1 text-white"
+                            type="button"
+                          >
+                            Apply
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="relative">
+                      <button
+                        id="status-chip"
+                        class="filter-chip-active flex h-8 items-center gap-1 rounded-full border bg-white px-4 text-[14px]"
+                        type="button"
+                      >
+                        Status
+                        <span class="icon-16">
+                          <span class="material-icons icon-caret">arrow_drop_down</span>
+                        </span>
+                      </button>
+                      <div
+                        id="status-menu"
+                        class="filter-menu absolute left-0 top-[36px] hidden bg-white p-2 text-[14px] text-[#4b4b4b]"
+                      >
+                        <div class="flex items-center gap-2 rounded border border-[#c0c0c0] px-2 py-1">
+                          <input
+                            id="status-search"
+                            class="w-full text-[14px] outline-none"
+                            placeholder="Search..."
+                            type="text"
+                          />
+                          <span
+                            class="material-icons text-[16px] text-[#4b4b4b]"
+                          >
+                            search
+                          </span>
+                        </div>
+                        <div
+                          id="status-options"
+                          class="mt-2 max-h-[180px] overflow-auto"
+                        ></div>
+                        <div class="mt-2 flex items-center justify-end gap-4 border-t border-[#d8e7fb] pt-2 text-[12px] font-bold text-[#004895]">
+                          <button id="status-cancel" type="button">Cancel</button>
+                          <button
+                            id="status-apply"
+                            class="rounded-full bg-[#004895] px-3 py-1 text-white"
+                            type="button"
+                          >
+                            Apply
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="h-6 w-px bg-[#d8e7fb]"></div>
+                    <button class="h-8 px-2 text-[14px] font-bold text-[#004895]">
+                      Reset all
+                    </button>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <div class="relative">
+                      <div
+                        class="flex h-8 w-8 items-center justify-center rounded border border-[#d8e7fb] bg-white"
+                      >
+                        <span
+                          class="material-icons inline-flex h-4 w-4 items-center justify-center text-[16px] leading-none text-[#004895]"
+                        >
+                          search
+                        </span>
+                      </div>
+                      <div
+                        class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 translate-y-[-35px] rounded bg-[#262626] px-2 py-1 text-[12px] text-[#efefef] opacity-0 shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
+                      >
+                        Search
+                      </div>
+                    </div>
+                    <div class="h-6 w-px bg-[#d8e7fb]"></div>
+                    <button
+                      class="flex h-8 items-center gap-2 rounded-full bg-[#004895] px-4 text-[14px] font-bold text-white"
+                    >
+                      <span
+                        class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none"
+                      >
+                        add
+                      </span>
+                      New Scenario
+                    </button>
+                    <button
+                      id="compare-button"
+                      class="flex h-8 items-center gap-2 rounded-full border border-[#dadada] px-4 text-[14px] font-bold text-[#b1b1b1]"
+                    >
+                      <span
+                        class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none"
+                      >
+                        compare_arrows
+                      </span>
+                      Compare
+                    </button>
+                  </div>
+                </div>
+
+                <div
+                  id="bulk-bar"
+                  class="flex items-center justify-between bg-[#f5f9ff] px-2 py-3"
+                >
+                  <p class="text-[14px] font-bold text-[#004895]">
+                    <span id="selected-count">1</span> of
+                    <span id="total-count">10</span> rows selected
+                  </p>
+                  <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-1 text-[12px] font-bold text-[#004895]">
+                      <span
+                        class="material-icons inline-flex h-4 w-4 items-center justify-center text-[16px] leading-none"
+                      >
+                        delete
+                      </span>
+                      Delete
+                    </div>
+                    <div class="flex items-center gap-1 text-[12px] font-bold text-[#004895]">
+                      <span
+                        class="material-icons inline-flex h-4 w-4 items-center justify-center text-[16px] leading-none"
+                      >
+                        edit
+                      </span>
+                      Duplicate &amp; Edit
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="border-b-2 border-[#d8e7fb]">
+              <div
+                class="grid min-h-[48px] grid-cols-[32px_120px_1fr_120px_140px_120px_1fr_120px] items-center border-b-2 border-[#d8e7fb] bg-white"
+              >
+                <div class="flex items-center justify-center">
+                  <input
+                    id="select-all"
+                    type="checkbox"
+                    class="table-checkbox"
+                  />
+                </div>
+                <div class="flex items-center gap-2 px-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                  Scenario ID
+                  <span class="icon-16">
+                    <span class="material-icons icon-sort">unfold_more</span>
+                  </span>
+                </div>
+                <div class="flex items-center gap-2 px-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                  Description
+                  <span class="icon-16">
+                    <span class="material-icons icon-sort">unfold_more</span>
+                  </span>
+                </div>
+                <div class="flex items-center gap-2 px-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                  Portfolio
+                  <span class="icon-16">
+                    <span class="material-icons icon-sort">unfold_more</span>
+                  </span>
+                </div>
+                <div class="flex items-center gap-2 px-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                  Owner
+                  <span class="icon-16">
+                    <span class="material-icons icon-sort">unfold_more</span>
+                  </span>
+                </div>
+                <div class="flex items-center gap-2 px-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                  Status
+                  <span class="icon-16">
+                    <span class="material-icons icon-sort">unfold_more</span>
+                  </span>
+                </div>
+                <div class="flex items-center gap-2 px-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                  Date Modified
+                  <span class="icon-16">
+                    <span class="material-icons icon-sort">unfold_more</span>
+                  </span>
+                </div>
+                <div class="flex items-center gap-2 px-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                  PTS Impact
+                  <span class="icon-16">
+                    <span class="material-icons icon-sort">unfold_more</span>
+                  </span>
+                </div>
+              </div>
+
+              <div
+                id="table-body"
+                class="divide-y-2 divide-[#d8e7fb]"
+              ></div>
+            </div>
+
+            <div class="flex items-center justify-between px-2 py-4">
+              <div class="flex items-center gap-2">
+                <span class="text-[14px]">Rows per page</span>
+                <div class="flex w-[60px] items-center">
+                  <div
+                    class="flex h-8 w-full items-center justify-between rounded border border-[#c0c0c0] bg-white px-2 text-[14px]"
+                  >
+                    10
+                  <span class="icon-16">
+                    <span class="material-icons icon-caret">arrow_drop_down</span>
+                  </span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none text-[#004895]"
+                  >
+                    first_page
+                  </span>
+                  <span
+                    class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none text-[#004895]"
+                  >
+                    chevron_left
+                  </span>
+                </div>
+                <div class="flex items-center gap-2 text-[14px]">
+                  <span>Page</span>
+                  <div
+                    class="flex h-8 w-[43px] items-center justify-center rounded border border-[#c0c0c0] bg-white"
+                  >
+                    1
+                  </div>
+                  <span>of <span class="font-inter font-bold">3</span></span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span
+                    class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none text-[#004895]"
+                  >
+                    chevron_right
+                  </span>
+                  <span
+                    class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none text-[#004895]"
+                  >
+                    last_page
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script>
+      const selectAll = document.getElementById("select-all");
+      const bulkBar = document.getElementById("bulk-bar");
+      const selectedCount = document.getElementById("selected-count");
+      const totalCount = document.getElementById("total-count");
+      const compareButton = document.getElementById("compare-button");
+      const tableBody = document.getElementById("table-body");
+      const tabAll = document.getElementById("tab-all");
+      const tabMy = document.getElementById("tab-my");
+      const portfolioChip = document.getElementById("portfolio-chip");
+      const statusChip = document.getElementById("status-chip");
+      const portfolioMenu = document.getElementById("portfolio-menu");
+      const statusMenu = document.getElementById("status-menu");
+      const portfolioOptions = document.getElementById("portfolio-options");
+      const statusOptions = document.getElementById("status-options");
+      const portfolioCount = null;
+      const statusCount = null;
+      const portfolioSearch = document.getElementById("portfolio-search");
+      const statusSearch = document.getElementById("status-search");
+      const portfolioApply = document.getElementById("portfolio-apply");
+      const statusApply = document.getElementById("status-apply");
+      const portfolioCancel = document.getElementById("portfolio-cancel");
+      const statusCancel = document.getElementById("status-cancel");
+      const MAX_SELECTED = 4;
+      const currentUser = "Grace Goudreau";
+      const filters = {
+        portfolio: {
+          options: ["1NA", "Food Only", "Bev Only"],
+          selected: new Set(),
+          draft: new Set(),
+        },
+        status: {
+          options: ["Completed", "In progress", "Draft"],
+          selected: new Set(),
+          draft: new Set(),
+        },
+      };
+      const scenarios = [
+        {
+          id: "SC-1001",
+          description: "Dallas Metro Q2 DSD Expansion",
+          portfolio: "1NA",
+          owner: "Jordan Lee",
+          status: "Completed",
+          dateModified: "02 12, 2026",
+          ptsImpact: "$1,180M",
+        },
+        {
+          id: "SC-1420",
+          description: "Midwest Multi-Pack Optimization",
+          portfolio: "Food Only",
+          owner: "Avery Patel",
+          status: "In progress",
+          runningTime: "Running for 05hh 18mm",
+          ptsImpact: "$3,420M",
+        },
+        {
+          id: "SC-1558",
+          description: "Houston Value Channel Reset",
+          portfolio: "Bev Only",
+          owner: "Grace Goudreau",
+          status: "Completed",
+          dateModified: "02 10, 2026",
+          ptsImpact: "$980M",
+        },
+        {
+          id: "SC-1612",
+          description: "Northeast Promo Lift Test",
+          portfolio: "1NA",
+          owner: "Taylor Brooks",
+          status: "Completed",
+          dateModified: "02 08, 2026",
+          ptsImpact: "$3,210M",
+        },
+        {
+          id: "SC-1711",
+          description: "West Coast Cold Chain Upgrade",
+          portfolio: "Bev Only",
+          owner: "Casey Nguyen",
+          status: "Completed",
+          dateModified: "02 05, 2026",
+          ptsImpact: "$2,740M",
+        },
+        {
+          id: "SC-1804",
+          description: "Southeast Snack Route Mix",
+          portfolio: "Food Only",
+          owner: "Riley Shah",
+          status: "Completed",
+          dateModified: "02 03, 2026",
+          ptsImpact: "$4,020M",
+        },
+        {
+          id: "SC-1922",
+          description: "Great Lakes Holiday Pallets",
+          portfolio: "1NA",
+          owner: "Grace Goudreau",
+          status: "Completed",
+          dateModified: "01 31, 2026",
+          ptsImpact: "$6,880M",
+        },
+        {
+          id: "SC-2033",
+          description: "Southwest Convenience Focus",
+          portfolio: "Food Only",
+          owner: "Jamie Park",
+          status: "Completed",
+          dateModified: "01 29, 2026",
+          ptsImpact: "$1,940M",
+        },
+        {
+          id: "SC-2147",
+          description: "Mountain Region Pack Sizes",
+          portfolio: "Bev Only",
+          owner: "Drew Morgan",
+          status: "Draft",
+          dateModified: "01 26, 2026",
+          ptsImpact: "$4,110M",
+        },
+        {
+          id: "SC-2275",
+          description: "Upper Midwest Pricing Guardrails",
+          portfolio: "1NA",
+          owner: "Grace Goudreau",
+          status: "Draft",
+          dateModified: "01 24, 2026",
+          ptsImpact: "$5,420M",
+        },
+      ];
+      let activeTab = "all";
+
+      function createScenario(scenario) {
+        scenarios.unshift({ ...scenario, owner: currentUser });
+        renderTable();
+      }
+
+      function getVisibleScenarios() {
+        if (activeTab === "mine") {
+          return scenarios.filter((scenario) => scenario.owner === currentUser);
+        }
+        return scenarios;
+      }
+
+      function statusBadge(status) {
+        if (status === "In progress") {
+          return "bg-[#95d7fe]";
+        }
+        if (status === "Draft") {
+          return "bg-[#cdcdcd]";
+        }
+        return "bg-[#98e492]";
+      }
+
+      function renderDateCell(scenario) {
+        if (scenario.runningTime) {
+          return `
+            <div class="px-2">
+              <div class="text-[14px] font-bold text-[#0662c4]">
+                ${scenario.runningTime}
+              </div>
+              <div class="text-[14px] font-bold uppercase text-[#4b4b4b]">
+                ELAPSE TIME
+              </div>
+            </div>
+          `;
+        }
+        return `<div class="px-2 text-[14px]">${scenario.dateModified}</div>`;
+      }
+
+      function renderRow(scenario) {
+        return `
+          <div
+            class="table-row grid min-h-[48px] grid-cols-[32px_120px_1fr_120px_140px_120px_1fr_120px] items-center bg-white py-2"
+          >
+            <div class="flex items-center justify-center">
+              <input type="checkbox" class="table-checkbox row-checkbox" />
+            </div>
+            <div class="px-2 text-[14px] text-[#004895]">${scenario.id}</div>
+            <div class="px-2 text-[14px]">${scenario.description}</div>
+            <div class="px-2 text-[14px]">${scenario.portfolio}</div>
+            <div class="px-2 text-[14px]">${scenario.owner}</div>
+            <div class="px-2">
+              <span
+                class="font-inter inline-flex h-6 items-center rounded ${statusBadge(
+                  scenario.status
+                )} px-2 text-[12px] leading-[20px] text-black"
+              >
+                ${scenario.status}
+              </span>
+            </div>
+            ${renderDateCell(scenario)}
+            <div class="px-2 text-[14px]">${scenario.ptsImpact}</div>
+          </div>
+        `;
+      }
+
+      function applyFilters(list) {
+        const portfolioSet = filters.portfolio.selected;
+        const statusSet = filters.status.selected;
+        return list.filter((scenario) => {
+          const portfolioPass =
+            portfolioSet.size === 0 || portfolioSet.has(scenario.portfolio);
+          const statusPass =
+            statusSet.size === 0 || statusSet.has(scenario.status);
+          return portfolioPass && statusPass;
+        });
+      }
+
+      function updateChipCounts() {
+        const portfolioCountValueNumber = filters.portfolio.selected.size;
+        const statusCountValueNumber = filters.status.selected.size;
+        const portfolioIsFiltered =
+          portfolioCountValueNumber > 0 &&
+          portfolioCountValueNumber < filters.portfolio.options.length;
+        const statusIsFiltered =
+          statusCountValueNumber > 0 &&
+          statusCountValueNumber < filters.status.options.length;
+        portfolioChip.classList.toggle("filter-chip-active", portfolioIsFiltered);
+        statusChip.classList.toggle("filter-chip-active", statusIsFiltered);
+      }
+
+      function renderTable() {
+        const visibleScenarios = applyFilters(getVisibleScenarios());
+        tableBody.innerHTML = visibleScenarios.map(renderRow).join("");
+        totalCount.textContent = visibleScenarios.length;
+        bindSelectionHandlers();
+        updateSelectionState();
+        updateChipCounts();
+      }
+
+      function setActiveTab(tab) {
+        activeTab = tab;
+        tabAll.classList.toggle("border-[#004895]", tab === "all");
+        tabAll.classList.toggle("font-bold", tab === "all");
+        tabMy.classList.toggle("border-[#004895]", tab === "mine");
+        tabMy.classList.toggle("font-bold", tab === "mine");
+        tabAll.classList.toggle("border-b-2", tab === "all");
+        tabMy.classList.toggle("border-b-2", tab === "mine");
+        tabAll.classList.toggle("border-b", tab !== "all");
+        tabMy.classList.toggle("border-b", tab !== "mine");
+        tabAll.classList.toggle("border-[#d8e7fb]", tab !== "all");
+        tabMy.classList.toggle("border-[#d8e7fb]", tab !== "mine");
+        clearSelections();
+        renderTable();
+      }
+
+      function buildOptionRow(name, group, isAllOption = false) {
+        const optionId = `${group}-${name.replace(/\s+/g, "-")}`;
+        return `
+          <label class="flex items-center gap-2 px-1 py-1">
+            <input
+              id="${optionId}"
+              type="checkbox"
+              class="filter-checkbox"
+              data-group="${group}"
+              data-option="${name}"
+              data-all="${isAllOption ? "true" : "false"}"
+            />
+            <span>${name}</span>
+          </label>
+        `;
+      }
+
+      function renderFilterOptions(group) {
+        const config = filters[group];
+        const searchTerm =
+          group === "portfolio"
+            ? portfolioSearch.value.trim().toLowerCase()
+            : statusSearch.value.trim().toLowerCase();
+        const container = group === "portfolio" ? portfolioOptions : statusOptions;
+        const allOption = buildOptionRow("All options", group, true);
+        const options = config.options
+          .filter((option) => option.toLowerCase().includes(searchTerm))
+          .map((option) => buildOptionRow(option, group))
+          .join("");
+        container.innerHTML = allOption + options;
+
+        const allCheckbox = container.querySelector(
+          `input[data-group="${group}"][data-all="true"]`
+        );
+        const optionCheckboxes = Array.from(
+          container.querySelectorAll(
+            `input[data-group="${group}"][data-all="false"]`
+          )
+        );
+        const selectedSet = config.draft;
+        optionCheckboxes.forEach((checkbox) => {
+          checkbox.checked = selectedSet.has(checkbox.dataset.option);
+        });
+        if (selectedSet.size === 0) {
+          allCheckbox.checked = true;
+          allCheckbox.indeterminate = false;
+        } else if (selectedSet.size === optionCheckboxes.length) {
+          allCheckbox.checked = true;
+          allCheckbox.indeterminate = false;
+        } else {
+          allCheckbox.checked = false;
+          allCheckbox.indeterminate = true;
+        }
+
+        allCheckbox.addEventListener("change", () => {
+          if (allCheckbox.checked) {
+            config.draft.clear();
+            optionCheckboxes.forEach((box) => (box.checked = false));
+          }
+        });
+
+        optionCheckboxes.forEach((checkbox) => {
+          checkbox.addEventListener("change", () => {
+            if (checkbox.checked) {
+              config.draft.add(checkbox.dataset.option);
+            } else {
+              config.draft.delete(checkbox.dataset.option);
+            }
+            if (config.draft.size === 0) {
+              allCheckbox.checked = true;
+              allCheckbox.indeterminate = false;
+            } else if (config.draft.size === optionCheckboxes.length) {
+              allCheckbox.checked = true;
+              allCheckbox.indeterminate = false;
+            } else {
+              allCheckbox.checked = false;
+              allCheckbox.indeterminate = true;
+            }
+          });
+        });
+      }
+
+      function openMenu(menu, group) {
+        if (menu.classList.contains("hidden")) {
+          filters[group].draft = new Set(filters[group].selected);
+          renderFilterOptions(group);
+          menu.classList.remove("hidden");
+        } else {
+          menu.classList.add("hidden");
+        }
+      }
+
+      function closeMenus() {
+        portfolioMenu.classList.add("hidden");
+        statusMenu.classList.add("hidden");
+      }
+
+      portfolioChip.addEventListener("click", (event) => {
+        event.stopPropagation();
+        openMenu(portfolioMenu, "portfolio");
+        statusMenu.classList.add("hidden");
+      });
+
+      statusChip.addEventListener("click", (event) => {
+        event.stopPropagation();
+        openMenu(statusMenu, "status");
+        portfolioMenu.classList.add("hidden");
+      });
+
+      portfolioMenu.addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
+
+      statusMenu.addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
+
+
+      portfolioApply.addEventListener("click", () => {
+        filters.portfolio.selected = new Set(filters.portfolio.draft);
+        closeMenus();
+        renderTable();
+      });
+
+      statusApply.addEventListener("click", () => {
+        filters.status.selected = new Set(filters.status.draft);
+        closeMenus();
+        renderTable();
+      });
+
+      portfolioCancel.addEventListener("click", () => {
+        closeMenus();
+      });
+
+      statusCancel.addEventListener("click", () => {
+        closeMenus();
+      });
+
+      portfolioSearch.addEventListener("input", () =>
+        renderFilterOptions("portfolio")
+      );
+      statusSearch.addEventListener("input", () =>
+        renderFilterOptions("status")
+      );
+
+      document.addEventListener("click", () => {
+        closeMenus();
+      });
+
+      function clearSelections() {
+        selectAll.checked = false;
+        selectAll.indeterminate = false;
+      }
+
+      function updateCompareState(checkedCount) {
+        const isActive = checkedCount >= 2;
+        if (isActive) {
+          compareButton.classList.remove("border-[#dadada]", "text-[#b1b1b1]");
+          compareButton.classList.add("border-[#004895]", "text-[#004895]");
+        } else {
+          compareButton.classList.add("border-[#dadada]", "text-[#b1b1b1]");
+          compareButton.classList.remove("border-[#004895]", "text-[#004895]");
+        }
+      }
+
+      function bindSelectionHandlers() {
+        const rowCheckboxes = Array.from(
+          document.querySelectorAll(".row-checkbox")
+        );
+
+        function getCheckedCount() {
+          return rowCheckboxes.filter((checkbox) => checkbox.checked).length;
+        }
+
+        function updateSelectionState() {
+          let checkedCount = 0;
+
+          rowCheckboxes.forEach((checkbox) => {
+            const row = checkbox.closest(".table-row");
+            if (checkbox.checked) {
+              checkedCount += 1;
+              row.classList.add("is-selected");
+            } else {
+              row.classList.remove("is-selected");
+            }
+          });
+
+          selectedCount.textContent = checkedCount;
+          bulkBar.style.display = checkedCount === 0 ? "none" : "flex";
+          updateCompareState(checkedCount);
+
+          if (checkedCount === 0) {
+            selectAll.checked = false;
+            selectAll.indeterminate = false;
+          } else if (checkedCount === rowCheckboxes.length) {
+            selectAll.checked = true;
+            selectAll.indeterminate = false;
+          } else {
+            selectAll.checked = false;
+            selectAll.indeterminate = true;
+          }
+        }
+
+        selectAll.onchange = () => {
+          const shouldCheck = selectAll.checked;
+          if (!shouldCheck) {
+            rowCheckboxes.forEach((checkbox) => {
+              checkbox.checked = false;
+            });
+            updateSelectionState();
+            return;
+          }
+
+          rowCheckboxes.forEach((checkbox, index) => {
+            checkbox.checked = index < MAX_SELECTED;
+          });
+          updateSelectionState();
+        };
+
+        rowCheckboxes.forEach((checkbox) => {
+          checkbox.addEventListener("change", () => {
+            if (checkbox.checked && getCheckedCount() > MAX_SELECTED) {
+              checkbox.checked = false;
+              return;
+            }
+            updateSelectionState();
+          });
+        });
+
+        updateSelectionState();
+      }
+
+      tabAll.addEventListener("click", () => setActiveTab("all"));
+      tabMy.addEventListener("click", () => setActiveTab("mine"));
+
+      renderTable();
+    </script>
+  </body>
+</html>
