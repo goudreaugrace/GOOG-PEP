@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GTM Scenario Tool - Data Table</title>
+    <title>GTM Scenario Tool</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -145,7 +145,7 @@
                 <img
                   alt="PepsiCo Logo"
                   class="h-10 w-28 object-contain"
-                  src="http://localhost:3845/assets/f94b3a152c5905b70bcd2f8485ceb752ec3f0213.svg"
+                  src="_Logo area.png"
                 />
               </div>
               <div class="h-6 w-px bg-[#dadada]"></div>
@@ -154,7 +154,11 @@
               </div>
             </div>
             <nav class="flex h-16 items-center gap-2">
-              <div class="flex h-16 items-center border-b-2 border-[#004895]">
+              <button
+                id="nav-workspace"
+                class="flex h-16 items-center border-b border-transparent hover:border-[#0662C4]"
+                type="button"
+              >
                 <div class="flex items-center gap-2 px-2 py-1">
                   <span
                     class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none text-[#004895]"
@@ -165,8 +169,12 @@
                     Workspace
                   </span>
                 </div>
-              </div>
-              <div class="flex h-16 items-center">
+              </button>
+              <button
+                id="nav-scenario"
+                class="flex h-16 items-center border-b border-transparent hover:border-[#0662C4]"
+                type="button"
+              >
                 <div class="flex items-center gap-2 px-2 py-1">
                   <span
                     class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none text-[#4b4b4b]"
@@ -175,7 +183,7 @@
                   </span>
                   <span class="text-[16px] text-[#4b4b4b]">Scenario</span>
                 </div>
-              </div>
+              </button>
               <div class="flex h-16 items-center">
                 <div class="flex items-center gap-2 px-2 py-1">
                   <span
@@ -228,8 +236,8 @@
         </div>
       </header>
 
-      <main class="px-12 pb-16 pt-6">
-        <section class="mx-auto max-w-[1344px]">
+      <main class="px-12 pb-24 pt-6">
+        <section id="workspace-view" class="mx-auto max-w-[1344px]">
           <div
             class="rounded-lg bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
           >
@@ -265,6 +273,23 @@
                         Portfolio
                         <span class="icon-16">
                           <span class="material-icons icon-caret">arrow_drop_down</span>
+                        </span>
+                        <span
+                          id="portfolio-count"
+                          class="ml-1 hidden flex h-6 items-center justify-center gap-1 rounded bg-[#106e98] px-2 text-[12px] leading-[20px] text-white"
+                        >
+                          <span
+                            id="portfolio-count-value"
+                            class="leading-[20px]"
+                          >
+                            0
+                          </span>
+                          <span
+                            id="portfolio-clear"
+                            class="material-icons inline-flex h-5 w-5 items-center justify-center text-[12px] leading-[20px]"
+                          >
+                            close
+                          </span>
                         </span>
                       </button>
                       <div
@@ -309,6 +334,23 @@
                         Status
                         <span class="icon-16">
                           <span class="material-icons icon-caret">arrow_drop_down</span>
+                        </span>
+                        <span
+                          id="status-count"
+                          class="ml-1 hidden flex h-6 items-center justify-center gap-1 rounded bg-[#106e98] px-2 text-[12px] leading-[20px] text-white"
+                        >
+                          <span
+                            id="status-count-value"
+                            class="leading-[20px]"
+                          >
+                            0
+                          </span>
+                          <span
+                            id="status-clear"
+                            class="material-icons inline-flex h-5 w-5 items-center justify-center text-[12px] leading-[20px]"
+                          >
+                            close
+                          </span>
                         </span>
                       </button>
                       <div
@@ -368,7 +410,8 @@
                     </div>
                     <div class="h-6 w-px bg-[#d8e7fb]"></div>
                     <button
-                      class="flex h-8 items-center gap-2 rounded-full bg-[#004895] px-4 text-[14px] font-bold text-white"
+                      id="new-scenario"
+                      class="flex h-8 items-center gap-2 rounded-full bg-[#004895] px-4 text-[14px] font-bold text-white transition-colors hover:bg-[#002B5E]"
                     >
                       <span
                         class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none"
@@ -382,7 +425,7 @@
                       class="flex h-8 items-center gap-2 rounded-full border border-[#dadada] px-4 text-[14px] font-bold text-[#b1b1b1]"
                     >
                       <span
-                        class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none"
+                        class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none text-current"
                       >
                         compare_arrows
                       </span>
@@ -534,7 +577,283 @@
             </div>
           </div>
         </section>
+
+        <section
+          id="scenario-view"
+          class="mx-auto hidden max-w-[1344px] flex-col gap-6"
+        >
+          <div class="flex flex-col gap-4">
+            <p class="text-[18px] leading-[24px] text-[#4b4b4b]">
+              SCENARIO CREATION
+            </p>
+            <div class="flex items-start justify-between px-12">
+              <div class="flex flex-1 flex-col">
+                <div class="flex w-full items-center py-1">
+                  <span
+                    class="material-icons inline-flex h-4 w-4 items-center justify-center text-[16px] leading-none text-[#0662C4]"
+                  >
+                    radio_button_checked
+                  </span>
+                  <div class="flex-1">
+                    <div class="h-[2px] w-full bg-[#4b4b4b]"></div>
+                  </div>
+                </div>
+                <p class="pt-1 text-[14px] font-bold text-[#004895]">
+                  Define Scope
+                </p>
+              </div>
+              <div class="flex flex-1 flex-col">
+                <div class="flex w-full items-center py-1">
+                  <span
+                    class="material-icons inline-flex h-4 w-4 items-center justify-center text-[16px] leading-none text-[#4b4b4b]"
+                  >
+                    circle
+                  </span>
+                  <div class="flex-1">
+                    <div class="h-[2px] w-full bg-[#4b4b4b]"></div>
+                  </div>
+                </div>
+                <p class="pt-1 text-[14px] text-[#4b4b4b]">View Baseline</p>
+              </div>
+              <div class="flex flex-col">
+                <div class="flex items-center py-1">
+                  <span
+                    class="material-icons inline-flex h-4 w-4 items-center justify-center text-[16px] leading-none text-[#4b4b4b]"
+                  >
+                    circle
+                  </span>
+                </div>
+                <p class="pt-1 text-[14px] text-[#4b4b4b]">
+                  Define Parameters
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="mt-6 flex gap-6 rounded-lg bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
+          >
+            <div class="flex w-fit flex-col gap-6">
+              <div class="flex items-center gap-2 rounded-lg border border-[#d8e7fb] bg-[#f5f9ff] p-1">
+                <div
+                  class="flex h-8 items-center gap-1 rounded-lg px-3 text-[14px] text-[#2d2d2d]"
+                >
+                  <span
+                    class="material-icons text-[20px] text-[#2d2d2d]"
+                  >
+                    pin_drop
+                  </span>
+                  Select Locations
+                </div>
+                <div
+                  class="flex h-8 items-center gap-1 rounded-lg border border-[#004895] bg-white px-3 text-[14px] font-bold text-[#004895]"
+                >
+                  <span class="material-icons text-[20px] text-[#004895]">
+                    cloud_upload
+                  </span>
+                  Upload Store List
+                </div>
+              </div>
+
+              <div class="flex gap-5">
+                <div class="flex flex-1 flex-col gap-2">
+                <div
+                  class="flex items-center justify-between text-[12px] font-medium"
+                >
+                  <div class="flex items-center gap-2">
+                    <span>Start Date</span>
+                    <span class="material-icons text-[16px] text-[#4b4b4b]">
+                      info
+                    </span>
+                  </div>
+                  <span class="text-[#4b4b4b]">*Required</span>
+                </div>
+                  <div class="relative">
+                    <div
+                      id="start-date-field"
+                      class="flex h-8 items-center justify-between rounded border border-[#c0c0c0] bg-white px-2 text-[14px]"
+                      role="button"
+                      tabindex="0"
+                    >
+                      <span id="start-date-value"></span>
+                      <span class="material-icons text-[16px] text-[#4b4b4b]">
+                        keyboard_arrow_down
+                      </span>
+                    </div>
+                    <div
+                      id="start-date-menu"
+                      class="absolute left-0 right-0 top-[36px] z-30 hidden max-h-[240px] overflow-auto rounded border border-[#d8e7fb] bg-white p-2 text-[14px] text-[#4b4b4b] shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
+                    ></div>
+                  </div>
+                  <div class="flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                    <span class="material-icons text-[16px] text-[#4b4b4b]">
+                      info
+                    </span>
+                    Lorem Ipsum
+                  </div>
+                </div>
+                <div class="flex flex-1 flex-col gap-2">
+                <div
+                  class="flex items-center justify-between text-[12px] font-medium"
+                >
+                  <div class="flex items-center gap-2">
+                    <span>End Date</span>
+                    <span class="material-icons text-[16px] text-[#4b4b4b]">
+                      info
+                    </span>
+                  </div>
+                  <span class="text-[#4b4b4b]">*Required</span>
+                </div>
+                  <div class="relative">
+                    <div
+                      id="end-date-field"
+                      class="flex h-8 items-center justify-between rounded border border-[#c0c0c0] bg-white px-2 text-[14px]"
+                      role="button"
+                      tabindex="0"
+                    >
+                      <span id="end-date-value"></span>
+                      <span class="material-icons text-[16px] text-[#4b4b4b]">
+                        keyboard_arrow_down
+                      </span>
+                    </div>
+                    <div
+                      id="end-date-menu"
+                      class="absolute left-0 right-0 top-[36px] z-30 hidden max-h-[240px] overflow-auto rounded border border-[#d8e7fb] bg-white p-2 text-[14px] text-[#4b4b4b] shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
+                    ></div>
+                  </div>
+                  <div class="flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                    <span class="material-icons text-[16px] text-[#4b4b4b]">
+                      info
+                    </span>
+                    Lorem Ipsum
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex w-[300px] flex-col gap-2">
+                <div class="flex items-center justify-between text-[12px]">
+                  <div class="flex items-center gap-2 font-medium">
+                    <span>Select Portfolio</span>
+                    <span class="material-icons text-[16px] text-[#4b4b4b]">
+                      info
+                    </span>
+                  </div>
+                  <span class="text-[#4b4b4b]">*Required</span>
+                </div>
+                <div class="relative">
+                  <div
+                    id="portfolio-select-field"
+                    class="flex h-8 items-center justify-between rounded border border-[#c0c0c0] bg-white px-2 text-[14px]"
+                    role="button"
+                    tabindex="0"
+                  >
+                    <span id="portfolio-select-value"></span>
+                    <span class="material-icons text-[16px] text-[#4b4b4b]">
+                      keyboard_arrow_down
+                    </span>
+                  </div>
+                  <div
+                    id="portfolio-select-menu"
+                    class="absolute left-0 right-0 top-[36px] z-20 hidden max-h-[240px] overflow-auto rounded border border-[#d8e7fb] bg-white p-2 text-[14px] text-[#4b4b4b] shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex w-full max-w-[500px] flex-col gap-2 mx-auto">
+              <div class="flex items-center justify-between text-[12px]">
+                <div class="flex items-center gap-2 font-medium">
+                  <span>Upload Store IDs</span>
+                  <span class="material-icons text-[16px] text-[#4b4b4b]">
+                    info
+                  </span>
+                </div>
+                <span class="text-[#4b4b4b]">*Required</span>
+              </div>
+              <div
+                id="upload-dropzone"
+                class="flex flex-1 flex-col items-center justify-center gap-4 rounded border border-dashed border-[#d8e7fb] bg-[#f5f9ff] px-4 py-4"
+              >
+                <div class="flex flex-col items-center gap-2 text-center text-[12px]">
+                  <span class="material-icons text-[32px] text-[#2d2d2d]">
+                    cloud_upload
+                  </span>
+                  <div>
+                    Drag and drop your file here
+                    <br />
+                    (only .cvs)
+                  </div>
+                </div>
+                <button
+                  id="upload-file-button"
+                  class="flex h-8 items-center gap-2 rounded-full border border-[#004895] px-4 text-[14px] font-bold text-[#004895] hover:border-[#002B5E] hover:text-[#002B5E]"
+                  type="button"
+                >
+                  <span class="material-icons text-[16px] text-current">
+                    file_upload
+                  </span>
+                  Upload file
+                </button>
+              </div>
+              <div
+                id="uploaded-file"
+                class="hidden flex h-[58px] items-center justify-between rounded border border-[#d8e7fb] bg-white px-3 py-2 text-[12px]"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="material-icons text-[16px] text-[#004895]">
+                    description
+                  </span>
+                  <span id="uploaded-file-name" class="font-medium">
+                    Select design is Figma
+                  </span>
+                </div>
+                <div class="flex items-center gap-3 text-[#004895]">
+                  <button
+                    id="uploaded-download"
+                    class="flex items-center"
+                    type="button"
+                    aria-label="Download file"
+                    title="Download"
+                  >
+                    <span class="material-icons text-[16px]">download</span>
+                  </button>
+                  <button
+                    id="uploaded-delete"
+                    class="flex items-center"
+                    type="button"
+                    aria-label="Delete file"
+                    title="Delete"
+                  >
+                    <span class="material-icons text-[16px]">delete</span>
+                  </button>
+                </div>
+              </div>
+              <div class="flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                  info
+                </span>
+                Only one file is allowed
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
+      <div
+        id="scenario-sticky"
+        class="fixed bottom-0 left-0 right-0 hidden flex h-16 items-center justify-end bg-white pl-12 pr-6 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]"
+      >
+        <button
+          id="view-baseline-button"
+          class="flex h-8 items-center gap-2 rounded-full bg-[#dadada] px-4 text-[14px] font-bold text-[#b1b1b1] transition-colors"
+          type="button"
+          disabled
+        >
+          View Baseline
+          <span class="material-icons text-[20px] text-current">
+            arrow_forward
+          </span>
+        </button>
+      </div>
     </div>
     <script>
       const selectAll = document.getElementById("select-all");
@@ -551,14 +870,40 @@
       const statusMenu = document.getElementById("status-menu");
       const portfolioOptions = document.getElementById("portfolio-options");
       const statusOptions = document.getElementById("status-options");
-      const portfolioCount = null;
-      const statusCount = null;
+      const portfolioCount = document.getElementById("portfolio-count");
+      const statusCount = document.getElementById("status-count");
+      const portfolioCountValue = document.getElementById("portfolio-count-value");
+      const statusCountValue = document.getElementById("status-count-value");
+      const portfolioClear = document.getElementById("portfolio-clear");
+      const statusClear = document.getElementById("status-clear");
       const portfolioSearch = document.getElementById("portfolio-search");
       const statusSearch = document.getElementById("status-search");
       const portfolioApply = document.getElementById("portfolio-apply");
       const statusApply = document.getElementById("status-apply");
       const portfolioCancel = document.getElementById("portfolio-cancel");
       const statusCancel = document.getElementById("status-cancel");
+      const startDateField = document.getElementById("start-date-field");
+      const endDateField = document.getElementById("end-date-field");
+      const startDateMenu = document.getElementById("start-date-menu");
+      const endDateMenu = document.getElementById("end-date-menu");
+      const startDateValue = document.getElementById("start-date-value");
+      const endDateValue = document.getElementById("end-date-value");
+      const navWorkspace = document.getElementById("nav-workspace");
+      const navScenario = document.getElementById("nav-scenario");
+      const workspaceView = document.getElementById("workspace-view");
+      const scenarioView = document.getElementById("scenario-view");
+      const scenarioSticky = document.getElementById("scenario-sticky");
+      const newScenario = document.getElementById("new-scenario");
+      const portfolioSelectField = document.getElementById("portfolio-select-field");
+      const portfolioSelectMenu = document.getElementById("portfolio-select-menu");
+      const portfolioSelectValue = document.getElementById("portfolio-select-value");
+      const viewBaselineButton = document.getElementById("view-baseline-button");
+      const uploadFileButton = document.getElementById("upload-file-button");
+      const uploadDropzone = document.getElementById("upload-dropzone");
+      const uploadedFile = document.getElementById("uploaded-file");
+      const uploadedFileName = document.getElementById("uploaded-file-name");
+      const uploadedDownload = document.getElementById("uploaded-download");
+      const uploadedDelete = document.getElementById("uploaded-delete");
       const MAX_SELECTED = 4;
       const currentUser = "Grace Goudreau";
       const filters = {
@@ -573,6 +918,53 @@
           draft: new Set(),
         },
       };
+      function buildPeriodsForYear(year) {
+        const periods = [];
+        const yearStart = new Date(year, 0, 1);
+
+        for (let index = 0; index < 12; index += 1) {
+          const start = new Date(yearStart);
+          start.setDate(yearStart.getDate() + index * 28);
+          const end = new Date(start);
+          end.setDate(start.getDate() + 27);
+          periods.push({ label: `P${String(index + 1).padStart(2, "0")} ${year}`, start, end });
+        }
+
+        const p13Start = new Date(yearStart);
+        p13Start.setDate(yearStart.getDate() + 12 * 28);
+        const p13End = new Date(year, 11, 31);
+        periods.push({ label: `P13 ${year}`, start: p13Start, end: p13End });
+
+        return periods;
+      }
+
+      function buildPeriodOptions() {
+        const today = new Date();
+        const windowStart = new Date(today);
+        windowStart.setFullYear(today.getFullYear() - 1);
+        windowStart.setHours(0, 0, 0, 0);
+        today.setHours(23, 59, 59, 999);
+
+        const years = [windowStart.getFullYear(), today.getFullYear()];
+        const options = years
+          .flatMap((year) => buildPeriodsForYear(year))
+          .filter((period) => period.start >= windowStart && period.end <= today);
+
+        if (options.length === 0) {
+          const fallbackYear = today.getFullYear();
+          const fallbackPeriods = buildPeriodsForYear(fallbackYear).filter(
+            (period) => period.end <= today
+          );
+          return fallbackPeriods.slice(-1).map((period) => period.label);
+        }
+
+        return options.map((period) => period.label);
+      }
+
+      const periodOptions = buildPeriodOptions();
+      let startDateSelected = "";
+      let endDateSelected = "";
+      const fakeUploadedFileName = "Placeholder101.csv";
       const scenarios = [
         {
           id: "SC-1001",
@@ -667,6 +1059,54 @@
       ];
       let activeTab = "all";
 
+      function setNavActive(active) {
+        const workspaceIcon = navWorkspace.querySelector(".material-icons");
+        const workspaceText = navWorkspace.querySelector("span:last-child");
+        const scenarioIcon = navScenario.querySelector(".material-icons");
+        const scenarioText = navScenario.querySelector("span:last-child");
+
+        if (active === "workspace") {
+          navWorkspace.classList.add("border-b-2", "border-[#0662C4]");
+          workspaceIcon.classList.add("text-[#0662C4]");
+          workspaceText.classList.add("font-bold", "text-[#0662C4]");
+          workspaceText.classList.remove("text-[#4b4b4b]");
+          workspaceIcon.classList.remove("text-[#4b4b4b]");
+
+          navScenario.classList.remove("border-b-2", "border-[#0662C4]");
+          scenarioIcon.classList.add("text-[#4b4b4b]");
+          scenarioText.classList.add("text-[#4b4b4b]");
+          scenarioIcon.classList.remove("text-[#0662C4]");
+          scenarioText.classList.remove("font-bold", "text-[#0662C4]");
+        } else {
+          navScenario.classList.add("border-b-2", "border-[#0662C4]");
+          scenarioIcon.classList.add("text-[#0662C4]");
+          scenarioText.classList.add("font-bold", "text-[#0662C4]");
+          scenarioText.classList.remove("text-[#4b4b4b]");
+          scenarioIcon.classList.remove("text-[#4b4b4b]");
+
+          navWorkspace.classList.remove("border-b-2", "border-[#0662C4]");
+          workspaceIcon.classList.add("text-[#4b4b4b]");
+          workspaceText.classList.add("text-[#4b4b4b]");
+          workspaceIcon.classList.remove("text-[#0662C4]");
+          workspaceText.classList.remove("font-bold", "text-[#0662C4]");
+        }
+      }
+
+      function setView(view) {
+        const showWorkspace = view === "workspace";
+        workspaceView.classList.toggle("hidden", !showWorkspace);
+        scenarioView.classList.toggle("hidden", showWorkspace);
+        scenarioSticky.classList.toggle("hidden", showWorkspace);
+        setNavActive(view);
+      }
+
+      navWorkspace.addEventListener("click", () => setView("workspace"));
+      navScenario.addEventListener("click", () => setView("scenario"));
+      newScenario.addEventListener("click", () => setView("scenario"));
+      uploadFileButton.addEventListener("click", showUploadedFile);
+      uploadedDelete.addEventListener("click", clearUploadedFile);
+      uploadedDownload.addEventListener("click", triggerFakeDownload);
+
       function createScenario(scenario) {
         scenarios.unshift({ ...scenario, owner: currentUser });
         renderTable();
@@ -747,12 +1187,12 @@
       function updateChipCounts() {
         const portfolioCountValueNumber = filters.portfolio.selected.size;
         const statusCountValueNumber = filters.status.selected.size;
-        const portfolioIsFiltered =
-          portfolioCountValueNumber > 0 &&
-          portfolioCountValueNumber < filters.portfolio.options.length;
-        const statusIsFiltered =
-          statusCountValueNumber > 0 &&
-          statusCountValueNumber < filters.status.options.length;
+        const portfolioIsFiltered = portfolioCountValueNumber > 0;
+        const statusIsFiltered = statusCountValueNumber > 0;
+        portfolioCountValue.textContent = portfolioCountValueNumber;
+        statusCountValue.textContent = statusCountValueNumber;
+        portfolioCount.classList.toggle("hidden", !portfolioIsFiltered);
+        statusCount.classList.toggle("hidden", !statusIsFiltered);
         portfolioChip.classList.toggle("filter-chip-active", portfolioIsFiltered);
         statusChip.classList.toggle("filter-chip-active", statusIsFiltered);
       }
@@ -879,16 +1319,242 @@
         statusMenu.classList.add("hidden");
       }
 
+      function setDateFieldActive(field, isActive) {
+        field.classList.toggle("border-2", isActive);
+        field.classList.toggle("border-[#0662c4]", isActive);
+        field.classList.toggle("border", !isActive);
+        field.classList.toggle("border-[#c0c0c0]", !isActive);
+      }
+
+      function renderPeriodMenu(menu, selectedLabel) {
+        if (!periodOptions.length) {
+          menu.innerHTML =
+            '<div class="px-2 py-1 text-[12px] text-[#4b4b4b]">No periods available</div>';
+          return;
+        }
+
+        menu.innerHTML = periodOptions
+          .map((label, index) => {
+            const isSelected = label === selectedLabel;
+            const borderClass =
+              index === periodOptions.length - 1 ? "" : "border-b border-[#d8e7fb]";
+            const checkOpacity = isSelected ? "opacity-100" : "opacity-0";
+            return `
+              <div
+                class="flex items-center gap-2 px-1 py-1 ${borderClass} cursor-pointer"
+                data-value="${label}"
+              >
+                <span class="flex-1">${label}</span>
+                <span class="material-icons text-[16px] text-[#004895] ${checkOpacity}">
+                  check
+                </span>
+              </div>
+            `;
+          })
+          .join("");
+      }
+
+      const portfolioSelectOptions = ["Foods and Beverages", "Foods", "Beverages"];
+      let portfolioSelected = "";
+
+      function updateViewBaselineState() {
+        const hasFile = !uploadedFile.classList.contains("hidden");
+        const hasStartDate = Boolean(startDateSelected.trim());
+        const hasEndDate = Boolean(endDateSelected.trim());
+        const hasPortfolio = Boolean(portfolioSelected.trim());
+        const isReady = hasFile && hasStartDate && hasEndDate && hasPortfolio;
+
+        viewBaselineButton.disabled = !isReady;
+        viewBaselineButton.classList.toggle("bg-[#004895]", isReady);
+        viewBaselineButton.classList.toggle("text-white", isReady);
+        viewBaselineButton.classList.toggle("hover:bg-[#002B5E]", isReady);
+        viewBaselineButton.classList.toggle("bg-[#dadada]", !isReady);
+        viewBaselineButton.classList.toggle("text-[#b1b1b1]", !isReady);
+        viewBaselineButton.classList.toggle("cursor-not-allowed", !isReady);
+      }
+
+      function renderPortfolioMenu() {
+        portfolioSelectMenu.innerHTML = portfolioSelectOptions
+          .map((label, index) => {
+            const isSelected = label === portfolioSelected;
+            const borderClass =
+              index === portfolioSelectOptions.length - 1
+                ? ""
+                : "border-b border-[#d8e7fb]";
+            const checkOpacity = isSelected ? "opacity-100" : "opacity-0";
+            return `
+              <div
+                class="flex items-center gap-2 px-1 py-1 ${borderClass} cursor-pointer"
+                data-value="${label}"
+              >
+                <span class="flex-1">${label}</span>
+                <span class="material-icons text-[16px] text-[#004895] ${checkOpacity}">
+                  check
+                </span>
+              </div>
+            `;
+          })
+          .join("");
+      }
+
+      function setUploadButtonDisabled(isDisabled) {
+        uploadFileButton.disabled = isDisabled;
+        uploadFileButton.classList.toggle("cursor-not-allowed", isDisabled);
+        uploadFileButton.classList.toggle("border-[#d8e7fb]", isDisabled);
+        uploadFileButton.classList.toggle("text-[#b1b1b1]", isDisabled);
+        uploadFileButton.classList.toggle("hover:border-[#002B5E]", !isDisabled);
+        uploadFileButton.classList.toggle("hover:text-[#002B5E]", !isDisabled);
+        uploadFileButton.classList.toggle("border-[#004895]", !isDisabled);
+        uploadFileButton.classList.toggle("text-[#004895]", !isDisabled);
+        uploadDropzone.classList.toggle("opacity-60", isDisabled);
+        uploadDropzone.classList.toggle("pointer-events-none", isDisabled);
+      }
+
+      function showUploadedFile() {
+        uploadedFileName.textContent = fakeUploadedFileName;
+        uploadedFile.classList.remove("hidden");
+        setUploadButtonDisabled(true);
+        updateViewBaselineState();
+      }
+
+      function clearUploadedFile() {
+        uploadedFile.classList.add("hidden");
+        setUploadButtonDisabled(false);
+        updateViewBaselineState();
+      }
+
+      function triggerFakeDownload() {
+        const blob = new Blob([fakeUploadedFileName], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "select-design-is-figma.txt";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+      }
+
+      function closeDateMenus() {
+        startDateMenu.classList.add("hidden");
+        endDateMenu.classList.add("hidden");
+        setDateFieldActive(startDateField, false);
+        setDateFieldActive(endDateField, false);
+      }
+
+      function closePortfolioSelectMenu() {
+        portfolioSelectMenu.classList.add("hidden");
+        setDateFieldActive(portfolioSelectField, false);
+      }
+
+      function openDateMenu(field, menu, selectedLabel) {
+        if (!menu.classList.contains("hidden")) {
+          menu.classList.add("hidden");
+          setDateFieldActive(field, false);
+          return;
+        }
+
+        closeDateMenus();
+        renderPeriodMenu(menu, selectedLabel);
+        menu.classList.remove("hidden");
+        setDateFieldActive(field, true);
+      }
+
+      function openPortfolioSelectMenu() {
+        if (!portfolioSelectMenu.classList.contains("hidden")) {
+          closePortfolioSelectMenu();
+          return;
+        }
+        closeDateMenus();
+        closeMenus();
+        renderPortfolioMenu();
+        portfolioSelectMenu.classList.remove("hidden");
+        setDateFieldActive(portfolioSelectField, true);
+      }
+
       portfolioChip.addEventListener("click", (event) => {
         event.stopPropagation();
         openMenu(portfolioMenu, "portfolio");
         statusMenu.classList.add("hidden");
+        closeDateMenus();
+        closePortfolioSelectMenu();
       });
 
       statusChip.addEventListener("click", (event) => {
         event.stopPropagation();
         openMenu(statusMenu, "status");
         portfolioMenu.classList.add("hidden");
+        closeDateMenus();
+        closePortfolioSelectMenu();
+      });
+
+      startDateField.addEventListener("click", (event) => {
+        event.stopPropagation();
+        openDateMenu(startDateField, startDateMenu, startDateSelected);
+        closeMenus();
+        closePortfolioSelectMenu();
+      });
+
+      endDateField.addEventListener("click", (event) => {
+        event.stopPropagation();
+        openDateMenu(endDateField, endDateMenu, endDateSelected);
+        closeMenus();
+        closePortfolioSelectMenu();
+      });
+
+      portfolioSelectField.addEventListener("click", (event) => {
+        event.stopPropagation();
+        openPortfolioSelectMenu();
+      });
+
+      startDateMenu.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const option = event.target.closest("[data-value]");
+        if (!option) {
+          return;
+        }
+        startDateSelected = option.dataset.value;
+        startDateValue.textContent = startDateSelected;
+        closeDateMenus();
+        updateViewBaselineState();
+      });
+
+      endDateMenu.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const option = event.target.closest("[data-value]");
+        if (!option) {
+          return;
+        }
+        endDateSelected = option.dataset.value;
+        endDateValue.textContent = endDateSelected;
+        closeDateMenus();
+        updateViewBaselineState();
+      });
+
+      portfolioSelectMenu.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const option = event.target.closest("[data-value]");
+        if (!option) {
+          return;
+        }
+        portfolioSelected = option.dataset.value;
+        portfolioSelectValue.textContent = portfolioSelected;
+        closePortfolioSelectMenu();
+        updateViewBaselineState();
+      });
+
+      portfolioClear.addEventListener("click", (event) => {
+        event.stopPropagation();
+        filters.portfolio.selected.clear();
+        updateChipCounts();
+        renderTable();
+      });
+
+      statusClear.addEventListener("click", (event) => {
+        event.stopPropagation();
+        filters.status.selected.clear();
+        updateChipCounts();
+        renderTable();
       });
 
       portfolioMenu.addEventListener("click", (event) => {
@@ -899,16 +1565,17 @@
         event.stopPropagation();
       });
 
-
       portfolioApply.addEventListener("click", () => {
         filters.portfolio.selected = new Set(filters.portfolio.draft);
         closeMenus();
+        updateChipCounts();
         renderTable();
       });
 
       statusApply.addEventListener("click", () => {
         filters.status.selected = new Set(filters.status.draft);
         closeMenus();
+        updateChipCounts();
         renderTable();
       });
 
@@ -929,6 +1596,8 @@
 
       document.addEventListener("click", () => {
         closeMenus();
+        closeDateMenus();
+        closePortfolioSelectMenu();
       });
 
       function clearSelections() {
@@ -941,9 +1610,11 @@
         if (isActive) {
           compareButton.classList.remove("border-[#dadada]", "text-[#b1b1b1]");
           compareButton.classList.add("border-[#004895]", "text-[#004895]");
+          compareButton.classList.add("hover:border-[#002B5E]", "hover:text-[#002B5E]");
         } else {
           compareButton.classList.add("border-[#dadada]", "text-[#b1b1b1]");
           compareButton.classList.remove("border-[#004895]", "text-[#004895]");
+          compareButton.classList.remove("hover:border-[#002B5E]", "hover:text-[#002B5E]");
         }
       }
 
@@ -1017,7 +1688,19 @@
       tabAll.addEventListener("click", () => setActiveTab("all"));
       tabMy.addEventListener("click", () => setActiveTab("mine"));
 
+      if (startDateSelected) {
+        startDateValue.textContent = startDateSelected;
+      }
+      if (endDateSelected) {
+        endDateValue.textContent = endDateSelected;
+      }
+      if (portfolioSelected) {
+        portfolioSelectValue.textContent = portfolioSelected;
+      }
+
+      setView("workspace");
       renderTable();
+      updateViewBaselineState();
     </script>
   </body>
 </html>
