@@ -17,7 +17,7 @@
     />
     <style>
       body {
-        font-family: "Roboto", sans-serif;
+        font-family: "Inter", sans-serif;
       }
       .font-inter {
         font-family: "Inter", sans-serif;
@@ -84,6 +84,29 @@
         display: block;
         transform: translateY(1px);
       }
+      .radio-input {
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 1.5px solid #2d2d2d;
+        border-radius: 9999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+      }
+      .radio-input:checked {
+        border-color: #004895;
+        background: #004895;
+      }
+      .radio-input:checked::after {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 9999px;
+        background: #fff;
+        display: block;
+      }
       .filter-checkbox {
         appearance: none;
         width: 12px;
@@ -124,6 +147,60 @@
         background: #d8e7fb;
         border-color: #004895;
         color: #004895;
+      }
+      .table-text,
+      .table-text * {
+        font-size: 14px;
+      }
+      .table-header,
+      .table-header * {
+        font-size: 12px;
+      }
+      .facility-input {
+        width: 100%;
+        height: 32px;
+        border: 1px solid #c0c0c0;
+        border-radius: 4px;
+        padding: 0 8px;
+        font-size: 14px;
+        color: #2d2d2d;
+        background: #fff;
+      }
+      .facility-input:focus,
+      .facility-input:active {
+        outline: none;
+        border-color: #0662c4;
+      }
+      .facility-input:disabled {
+        background: #dadada;
+        color: #b1b1b1;
+      }
+      .facility-input::-webkit-outer-spin-button,
+      .facility-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      .facility-input[type="number"] {
+        -moz-appearance: textfield;
+      }
+      .define-parameters-tab {
+        width: 100%;
+      }
+      .labor-table .facility-input + div,
+      .labor-table .facility-input + div .material-icons {
+        color: #4b4b4b;
+      }
+      .facility-input:disabled + div,
+      .facility-input:disabled + div .material-icons {
+        color: #b1b1b1;
+      }
+      [data-define-panel="Facilities"] .facility-input + div,
+      [data-define-panel="Facilities"] .facility-input + div .material-icons {
+        color: #4b4b4b;
+      }
+      [data-define-panel="Facilities"] .facility-input:disabled + div,
+      [data-define-panel="Facilities"] .facility-input:disabled + div .material-icons {
+        color: #b1b1b1;
       }
       .filter-menu {
         width: 240px;
@@ -184,16 +261,6 @@
                   <span class="text-[16px] text-[#4b4b4b]">Scenario</span>
                 </div>
               </button>
-              <div class="flex h-16 items-center">
-                <div class="flex items-center gap-2 px-2 py-1">
-                  <span
-                    class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none text-[#4b4b4b]"
-                  >
-                    bar_chart
-                  </span>
-                  <span class="text-[16px] text-[#4b4b4b]">Analysis</span>
-                </div>
-              </div>
             </nav>
           </div>
           <div class="flex items-center">
@@ -213,11 +280,12 @@
                 </div>
               </div>
               <div class="flex items-center gap-1">
-                <img
-                  alt="Avatar"
-                  class="h-10 w-10 rounded-full object-cover"
-                  src="http://localhost:3845/assets/2f1fd18b1e387532b46fa1a63c7da8ecd2eda62a.png"
-                />
+                <div
+                  class="flex h-10 w-10 items-center justify-center rounded-full bg-[#dadada] text-[14px] font-bold text-[#4b4b4b]"
+                  aria-label="Signed in as GG"
+                >
+                  GG
+                </div>
                 <span
                   class="material-icons inline-flex h-6 w-6 items-center justify-center text-[24px] leading-none text-[#2d2d2d]"
                 >
@@ -461,6 +529,398 @@
                     </div>
                   </div>
                 </div>
+                <div class="w-full min-w-0" data-define-panel="Time Estimates">
+                  <div
+                    class="w-full rounded-[8px] bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
+                  >
+                    <div class="flex items-center justify-between">
+                      <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                        Time Estimates
+                      </div>
+                      <button
+                        class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[12px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+                        type="button"
+                      >
+                        <span class="material-icons text-[16px] text-current">
+                          refresh
+                        </span>
+                        Reset to default
+                      </button>
+                    </div>
+                    <div class="mt-4 w-full text-[12px] text-[#2d2d2d] table-text overflow-x-auto">
+                      <div class="min-w-full w-max">
+                        <div
+                          class="table-header grid min-h-[40px] grid-cols-[180px_180px_1fr] items-center gap-4 border-b-2 border-t-2 border-[#d8e7fb] px-2 py-2 font-bold uppercase text-[#4b4b4b]"
+                        >
+                          <div class="flex items-center gap-1">
+                            Role Type
+                            <span class="material-icons text-[16px] text-[#4b4b4b]">
+                              unfold_more
+                            </span>
+                          </div>
+                          <div class="flex items-center gap-1">
+                            GTM Activity
+                            <span class="material-icons text-[16px] text-[#4b4b4b]">
+                              unfold_more
+                            </span>
+                          </div>
+                          <div>Daily Fixed Time (On Property, Meetings, Breaks)</div>
+                        </div>
+                        <div class="divide-y divide-[#d8e7fb]">
+                          <div class="grid min-h-[48px] grid-cols-[180px_180px_1fr] items-center gap-4 px-2 py-2">
+                            <div>Delivery</div>
+                            <div>On property</div>
+                            <div class="max-w-[360px]">
+                              <input class="facility-input w-full text-[#b1b1b1]" value="60" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 60
+                              </div>
+                            </div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[180px_180px_1fr] items-center gap-4 px-2 py-2">
+                            <div>Sales</div>
+                            <div>On property</div>
+                            <div class="max-w-[360px]">
+                              <input class="facility-input w-full text-[#b1b1b1]" value="60" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 60
+                              </div>
+                            </div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[180px_180px_1fr] items-center gap-4 px-2 py-2">
+                            <div>Merch</div>
+                            <div>On property</div>
+                            <div class="max-w-[360px]">
+                              <input class="facility-input w-full text-[#b1b1b1]" value="60" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 60
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="mt-6 w-full rounded-[8px] bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
+                  >
+                    <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                      Channel List
+                    </div>
+                    <div
+                      class="mt-4 flex flex-wrap items-center justify-between gap-4 border-y border-[#d8e7fb] py-4"
+                    >
+                      <div class="flex flex-wrap items-center gap-2">
+                        <button
+                          class="flex h-8 items-center gap-1 rounded-full border border-[#d8e7fb] bg-white px-4 text-[14px] text-[#004895]"
+                          type="button"
+                        >
+                          Role Type
+                          <span class="material-icons text-[16px] text-[#004895]">
+                            arrow_drop_down
+                          </span>
+                        </button>
+                        <button
+                          class="flex h-8 items-center gap-1 rounded-full border border-[#d8e7fb] bg-white px-4 text-[14px] text-[#004895]"
+                          type="button"
+                        >
+                          GTM Activity
+                          <span class="material-icons text-[16px] text-[#004895]">
+                            arrow_drop_down
+                          </span>
+                        </button>
+                        <button
+                          class="flex h-8 items-center gap-1 rounded-full border border-[#d8e7fb] bg-white px-4 text-[14px] text-[#004895]"
+                          type="button"
+                        >
+                          Trade Segment
+                          <span class="material-icons text-[16px] text-[#004895]">
+                            arrow_drop_down
+                          </span>
+                        </button>
+                        <div class="h-6 w-px bg-[#d8e7fb]"></div>
+                        <button
+                          class="text-[14px] font-bold text-[#004895]"
+                          type="button"
+                        >
+                          Reset all filters
+                        </button>
+                      </div>
+                      <div class="flex items-center gap-3">
+                        <label class="flex items-center gap-2 text-[12px] text-[#4b4b4b]">
+                          <input type="checkbox" class="table-checkbox" checked />
+                          Show Legacy Standards
+                        </label>
+                        <button
+                          class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[12px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+                          type="button"
+                        >
+                          <span class="material-icons text-[16px] text-current">
+                            add
+                          </span>
+                          Reset to default
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="mt-4 w-full text-[12px] text-[#2d2d2d] table-text overflow-x-auto">
+                      <div class="min-w-full w-max">
+                        <div
+                          class="table-header grid min-h-[40px] grid-cols-[140px_140px_160px_200px_180px_180px_200px_200px_200px] items-center gap-4 border-b-2 border-t-2 border-[#d8e7fb] px-2 py-2 font-bold uppercase text-[#4b4b4b]"
+                        >
+                          <div class="flex items-center gap-1">
+                            Role Type
+                            <span class="material-icons text-[16px] text-[#4b4b4b]">
+                              unfold_more
+                            </span>
+                          </div>
+                          <div class="flex items-center gap-1">
+                            GTM Activity
+                            <span class="material-icons text-[16px] text-[#4b4b4b]">
+                              unfold_more
+                            </span>
+                          </div>
+                          <div>Trade Segment</div>
+                          <div>Channel</div>
+                          <div class="leading-[14px] text-[#626262]">
+                            <div>1NA Fixed Minutes</div>
+                            <div>Per Visit</div>
+                          </div>
+                          <div class="leading-[14px] text-[#626262]">
+                            <div>Foods Variable</div>
+                            <div>Minutes Per Case</div>
+                          </div>
+                          <div class="leading-[14px] text-[#626262]">
+                            <div>Beverages Variable</div>
+                            <div>Minutes Per Case</div>
+                          </div>
+                          <div>Beverages Fixed Mins Per Visit</div>
+                          <div>Foods Fixed Mins Per Visit</div>
+                        </div>
+                        <div class="divide-y divide-[#d8e7fb]">
+                          <div class="grid min-h-[48px] grid-cols-[140px_140px_160px_200px_180px_180px_200px_200px_200px] items-center gap-4 px-2 py-2">
+                            <div>Delivery</div>
+                            <div>Deliver</div>
+                            <div>Large Format</div>
+                            <div>HYPER SUPER CENTER</div>
+                            <div>
+                              <input class="facility-input text-[#b1b1b1]" value="73" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 73
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input text-[#b1b1b1]" value="0" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 0
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input text-[#b1b1b1]" value="0" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 0
+                              </div>
+                            </div>
+                            <div>Content</div>
+                            <div>Content</div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[140px_140px_160px_200px_180px_180px_200px_200px_200px] items-center gap-4 px-2 py-2">
+                            <div>Delivery</div>
+                            <div>Deliver</div>
+                            <div>Large Format</div>
+                            <div>GROCERY</div>
+                            <div>
+                              <input class="facility-input text-[#b1b1b1]" value="57.2" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 57.2
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input text-[#b1b1b1]" value="0" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 0
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input text-[#b1b1b1]" value="0" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 0
+                              </div>
+                            </div>
+                            <div>Content</div>
+                            <div>Content</div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[140px_140px_160px_200px_180px_180px_200px_200px_200px] items-center gap-4 px-2 py-2">
+                            <div>Delivery</div>
+                            <div>Deliver</div>
+                            <div>Large Format</div>
+                            <div>MILITARY&amp;G OVT</div>
+                            <div>
+                              <input class="facility-input text-[#b1b1b1]" value="62.7" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 62.7
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input text-[#b1b1b1]" value="0" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 0
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input text-[#b1b1b1]" value="0" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 0
+                              </div>
+                            </div>
+                            <div>Content</div>
+                            <div>Content</div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[140px_140px_160px_200px_180px_180px_200px_200px_200px] items-center gap-4 px-2 py-2">
+                            <div>Delivery</div>
+                            <div>Deliver</div>
+                            <div>Large Format</div>
+                            <div>WHOLESALE CLUB</div>
+                            <div>
+                              <input class="facility-input text-[#b1b1b1]" value="94.4" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 94.4
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input text-[#b1b1b1]" value="0" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 0
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input text-[#b1b1b1]" value="0" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 0
+                              </div>
+                            </div>
+                            <div>Content</div>
+                            <div>Content</div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[140px_140px_160px_200px_180px_180px_200px_200px_200px] items-center gap-4 px-2 py-2">
+                            <div>Delivery</div>
+                            <div>Deliver</div>
+                            <div>Large Format</div>
+                            <div>IBS</div>
+                            <div>
+                              <input class="facility-input text-[#b1b1b1]" value="25.3" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 25.3
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input text-[#b1b1b1]" value="0" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 0
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input text-[#b1b1b1]" value="0" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 0
+                              </div>
+                            </div>
+                            <div>Content</div>
+                            <div>Content</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="mt-4 flex items-center justify-between text-[14px] text-[#2d2d2d]">
+                      <div class="flex items-center gap-2">
+                        <span>Rows per page</span>
+                        <button
+                          class="flex h-8 items-center gap-1 rounded border border-[#c0c0c0] bg-white px-2"
+                          type="button"
+                        >
+                          5
+                          <span class="material-icons text-[16px] text-[#4b4b4b]">
+                            keyboard_arrow_down
+                          </span>
+                        </button>
+                      </div>
+                      <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-2 text-[#004895]">
+                          <span class="material-icons text-[18px]">first_page</span>
+                          <span class="material-icons text-[18px]">chevron_left</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <span>Page</span>
+                          <div class="flex h-8 w-10 items-center justify-center rounded border border-[#c0c0c0] bg-white">
+                            1
+                          </div>
+                          <span>of</span>
+                          <span class="font-bold">3</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-[#004895]">
+                          <span class="material-icons text-[18px]">chevron_right</span>
+                          <span class="material-icons text-[18px]">last_page</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -582,7 +1042,7 @@
           id="scenario-view"
           class="mx-auto hidden max-w-[1344px] flex-col gap-6"
         >
-          <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-4 pb-6">
             <p class="text-[18px] leading-[24px] text-[#4b4b4b]">
               SCENARIO CREATION
             </p>
@@ -595,7 +1055,7 @@
                     radio_button_checked
                   </span>
                   <div class="flex-1">
-                    <div class="h-[2px] w-full bg-[#4b4b4b]"></div>
+                    <div class="h-[2px] w-full bg-[#4b4b4b] text-[#0562C4]"></div>
                   </div>
                 </div>
                 <p class="pt-1 text-[14px] font-bold text-[#004895]">
@@ -837,7 +1297,2015 @@
             </div>
           </div>
         </section>
+
+        <section
+          id="baseline-view"
+          class="mx-auto hidden max-w-[1344px] flex-col gap-6"
+        >
+          <div class="flex flex-col gap-4 pb-6">
+            <p class="text-[18px] leading-[24px] text-[#4b4b4b]">
+              SCENARIO CREATION
+            </p>
+            <div class="flex items-start justify-between px-12">
+              <div class="flex flex-1 flex-col">
+                <div class="flex w-full items-center py-1">
+                  <span
+                    class="material-icons inline-flex h-4 w-4 items-center justify-center text-[16px] leading-none text-[#0662C4]"
+                  >
+                    check_circle
+                  </span>
+                  <div class="flex-1">
+                    <div class="h-[2px] w-full bg-[#4b4b4b]"></div>
+                  </div>
+                </div>
+                <p class="pt-1 text-[14px] font-bold text-[#004895]">
+                  Define Scope
+                </p>
+              </div>
+              <div class="flex flex-1 flex-col">
+                <div class="flex w-full items-center py-1">
+                  <span
+                    class="material-icons inline-flex h-4 w-4 items-center justify-center text-[16px] leading-none text-[#0662C4]"
+                  >
+                    radio_button_checked
+                  </span>
+                  <div class="flex-1">
+                    <div class="h-[2px] w-full bg-[#4b4b4b]"></div>
+                  </div>
+                </div>
+                <p class="pt-1 text-[14px] font-bold text-[#004895]">
+                  View Baseline
+                </p>
+              </div>
+              <div class="flex flex-col">
+                <div class="flex items-center py-1">
+                  <span
+                    class="material-icons inline-flex h-4 w-4 items-center justify-center text-[16px] leading-none text-[#4b4b4b]"
+                  >
+                    circle
+                  </span>
+                </div>
+                <p class="pt-1 text-[14px] text-[#4b4b4b]">
+                  Define Parameters
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col gap-6 rounded-lg bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
+          >
+            <div class="grid gap-2">
+              <div class="grid grid-cols-5 gap-2">
+                <div class="flex items-start justify-between rounded border border-[#d8e7fb] bg-white p-2">
+                  <div>
+                    <div class="text-[12px] text-[#4b4b4b]">Stores</div>
+                    <div id="baseline-kpi-top-0" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                  </div>
+                  <span class="material-icons text-[20px] text-[#4b4b4b]">storefront</span>
+                </div>
+                <div class="flex items-start justify-between rounded border border-[#d8e7fb] bg-white p-2">
+                  <div>
+                    <div class="text-[12px] text-[#4b4b4b]">Annual Cases</div>
+                    <div id="baseline-kpi-top-1" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                  </div>
+                  <span class="material-icons text-[20px] text-[#4b4b4b]">bar_chart</span>
+                </div>
+                <div class="flex items-start justify-between rounded border border-[#d8e7fb] bg-white p-2">
+                  <div>
+                    <div class="text-[12px] text-[#4b4b4b]">Profit to Serve %NR</div>
+                    <div id="baseline-kpi-top-2" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                  </div>
+                  <span class="material-icons text-[20px] text-[#4b4b4b]">show_chart</span>
+                </div>
+                <div class="flex items-start justify-between rounded border border-[#d8e7fb] bg-white p-2">
+                  <div>
+                    <div class="text-[12px] text-[#4b4b4b]">Annual NR</div>
+                    <div id="baseline-kpi-top-3" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                  </div>
+                  <span class="material-icons text-[20px] text-[#4b4b4b]">monetization_on</span>
+                </div>
+                <div class="flex items-start justify-between rounded border border-[#d8e7fb] bg-white p-2">
+                  <div>
+                    <div class="text-[12px] text-[#4b4b4b]">Headcount</div>
+                    <div id="baseline-kpi-top-4" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                  </div>
+                  <span class="material-icons text-[20px] text-[#4b4b4b]">person</span>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-5 gap-2">
+                <div class="flex items-start justify-between rounded border border-[#d8e7fb] bg-white p-2">
+                  <div>
+                    <div class="text-[12px] text-[#4b4b4b]">Hours</div>
+                    <div id="baseline-kpi-bottom-0" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                  </div>
+                  <span class="material-icons text-[20px] text-[#4b4b4b]">hourglass_empty</span>
+                </div>
+                <div class="flex items-start justify-between rounded border border-[#d8e7fb] bg-white p-2">
+                  <div>
+                    <div class="text-[12px] text-[#4b4b4b]">Miles</div>
+                    <div id="baseline-kpi-bottom-1" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                  </div>
+                  <span class="material-icons text-[20px] text-[#4b4b4b]">add_road</span>
+                </div>
+                <div class="flex items-start justify-between rounded border border-[#d8e7fb] bg-white p-2">
+                  <div>
+                    <div class="text-[12px] text-[#4b4b4b]">Number of Deliveries</div>
+                    <div id="baseline-kpi-bottom-2" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                  </div>
+                  <span class="material-icons text-[20px] text-[#4b4b4b]">local_shipping</span>
+                </div>
+                <div class="flex items-start justify-between rounded border border-[#d8e7fb] bg-white p-2">
+                  <div>
+                    <div class="text-[12px] text-[#4b4b4b]">S&amp;D % NR</div>
+                    <div id="baseline-kpi-bottom-3" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                  </div>
+                  <span class="material-icons text-[20px] text-[#4b4b4b]">analytics</span>
+                </div>
+                <div class="flex items-start justify-between rounded border border-[#d8e7fb] bg-white p-2">
+                  <div>
+                    <div class="text-[12px] text-[#4b4b4b]">Net Revenue/hour</div>
+                    <div id="baseline-kpi-bottom-4" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                  </div>
+                  <span class="material-icons text-[20px] text-[#4b4b4b]">attach_money</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="rounded-[8px] border border-[#d8e7fb]">
+                <div class="rounded-t-[8px] border-t-[8px] border-[#0662C4]">
+                  <div class="flex items-center justify-between border-b border-[#d8e7fb] px-4 py-3">
+                    <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                      BEVERAGES
+                    </div>
+                    <div class="flex items-center gap-2 text-[14px] font-bold text-[#2d2d2d]">
+                      <span id="beverages-total-stores" class="text-[#0662c4]">0</span>
+                      Total Stores
+                      <span class="material-icons text-[22px] text-[#2d2d2d]">
+                        storefront
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-4 p-4">
+                  <div class="flex flex-wrap gap-2">
+                    <div class="flex w-[145px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90">Annual Cases</div>
+                        <div id="beverages-kpi-top-0" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#4b4b4b]">bar_chart</span>
+                    </div>
+                    <div class="flex w-[145px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90">Profit to Serve %NR</div>
+                        <div id="beverages-kpi-top-1" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#4b4b4b]">show_chart</span>
+                    </div>
+                    <div class="flex w-[145px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90">Annual NR</div>
+                        <div id="beverages-kpi-top-2" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#4b4b4b]">monetization_on</span>
+                    </div>
+                    <div class="flex w-[145px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90">Headcount</div>
+                        <div id="beverages-kpi-top-3" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#4b4b4b]">person</span>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-wrap gap-2">
+                    <div class="flex w-[111.5px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90">Hours</div>
+                        <div id="beverages-kpi-bottom-0" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#4b4b4b]">hourglass_empty</span>
+                    </div>
+                    <div class="flex w-[111.5px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90">Miles</div>
+                        <div id="beverages-kpi-bottom-1" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#4b4b4b]">add_road</span>
+                    </div>
+                    <div class="flex w-[127px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90"># of Deliveries</div>
+                        <div id="beverages-kpi-bottom-2" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#4b4b4b]">local_shipping</span>
+                    </div>
+                    <div class="flex w-[111.5px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90">S&amp;D % NR</div>
+                        <div id="beverages-kpi-bottom-3" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#4b4b4b]">analytics</span>
+                    </div>
+                    <div class="flex w-[111.5px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90">NR/Hour</div>
+                        <div id="beverages-kpi-bottom-4" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#4b4b4b]">attach_money</span>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-col gap-4">
+                    <div>
+                      <div class="mt-2 overflow-hidden rounded border border-[#d8e7fb] table-text">
+                        <div class="bg-[#f5f9ff] px-4 py-3 text-[12px] font-bold uppercase text-[#2d2d2d]">
+                          Labor
+                        </div>
+                        <div class="border-b border-[#d8e7fb]">
+                          <div class="grid grid-cols-[1.6fr_0.6fr_1fr_1fr_0.6fr] items-center px-4 py-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                            <div>Role Name</div>
+                            <div>HC</div>
+                            <div>Wages $/Hr</div>
+                            <div>Annual Salary</div>
+                            <div>Hrs/Wk</div>
+                          </div>
+                        </div>
+                        <div id="beverages-labor-body" class="divide-y divide-[#d8e7fb] text-[14px]"></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div class="mt-2 overflow-hidden rounded border border-[#d8e7fb] table-text">
+                        <div class="bg-[#f5f9ff] px-4 py-3 text-[12px] font-bold uppercase text-[#2d2d2d]">
+                          Service
+                        </div>
+                        <div class="border-b border-[#d8e7fb]">
+                          <div class="grid grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr] items-center px-4 py-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                            <div>Segment</div>
+                            <div>Large Format</div>
+                            <div>Small Format</div>
+                            <div>AFH</div>
+                          </div>
+                        </div>
+                        <div id="beverages-service-body" class="divide-y divide-[#d8e7fb] text-[14px]"></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div class="mt-2 overflow-hidden rounded border border-[#d8e7fb] table-text">
+                        <div class="bg-[#f5f9ff] px-4 py-3 text-[12px] font-bold uppercase text-[#2d2d2d]">
+                          Assets
+                        </div>
+                        <div class="border-b border-[#d8e7fb]">
+                          <div class="grid grid-cols-[1.2fr_0.8fr_1fr_1fr] items-center px-4 py-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                            <div>Asset Type</div>
+                            <div>Miles</div>
+                            <div>Est. $/Mile Fuel &amp; R&amp;M</div>
+                            <div>
+                              <div>Est. $/Mile</div>
+                              <div>Depreciation</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="beverages-assets-body" class="divide-y divide-[#d8e7fb] text-[14px]"></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div class="mt-2 overflow-hidden rounded border border-[#d8e7fb] table-text">
+                        <div class="bg-[#f5f9ff] px-4 py-3 text-[12px] font-bold uppercase text-[#2d2d2d]">
+                          P&amp;L
+                        </div>
+                        <div class="border-b border-[#d8e7fb]">
+                          <div class="grid grid-cols-[1fr_100px_100px_100px] items-center px-4 py-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                            <div>P&amp;L</div>
+                            <div>$</div>
+                            <div>% NR</div>
+                            <div>$/Case</div>
+                          </div>
+                        </div>
+                        <div id="beverages-pnl-body" class="divide-y divide-[#d8e7fb] text-[14px]"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="rounded-[8px] border border-[#f3c12e]">
+                <div class="rounded-t-[8px] border-t-[8px] border-[#f3c12e]">
+                  <div class="flex items-center justify-between border-b border-[#f3c12e] px-4 py-3">
+                    <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                      FOODS
+                    </div>
+                    <div class="flex items-center gap-2 text-[14px] font-bold text-[#2d2d2d]">
+                      <span id="foods-total-stores" class="text-[#f3c12e]">0</span>
+                      Total Stores
+                      <span class="material-icons text-[22px] text-[#2d2d2d]">
+                        storefront
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-4 p-4">
+                  <div class="flex flex-wrap gap-2">
+                    <div class="flex w-[145px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90">Annual Cases</div>
+                        <div id="foods-kpi-top-0" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#2d2d2d]">bar_chart</span>
+                    </div>
+                    <div class="flex w-[145px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90">Profit to Serve %NR</div>
+                        <div id="foods-kpi-top-1" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#2d2d2d]">show_chart</span>
+                    </div>
+                    <div class="flex w-[145px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90">Annual NR</div>
+                        <div id="foods-kpi-top-2" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#2d2d2d]">monetization_on</span>
+                    </div>
+                    <div class="flex w-[145px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90">Headcount</div>
+                        <div id="foods-kpi-top-3" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#2d2d2d]">person</span>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-wrap gap-2">
+                    <div class="flex w-[111.5px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90">Hours</div>
+                        <div id="foods-kpi-bottom-0" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#2d2d2d]">hourglass_empty</span>
+                    </div>
+                    <div class="flex w-[111.5px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90">Miles</div>
+                        <div id="foods-kpi-bottom-1" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#2d2d2d]">add_road</span>
+                    </div>
+                    <div class="flex w-[126px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90"># of Deliveries</div>
+                        <div id="foods-kpi-bottom-2" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#2d2d2d]">local_shipping</span>
+                    </div>
+                    <div class="flex w-[111.5px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90">S&amp;D % NR</div>
+                        <div id="foods-kpi-bottom-3" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#2d2d2d]">analytics</span>
+                    </div>
+                    <div class="flex w-[111.5px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                      <div>
+                        <div class="text-[12px] text-[#4b4b4b] opacity-90">NR/Hour</div>
+                        <div id="foods-kpi-bottom-4" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
+                      </div>
+                      <span class="material-icons text-[24px] text-[#2d2d2d]">attach_money</span>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-col gap-4">
+                    <div>
+                      <div class="mt-2 overflow-hidden rounded border border-[#f9d849] table-text">
+                        <div class="bg-[#fff9d6] px-4 py-3 text-[12px] font-bold uppercase text-[#2d2d2d]">
+                          Labor
+                        </div>
+                        <div class="border-b border-[#f9d849]">
+                          <div class="grid grid-cols-[1.6fr_0.6fr_1fr_1fr_0.6fr] items-center px-4 py-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                            <div>Role Name</div>
+                            <div>HC</div>
+                            <div>Wages $/Hr</div>
+                            <div>Annual Salary</div>
+                            <div>Hrs/Wk</div>
+                          </div>
+                        </div>
+                        <div
+                          id="foods-labor-body"
+                          class="divide-y divide-[#f9d849] text-[14px] min-h-[192px]"
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div class="mt-2 overflow-hidden rounded border border-[#f9d849] table-text">
+                        <div class="bg-[#fff9d6] px-4 py-3 text-[12px] font-bold uppercase text-[#2d2d2d]">
+                          Service
+                        </div>
+                        <div class="border-b border-[#f9d849]">
+                          <div class="grid grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr] items-center px-4 py-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                            <div>Segment</div>
+                            <div>Large Format</div>
+                            <div>Small Format</div>
+                            <div>AFH</div>
+                          </div>
+                        </div>
+                        <div id="foods-service-body" class="divide-y divide-[#f9d849] text-[14px]"></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div class="mt-2 overflow-hidden rounded border border-[#f9d849] table-text">
+                        <div class="bg-[#fff9d6] px-4 py-3 text-[12px] font-bold uppercase text-[#2d2d2d]">
+                          Assets
+                        </div>
+                        <div class="border-b border-[#f9d849]">
+                          <div class="grid grid-cols-[1.2fr_0.8fr_1fr_1fr] items-center px-4 py-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                            <div>Asset Type</div>
+                            <div>Miles</div>
+                            <div>Est. $/Mile Fuel &amp; R&amp;M</div>
+                            <div>
+                              <div>Est. $/Mile</div>
+                              <div>Depreciation</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="foods-assets-body" class="divide-y divide-[#f9d849] text-[14px]"></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div class="mt-2 overflow-hidden rounded border border-[#f9d849] table-text">
+                        <div class="bg-[#fff9d6] px-4 py-3 text-[12px] font-bold uppercase text-[#2d2d2d]">
+                          P&amp;L
+                        </div>
+                        <div class="border-b border-[#f9d849]">
+                          <div class="grid min-h-[40px] grid-cols-[1fr_100px_100px_100px] items-center px-4 py-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                            <div>P&amp;L</div>
+                            <div>$</div>
+                            <div>% NR</div>
+                            <div>$/Case</div>
+                          </div>
+                        </div>
+                        <div id="foods-pnl-body" class="divide-y divide-[#f9d849] text-[14px]"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <section
+          id="define-parameters-view"
+          class="mx-auto hidden max-w-[1344px] flex-col gap-6"
+        >
+          <div class="flex flex-col gap-4 pb-6">
+            <p class="text-[18px] leading-[24px] text-[#4b4b4b]">
+              SCENARIO CREATION
+            </p>
+            <div class="flex items-start justify-between px-12">
+              <div class="flex flex-1 flex-col">
+                <div class="flex w-full items-center py-1">
+                  <span
+                    class="material-icons inline-flex h-4 w-4 items-center justify-center text-[16px] leading-none text-[#0662C4]"
+                  >
+                    check_circle
+                  </span>
+                  <div class="flex-1">
+                    <div class="h-[2px] w-full bg-[#0662C4]"></div>
+                  </div>
+                </div>
+                <p class="pt-1 text-[14px] font-bold text-[#004895]">
+                  Define Scope
+                </p>
+              </div>
+              <div class="flex flex-1 flex-col">
+                <div class="flex w-full items-center py-1">
+                  <span
+                    class="material-icons inline-flex h-4 w-4 items-center justify-center text-[16px] leading-none text-[#0662C4]"
+                  >
+                    check_circle
+                  </span>
+                  <div class="flex-1">
+                    <div class="h-[2px] w-full bg-[#0662C4]"></div>
+                  </div>
+                </div>
+                <p class="pt-1 text-[14px] font-bold text-[#004895]">
+                  View Baseline
+                </p>
+              </div>
+              <div class="flex flex-col">
+                <div class="flex items-center py-1">
+                  <span
+                    class="material-icons inline-flex h-4 w-4 items-center justify-center text-[16px] leading-none text-[#0662C4]"
+                  >
+                    radio_button_checked
+                  </span>
+                </div>
+                <p class="pt-1 text-[14px] font-bold text-[#004895]">
+                  Define Parameters
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="rounded-lg bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)] w-full"
+          >
+            <div class="flex gap-6">
+              <div class="w-[220px] shrink-0 border-l border-[#d8e7fb] h-fit">
+                <div class="flex flex-col text-[14px] text-[#4b4b4b]">
+                  <button
+                    class="define-parameters-tab flex min-h-[32px] items-center justify-between border-l border-[#d8e7fb] px-2 py-1 transition-colors hover:border-l-2 hover:border-[#B0D0FB]"
+                    data-define-tab="Facilities"
+                    type="button"
+                  >
+                    <span>Facilities</span>
+                    <span class="rounded-[4px] bg-[#0662c4] px-2 py-[2px] text-[12px] text-white">
+                      1 changes
+                    </span>
+                  </button>
+                  <button
+                    class="define-parameters-tab flex min-h-[32px] items-center justify-between border-l border-[#d8e7fb] px-2 py-1 transition-colors hover:border-l-2 hover:border-[#B0D0FB]"
+                    data-define-tab="Labor"
+                    type="button"
+                  >
+                    <span>Labor</span>
+                    <span class="rounded-[4px] bg-[#0662c4] px-2 py-[2px] text-[12px] text-white">
+                      5 changes
+                    </span>
+                  </button>
+                  <button
+                    class="define-parameters-tab flex min-h-[32px] items-center justify-between border-l border-[#d8e7fb] px-2 py-1 transition-colors hover:border-l-2 hover:border-[#B0D0FB]"
+                    data-define-tab="Service"
+                    type="button"
+                  >
+                    <span>Service</span>
+                    <span class="rounded-[4px] bg-[#0662c4] px-2 py-[2px] text-[12px] text-white">
+                      0 changes
+                    </span>
+                  </button>
+                  <button
+                    class="define-parameters-tab flex min-h-[32px] items-center justify-between border-l border-[#d8e7fb] px-2 py-1 transition-colors hover:border-l-2 hover:border-[#B0D0FB]"
+                    data-define-tab="Assets"
+                    type="button"
+                  >
+                    <span>Assets</span>
+                    <span class="rounded-[4px] bg-[#0662c4] px-2 py-[2px] text-[12px] text-white">
+                      5 changes
+                    </span>
+                  </button>
+                  <button
+                    class="define-parameters-tab flex min-h-[32px] items-center justify-between border-l border-[#d8e7fb] px-2 py-1 transition-colors hover:border-l-2 hover:border-[#B0D0FB]"
+                    data-define-tab="GTM Types"
+                    type="button"
+                  >
+                    <span>GTM Types</span>
+                    <span class="rounded-[4px] bg-[#0662c4] px-2 py-[2px] text-[12px] text-white">
+                      8 changes
+                    </span>
+                  </button>
+                  <button
+                    class="define-parameters-tab flex min-h-[32px] items-center justify-between border-l-2 border-[#004895] px-2 py-1 font-bold transition-colors hover:border-l-2 hover:border-[#B0D0FB]"
+                    data-define-tab="Time Estimates"
+                    type="button"
+                  >
+                    <span>Time Estimates</span>
+                    <span class="rounded-[4px] bg-[#0662c4] px-2 py-[2px] text-[12px] text-white">
+                      0 changes
+                    </span>
+                  </button>
+                  <button
+                    class="define-parameters-tab flex min-h-[32px] items-center justify-between border-l border-[#d8e7fb] px-2 py-1 transition-colors hover:border-l-2 hover:border-[#B0D0FB]"
+                    data-define-tab="Exceptions"
+                    type="button"
+                  >
+                    <span>Exceptions</span>
+                    <span class="rounded-[4px] bg-[#0662c4] px-2 py-[2px] text-[12px] text-white">
+                      0 changes
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex-1 min-w-0">
+                <div class="hidden w-full min-w-0" data-define-panel="Facilities">
+                  <div
+                    class="w-full rounded-[8px] bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
+                  >
+                    <div class="flex items-center justify-between">
+                      <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                        Existing Facilities
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <button
+                          class="flex h-8 items-center gap-1 rounded-full bg-[#004895] px-3 text-[12px] font-bold text-white transition-colors hover:bg-[#002B5E]"
+                          type="button"
+                        >
+                          <span class="material-icons text-[16px] text-current">
+                            add
+                          </span>
+                          Add Existing Facility
+                        </button>
+                        <button
+                          id="existing-facilities-reset"
+                          class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-3 text-[12px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+                          type="button"
+                        >
+                          <span class="material-icons text-[16px] text-current">
+                            refresh
+                          </span>
+                          Reset to default
+                        </button>
+                      </div>
+                    </div>
+                    <div class="mt-4 text-[12px] text-[#2d2d2d] table-text overflow-x-auto">
+                      <div
+                        class="table-header grid min-h-[40px] grid-cols-[1.2fr_80px_120px_220px_1.2fr] items-center gap-4 border-b-2 border-t-2 border-[#d8e7fb] px-2 py-2 font-bold uppercase text-[#4b4b4b]"
+                      >
+                        <div class="flex items-center gap-1">
+                          Facility
+                          <span class="material-icons text-[16px] text-[#4b4b4b]">
+                            unfold_more
+                          </span>
+                        </div>
+                        <div>Inc.</div>
+                        <div class="flex items-center gap-1">
+                          Location ID
+                          <span class="material-icons text-[16px] text-[#4b4b4b]">
+                            unfold_more
+                          </span>
+                        </div>
+                        <div class="flex items-center gap-1">
+                          Maximum Weekly Cases
+                          <span class="material-icons text-[16px] text-[#4b4b4b]">
+                            unfold_more
+                          </span>
+                        </div>
+                        <div class="flex items-center gap-1">
+                          Address
+                          <span class="material-icons text-[16px] text-[#4b4b4b]">
+                            unfold_more
+                          </span>
+                        </div>
+                      </div>
+                      <div class="divide-y divide-[#d8e7fb]">
+                        <div class="grid min-h-[48px] grid-cols-[1.2fr_80px_120px_220px_1.2fr] items-center gap-4 px-2 py-2">
+                          <div>FLUS Forth Worth DC</div>
+                          <div class="flex items-center">
+                            <input type="checkbox" class="table-checkbox" />
+                          </div>
+                          <div>1234</div>
+                          <div>
+                            <input
+                              type="number"
+                              class="facility-input"
+                              value="46"
+                              data-default="46"
+                              disabled
+                            />
+                            <div class="mt-1 flex items-center gap-1 text-[12px] text-[#b1b1b1]">
+                              <span class="material-icons text-[16px] text-[#b1b1b1]">
+                                info
+                              </span>
+                              Default: 46
+                            </div>
+                          </div>
+                          <div>4701 PYLON ST FORT WORTH TX 76106</div>
+                        </div>
+                        <div class="grid min-h-[48px] grid-cols-[1.2fr_80px_120px_220px_1.2fr] items-center gap-4 px-2 py-2">
+                          <div>PBC US Forth Worth DC</div>
+                          <div class="flex items-center">
+                            <input type="checkbox" class="table-checkbox" />
+                          </div>
+                          <div>5678</div>
+                          <div>
+                            <input
+                              type="number"
+                              class="facility-input"
+                              value="46"
+                              data-default="46"
+                              disabled
+                            />
+                            <div class="mt-1 flex items-center gap-1 text-[12px] text-[#b1b1b1]">
+                              <span class="material-icons text-[16px] text-[#b1b1b1]">
+                                info
+                              </span>
+                              Default: 46
+                            </div>
+                          </div>
+                          <div>5201 BLUE MOUND RD FORT WORTH TX 76106</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="mt-4 rounded-[8px] bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
+                  >
+                    <div class="flex items-center justify-between">
+                      <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                        New Facilities
+                      </div>
+                      <button
+                        class="flex h-8 items-center gap-1 rounded-full bg-[#004895] px-3 text-[12px] font-bold text-white transition-colors hover:bg-[#002B5E]"
+                        type="button"
+                      >
+                        <span class="material-icons text-[16px] text-current">
+                          add
+                        </span>
+                        Create New Facility
+                      </button>
+                    </div>
+                    <div class="mt-4 text-[12px] table-text overflow-x-auto">
+                      <div
+                        class="table-header grid min-h-[40px] grid-cols-[1.2fr_80px_1fr_1.2fr] items-center gap-4 border-b-2 border-t-2 border-[#d8e7fb] px-2 py-2 font-bold uppercase text-[#4b4b4b]"
+                      >
+                        <div class="flex items-center gap-1">
+                          Facility
+                          <span class="material-icons text-[16px] text-[#4b4b4b]">
+                            unfold_more
+                          </span>
+                        </div>
+                        <div>Inc.</div>
+                        <div class="flex items-center gap-1">
+                          Maximum Weekly Cases
+                          <span class="material-icons text-[16px] text-[#4b4b4b]">
+                            unfold_more
+                          </span>
+                        </div>
+                        <div class="flex items-center gap-1">
+                          Address
+                          <span class="material-icons text-[16px] text-[#4b4b4b]">
+                            unfold_more
+                          </span>
+                        </div>
+                      </div>
+                      <div class="border-b-2 border-[#d8e7fb] px-2 py-6 text-center text-[14px] text-[#2d2d2d]">
+                        Create new facility to see information here
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="hidden w-full min-w-0" data-define-panel="Labor">
+                  <div
+                    class="rounded-[8px] bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
+                  >
+                    <div class="flex items-center justify-between">
+                      <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                        Frontline
+                      </div>
+                      <button
+                        class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[12px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+                        type="button"
+                        data-reset-default="frontline"
+                      >
+                        <span class="material-icons text-[16px] text-current">
+                          refresh
+                        </span>
+                        Reset to default
+                      </button>
+                    </div>
+                    <div
+                      class="mt-4 w-full flex-1 text-[12px] text-[#2d2d2d] table-text labor-table overflow-x-auto"
+                      data-define-table="frontline"
+                    >
+                      <div class="min-w-full w-max">
+                        <div
+                          class="table-header grid min-h-[40px] grid-cols-[1.1fr_64px_140px_140px_140px_140px_120px_160px] items-center gap-4 border-b-2 border-t-2 border-[#d8e7fb] px-2 py-2 font-bold uppercase text-[#4b4b4b]"
+                        >
+                          <div class="flex items-center gap-1">
+                            Role Name
+                            <span class="material-icons text-[16px] text-[#4b4b4b]">
+                              unfold_more
+                            </span>
+                          </div>
+                          <div>Inc</div>
+                          <div>Max Hours/Day</div>
+                          <div>Max Hours/Week</div>
+                          <div>Hourly Wage</div>
+                          <div class="flex items-center gap-1">
+                            Annual Earning
+                            <span class="material-icons text-[16px] text-[#4b4b4b]">
+                              info
+                            </span>
+                          </div>
+                          <div>Relief Rate</div>
+                          <div>Relief Wage Index</div>
+                        </div>
+                        <div class="divide-y divide-[#d8e7fb]">
+                          <div class="grid min-h-[48px] grid-cols-[1.1fr_64px_140px_140px_140px_140px_120px_160px] items-center gap-4 px-2 py-2">
+                            <div>CDL(A) DMS</div>
+                            <div class="flex items-center">
+                              <input type="checkbox" class="table-checkbox" checked />
+                            </div>
+                            <div>
+                              <input class="facility-input" value="10" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 10
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="46" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 46
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" placeholder="Placeholder" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 46
+                              </div>
+                            </div>
+                            <div class="text-[14px] font-bold">$92,940</div>
+                            <div>
+                              <input class="facility-input" value="15%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 15%
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="100%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 100%
+                              </div>
+                            </div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[1.1fr_64px_140px_140px_140px_140px_120px_160px] items-center gap-4 px-2 py-2">
+                            <div>CDL(B) DMS</div>
+                            <div class="flex items-center">
+                              <input type="checkbox" class="table-checkbox" checked />
+                            </div>
+                            <div>
+                              <input class="facility-input" value="10" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 10
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="46" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 46
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" placeholder="Placeholder" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 46
+                              </div>
+                            </div>
+                            <div class="text-[14px] font-bold">$83,646</div>
+                            <div>
+                              <input class="facility-input" value="15%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 15%
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="100%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 100%
+                              </div>
+                            </div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[1.1fr_64px_140px_140px_140px_140px_120px_160px] items-center gap-4 px-2 py-2">
+                            <div>Non-CDL DMS</div>
+                            <div class="flex items-center">
+                              <input type="checkbox" class="table-checkbox" checked />
+                            </div>
+                            <div>
+                              <input class="facility-input" value="9" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 9
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" placeholder="Placeholder" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 46
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" placeholder="Placeholder" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 46
+                              </div>
+                            </div>
+                            <div class="text-[14px] font-bold">$69,956</div>
+                            <div>
+                              <input class="facility-input" value="15%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 15%
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="100%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 100%
+                              </div>
+                            </div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[1.1fr_64px_140px_140px_140px_140px_120px_160px] items-center gap-4 px-2 py-2">
+                            <div>Merchandiser</div>
+                            <div class="flex items-center">
+                              <input type="checkbox" class="table-checkbox" checked />
+                            </div>
+                            <div>
+                              <input class="facility-input" value="9" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 9
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" placeholder="Placeholder" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 46
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" placeholder="Placeholder" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 46
+                              </div>
+                            </div>
+                            <div class="text-[14px] font-bold">$51,609</div>
+                            <div>
+                              <input class="facility-input" value="15%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 15%
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="100%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 100%
+                              </div>
+                            </div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[1.1fr_64px_140px_140px_140px_140px_120px_160px] items-center gap-4 px-2 py-2">
+                            <div>Sales Rep</div>
+                            <div class="flex items-center">
+                              <input type="checkbox" class="table-checkbox" checked />
+                            </div>
+                            <div>
+                              <input class="facility-input" value="9" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 9
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" placeholder="Placeholder" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 46
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" placeholder="Placeholder" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 46
+                              </div>
+                            </div>
+                            <div class="text-[14px] font-bold">$51,609</div>
+                            <div>
+                              <input class="facility-input" value="15%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 15%
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="100%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 100%
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="mt-4 w-full rounded-[8px] bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
+                  >
+                    <div class="flex items-center justify-between">
+                      <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                        Management
+                      </div>
+                      <button
+                        class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[12px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+                        type="button"
+                        data-reset-default="management"
+                      >
+                        <span class="material-icons text-[16px] text-current">
+                          refresh
+                        </span>
+                        Reset to default
+                      </button>
+                    </div>
+                    <div
+                      class="mt-4 w-full flex-1 text-[12px] text-[#2d2d2d] table-text labor-table overflow-x-auto"
+                      data-define-table="management"
+                    >
+                      <div class="min-w-full w-max">
+                        <div
+                          class="table-header grid min-h-[40px] grid-cols-[1.4fr_1fr_1fr] items-center gap-4 border-b-2 border-t-2 border-[#d8e7fb] px-2 py-2 font-bold uppercase text-[#4b4b4b]"
+                        >
+                          <div class="flex items-center gap-1">
+                            Role Name
+                            <span class="material-icons text-[16px] text-[#4b4b4b]">
+                              unfold_more
+                            </span>
+                          </div>
+                          <div class="flex items-center gap-1">
+                            Annual Salary
+                            <span class="material-icons text-[16px] text-[#4b4b4b]">
+                              info
+                            </span>
+                          </div>
+                          <div>Span of Control</div>
+                        </div>
+                        <div class="divide-y divide-[#d8e7fb]">
+                          <div class="grid min-h-[48px] grid-cols-[1.4fr_1fr_1fr] items-center gap-4 px-2 py-2">
+                            <div>Delivery Manager</div>
+                            <div>
+                              <input class="facility-input" value="$97,750" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: $97,750
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="13" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 13
+                              </div>
+                            </div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[1.4fr_1fr_1fr] items-center gap-4 px-2 py-2">
+                            <div>Sales Manager</div>
+                            <div>
+                              <input class="facility-input" value="$97,750" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: $97,750
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="13" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 13
+                              </div>
+                            </div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[1.4fr_1fr_1fr] items-center gap-4 px-2 py-2">
+                            <div>Merch Manager</div>
+                            <div>
+                              <input class="facility-input" value="$97,750" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: $97,750
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="13" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 13
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="hidden w-full min-w-0" data-define-panel="Service">
+                  <div class="mb-6 flex flex-col gap-6">
+                    <div class="w-full rounded-[8px] bg-white px-4 py-0">
+                      <div class="flex items-center gap-2">
+                        <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                          Delivery Frequency
+                        </div>
+                        <span class="material-icons text-[16px] text-[#4b4b4b]">
+                          info
+                        </span>
+                      </div>
+                      <div class="mt-2 flex flex-wrap gap-6 text-[14px] text-[#4b4b4b]">
+                        <label class="flex items-center gap-2">
+                          <input
+                            class="radio-input"
+                            id="service-delivery-actuals"
+                            type="radio"
+                            name="service-delivery-frequency"
+                            checked
+                          />
+                          Actuals
+                        </label>
+                        <label class="flex items-center gap-2">
+                          <input
+                            class="radio-input"
+                            id="service-delivery-standards"
+                            type="radio"
+                            name="service-delivery-frequency"
+                          />
+                          Standards
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="w-full rounded-[8px] bg-white p-4">
+                      <div class="flex items-center gap-2">
+                        <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                          Sunday Delivery Eligibility
+                        </div>
+                        <span class="material-icons text-[16px] text-[#4b4b4b]">
+                          info
+                        </span>
+                      </div>
+                      <div class="mt-2 flex flex-wrap gap-6 text-[14px] text-[#4b4b4b]">
+                        <label class="flex items-center gap-2">
+                          <input
+                            class="radio-input"
+                            type="radio"
+                            name="service-sunday-eligibility"
+                            checked
+                          />
+                          Stores Currently Receiving Sunday Deliveries
+                        </label>
+                        <label class="flex items-center gap-2">
+                          <input
+                            class="radio-input"
+                            type="radio"
+                            name="service-sunday-eligibility"
+                          />
+                          Chains Currently Receiving Sunday Deliveries
+                        </label>
+                        <label class="flex items-center gap-2">
+                          <input
+                            class="radio-input"
+                            type="radio"
+                            name="service-sunday-eligibility"
+                          />
+                          All Stores
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="w-full rounded-[8px] bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
+                  >
+                    <div class="flex items-center justify-between">
+                      <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                        Service Frequency Standards (Weekly)
+                      </div>
+                      <button
+                        class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[12px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+                        type="button"
+                        data-reset-default="service-standards"
+                      >
+                        <span class="material-icons text-[16px] text-current">
+                          refresh
+                        </span>
+                        Reset to default
+                      </button>
+                    </div>
+                    <div class="mt-3 flex flex-wrap items-center justify-between gap-3">
+                      <div class="flex flex-wrap items-center gap-2">
+                        <button
+                          class="flex h-8 items-center gap-1 rounded-full border border-[#d8e7fb] bg-white px-4 text-[14px] text-[#004895]"
+                          type="button"
+                        >
+                          Business Unit
+                          <span class="material-icons text-[16px] text-current">
+                            arrow_drop_down
+                          </span>
+                        </button>
+                        <button
+                          class="flex h-8 items-center gap-1 rounded-full border border-[#d8e7fb] bg-white px-4 text-[14px] text-[#004895]"
+                          type="button"
+                        >
+                          Trade Segment
+                          <span class="material-icons text-[16px] text-current">
+                            arrow_drop_down
+                          </span>
+                        </button>
+                        <button
+                          class="flex h-8 items-center gap-1 rounded-full border border-[#d8e7fb] bg-white px-4 text-[14px] text-[#004895]"
+                          type="button"
+                        >
+                          Weekly Case Range
+                          <span class="material-icons text-[16px] text-current">
+                            arrow_drop_down
+                          </span>
+                        </button>
+                        <div class="h-6 w-px bg-[#d8e7fb]"></div>
+                        <button
+                          class="flex h-8 items-center text-[14px] font-bold text-[#004895]"
+                          type="button"
+                        >
+                          Reset all filters
+                        </button>
+                      </div>
+                    </div>
+                    <div
+                      class="mt-4 w-full text-[12px] text-[#2d2d2d] table-text overflow-x-auto"
+                      data-define-table="service-standards"
+                    >
+                      <div class="min-w-full w-max">
+                        <div
+                          class="table-header grid min-h-[40px] grid-cols-[120px_160px_160px_140px_140px_120px_120px] items-center gap-4 border-b-2 border-t-2 border-[#d8e7fb] px-2 py-2 font-bold uppercase text-[#4b4b4b]"
+                        >
+                          <div>Business Unit</div>
+                          <div class="flex items-center gap-1">
+                            Trade Segment
+                            <span class="material-icons text-[16px] text-[#4b4b4b]">
+                              unfold_more
+                            </span>
+                          </div>
+                          <div class="flex items-center gap-1">
+                            Weekly Case Range
+                            <span class="material-icons text-[16px] text-[#4b4b4b]">
+                              unfold_more
+                            </span>
+                          </div>
+                          <div>Delivery Freq.</div>
+                          <div>Merch Primary</div>
+                          <div>Sell Freq.</div>
+                          <div>Order Freq.</div>
+                        </div>
+                        <div class="divide-y divide-[#d8e7fb]">
+                          <div class="grid min-h-[48px] grid-cols-[120px_160px_160px_140px_140px_120px_120px] items-center gap-4 px-2 py-2">
+                            <div>1NA</div>
+                            <div>Large Format</div>
+                            <div>0-145</div>
+                            <div>
+                              <input class="facility-input" value="3" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 3
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="7" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 7
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="1" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 1
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="1" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 1
+                              </div>
+                            </div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[120px_160px_160px_140px_140px_120px_120px] items-center gap-4 px-2 py-2">
+                            <div>1NA</div>
+                            <div>Large Format</div>
+                            <div>145-290</div>
+                            <div>
+                              <input class="facility-input" value="3" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 3
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="7" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 7
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="1" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 1
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="2" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 2
+                              </div>
+                            </div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[120px_160px_160px_140px_140px_120px_120px] items-center gap-4 px-2 py-2">
+                            <div>1NA</div>
+                            <div>Large Format</div>
+                            <div>290-430</div>
+                            <div>
+                              <input class="facility-input" value="3" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 3
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="7" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 7
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="1" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 1
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="1" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 1
+                              </div>
+                            </div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[120px_160px_160px_140px_140px_120px_120px] items-center gap-4 px-2 py-2">
+                            <div>1NA</div>
+                            <div>Large Format</div>
+                            <div>430-575</div>
+                            <div>
+                              <input class="facility-input" value="3" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 3
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="7" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 7
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="1" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 1
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="1" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 1
+                              </div>
+                            </div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[120px_160px_160px_140px_140px_120px_120px] items-center gap-4 px-2 py-2">
+                            <div>1NA</div>
+                            <div>Large Format</div>
+                            <div>575-999K</div>
+                            <div>
+                              <input class="facility-input" value="3" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 3
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="7" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 7
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="1" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 1
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="1" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 1
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="mt-4 w-full rounded-[8px] bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
+                  >
+                    <div class="flex flex-col gap-1">
+                      <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                        Second Hit Merchandising (Beverages Only)
+                      </div>
+                      <div class="text-[14px] text-[#c12c01]">
+                        This section is rarely modified
+                      </div>
+                    </div>
+                    <div class="mt-3 flex flex-wrap items-center justify-between gap-3">
+                      <div class="flex flex-wrap items-center gap-2">
+                        <button
+                          class="flex h-8 items-center gap-1 rounded-full border border-[#d8e7fb] bg-white px-4 text-[14px] text-[#004895]"
+                          type="button"
+                        >
+                          Trade Segment
+                          <span class="material-icons text-[16px] text-current">
+                            arrow_drop_down
+                          </span>
+                        </button>
+                        <button
+                          class="flex h-8 items-center gap-1 rounded-full border border-[#d8e7fb] bg-white px-4 text-[14px] text-[#004895]"
+                          type="button"
+                        >
+                          Channel
+                          <span class="material-icons text-[16px] text-current">
+                            arrow_drop_down
+                          </span>
+                        </button>
+                        <div class="h-6 w-px bg-[#d8e7fb]"></div>
+                        <button
+                          class="flex h-8 items-center text-[14px] font-bold text-[#004895]"
+                          type="button"
+                        >
+                          Reset all filters
+                        </button>
+                      </div>
+                      <button
+                        class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[12px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+                        type="button"
+                        data-reset-default="service-second-hit"
+                      >
+                        <span class="material-icons text-[16px] text-current">
+                          refresh
+                        </span>
+                        Reset to default
+                      </button>
+                    </div>
+                    <div
+                      class="mt-4 w-full text-[12px] text-[#2d2d2d] table-text overflow-x-auto"
+                      data-define-table="service-second-hit"
+                    >
+                      <div class="min-w-full w-max">
+                        <div
+                          class="table-header grid min-h-[40px] grid-cols-[200px_200px_180px_220px] items-center gap-4 border-b-2 border-t-2 border-[#d8e7fb] px-2 py-2 font-bold uppercase text-[#4b4b4b]"
+                        >
+                          <div class="flex items-center gap-1">
+                            Trade Segment
+                            <span class="material-icons text-[16px] text-[#4b4b4b]">
+                              unfold_more
+                            </span>
+                          </div>
+                          <div class="flex items-center gap-1">
+                            Channel
+                            <span class="material-icons text-[16px] text-[#4b4b4b]">
+                              unfold_more
+                            </span>
+                          </div>
+                          <div class="flex items-center gap-1">
+                            Weekly Case Range
+                            <span class="material-icons text-[16px] text-[#4b4b4b]">
+                              unfold_more
+                            </span>
+                          </div>
+                          <div>Second Hit Weekly Freq.</div>
+                        </div>
+                        <div class="divide-y divide-[#d8e7fb]">
+                          <div class="grid min-h-[48px] grid-cols-[200px_200px_180px_220px] items-center gap-4 px-2 py-2">
+                            <div>Large Format</div>
+                            <div>Grocery</div>
+                            <div>0-900</div>
+                            <div>
+                              <input class="facility-input" value="0" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 0
+                              </div>
+                            </div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[200px_200px_180px_220px] items-center gap-4 px-2 py-2">
+                            <div>Large Format</div>
+                            <div>Grocery</div>
+                            <div>900-1250</div>
+                            <div>
+                              <input class="facility-input" value="3" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 3
+                              </div>
+                            </div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[200px_200px_180px_220px] items-center gap-4 px-2 py-2">
+                            <div>Large Format</div>
+                            <div>Grocery</div>
+                            <div>1250-999K</div>
+                            <div>
+                              <input class="facility-input" value="7" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 7
+                              </div>
+                            </div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[200px_200px_180px_220px] items-center gap-4 px-2 py-2">
+                            <div>Large Format</div>
+                            <div>Hyper Super Center</div>
+                            <div>0-810</div>
+                            <div>
+                              <input class="facility-input" value="0" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 0
+                              </div>
+                            </div>
+                          </div>
+                          <div class="grid min-h-[48px] grid-cols-[200px_200px_180px_220px] items-center gap-4 px-2 py-2">
+                            <div>Large Format</div>
+                            <div>Hyper Super Center</div>
+                            <div>810-1010</div>
+                            <div>
+                              <input class="facility-input" value="3" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 3
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between text-[14px] text-[#2d2d2d]">
+                      <div class="flex items-center gap-2">
+                        <span>Rows per page</span>
+                        <button
+                          class="flex h-8 items-center gap-1 rounded border border-[#c0c0c0] bg-white px-2"
+                          type="button"
+                        >
+                          5
+                          <span class="material-icons text-[16px] text-[#4b4b4b]">
+                            keyboard_arrow_down
+                          </span>
+                        </button>
+                      </div>
+                      <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-2 text-[#004895]">
+                          <span class="material-icons text-[18px]">first_page</span>
+                          <span class="material-icons text-[18px]">chevron_left</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <span>Page</span>
+                          <div class="flex h-8 w-10 items-center justify-center rounded border border-[#c0c0c0] bg-white">
+                            1
+                          </div>
+                          <span>of</span>
+                          <span class="font-bold">3</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-[#004895]">
+                          <span class="material-icons text-[18px]">chevron_right</span>
+                          <span class="material-icons text-[18px]">last_page</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="hidden w-full min-w-0" data-define-panel="Assets">
+                  <div
+                    class="w-full rounded-[8px] bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
+                  >
+                    <div class="flex items-center justify-between">
+                      <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                        Assets
+                      </div>
+                      <button
+                        class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[12px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+                        type="button"
+                        data-reset-default="assets"
+                      >
+                        <span class="material-icons text-[16px] text-current">
+                          refresh
+                        </span>
+                        Reset to default
+                      </button>
+                    </div>
+                    <div
+                      class="mt-4 w-full text-[12px] text-[#2d2d2d] table-text overflow-x-auto"
+                      data-define-table="assets"
+                    >
+                      <div class="min-w-full w-max">
+                        <div
+                          class="table-header grid min-h-[40px] grid-cols-[1.6fr_80px_200px_240px] items-center gap-4 border-b-2 border-t-2 border-[#d8e7fb] px-2 py-2 font-bold uppercase text-[#4b4b4b]"
+                        >
+                          <div class="flex items-center gap-1">
+                            Truck Type
+                            <span class="material-icons text-[16px] text-[#4b4b4b]">
+                              unfold_more
+                            </span>
+                          </div>
+                          <div>Inc.</div>
+                          <div class="flex items-center gap-1">
+                            Spare Rate
+                            <span class="material-icons text-[16px] text-[#4b4b4b]">
+                              unfold_more
+                            </span>
+                          </div>
+                          <div class="flex items-center gap-1">
+                            Maximum Utilization
+                            <span class="material-icons text-[16px] text-[#4b4b4b]">
+                              unfold_more
+                            </span>
+                          </div>
+                        </div>
+                        <div class="divide-y divide-[#d8e7fb]">
+                          <div class="asset-row grid min-h-[48px] grid-cols-[1.6fr_80px_200px_240px] items-center gap-4 px-2 py-2">
+                            <div>Class 6 Non CDL Bulk Truck</div>
+                            <div class="flex items-center">
+                              <input type="checkbox" class="table-checkbox asset-checkbox" checked />
+                            </div>
+                            <div>
+                              <input class="facility-input" value="10%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 10%
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="85%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 85%
+                              </div>
+                            </div>
+                          </div>
+                          <div class="asset-row grid min-h-[48px] grid-cols-[1.6fr_80px_200px_240px] items-center gap-4 px-2 py-2">
+                            <div>Class 7 CDL Bulk Truck</div>
+                            <div class="flex items-center">
+                              <input type="checkbox" class="table-checkbox asset-checkbox" checked />
+                            </div>
+                            <div>
+                              <input class="facility-input" value="10%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 10%
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="85%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 85%
+                              </div>
+                            </div>
+                          </div>
+                          <div class="asset-row grid min-h-[48px] grid-cols-[1.6fr_80px_200px_240px] items-center gap-4 px-2 py-2">
+                            <div>GeoBox Tractor with Liftgate</div>
+                            <div class="flex items-center">
+                              <input type="checkbox" class="table-checkbox asset-checkbox" checked />
+                            </div>
+                            <div>
+                              <input class="facility-input" value="10%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 10%
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="85%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 85%
+                              </div>
+                            </div>
+                          </div>
+                          <div class="asset-row grid min-h-[48px] grid-cols-[1.6fr_80px_200px_240px] items-center gap-4 px-2 py-2">
+                            <div>GeoBox Tractor without Liftgate</div>
+                            <div class="flex items-center">
+                              <input type="checkbox" class="table-checkbox asset-checkbox" checked />
+                            </div>
+                            <div>
+                              <input class="facility-input" value="10%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 10%
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="85%" />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 85%
+                              </div>
+                            </div>
+                          </div>
+                          <div class="asset-row grid min-h-[48px] grid-cols-[1.6fr_80px_200px_240px] items-center gap-4 px-2 py-2">
+                            <div>Route Truck</div>
+                            <div class="flex items-center">
+                              <input type="checkbox" class="table-checkbox asset-checkbox" />
+                            </div>
+                            <div>
+                              <input class="facility-input" value="10%" disabled />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 10%
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="85%" disabled />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 85%
+                              </div>
+                            </div>
+                          </div>
+                          <div class="asset-row grid min-h-[48px] grid-cols-[1.6fr_80px_200px_240px] items-center gap-4 px-2 py-2">
+                            <div>Market Place Truck</div>
+                            <div class="flex items-center">
+                              <input type="checkbox" class="table-checkbox asset-checkbox" />
+                            </div>
+                            <div>
+                              <input class="facility-input" value="10%" disabled />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 10%
+                              </div>
+                            </div>
+                            <div>
+                              <input class="facility-input" value="85%" disabled />
+                              <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                  info
+                                </span>
+                                Default: 85%
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
+      <div
+        id="baseline-sticky"
+        class="fixed bottom-0 left-0 right-0 hidden flex items-center justify-between bg-white px-12 py-4 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]"
+      >
+        <button
+          id="baseline-back"
+          class="flex h-8 items-center gap-1 text-[14px] font-bold text-[#004895] transition-colors hover:text-[#002B5E]"
+          type="button"
+        >
+          <span class="material-icons text-[20px] text-current">
+            arrow_back
+          </span>
+          Back
+        </button>
+        <div class="flex items-center gap-4">
+          <button
+            id="baseline-rerun"
+            class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[14px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+            type="button"
+          >
+            <span class="material-icons text-[20px] text-current">
+              refresh
+            </span>
+            Re-run
+          </button>
+          <button
+            id="baseline-define-parameters"
+            class="flex h-8 items-center gap-1 rounded-full bg-[#004895] px-4 text-[14px] font-bold text-white transition-colors hover:bg-[#002B5E]"
+            type="button"
+          >
+            Define Parameters
+            <span class="material-icons text-[20px] text-current">
+              arrow_forward
+            </span>
+          </button>
+        </div>
+      </div>
+      <div
+        id="define-parameters-sticky"
+        class="fixed bottom-0 left-0 right-0 hidden flex items-center justify-between bg-white px-12 py-4 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]"
+      >
+        <button
+          id="define-parameters-back"
+          class="flex h-8 items-center gap-1 text-[14px] font-bold text-[#004895] transition-colors hover:text-[#002B5E]"
+          type="button"
+        >
+          <span class="material-icons text-[20px] text-current">
+            arrow_back
+          </span>
+          Back
+        </button>
+        <div class="flex items-center gap-4">
+          <button
+            id="define-parameters-save"
+            class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[14px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+            type="button"
+          >
+            <span class="material-icons text-[20px] text-current">
+              file_download
+            </span>
+            Save as a draft
+          </button>
+          <button
+            id="define-parameters-run"
+            class="flex h-8 items-center gap-1 rounded-full bg-[#004895] px-4 text-[14px] font-bold text-white transition-colors hover:bg-[#002B5E]"
+            type="button"
+          >
+            Run the scenario
+            <span class="material-icons text-[20px] text-current">
+              arrow_forward
+            </span>
+          </button>
+        </div>
+      </div>
       <div
         id="scenario-sticky"
         class="fixed bottom-0 left-0 right-0 hidden flex h-16 items-center justify-end bg-white pl-12 pr-6 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]"
@@ -892,18 +3360,62 @@
       const navScenario = document.getElementById("nav-scenario");
       const workspaceView = document.getElementById("workspace-view");
       const scenarioView = document.getElementById("scenario-view");
+      const baselineView = document.getElementById("baseline-view");
+      const defineParametersView = document.getElementById("define-parameters-view");
       const scenarioSticky = document.getElementById("scenario-sticky");
+      const baselineSticky = document.getElementById("baseline-sticky");
+      const baselineBack = document.getElementById("baseline-back");
+      const baselineRerun = document.getElementById("baseline-rerun");
+      const baselineDefineParameters = document.getElementById("baseline-define-parameters");
+      const defineParametersSticky = document.getElementById("define-parameters-sticky");
+      const defineParametersBack = document.getElementById("define-parameters-back");
       const newScenario = document.getElementById("new-scenario");
       const portfolioSelectField = document.getElementById("portfolio-select-field");
       const portfolioSelectMenu = document.getElementById("portfolio-select-menu");
       const portfolioSelectValue = document.getElementById("portfolio-select-value");
       const viewBaselineButton = document.getElementById("view-baseline-button");
+      const baselineKpiTop = Array.from({ length: 5 }, (_, index) =>
+        document.getElementById(`baseline-kpi-top-${index}`)
+      );
+      const baselineKpiBottom = Array.from({ length: 5 }, (_, index) =>
+        document.getElementById(`baseline-kpi-bottom-${index}`)
+      );
+      const beveragesTotalStores = document.getElementById("beverages-total-stores");
+      const foodsTotalStores = document.getElementById("foods-total-stores");
+      const beveragesKpiTop = Array.from({ length: 4 }, (_, index) =>
+        document.getElementById(`beverages-kpi-top-${index}`)
+      );
+      const beveragesKpiBottom = Array.from({ length: 5 }, (_, index) =>
+        document.getElementById(`beverages-kpi-bottom-${index}`)
+      );
+      const foodsKpiTop = Array.from({ length: 4 }, (_, index) =>
+        document.getElementById(`foods-kpi-top-${index}`)
+      );
+      const foodsKpiBottom = Array.from({ length: 5 }, (_, index) =>
+        document.getElementById(`foods-kpi-bottom-${index}`)
+      );
+      const beveragesLaborBody = document.getElementById("beverages-labor-body");
+      const beveragesServiceBody = document.getElementById("beverages-service-body");
+      const beveragesAssetsBody = document.getElementById("beverages-assets-body");
+      const beveragesTotalBody = document.getElementById("beverages-total-body");
+      const beveragesPnlBody = document.getElementById("beverages-pnl-body");
+      const foodsLaborBody = document.getElementById("foods-labor-body");
+      const foodsServiceBody = document.getElementById("foods-service-body");
+      const foodsAssetsBody = document.getElementById("foods-assets-body");
+      const foodsTotalBody = document.getElementById("foods-total-body");
+      const foodsPnlBody = document.getElementById("foods-pnl-body");
       const uploadFileButton = document.getElementById("upload-file-button");
       const uploadDropzone = document.getElementById("upload-dropzone");
       const uploadedFile = document.getElementById("uploaded-file");
       const uploadedFileName = document.getElementById("uploaded-file-name");
       const uploadedDownload = document.getElementById("uploaded-download");
       const uploadedDelete = document.getElementById("uploaded-delete");
+      const serviceDeliveryActuals = document.getElementById(
+        "service-delivery-actuals"
+      );
+      const serviceDeliveryStandards = document.getElementById(
+        "service-delivery-standards"
+      );
       const MAX_SELECTED = 4;
       const currentUser = "Grace Goudreau";
       const filters = {
@@ -965,6 +3477,8 @@
       let startDateSelected = "";
       let endDateSelected = "";
       const fakeUploadedFileName = "Placeholder101.csv";
+      let scenarioSessionId = 0;
+      let currentBaselineData = null;
       const scenarios = [
         {
           id: "SC-1001",
@@ -1094,18 +3608,238 @@
 
       function setView(view) {
         const showWorkspace = view === "workspace";
+        const showScenario = view === "scenario";
+        const showBaseline = view === "baseline";
+        const showDefineParameters = view === "define-parameters";
         workspaceView.classList.toggle("hidden", !showWorkspace);
-        scenarioView.classList.toggle("hidden", showWorkspace);
-        scenarioSticky.classList.toggle("hidden", showWorkspace);
-        setNavActive(view);
+        scenarioView.classList.toggle("hidden", !showScenario);
+        baselineView.classList.toggle("hidden", !showBaseline);
+        defineParametersView.classList.toggle("hidden", !showDefineParameters);
+        scenarioSticky.classList.toggle("hidden", !showScenario);
+        baselineSticky.classList.toggle("hidden", !showBaseline);
+        defineParametersSticky.classList.toggle("hidden", !showDefineParameters);
+        setNavActive(showWorkspace ? "workspace" : "scenario");
       }
 
       navWorkspace.addEventListener("click", () => setView("workspace"));
-      navScenario.addEventListener("click", () => setView("scenario"));
-      newScenario.addEventListener("click", () => setView("scenario"));
+      navScenario.addEventListener("click", () => startScenarioSession());
+      newScenario.addEventListener("click", () => startScenarioSession());
       uploadFileButton.addEventListener("click", showUploadedFile);
       uploadedDelete.addEventListener("click", clearUploadedFile);
       uploadedDownload.addEventListener("click", triggerFakeDownload);
+      viewBaselineButton.addEventListener("click", () => {
+        if (viewBaselineButton.disabled) {
+          return;
+        }
+        if (!currentBaselineData) {
+          currentBaselineData = buildBaselineData();
+        }
+        renderBaseline(currentBaselineData);
+        setView("baseline");
+      });
+
+      baselineBack.addEventListener("click", () => {
+        setView("scenario");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      baselineRerun.addEventListener("click", () => {
+        currentBaselineData = buildBaselineData();
+        renderBaseline(currentBaselineData);
+        setView("baseline");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      baselineDefineParameters.addEventListener("click", () => {
+        setView("define-parameters");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      defineParametersBack.addEventListener("click", () => {
+        setView("baseline");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      const defineParametersTabs = Array.from(
+        document.querySelectorAll(".define-parameters-tab")
+      );
+      const defineParametersPanels = Array.from(
+        document.querySelectorAll("[data-define-panel]")
+      );
+      const setDefineParametersActiveTab = (activeLabel) => {
+        defineParametersTabs.forEach((tab) => {
+          const isActive = tab.dataset.defineTab === activeLabel;
+          tab.classList.toggle("border-l-2", isActive);
+          tab.classList.toggle("border-[#004895]", isActive);
+          tab.classList.toggle("font-bold", isActive);
+          tab.classList.toggle("border-l", !isActive);
+          tab.classList.toggle("border-[#d8e7fb]", !isActive);
+        });
+        defineParametersPanels.forEach((panel) => {
+          panel.classList.toggle(
+            "hidden",
+            panel.dataset.definePanel !== activeLabel
+          );
+        });
+      };
+
+      defineParametersTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          setDefineParametersActiveTab(tab.dataset.defineTab);
+        });
+      });
+      setDefineParametersActiveTab("Time Estimates");
+
+      const existingFacilitiesTable = document.querySelector(
+        ".define-parameters-tab[data-define-tab='Facilities']"
+      );
+      const existingFacilitiesReset = document.getElementById(
+        "existing-facilities-reset"
+      );
+      const facilityRows = Array.from(
+        document.querySelectorAll(".facility-input")
+      ).map((input) => ({
+        input,
+        checkbox: input
+          .closest(".grid")
+          .querySelector("input.table-checkbox"),
+      }));
+
+      facilityRows.forEach(({ input, checkbox }) => {
+        if (!checkbox) return;
+        checkbox.addEventListener("change", () => {
+          input.disabled = !checkbox.checked;
+          if (!checkbox.checked) {
+            input.value = input.dataset.default || "46";
+          }
+        });
+      });
+
+      if (existingFacilitiesReset) {
+        existingFacilitiesReset.addEventListener("click", () => {
+          facilityRows.forEach(({ input, checkbox }) => {
+            input.value = input.dataset.default || "46";
+            if (checkbox) {
+              input.disabled = !checkbox.checked;
+            }
+          });
+        });
+      }
+
+      const laborTables = Array.from(
+        document.querySelectorAll("[data-define-table]")
+      );
+      const updateServiceDeliveryColumn = () => {
+        const serviceTable = document.querySelector(
+          "[data-define-table='service-standards']"
+        );
+        if (!serviceTable) {
+          return;
+        }
+        const headerRow = serviceTable.querySelector(".table-header");
+        const rows = Array.from(
+          serviceTable.querySelectorAll(".divide-y > .grid")
+        );
+        const hideDelivery = Boolean(serviceDeliveryActuals?.checked);
+        const fullColumns =
+          "120px 160px 160px 140px 140px 120px 120px";
+        const hiddenColumns =
+          "120px 160px 160px 140px 120px 120px";
+
+        if (headerRow) {
+          headerRow.style.gridTemplateColumns = hideDelivery
+            ? hiddenColumns
+            : fullColumns;
+          const headerCell = headerRow.children[3];
+          if (headerCell) {
+            headerCell.classList.toggle("hidden", hideDelivery);
+          }
+        }
+
+        rows.forEach((row) => {
+          row.style.gridTemplateColumns = hideDelivery
+            ? hiddenColumns
+            : fullColumns;
+          const cell = row.children[3];
+          if (cell) {
+            cell.classList.toggle("hidden", hideDelivery);
+          }
+        });
+      };
+      const syncLaborDefaults = () => {
+        laborTables.forEach((table) => {
+          table.querySelectorAll(".facility-input").forEach((input) => {
+            const defaultLabel = input.parentElement?.querySelector("div");
+            if (!defaultLabel) {
+              return;
+            }
+            const match = defaultLabel.textContent.match(/Default:\s*(.*)/i);
+            if (!match) {
+              return;
+            }
+            const defaultValue = match[1].trim();
+            input.dataset.default = defaultValue;
+            input.value = defaultValue;
+          });
+        });
+      };
+
+      syncLaborDefaults();
+
+      if (serviceDeliveryActuals || serviceDeliveryStandards) {
+        serviceDeliveryActuals?.addEventListener(
+          "change",
+          updateServiceDeliveryColumn
+        );
+        serviceDeliveryStandards?.addEventListener(
+          "change",
+          updateServiceDeliveryColumn
+        );
+        updateServiceDeliveryColumn();
+      }
+
+      const assetRows = Array.from(document.querySelectorAll(".asset-row")).map(
+        (row) => ({
+          row,
+          checkbox: row.querySelector(".asset-checkbox"),
+          inputs: Array.from(row.querySelectorAll(".facility-input")),
+        })
+      );
+      const syncAssetRows = () => {
+        assetRows.forEach(({ checkbox, inputs }) => {
+          if (!checkbox) return;
+          const isDisabled = !checkbox.checked;
+          inputs.forEach((input) => {
+            input.disabled = isDisabled;
+          });
+        });
+      };
+
+      assetRows.forEach(({ checkbox }) => {
+        if (!checkbox) return;
+        checkbox.addEventListener("change", syncAssetRows);
+      });
+      syncAssetRows();
+
+      document.querySelectorAll("[data-reset-default]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const target = button.dataset.resetDefault;
+          const table = document.querySelector(
+            `[data-define-table="${target}"]`
+          );
+          if (!table) {
+            return;
+          }
+          table.querySelectorAll(".facility-input").forEach((input) => {
+            if (input.dataset.default !== undefined) {
+              input.value = input.dataset.default;
+            }
+          });
+          if (target === "assets") {
+            syncAssetRows();
+          }
+        });
+      });
 
       function createScenario(scenario) {
         scenarios.unshift({ ...scenario, owner: currentUser });
@@ -1357,6 +4091,12 @@
       const portfolioSelectOptions = ["Foods and Beverages", "Foods", "Beverages"];
       let portfolioSelected = "";
 
+      function startScenarioSession() {
+        scenarioSessionId += 1;
+        currentBaselineData = null;
+        setView("scenario");
+      }
+
       function updateViewBaselineState() {
         const hasFile = !uploadedFile.classList.contains("hidden");
         const hasStartDate = Boolean(startDateSelected.trim());
@@ -1433,6 +4173,408 @@
         link.click();
         link.remove();
         URL.revokeObjectURL(url);
+      }
+
+      function createSeededRandom(seed) {
+        let value = seed || 1;
+        return () => {
+          value += 0x6D2B79F5;
+          let result = Math.imul(value ^ (value >>> 15), 1 | value);
+          result ^= result + Math.imul(result ^ (result >>> 7), 61 | result);
+          return ((result ^ (result >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+
+      function formatCurrency(value, decimals = 0) {
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: decimals,
+          minimumFractionDigits: decimals,
+        }).format(value);
+      }
+
+      function formatNumber(value) {
+        return new Intl.NumberFormat("en-US").format(value);
+      }
+
+      function formatPercent(value) {
+        return `${value.toFixed(1)}%`;
+      }
+
+      function formatMillions(value) {
+        return `${value.toFixed(1)}MM`;
+      }
+
+      function formatMoneyMillions(value) {
+        return `$${value.toFixed(1)}MM`;
+      }
+
+      function buildBaselineData() {
+        const seed = scenarioSessionId || Math.floor(Math.random() * 10000) + 1;
+        const random = createSeededRandom(seed);
+        const randomBetween = (min, max) => min + random() * (max - min);
+        const annualCases = randomBetween(2.8, 4.8);
+        const annualNr = randomBetween(14, 22);
+        const netRevenuePerHour = randomBetween(12, 22);
+        const topKpis = [
+          formatNumber(Math.round(randomBetween(4200, 7800))),
+          formatMillions(annualCases),
+          formatPercent(randomBetween(3.2, 7.4)),
+          formatMoneyMillions(annualNr),
+          formatNumber(Math.round(randomBetween(1200000, 1900000))),
+        ];
+        const bottomKpis = [
+          formatNumber(Math.round(randomBetween(1200000, 2100000))),
+          formatNumber(Math.round(randomBetween(240000, 380000))),
+          formatMillions(randomBetween(18, 32)),
+          formatPercent(randomBetween(10, 18)),
+          formatCurrency(netRevenuePerHour, 2),
+        ];
+
+        const buildLaborRows = (count = 4) => {
+          const roles = ["Sales Rep", "Merchandiser", "Non-CDL DMS", "CDL(A) DMS"];
+          return roles.slice(0, count).map((role) => {
+            const wages = randomBetween(22, 31);
+            const hours = randomBetween(36, 44);
+            return {
+              role,
+              hc: Math.round(randomBetween(8, 18)),
+              wages: formatCurrency(wages, 2),
+              salary: formatCurrency(wages * hours * 52, 0),
+              hrs: hours.toFixed(1),
+            };
+          });
+        };
+
+        const buildServiceRows = () => [
+          {
+            label: "Number of Stores",
+            large: Math.round(randomBetween(900, 1400)),
+            small: Math.round(randomBetween(300, 700)),
+            afh: Math.round(randomBetween(120, 320)),
+          },
+          {
+            label: "Freq/Week",
+            large: randomBetween(1.1, 1.7).toFixed(2),
+            small: randomBetween(0.7, 1.2).toFixed(2),
+            afh: randomBetween(2.0, 2.8).toFixed(2),
+          },
+          {
+            label: "WSA (NR)",
+            large: formatCurrency(randomBetween(60000, 90000), 0),
+            small: formatCurrency(randomBetween(28000, 52000), 0),
+            afh: formatCurrency(randomBetween(40000, 80000), 0),
+          },
+          {
+            label: "Drop Size (NR)",
+            large: formatCurrency(randomBetween(1600, 3200), 0),
+            small: formatCurrency(randomBetween(900, 1800), 0),
+            afh: formatCurrency(randomBetween(2000, 3500), 0),
+          },
+          {
+            label: "WSA (Cs)",
+            large: formatNumber(Math.round(randomBetween(8000, 13000))),
+            small: formatNumber(Math.round(randomBetween(4000, 7000))),
+            afh: formatNumber(Math.round(randomBetween(6000, 11000))),
+          },
+          {
+            label: "Drop Size (Cs)",
+            large: formatNumber(Math.round(randomBetween(280, 420))),
+            small: formatNumber(Math.round(randomBetween(180, 300))),
+            afh: formatNumber(Math.round(randomBetween(320, 520))),
+          },
+        ];
+
+        const buildAssetsRows = (labels) => {
+          const rows = labels.map((label) => {
+            const miles = Math.round(randomBetween(5000, 25000));
+            const fuel = randomBetween(0.35, 1.25);
+            const dep = randomBetween(0.25, 0.95);
+            return {
+              label,
+              miles,
+              fuel,
+              dep,
+            };
+          });
+          const totals = rows.reduce(
+            (acc, row) => ({
+              miles: acc.miles + row.miles,
+              fuel: acc.fuel + row.fuel,
+              dep: acc.dep + row.dep,
+            }),
+            { miles: 0, fuel: 0, dep: 0 }
+          );
+          const count = rows.length || 1;
+          const total = {
+            label: "TOTAL",
+            miles: formatNumber(totals.miles),
+            fuel: formatCurrency(totals.fuel / count, 2),
+            dep: formatCurrency(totals.dep / count, 2),
+          };
+          const formattedRows = rows.map((row) => ({
+            label: row.label,
+            miles: formatNumber(row.miles),
+            fuel: formatCurrency(row.fuel, 2),
+            dep: formatCurrency(row.dep, 2),
+          }));
+          return { rows: formattedRows, total };
+        };
+
+        const buildTotalRows = () => [
+          {
+            label: "Total",
+            large: formatCurrency(randomBetween(600000, 1100000), 0),
+            small: formatCurrency(randomBetween(280000, 620000), 0),
+            afh: formatCurrency(randomBetween(420000, 780000), 0),
+          },
+        ];
+
+        const buildPnlRows = (casesMillions) => {
+          const netRevenue = randomBetween(6, 12) * 1000000;
+          const caseCount = casesMillions * 1000000;
+          const rows = [
+            { label: "Net Revenue", value: netRevenue, level: 0, bold: true },
+            { label: "Cost of Sales", value: netRevenue * randomBetween(0.45, 0.6), level: 0, bold: true },
+            { label: "Gross Margin", value: netRevenue * randomBetween(0.35, 0.5), level: 0, bold: true },
+            {
+              label: "Selling & Distribution",
+              value: netRevenue * randomBetween(0.12, 0.2),
+              level: 0,
+              bold: true,
+            },
+            { label: "Selling", value: netRevenue * randomBetween(0.05, 0.09), level: 1 },
+            { label: "Frontline Labor", value: netRevenue * randomBetween(0.03, 0.06), level: 2 },
+            { label: "Mgmt Labor", value: netRevenue * randomBetween(0.015, 0.035), level: 2 },
+            { label: "Distribution", value: netRevenue * randomBetween(0.05, 0.09), level: 1 },
+            { label: "Delivery Fleet Cost", value: netRevenue * randomBetween(0.02, 0.05), level: 2 },
+            { label: "Depreciation and Leases", value: netRevenue * randomBetween(0.015, 0.03), level: 3 },
+            { label: "Fuel", value: netRevenue * randomBetween(0.01, 0.025), level: 3 },
+            { label: "R&M", value: netRevenue * randomBetween(0.008, 0.02), level: 3 },
+            { label: "PTS", value: netRevenue * randomBetween(0.04, 0.08), level: 0, bold: true },
+          ];
+          return rows.map((row) => ({
+            label: row.label,
+            level: row.level,
+            bold: row.bold ?? false,
+            dollars: formatCurrency(row.value, 0),
+            percent: formatPercent((row.value / netRevenue) * 100),
+            perCase: formatCurrency(row.value / caseCount, 2),
+          }));
+        };
+
+        const buildCardData = (storeMin, storeMax, laborCount = 4, assetLabels = []) => {
+          const cardAnnualCases = randomBetween(1.2, 2.8);
+          const cardAnnualNr = randomBetween(6, 12);
+          const cardHours = Math.round(randomBetween(700000, 1100000));
+          return {
+            totalStores: Math.round(randomBetween(storeMin, storeMax)),
+            kpiTop: [
+              formatMillions(cardAnnualCases),
+              formatPercent(randomBetween(2.5, 5.5)),
+              formatMoneyMillions(cardAnnualNr),
+              formatNumber(Math.round(randomBetween(600000, 950000))),
+            ],
+            kpiBottom: [
+              formatNumber(cardHours),
+              formatNumber(Math.round(randomBetween(120000, 200000))),
+              formatMillions(randomBetween(11, 18)),
+              formatPercent(randomBetween(6, 11)),
+              formatCurrency(randomBetween(12, 19), 2),
+            ],
+            labor: buildLaborRows(laborCount),
+            service: buildServiceRows(),
+            assets: buildAssetsRows(assetLabels),
+            total: buildTotalRows(),
+            pnl: buildPnlRows(cardAnnualCases),
+          };
+        };
+
+        return {
+          topKpis,
+          bottomKpis,
+          beverages: buildCardData(3800, 5200, 4, [
+            "Class 6 Non-CDL Bulk Track",
+            "GeoBox Tractor with Liftgate",
+          ]),
+          foods: buildCardData(1200, 2200, 3, [
+            "Class 6 Non-CDL Bulk Track",
+            "Route Truck",
+            "Market Place Truck",
+          ]),
+        };
+      }
+
+      function renderBaseline(data) {
+        baselineKpiTop.forEach((node, index) => {
+          if (node) {
+            node.textContent = data.topKpis[index];
+          }
+        });
+        baselineKpiBottom.forEach((node, index) => {
+          if (node) {
+            node.textContent = data.bottomKpis[index];
+          }
+        });
+
+        const renderLaborRows = (rows) =>
+          rows
+            .map(
+              (row) => `
+                <div class="grid min-h-[48px] grid-cols-[1.6fr_0.6fr_1fr_1fr_0.6fr] items-center px-4 py-3">
+                  <div>${row.role}</div>
+                  <div>${row.hc}</div>
+                  <div>${row.wages}</div>
+                  <div>${row.salary}</div>
+                  <div>${row.hrs}</div>
+                </div>
+              `
+            )
+            .join("");
+
+        const renderServiceRows = (rows) =>
+          rows
+            .map(
+              (row) => `
+                <div class="grid min-h-[48px] grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr] items-center px-4 py-3">
+                  <div>${row.label}</div>
+                  <div>${row.large}</div>
+                  <div>${row.small}</div>
+                  <div>${row.afh}</div>
+                </div>
+              `
+            )
+            .join("");
+
+        const renderAssetsRows = (rows, totalRow, includeSpacer = true) => {
+          const rowMarkup = rows
+            .map(
+              (row) => `
+                <div class="grid min-h-[48px] grid-cols-[1.2fr_0.8fr_1fr_1fr] items-center px-4 py-3">
+                  <div>${row.label}</div>
+                  <div>${row.miles}</div>
+                  <div>${row.fuel}</div>
+                  <div>${row.dep}</div>
+                </div>
+              `
+            )
+            .join("");
+          const totalMarkup = `
+            <div class="grid min-h-[48px] grid-cols-[1.2fr_0.8fr_1fr_1fr] items-center border-t-0 border-t-transparent px-4 py-3 font-bold">
+              <div>${totalRow.label}</div>
+              <div>${totalRow.miles}</div>
+              <div>${totalRow.fuel}</div>
+              <div>${totalRow.dep}</div>
+            </div>
+          `;
+          const spacer = includeSpacer
+            ? `
+            <div class="grid min-h-[48px] grid-cols-[1.2fr_0.8fr_1fr_1fr] items-center px-4 py-3 text-transparent">
+              <div>.</div>
+              <div>.</div>
+              <div>.</div>
+              <div>.</div>
+            </div>
+          `
+            : "";
+          return rowMarkup + spacer + totalMarkup;
+        };
+
+        const renderTotalRows = (rows) =>
+          rows
+            .map(
+              (row) => `
+                <div class="grid grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr] items-center px-2 py-2">
+                  <div>${row.label}</div>
+                  <div>${row.large}</div>
+                  <div>${row.small}</div>
+                  <div>${row.afh}</div>
+                </div>
+              `
+            )
+            .join("");
+
+        const renderPnlRows = (rows) => {
+          const indentClass = (level) => {
+            if (level === 1) return "pl-4";
+            if (level === 2) return "pl-8";
+            if (level >= 3) return "pl-12";
+            return "";
+          };
+          return rows
+            .map(
+              (row) => `
+                <div class="grid min-h-[48px] grid-cols-[1fr_100px_100px_100px] items-center px-4 py-3 ${
+                  row.bold ? "font-bold" : ""
+                }">
+                  <div class="${indentClass(row.level)}">${row.label}</div>
+                  <div>${row.dollars}</div>
+                  <div>${row.percent}</div>
+                  <div>${row.perCase}</div>
+                </div>
+              `
+            )
+            .join("");
+        };
+
+        const applyCardData = (card, elements) => {
+          if (elements.totalStores) {
+            elements.totalStores.textContent = formatNumber(card.totalStores);
+          }
+          elements.kpiTop.forEach((node, index) => {
+            if (node) {
+              node.textContent = card.kpiTop[index];
+            }
+          });
+          elements.kpiBottom.forEach((node, index) => {
+            if (node) {
+              node.textContent = card.kpiBottom[index];
+            }
+          });
+          if (elements.laborBody) {
+            elements.laborBody.innerHTML = renderLaborRows(card.labor);
+          }
+          if (elements.serviceBody) {
+            elements.serviceBody.innerHTML = renderServiceRows(card.service);
+          }
+          if (elements.assetsBody) {
+            const includeSpacer = elements.assetsBody.id !== "foods-assets-body";
+            elements.assetsBody.innerHTML = renderAssetsRows(
+              card.assets.rows,
+              card.assets.total,
+              includeSpacer
+            );
+          }
+          if (elements.totalBody) {
+            elements.totalBody.innerHTML = renderTotalRows(card.total);
+          }
+          if (elements.pnlBody) {
+            elements.pnlBody.innerHTML = renderPnlRows(card.pnl);
+          }
+        };
+
+        applyCardData(data.beverages, {
+          totalStores: beveragesTotalStores,
+          kpiTop: beveragesKpiTop,
+          kpiBottom: beveragesKpiBottom,
+          laborBody: beveragesLaborBody,
+          serviceBody: beveragesServiceBody,
+          assetsBody: beveragesAssetsBody,
+          totalBody: beveragesTotalBody,
+          pnlBody: beveragesPnlBody,
+        });
+
+        applyCardData(data.foods, {
+          totalStores: foodsTotalStores,
+          kpiTop: foodsKpiTop,
+          kpiBottom: foodsKpiBottom,
+          laborBody: foodsLaborBody,
+          serviceBody: foodsServiceBody,
+          assetsBody: foodsAssetsBody,
+          totalBody: foodsTotalBody,
+          pnlBody: foodsPnlBody,
+        });
       }
 
       function closeDateMenus() {
@@ -1698,7 +4840,7 @@
         portfolioSelectValue.textContent = portfolioSelected;
       }
 
-      setView("workspace");
+      setView("define-parameters");
       renderTable();
       updateViewBaselineState();
     </script>
