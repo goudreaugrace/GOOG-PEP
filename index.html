@@ -611,37 +611,52 @@
               </div>
               <div class="flex items-center gap-6">
                 <div class="flex items-center gap-2">
-                  <span
+                  <button
+                    id="workspace-first-page"
                     class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none text-[#004895]"
+                    type="button"
+                    aria-label="First page"
                   >
                     first_page
-                  </span>
-                  <span
+                  </button>
+                  <button
+                    id="workspace-prev-page"
                     class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none text-[#004895]"
+                    type="button"
+                    aria-label="Previous page"
                   >
                     chevron_left
-                  </span>
+                  </button>
                 </div>
                 <div class="flex items-center gap-2 text-[14px]">
                   <span>Page</span>
                   <div
+                    id="workspace-page-current"
                     class="flex h-8 w-[43px] items-center justify-center rounded border border-[#c0c0c0] bg-white"
                   >
                     1
                   </div>
-                  <span>of <span class="font-inter font-bold">3</span></span>
+                  <span>
+                    of <span id="workspace-page-total" class="font-inter font-bold">1</span>
+                  </span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <span
+                  <button
+                    id="workspace-next-page"
                     class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none text-[#004895]"
+                    type="button"
+                    aria-label="Next page"
                   >
                     chevron_right
-                  </span>
-                  <span
+                  </button>
+                  <button
+                    id="workspace-last-page"
                     class="material-icons inline-flex h-5 w-5 items-center justify-center text-[20px] leading-none text-[#004895]"
+                    type="button"
+                    aria-label="Last page"
                   >
                     last_page
-                  </span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -680,7 +695,7 @@
                     circle
                   </span>
                   <div class="flex-1">
-                    <div class="h-[2px] w-full bg-[#4b4b4b]"></div>
+                    <div class="h-[2px] w-full bg-[#0662C4]"></div>
                   </div>
                 </div>
                 <p class="pt-1 text-[14px] text-[#4b4b4b]">View Baseline</p>
@@ -925,7 +940,7 @@
                     check_circle
                   </span>
                   <div class="flex-1">
-                    <div class="h-[2px] w-full bg-[#4b4b4b]"></div>
+                    <div class="h-[2px] w-full bg-[#0662C4]"></div>
                   </div>
                 </div>
                 <p class="pt-1 text-[14px] font-bold text-[#004895]">
@@ -1061,28 +1076,28 @@
                 </div>
                 <div class="flex flex-col gap-4 p-4">
                   <div class="flex flex-wrap gap-2">
-                    <div class="flex w-[145px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                    <div class="flex w-[145px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90">Annual Cases</div>
                         <div id="beverages-kpi-top-0" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
                       </div>
                       <span class="material-icons text-[24px] text-[#4b4b4b]">bar_chart</span>
                     </div>
-                    <div class="flex w-[145px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                    <div class="flex w-[145px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90">Profit to Serve %NR</div>
                         <div id="beverages-kpi-top-1" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
                       </div>
                       <span class="material-icons text-[24px] text-[#4b4b4b]">show_chart</span>
                     </div>
-                    <div class="flex w-[145px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                    <div class="flex w-[145px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90">Annual NR</div>
                         <div id="beverages-kpi-top-2" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
                       </div>
                       <span class="material-icons text-[24px] text-[#4b4b4b]">monetization_on</span>
                     </div>
-                    <div class="flex w-[145px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                    <div class="flex w-[145px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90">Headcount</div>
                         <div id="beverages-kpi-top-3" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
@@ -1092,35 +1107,35 @@
                   </div>
 
                   <div class="flex flex-wrap gap-2">
-                    <div class="flex w-[111.5px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                    <div class="flex w-[111.5px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90">Hours</div>
                         <div id="beverages-kpi-bottom-0" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
                       </div>
                       <span class="material-icons text-[24px] text-[#4b4b4b]">hourglass_empty</span>
                     </div>
-                    <div class="flex w-[111.5px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                    <div class="flex w-[111.5px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90">Miles</div>
                         <div id="beverages-kpi-bottom-1" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
                       </div>
                       <span class="material-icons text-[24px] text-[#4b4b4b]">add_road</span>
                     </div>
-                    <div class="flex w-[127px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                    <div class="flex w-[127px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90"># of Deliveries</div>
                         <div id="beverages-kpi-bottom-2" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
                       </div>
                       <span class="material-icons text-[24px] text-[#4b4b4b]">local_shipping</span>
                     </div>
-                    <div class="flex w-[111.5px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                    <div class="flex w-[111.5px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90">S&amp;D % NR</div>
                         <div id="beverages-kpi-bottom-3" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
                       </div>
                       <span class="material-icons text-[24px] text-[#4b4b4b]">analytics</span>
                     </div>
-                    <div class="flex w-[111.5px] items-start justify-between gap-2 rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
+                    <div class="flex w-[111.5px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#d8e7fb] bg-[#f5f9ff] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90">NR/Hour</div>
                         <div id="beverages-kpi-bottom-4" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
@@ -1222,28 +1237,28 @@
                 </div>
                 <div class="flex flex-col gap-4 p-4">
                   <div class="flex flex-wrap gap-2">
-                    <div class="flex w-[145px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                    <div class="flex w-[145px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90">Annual Cases</div>
                         <div id="foods-kpi-top-0" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
                       </div>
                       <span class="material-icons text-[24px] text-[#2d2d2d]">bar_chart</span>
                     </div>
-                    <div class="flex w-[145px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                    <div class="flex w-[145px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90">Profit to Serve %NR</div>
                         <div id="foods-kpi-top-1" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
                       </div>
                       <span class="material-icons text-[24px] text-[#2d2d2d]">show_chart</span>
                     </div>
-                    <div class="flex w-[145px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                    <div class="flex w-[145px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90">Annual NR</div>
                         <div id="foods-kpi-top-2" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
                       </div>
                       <span class="material-icons text-[24px] text-[#2d2d2d]">monetization_on</span>
                     </div>
-                    <div class="flex w-[145px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                    <div class="flex w-[145px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90">Headcount</div>
                         <div id="foods-kpi-top-3" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
@@ -1253,35 +1268,35 @@
                   </div>
 
                   <div class="flex flex-wrap gap-2">
-                    <div class="flex w-[111.5px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                    <div class="flex w-[111.5px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90">Hours</div>
                         <div id="foods-kpi-bottom-0" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
                       </div>
                       <span class="material-icons text-[24px] text-[#2d2d2d]">hourglass_empty</span>
                     </div>
-                    <div class="flex w-[111.5px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                    <div class="flex w-[111.5px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90">Miles</div>
                         <div id="foods-kpi-bottom-1" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
                       </div>
                       <span class="material-icons text-[24px] text-[#2d2d2d]">add_road</span>
                     </div>
-                    <div class="flex w-[126px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                    <div class="flex w-[126px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90"># of Deliveries</div>
                         <div id="foods-kpi-bottom-2" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
                       </div>
                       <span class="material-icons text-[24px] text-[#2d2d2d]">local_shipping</span>
                     </div>
-                    <div class="flex w-[111.5px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                    <div class="flex w-[111.5px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90">S&amp;D % NR</div>
                         <div id="foods-kpi-bottom-3" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
                       </div>
                       <span class="material-icons text-[24px] text-[#2d2d2d]">analytics</span>
                     </div>
-                    <div class="flex w-[111.5px] items-start justify-between gap-2 rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
+                    <div class="flex w-[111.5px] items-start justify-between gap-2 overflow-hidden rounded-[8px] border border-[#f9d849] bg-[#fff9d6] p-2">
                       <div>
                         <div class="text-[12px] text-[#4b4b4b] opacity-90">NR/Hour</div>
                         <div id="foods-kpi-bottom-4" class="text-[16px] font-bold text-[#2d2d2d]">0</div>
@@ -3531,6 +3546,64 @@
           </span>
         </button>
       </div>
+      <div
+        id="draft-modal"
+        class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 px-6"
+      >
+        <div class="w-full max-w-[420px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
+          <div class="text-[18px] font-bold text-[#2d2d2d]">
+            Save as a draft?
+          </div>
+          <p class="mt-2 text-[14px] text-[#4b4b4b]">
+            This will save your current progress as a draft and return you to the workspace.
+          </p>
+          <div class="mt-5 flex items-center justify-end gap-3">
+            <button
+              id="draft-modal-cancel"
+              class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[14px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+              type="button"
+            >
+              No
+            </button>
+            <button
+              id="draft-modal-confirm"
+              class="flex h-8 items-center gap-1 rounded-full bg-[#004895] px-4 text-[14px] font-bold text-white transition-colors hover:bg-[#002B5E]"
+              type="button"
+            >
+              Yes, save
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        id="run-modal"
+        class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 px-6"
+      >
+        <div class="w-full max-w-[420px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
+          <div class="text-[18px] font-bold text-[#2d2d2d]">
+            Run this scenario?
+          </div>
+          <p class="mt-2 text-[14px] text-[#4b4b4b]">
+            This will start the scenario run and return you to the workspace.
+          </p>
+          <div class="mt-5 flex items-center justify-end gap-3">
+            <button
+              id="run-modal-cancel"
+              class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[14px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+              type="button"
+            >
+              No
+            </button>
+            <button
+              id="run-modal-confirm"
+              class="flex h-8 items-center gap-1 rounded-full bg-[#004895] px-4 text-[14px] font-bold text-white transition-colors hover:bg-[#002B5E]"
+              type="button"
+            >
+              Yes, run
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
     <script>
       const selectAll = document.getElementById("select-all");
@@ -3539,6 +3612,12 @@
       const totalCount = document.getElementById("total-count");
       const compareButton = document.getElementById("compare-button");
       const tableBody = document.getElementById("table-body");
+      const workspaceFirstPage = document.getElementById("workspace-first-page");
+      const workspacePrevPage = document.getElementById("workspace-prev-page");
+      const workspaceNextPage = document.getElementById("workspace-next-page");
+      const workspaceLastPage = document.getElementById("workspace-last-page");
+      const workspacePageCurrent = document.getElementById("workspace-page-current");
+      const workspacePageTotal = document.getElementById("workspace-page-total");
       const tabAll = document.getElementById("tab-all");
       const tabMy = document.getElementById("tab-my");
       const portfolioChip = document.getElementById("portfolio-chip");
@@ -3578,6 +3657,14 @@
       const baselineDefineParameters = document.getElementById("baseline-define-parameters");
       const defineParametersSticky = document.getElementById("define-parameters-sticky");
       const defineParametersBack = document.getElementById("define-parameters-back");
+      const defineParametersSave = document.getElementById("define-parameters-save");
+      const defineParametersRun = document.getElementById("define-parameters-run");
+      const draftModal = document.getElementById("draft-modal");
+      const draftModalConfirm = document.getElementById("draft-modal-confirm");
+      const draftModalCancel = document.getElementById("draft-modal-cancel");
+      const runModal = document.getElementById("run-modal");
+      const runModalConfirm = document.getElementById("run-modal-confirm");
+      const runModalCancel = document.getElementById("run-modal-cancel");
       const newScenario = document.getElementById("new-scenario");
       const portfolioSelectField = document.getElementById("portfolio-select-field");
       const portfolioSelectMenu = document.getElementById("portfolio-select-menu");
@@ -3781,6 +3868,21 @@
         },
       ];
       let activeTab = "all";
+      const WORKSPACE_PAGE_SIZE = 10;
+      let workspacePage = 1;
+      const formatScenarioDate = (date) => {
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${month} ${day}, ${date.getFullYear()}`;
+      };
+      const getNextScenarioId = () => {
+        const maxId = scenarios.reduce((currentMax, scenario) => {
+          const match = String(scenario.id).match(/SC-(\d+)/i);
+          if (!match) return currentMax;
+          return Math.max(currentMax, Number(match[1]));
+        }, 1000);
+        return `SC-${maxId + 1}`;
+      };
 
       function setNavActive(active) {
         const workspaceIcon = navWorkspace.querySelector(".material-icons");
@@ -3815,6 +3917,7 @@
         }
       }
 
+      let currentView = "workspace";
       function setView(view) {
         const showWorkspace = view === "workspace";
         const showScenario = view === "scenario";
@@ -3828,6 +3931,7 @@
         baselineSticky.classList.toggle("hidden", !showBaseline);
         defineParametersSticky.classList.toggle("hidden", !showDefineParameters);
         setNavActive(showWorkspace ? "workspace" : "scenario");
+        currentView = view;
       }
 
       navWorkspace.addEventListener("click", () => setView("workspace"));
@@ -3861,6 +3965,7 @@
 
       baselineDefineParameters.addEventListener("click", () => {
         setView("define-parameters");
+        setDefineParametersActiveTab("Facilities");
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
 
@@ -3868,6 +3973,119 @@
         setView("baseline");
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
+      const showDraftModal = () => {
+        if (!draftModal) {
+          return;
+        }
+        draftModal.classList.remove("hidden");
+        draftModal.classList.add("flex");
+      };
+      const hideDraftModal = () => {
+        if (!draftModal) {
+          return;
+        }
+        draftModal.classList.add("hidden");
+        draftModal.classList.remove("flex");
+      };
+      const normalizePortfolioLabel = (label) => {
+        if (!label) return label;
+        return label === "Foods and Beverages" ? "1NA" : label;
+      };
+
+      const saveDraftScenario = () => {
+        const now = new Date();
+        const activeDefineTab = defineParametersTabs.find((tab) =>
+          tab.classList.contains("border-l-2")
+        )?.dataset.defineTab;
+        const displayPortfolio = normalizePortfolioLabel(
+          portfolioSelected || portfolioSelectValue.textContent || "1NA"
+        );
+        const scenario = {
+          id: getNextScenarioId(),
+          description: "Draft scenario",
+          portfolio: displayPortfolio,
+          status: "Draft",
+          dateModified: formatScenarioDate(now),
+          ptsImpact: "$0",
+          draftState: {
+            startDateSelected,
+            endDateSelected,
+            portfolioSelected,
+            hasFile: !uploadedFile.classList.contains("hidden"),
+            lastView: currentView,
+            defineTab: activeDefineTab || "Facilities",
+          },
+        };
+        createScenario(scenario);
+      };
+      const saveInProgressScenario = () => {
+        const displayPortfolio = normalizePortfolioLabel(
+          portfolioSelected || portfolioSelectValue.textContent || "1NA"
+        );
+        const scenario = {
+          id: getNextScenarioId(),
+          description: "Running scenario",
+          portfolio: displayPortfolio,
+          status: "In progress",
+          runningTime: "Running for 00hh 05mm",
+          ptsImpact: "$0",
+        };
+        createScenario(scenario);
+      };
+      defineParametersSave?.addEventListener("click", showDraftModal);
+      draftModalConfirm?.addEventListener("click", () => {
+        hideDraftModal();
+        try {
+          saveDraftScenario();
+        } catch (error) {
+          // Continue to workspace even if draft creation fails.
+        }
+        setTimeout(() => {
+          setView("workspace");
+          renderTable();
+          workspaceView?.classList.remove("hidden");
+          scenarioView?.classList.add("hidden");
+          baselineView?.classList.add("hidden");
+          defineParametersView?.classList.add("hidden");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 0);
+      });
+      draftModalCancel?.addEventListener("click", hideDraftModal);
+
+      const showRunModal = () => {
+        if (!runModal) {
+          return;
+        }
+        runModal.classList.remove("hidden");
+        runModal.classList.add("flex");
+      };
+      const hideRunModal = () => {
+        if (!runModal) {
+          return;
+        }
+        runModal.classList.add("hidden");
+        runModal.classList.remove("flex");
+      };
+
+      defineParametersRun?.addEventListener("click", showRunModal);
+      runModalConfirm?.addEventListener("click", () => {
+        hideRunModal();
+        try {
+          saveInProgressScenario();
+        } catch (error) {
+          // Continue to workspace even if scenario creation fails.
+        }
+        setTimeout(() => {
+          setView("workspace");
+          renderTable();
+          workspaceView?.classList.remove("hidden");
+          scenarioView?.classList.add("hidden");
+          baselineView?.classList.add("hidden");
+          defineParametersView?.classList.add("hidden");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 0);
+      });
+      runModalCancel?.addEventListener("click", hideRunModal);
 
       const defineParametersTabs = Array.from(
         document.querySelectorAll(".define-parameters-tab")
@@ -3897,7 +4115,7 @@
           setDefineParametersActiveTab(tab.dataset.defineTab);
         });
       });
-      setDefineParametersActiveTab("Time Estimates");
+      setDefineParametersActiveTab("Facilities");
 
       const existingFacilitiesTable = document.querySelector(
         ".define-parameters-tab[data-define-tab='Facilities']"
@@ -4052,6 +4270,7 @@
 
       function createScenario(scenario) {
         scenarios.unshift({ ...scenario, owner: currentUser });
+        workspacePage = 1;
         renderTable();
       }
 
@@ -4096,7 +4315,15 @@
             <div class="flex items-center justify-center">
               <input type="checkbox" class="table-checkbox row-checkbox" />
             </div>
-            <div class="px-2 text-[14px] text-[#004895]">${scenario.id}</div>
+            <div class="px-2 text-[14px] text-[#004895]">
+              <button
+                class="scenario-link font-bold text-[#004895]"
+                type="button"
+                data-scenario-id="${scenario.id}"
+              >
+                ${scenario.id}
+              </button>
+            </div>
             <div class="px-2 text-[14px]">${scenario.description}</div>
             <div class="px-2 text-[14px]">${scenario.portfolio}</div>
             <div class="px-2 text-[14px]">${scenario.owner}</div>
@@ -4127,6 +4354,39 @@
         });
       }
 
+      function applyDraftState(draftState) {
+        const fallbackStart = periodOptions[0] || "";
+        const fallbackEnd = periodOptions[1] || periodOptions[0] || "";
+        startDateSelected = draftState.startDateSelected || fallbackStart;
+        endDateSelected = draftState.endDateSelected || fallbackEnd;
+        portfolioSelected = draftState.portfolioSelected || "Foods and Beverages";
+        startDateValue.textContent = startDateSelected;
+        endDateValue.textContent = endDateSelected;
+        portfolioSelectValue.textContent = portfolioSelected;
+        if (draftState.hasFile) {
+          showUploadedFile();
+        } else {
+          clearUploadedFile();
+        }
+        updateViewBaselineState();
+        setDefineParametersActiveTab(draftState.defineTab || "Facilities");
+        setView(draftState.lastView || "scenario");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function openDraftScenario(scenario) {
+        const draftState =
+          scenario.draftState || {
+            startDateSelected: periodOptions[0] || "",
+            endDateSelected: periodOptions[1] || periodOptions[0] || "",
+            portfolioSelected: "Foods and Beverages",
+            hasFile: true,
+            lastView: "define-parameters",
+            defineTab: "Facilities",
+          };
+        applyDraftState(draftState);
+      }
+
       function updateChipCounts() {
         const portfolioCountValueNumber = filters.portfolio.selected.size;
         const statusCountValueNumber = filters.status.selected.size;
@@ -4140,14 +4400,84 @@
         statusChip.classList.toggle("filter-chip-active", statusIsFiltered);
       }
 
+      function getWorkspacePagination(list) {
+        const totalPages = Math.max(
+          1,
+          Math.ceil(list.length / WORKSPACE_PAGE_SIZE)
+        );
+        if (workspacePage > totalPages) {
+          workspacePage = totalPages;
+        }
+        if (workspacePage < 1) {
+          workspacePage = 1;
+        }
+        const startIndex = (workspacePage - 1) * WORKSPACE_PAGE_SIZE;
+        return {
+          totalPages,
+          pageItems: list.slice(startIndex, startIndex + WORKSPACE_PAGE_SIZE),
+        };
+      }
+
+      function updateWorkspacePaginationUI(totalPages) {
+        if (workspacePageCurrent) {
+          workspacePageCurrent.textContent = workspacePage;
+        }
+        if (workspacePageTotal) {
+          workspacePageTotal.textContent = totalPages;
+        }
+        const isFirst = workspacePage <= 1;
+        const isLast = workspacePage >= totalPages;
+        workspaceFirstPage?.toggleAttribute("disabled", isFirst);
+        workspacePrevPage?.toggleAttribute("disabled", isFirst);
+        workspaceNextPage?.toggleAttribute("disabled", isLast);
+        workspaceLastPage?.toggleAttribute("disabled", isLast);
+      }
+
       function renderTable() {
         const visibleScenarios = applyFilters(getVisibleScenarios());
-        tableBody.innerHTML = visibleScenarios.map(renderRow).join("");
-        totalCount.textContent = visibleScenarios.length;
+        const { pageItems, totalPages } = getWorkspacePagination(
+          visibleScenarios
+        );
+        tableBody.innerHTML = pageItems.map(renderRow).join("");
+        totalCount.textContent = pageItems.length;
         bindSelectionHandlers();
         updateSelectionState();
         updateChipCounts();
+        updateWorkspacePaginationUI(totalPages);
       }
+
+      tableBody.addEventListener("click", (event) => {
+        const link = event.target.closest("[data-scenario-id]");
+        if (!link) {
+          return;
+        }
+        const scenario = scenarios.find((item) => item.id === link.dataset.scenarioId);
+        if (!scenario || scenario.status !== "Draft") {
+          return;
+        }
+        openDraftScenario(scenario);
+      });
+
+      workspaceFirstPage?.addEventListener("click", () => {
+        workspacePage = 1;
+        renderTable();
+      });
+      workspacePrevPage?.addEventListener("click", () => {
+        workspacePage = Math.max(1, workspacePage - 1);
+        renderTable();
+      });
+      workspaceNextPage?.addEventListener("click", () => {
+        workspacePage += 1;
+        renderTable();
+      });
+      workspaceLastPage?.addEventListener("click", () => {
+        const totalPages = Math.max(
+          1,
+          Math.ceil(applyFilters(getVisibleScenarios()).length / WORKSPACE_PAGE_SIZE)
+        );
+        workspacePage = totalPages;
+        renderTable();
+      });
 
       function setActiveTab(tab) {
         activeTab = tab;
@@ -4303,6 +4633,16 @@
       function startScenarioSession() {
         scenarioSessionId += 1;
         currentBaselineData = null;
+        startDateSelected = "";
+        endDateSelected = "";
+        portfolioSelected = "";
+        startDateValue.textContent = "";
+        endDateValue.textContent = "";
+        portfolioSelectValue.textContent = "";
+        clearUploadedFile();
+        closeDateMenus();
+        closePortfolioSelectMenu();
+        updateViewBaselineState();
         setView("scenario");
       }
 
@@ -4748,7 +5088,7 @@
             elements.serviceBody.innerHTML = renderServiceRows(card.service);
           }
           if (elements.assetsBody) {
-            const includeSpacer = elements.assetsBody.id !== "foods-assets-body";
+            const includeSpacer = false;
             elements.assetsBody.innerHTML = renderAssetsRows(
               card.assets.rows,
               card.assets.total,
@@ -4783,6 +5123,15 @@
           assetsBody: foodsAssetsBody,
           totalBody: foodsTotalBody,
           pnlBody: foodsPnlBody,
+        });
+
+        requestAnimationFrame(() => {
+          const foodsAssetsTable = foodsAssetsBody?.closest(".table-text");
+          const beveragesAssetsTable = beveragesAssetsBody?.closest(".table-text");
+          if (foodsAssetsTable && beveragesAssetsTable) {
+            const targetHeight = foodsAssetsTable.getBoundingClientRect().height;
+            beveragesAssetsTable.style.minHeight = `${targetHeight}px`;
+          }
         });
       }
 
@@ -5049,7 +5398,7 @@
         portfolioSelectValue.textContent = portfolioSelected;
       }
 
-      setView("define-parameters");
+      setView("workspace");
       renderTable();
       updateViewBaselineState();
     </script>
