@@ -1881,10 +1881,11 @@
                       <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
                         New Facilities
                       </div>
-                      <button
-                        class="flex h-8 items-center gap-1 rounded-full bg-[#004895] px-3 text-[12px] font-bold text-white transition-colors hover:bg-[#002B5E]"
-                        type="button"
-                      >
+                        <button
+                          id="create-facility-button"
+                          class="flex h-8 items-center gap-1 rounded-full bg-[#004895] px-3 text-[12px] font-bold text-white transition-colors hover:bg-[#002B5E]"
+                          type="button"
+                        >
                         <span class="material-icons text-[16px] text-current">
                           add
                         </span>
@@ -1942,7 +1943,7 @@
                       </button>
                     </div>
                     <div
-                      class="mt-4 w-full flex-1 text-[12px] text-[#2d2d2d] table-text labor-table overflow-x-auto"
+                      class="relative z-20 mt-4 w-full flex-1 text-[12px] text-[#2d2d2d] table-text labor-table overflow-x-auto overflow-y-visible"
                       data-define-table="frontline"
                     >
                       <div class="min-w-full w-max">
@@ -1961,8 +1962,13 @@
                           <div>Hourly Wage</div>
                           <div class="flex items-center gap-1">
                             Annual Earning
-                            <span class="material-icons text-[16px] text-[#4b4b4b]">
-                              info
+                            <span
+                              class="relative flex items-center"
+                              data-tooltip="Expected pay for frontline employees if they maintain their weekly hours throughout the year, inclusive of base pay and overtime pay"
+                            >
+                              <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                info
+                              </span>
                             </span>
                           </div>
                           <div>Relief Rate</div>
@@ -2253,7 +2259,7 @@
                       </button>
                     </div>
                     <div
-                      class="mt-4 w-full flex-1 text-[12px] text-[#2d2d2d] table-text labor-table overflow-x-auto"
+                      class="relative z-20 mt-4 w-full flex-1 text-[12px] text-[#2d2d2d] table-text labor-table overflow-x-auto overflow-y-visible"
                       data-define-table="management"
                     >
                       <div class="min-w-full w-max">
@@ -2268,8 +2274,13 @@
                           </div>
                           <div class="flex items-center gap-1">
                             Annual Salary
-                            <span class="material-icons text-[16px] text-[#4b4b4b]">
-                              info
+                            <span
+                              class="relative flex items-center"
+                              data-tooltip="Indirect employee's annual base salary and bonus paid at target"
+                            >
+                              <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                info
+                              </span>
                             </span>
                           </div>
                           <div>Span of Control</div>
@@ -3129,7 +3140,7 @@
                         </div>
                         <div>Daily Fixed Minutes (On Property, Meetings, Breaks)</div>
                       </div>
-                      <div class="divide-y divide-[#d8e7fb]">
+                      <div id="existing-facilities-body" class="divide-y divide-[#d8e7fb]">
                         <div class="grid min-h-[64px] grid-cols-[200px_200px_1fr] items-center gap-4 px-2 py-2">
                           <div>Delivery</div>
                           <div>On property</div>
@@ -3513,6 +3524,7 @@
                       </div>
                       <div class="flex items-center gap-2">
                         <button
+                          id="add-chain-button"
                           class="flex h-8 items-center gap-1 rounded-full bg-[#004895] px-4 text-[14px] font-bold text-white transition-colors hover:bg-[#002B5E]"
                           type="button"
                         >
@@ -3574,7 +3586,7 @@
                           </span>
                         </div>
                       </div>
-                      <div class="divide-y divide-[#d8e7fb]">
+                      <div id="exceptions-table-body" class="divide-y divide-[#d8e7fb]">
                         <div class="grid min-h-[48px] grid-cols-[140px_1.4fr_120px_120px_120px_120px] items-center gap-4 px-2 py-2">
                           <div>PFUS</div>
                           <div>7-Eleven</div>
@@ -3817,6 +3829,143 @@
         </div>
       </div>
       <div
+        id="chain-modal"
+        class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 px-6"
+      >
+        <div class="w-full max-w-[520px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
+          <div class="text-[18px] font-bold text-[#2d2d2d]">
+            Add Chain Exception
+          </div>
+          <p class="mt-2 text-[14px] text-[#4b4b4b]">
+            Select a business unit and chain name to add a chain exception to this
+            scenario.
+          </p>
+          <div class="mt-4 grid gap-4">
+            <label class="flex flex-col gap-2 text-[12px] text-[#4b4b4b]">
+              Business Unit
+              <div class="relative">
+                <select
+                  id="chain-business-unit"
+                  class="h-8 w-full appearance-none rounded border border-[#c0c0c0] bg-white px-2 pr-8 text-[14px] text-[#2d2d2d]"
+                >
+                  <option value="PFUS">PFUS</option>
+                  <option value="PBUS">PBUS</option>
+                </select>
+                <span class="material-icons pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-[16px] text-[#4b4b4b]">
+                  keyboard_arrow_down
+                </span>
+              </div>
+            </label>
+            <label class="flex flex-col gap-2 text-[12px] text-[#4b4b4b]">
+              Chain Name
+              <div class="relative">
+                <select
+                  id="chain-name"
+                  class="h-8 w-full appearance-none rounded border border-[#c0c0c0] bg-white px-2 pr-8 text-[14px] text-[#2d2d2d]"
+                ></select>
+                <span class="material-icons pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-[16px] text-[#4b4b4b]">
+                  keyboard_arrow_down
+                </span>
+              </div>
+            </label>
+          </div>
+          <div class="mt-6 flex items-center justify-end gap-3">
+            <button
+              id="chain-modal-cancel"
+              class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[14px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              id="chain-modal-confirm"
+              class="flex h-8 items-center gap-1 rounded-full bg-[#004895] px-4 text-[14px] font-bold text-white transition-colors hover:bg-[#002B5E]"
+              type="button"
+            >
+              Add Chain
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        id="facility-modal"
+        class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 px-6"
+      >
+        <div class="w-full max-w-[560px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
+          <div class="text-[18px] font-bold text-[#2d2d2d]">
+            Create New Facility
+          </div>
+          <p class="mt-2 text-[14px] text-[#4b4b4b]">
+            Add a new facility to the existing facilities list for this scenario.
+          </p>
+          <div class="mt-4 grid gap-4">
+            <label class="flex flex-col gap-2 text-[12px] text-[#4b4b4b]">
+              Facility Name
+              <input
+                id="facility-name-input"
+                type="text"
+                class="h-9 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+                placeholder="Enter facility name"
+              />
+            </label>
+            <div class="grid grid-cols-2 gap-4">
+              <label class="flex flex-col gap-2 text-[12px] text-[#4b4b4b]">
+                Location ID
+                <input
+                  id="facility-location-id"
+                  type="text"
+                  class="h-9 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+                  placeholder="Enter location ID"
+                />
+              </label>
+              <label class="flex flex-col gap-2 text-[12px] text-[#4b4b4b]">
+                Maximum Weekly Cases
+                <input
+                  id="facility-max-cases"
+                  type="number"
+                  class="h-9 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+                  placeholder="0"
+                />
+              </label>
+            </div>
+            <label class="flex flex-col gap-2 text-[12px] text-[#4b4b4b]">
+              Address
+              <input
+                id="facility-address"
+                type="text"
+                class="h-9 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+                placeholder="Enter address"
+              />
+            </label>
+            <label class="flex items-center gap-2 text-[12px] text-[#4b4b4b]">
+              <input
+                id="facility-inc"
+                type="checkbox"
+                class="table-checkbox"
+              />
+              Include in scenario
+            </label>
+          </div>
+          <div class="mt-6 flex items-center justify-end gap-3">
+            <button
+              id="facility-modal-cancel"
+              class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[14px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              id="facility-modal-confirm"
+              class="flex h-8 items-center gap-1 rounded-full bg-[#dadada] px-4 text-[14px] font-bold text-[#b1b1b1] transition-colors"
+              type="button"
+              disabled
+            >
+              Create New Facility
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
         id="run-modal"
         class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 px-6"
       >
@@ -3909,6 +4058,27 @@
       const draftModal = document.getElementById("draft-modal");
       const draftModalConfirm = document.getElementById("draft-modal-confirm");
       const draftModalCancel = document.getElementById("draft-modal-cancel");
+      const chainModal = document.getElementById("chain-modal");
+      const chainModalConfirm = document.getElementById("chain-modal-confirm");
+      const chainModalCancel = document.getElementById("chain-modal-cancel");
+      const addChainButton = document.getElementById("add-chain-button");
+      const chainBusinessUnit = document.getElementById("chain-business-unit");
+      const chainNameSelect = document.getElementById("chain-name");
+      const exceptionsTableBody = document.getElementById(
+        "exceptions-table-body"
+      );
+      const facilityModal = document.getElementById("facility-modal");
+      const facilityModalConfirm = document.getElementById("facility-modal-confirm");
+      const facilityModalCancel = document.getElementById("facility-modal-cancel");
+      const createFacilityButton = document.getElementById("create-facility-button");
+      const facilityNameInput = document.getElementById("facility-name-input");
+      const facilityLocationId = document.getElementById("facility-location-id");
+      const facilityMaxCases = document.getElementById("facility-max-cases");
+      const facilityAddress = document.getElementById("facility-address");
+      const facilityInc = document.getElementById("facility-inc");
+      const existingFacilitiesBody = document.getElementById(
+        "existing-facilities-body"
+      );
       const runModal = document.getElementById("run-modal");
       const runModalConfirm = document.getElementById("run-modal-confirm");
       const runModalCancel = document.getElementById("run-modal-cancel");
@@ -4366,6 +4536,85 @@
         runModal.classList.remove("flex");
       };
 
+      const chainOptions = {
+        PFUS: [
+          "Corner Market",
+          "Freshway Foods",
+          "Prairie Mart",
+          "Summit Grocers",
+          "Westside Foods",
+        ],
+        PBUS: [
+          "Blue Ridge Market",
+          "Harvest Pantry",
+          "Northland Co-op",
+          "Sunset Foods",
+          "Urban Pantry",
+        ],
+      };
+      const updateChainNames = (unit) => {
+        if (!chainNameSelect) {
+          return;
+        }
+        const options = chainOptions[unit] || [];
+        chainNameSelect.innerHTML = options
+          .map((name) => `<option value="${name}">${name}</option>`)
+          .join("");
+      };
+      const showChainModal = () => {
+        if (!chainModal) {
+          return;
+        }
+        const unit = chainBusinessUnit?.value || "PFUS";
+        updateChainNames(unit);
+        chainModal.classList.remove("hidden");
+        chainModal.classList.add("flex");
+      };
+      const hideChainModal = () => {
+        if (!chainModal) {
+          return;
+        }
+        chainModal.classList.add("hidden");
+        chainModal.classList.remove("flex");
+      };
+      const updateFacilityModalState = () => {
+        if (!facilityModalConfirm) {
+          return;
+        }
+        const isReady =
+          Boolean(facilityNameInput?.value.trim()) &&
+          Boolean(facilityLocationId?.value.trim()) &&
+          Boolean(facilityMaxCases?.value.trim()) &&
+          Boolean(facilityAddress?.value.trim());
+        facilityModalConfirm.disabled = !isReady;
+        facilityModalConfirm.classList.toggle("bg-[#004895]", isReady);
+        facilityModalConfirm.classList.toggle("text-white", isReady);
+        facilityModalConfirm.classList.toggle("hover:bg-[#002B5E]", isReady);
+        facilityModalConfirm.classList.toggle("bg-[#dadada]", !isReady);
+        facilityModalConfirm.classList.toggle("text-[#b1b1b1]", !isReady);
+        facilityModalConfirm.classList.toggle("cursor-not-allowed", !isReady);
+      };
+      const showFacilityModal = () => {
+        if (!facilityModal) {
+          return;
+        }
+        if (facilityNameInput) facilityNameInput.value = "";
+        if (facilityLocationId) facilityLocationId.value = "";
+        if (facilityMaxCases) facilityMaxCases.value = "";
+        if (facilityAddress) facilityAddress.value = "";
+        if (facilityInc) facilityInc.checked = false;
+        updateFacilityModalState();
+        facilityModal.classList.remove("hidden");
+        facilityModal.classList.add("flex");
+      };
+      const hideFacilityModal = () => {
+        if (!facilityModal) {
+          return;
+        }
+        facilityModal.classList.add("hidden");
+        facilityModal.classList.remove("flex");
+      };
+
       defineParametersRun?.addEventListener("click", showRunModal);
       runModalConfirm?.addEventListener("click", () => {
         hideRunModal();
@@ -4385,6 +4634,100 @@
         }, 0);
       });
       runModalCancel?.addEventListener("click", hideRunModal);
+      addChainButton?.addEventListener("click", showChainModal);
+      chainModalCancel?.addEventListener("click", hideChainModal);
+      chainModalConfirm?.addEventListener("click", () => {
+        if (!exceptionsTableBody || !chainBusinessUnit || !chainNameSelect) {
+          hideChainModal();
+          return;
+        }
+        const unit = chainBusinessUnit.value;
+        const chainName = chainNameSelect.value;
+        const row = document.createElement("div");
+        row.className =
+          "grid min-h-[48px] grid-cols-[140px_1.4fr_120px_120px_120px_120px] items-center gap-4 px-2 py-2";
+        row.innerHTML = `
+          <div>${unit}</div>
+          <div>${chainName}</div>
+          <div class="flex items-center justify-start">
+            <input type="checkbox" class="table-checkbox" checked />
+          </div>
+          <div class="flex items-center justify-start">
+            <input type="checkbox" class="table-checkbox" checked />
+          </div>
+          <div class="flex items-center justify-start">
+            <input type="checkbox" class="table-checkbox" />
+          </div>
+          <div class="flex items-center justify-start">
+            <input type="checkbox" class="table-checkbox" checked />
+          </div>
+        `;
+        exceptionsTableBody.prepend(row);
+        row.querySelectorAll("input").forEach((input) => {
+          registerDefineInput(input);
+        });
+        updateDefineChangeCounts();
+        hideChainModal();
+      });
+      chainBusinessUnit?.addEventListener("change", () => {
+        updateChainNames(chainBusinessUnit.value);
+      });
+      createFacilityButton?.addEventListener("click", showFacilityModal);
+      facilityModalCancel?.addEventListener("click", hideFacilityModal);
+      facilityModalConfirm?.addEventListener("click", () => {
+        if (
+          !existingFacilitiesBody ||
+          !facilityNameInput ||
+          !facilityLocationId ||
+          !facilityMaxCases ||
+          !facilityAddress
+        ) {
+          hideFacilityModal();
+          return;
+        }
+        const row = document.createElement("div");
+        row.className =
+          "grid min-h-[48px] grid-cols-[1.2fr_80px_120px_220px_1.2fr] items-center gap-4 px-2 py-2";
+        const defaultCases = facilityMaxCases.value.trim();
+        row.innerHTML = `
+          <div>${facilityNameInput.value.trim()}</div>
+          <div class="flex items-center">
+            <input type="checkbox" class="table-checkbox" ${facilityInc?.checked ? "checked" : ""} />
+          </div>
+          <div>${facilityLocationId.value.trim()}</div>
+          <div>
+            <input
+              type="number"
+              class="facility-input"
+              value="${defaultCases}"
+              data-default="${defaultCases}"
+              ${facilityInc?.checked ? "" : "disabled"}
+            />
+            <div class="mt-1 flex items-center gap-1 text-[12px] text-[#b1b1b1]">
+              <span class="material-icons text-[16px] text-[#b1b1b1]">
+                info
+              </span>
+              Default: ${defaultCases}
+            </div>
+          </div>
+          <div>${facilityAddress.value.trim()}</div>
+        `;
+        existingFacilitiesBody.prepend(row);
+        const input = row.querySelector(".facility-input");
+        const checkbox = row.querySelector(".table-checkbox");
+        registerFacilityRow(input, checkbox);
+        facilityRows.push({ input, checkbox });
+        updateDefineChangeCounts();
+        hideFacilityModal();
+      });
+      [
+        facilityNameInput,
+        facilityLocationId,
+        facilityMaxCases,
+        facilityAddress,
+      ].forEach((input) => {
+        input?.addEventListener("input", updateFacilityModalState);
+      });
 
       const defineParametersTabs = Array.from(
         document.querySelectorAll(".define-parameters-tab")
@@ -4412,17 +4755,43 @@
       const getDefineTabBadge = (tab) =>
         tab?.querySelector("span:last-child");
 
+      const registerFacilityRow = (input, checkbox) => {
+        if (!input || !checkbox) {
+          return;
+        }
+        checkbox.addEventListener("change", () => {
+          input.disabled = !checkbox.checked;
+          if (!checkbox.checked) {
+            input.value = input.dataset.default || "46";
+          }
+          updateDefineChangeCounts();
+        });
+        registerDefineInput(checkbox);
+        registerDefineInput(input);
+      };
+
+      const registerDefineInput = (input) => {
+        if (!input) {
+          return;
+        }
+        if (input.type === "checkbox") {
+          if (input.dataset.initialChecked === undefined) {
+            input.dataset.initialChecked = input.checked ? "true" : "false";
+          }
+          input.addEventListener("change", updateDefineChangeCounts);
+          return;
+        }
+        if (input.dataset.initialValue === undefined) {
+          const defaultValue = input.dataset.default ?? input.value;
+          input.dataset.initialValue = defaultValue;
+        }
+        input.addEventListener("input", updateDefineChangeCounts);
+      };
+
       const initDefineChangeTracking = () => {
         defineParametersPanels.forEach((panel) => {
           panel.querySelectorAll("input").forEach((input) => {
-            if (input.type === "checkbox") {
-              input.dataset.initialChecked = input.checked ? "true" : "false";
-              input.addEventListener("change", updateDefineChangeCounts);
-              return;
-            }
-            const defaultValue = input.dataset.default ?? input.value;
-            input.dataset.initialValue = defaultValue;
-            input.addEventListener("input", updateDefineChangeCounts);
+            registerDefineInput(input);
           });
         });
       };
@@ -4477,14 +4846,7 @@
       }));
 
       facilityRows.forEach(({ input, checkbox }) => {
-        if (!checkbox) return;
-        checkbox.addEventListener("change", () => {
-          input.disabled = !checkbox.checked;
-          if (!checkbox.checked) {
-            input.value = input.dataset.default || "46";
-          }
-          updateDefineChangeCounts();
-        });
+        registerFacilityRow(input, checkbox);
       });
 
       if (existingFacilitiesReset) {
@@ -6263,6 +6625,43 @@
         closePortfolioSelectMenu();
         closeStateSelectMenu();
         closeLocationMenus();
+      });
+
+      const tooltipEl = document.createElement("div");
+      tooltipEl.className =
+        "fixed z-[9999] max-w-[260px] rounded bg-[#262626] px-2 py-1 text-[12px] text-[#efefef] opacity-0 shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)] transition-opacity";
+      tooltipEl.style.pointerEvents = "none";
+      document.body.appendChild(tooltipEl);
+
+      const showTooltip = (target) => {
+        const text = target.dataset.tooltip;
+        if (!text) {
+          return;
+        }
+        tooltipEl.textContent = text;
+        tooltipEl.style.opacity = "1";
+        const rect = target.getBoundingClientRect();
+        const tooltipRect = tooltipEl.getBoundingClientRect();
+        const left = rect.left + rect.width / 2 - tooltipRect.width / 2;
+        const top = rect.top - tooltipRect.height - 8;
+        tooltipEl.style.left = `${Math.max(8, left)}px`;
+        tooltipEl.style.top = `${Math.max(8, top)}px`;
+      };
+
+      const hideTooltip = () => {
+        tooltipEl.style.opacity = "0";
+      };
+
+      document.addEventListener("mouseover", (event) => {
+        const target = event.target.closest("[data-tooltip]");
+        if (target) {
+          showTooltip(target);
+        }
+      });
+      document.addEventListener("mouseout", (event) => {
+        if (event.target.closest("[data-tooltip]")) {
+          hideTooltip();
+        }
       });
 
       function clearSelections() {
