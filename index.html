@@ -5028,6 +5028,14 @@
         startDateValue.textContent = "";
         endDateValue.textContent = "";
         portfolioSelectValue.textContent = "";
+        stateSelectSearch.value = "";
+        foodLocationSearch.value = "";
+        beverageLocationSearch.value = "";
+        foodBeverageLocationSearch.value = "";
+        if (mapImage) {
+          mapImage.src = "./map1.png";
+        }
+        renderMapMarkers();
         updateStateSelectValue();
         updateLocationSelectValues();
         updateLocationSelectState();
@@ -5036,6 +5044,7 @@
         closePortfolioSelectMenu();
         closeStateSelectMenu();
         closeLocationMenus();
+        setDefineScopeTab("upload");
         updateViewBaselineState();
         setView("scenario");
       }
