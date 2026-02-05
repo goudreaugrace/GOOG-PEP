@@ -1109,11 +1109,15 @@
             <div class="flex-1 hidden" data-scope-panel="select-map">
               <div class="relative h-full min-h-[520px] rounded-lg border border-[#d8e7fb] bg-[#e6e8e3]">
                 <img
+                  id="map-image"
                   src="./map1.png"
                   alt="Map"
                   class="absolute inset-0 h-full w-full rounded-lg object-cover"
                 />
-                <div class="absolute left-4 top-4 rounded bg-white/90 px-3 py-2 text-[12px] text-[#2d2d2d] shadow">
+                <div class="absolute inset-0 z-10 pointer-events-none">
+                  <div id="map-markers" class="absolute inset-0"></div>
+                </div>
+                <div class="absolute left-4 top-4 z-20 rounded bg-white/90 px-3 py-2 text-[12px] text-[#2d2d2d] shadow">
                   <div class="font-bold uppercase text-[11px] text-[#4b4b4b]">
                     Locations
                   </div>
@@ -1150,7 +1154,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="absolute bottom-4 right-4 flex flex-col overflow-hidden rounded border border-[#d8e7fb] bg-white">
+                <div class="absolute bottom-4 right-4 z-40 flex flex-col overflow-hidden rounded border border-[#d8e7fb] bg-white">
                   <button class="flex h-8 w-8 items-center justify-center text-[#4b4b4b]" type="button">+</button>
                   <button class="flex h-8 w-8 items-center justify-center text-[#4b4b4b]" type="button">−</button>
                 </div>
@@ -3770,7 +3774,7 @@
       </div>
       <div
         id="scenario-sticky"
-        class="fixed bottom-0 left-0 right-0 hidden flex h-16 items-center justify-end bg-white pl-12 pr-6 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]"
+        class="fixed bottom-0 left-0 right-0 z-50 hidden flex h-16 items-center justify-end bg-white pl-12 pr-6 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]"
       >
         <button
           id="view-baseline-button"
@@ -3921,6 +3925,7 @@
       const applySelectionsButton = document.getElementById(
         "apply-selections-button"
       );
+      const mapImage = document.getElementById("map-image");
       const foodLocationField = document.getElementById("food-location-field");
       const foodLocationValue = document.getElementById("food-location-value");
       const foodLocationMenu = document.getElementById("food-location-menu");
@@ -4930,6 +4935,7 @@
 
       const portfolioSelectOptions = ["Foods and Beverages", "Foods", "Beverages"];
       let portfolioSelected = "";
+      let selectionsApplied = false;
       const stateOptions = [
         "Alabama",
         "Alaska",
@@ -5014,6 +5020,7 @@
         startDateSelected = "";
         endDateSelected = "";
         portfolioSelected = "";
+        selectionsApplied = false;
         selectedStates.clear();
         selectedFoodLocations.clear();
         selectedBeverageLocations.clear();
@@ -5038,7 +5045,8 @@
         const hasStartDate = Boolean(startDateSelected.trim());
         const hasEndDate = Boolean(endDateSelected.trim());
         const hasPortfolio = Boolean(portfolioSelected.trim());
-        const isReady = hasFile && hasStartDate && hasEndDate && hasPortfolio;
+        const hasScope = hasFile || selectionsApplied;
+        const isReady = hasScope && hasStartDate && hasEndDate && hasPortfolio;
 
         viewBaselineButton.disabled = !isReady;
         viewBaselineButton.classList.toggle("bg-[#004895]", isReady);
@@ -5131,6 +5139,69 @@
             state,
           }))
         );
+      }
+
+      function renderMapMarkers(shapeMode = "mixed") {
+        const mapMarkers = document.getElementById("map-markers");
+        if (!mapMarkers) {
+          return;
+        }
+        mapMarkers.innerHTML = "";
+        const colors = ["#E5BB08", "#0662C4", "#027C06"];
+        const markerCount = 100;
+        let created = 0;
+        let attempts = 0;
+        while (created < markerCount && attempts < 1200) {
+          const left = 5 + Math.random() * 90;
+          const top = 6 + Math.random() * 78;
+          if (left < 28 && top < 22) {
+            attempts += 1;
+            continue;
+          }
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          const shape =
+            shapeMode === "circle"
+              ? "circle"
+              : ["diamond", "triangle", "square"][
+                  Math.floor(Math.random() * 3)
+                ];
+          mapMarkers.insertAdjacentHTML(
+            "beforeend",
+            getMarkerSvg(shape, color, left, top)
+          );
+          created += 1;
+          attempts += 1;
+        }
+      }
+
+      function getMarkerSvg(shape, color, left, top) {
+        const position = `left:${left.toFixed(1)}%; top:${top.toFixed(1)}%;`;
+        if (shape === "triangle") {
+          return `
+            <svg class="absolute" style="${position}" width="12" height="12" viewBox="0 0 12 12">
+              <polygon points="6,1 11,10.5 1,10.5" fill="${color}" stroke="#000" stroke-width="1" />
+            </svg>
+          `;
+        }
+        if (shape === "square") {
+          return `
+            <svg class="absolute" style="${position}" width="12" height="12" viewBox="0 0 12 12">
+              <rect x="1.5" y="1.5" width="9" height="9" fill="${color}" stroke="#000" stroke-width="1" />
+            </svg>
+          `;
+        }
+        if (shape === "circle") {
+          return `
+            <svg class="absolute" style="${position}" width="12" height="12" viewBox="0 0 12 12">
+              <circle cx="6" cy="6" r="4.5" fill="${color}" stroke="#000" stroke-width="1" />
+            </svg>
+          `;
+        }
+        return `
+          <svg class="absolute" style="${position}" width="12" height="12" viewBox="0 0 12 12">
+            <rect x="2" y="2" width="8" height="8" fill="${color}" stroke="#000" stroke-width="1" transform="rotate(45 6 6)" />
+          </svg>
+        `;
       }
 
       function renderLocationOptions(
@@ -6003,6 +6074,18 @@
         );
       });
 
+      applySelectionsButton.addEventListener("click", () => {
+        if (applySelectionsButton.disabled) {
+          return;
+        }
+        if (mapImage) {
+          mapImage.src = "./MapZoom.png";
+        }
+        renderMapMarkers("circle");
+        selectionsApplied = true;
+        updateViewBaselineState();
+      });
+
       portfolioClear.addEventListener("click", (event) => {
         event.stopPropagation();
         filters.portfolio.selected.clear();
@@ -6188,6 +6271,7 @@
       if (portfolioSelected) {
         portfolioSelectValue.textContent = portfolioSelected;
       }
+      renderMapMarkers();
       updateStateSelectValue();
       updateLocationSelectValues();
       updateLocationSelectState();
