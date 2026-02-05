@@ -84,6 +84,9 @@
         display: block;
         transform: translateY(1px);
       }
+      [data-define-panel="Time Estimates"] .facility-input {
+        color: #2d2d2d !important;
+      }
       .radio-input {
         appearance: none;
         width: 16px;
@@ -4406,6 +4409,51 @@
         });
       };
 
+      const getDefineTabBadge = (tab) =>
+        tab?.querySelector("span:last-child");
+
+      const initDefineChangeTracking = () => {
+        defineParametersPanels.forEach((panel) => {
+          panel.querySelectorAll("input").forEach((input) => {
+            if (input.type === "checkbox") {
+              input.dataset.initialChecked = input.checked ? "true" : "false";
+              input.addEventListener("change", updateDefineChangeCounts);
+              return;
+            }
+            const defaultValue = input.dataset.default ?? input.value;
+            input.dataset.initialValue = defaultValue;
+            input.addEventListener("input", updateDefineChangeCounts);
+          });
+        });
+      };
+
+      const updateDefineChangeCounts = () => {
+        defineParametersPanels.forEach((panel) => {
+          let changes = 0;
+          panel.querySelectorAll("input").forEach((input) => {
+            if (input.type === "checkbox") {
+              const initialChecked = input.dataset.initialChecked === "true";
+              if (input.checked !== initialChecked) {
+                changes += 1;
+              }
+              return;
+            }
+            const initialValue = input.dataset.initialValue ?? "";
+            if (input.value !== initialValue) {
+              changes += 1;
+            }
+          });
+          const tab = defineParametersTabs.find(
+            (candidate) =>
+              candidate.dataset.defineTab === panel.dataset.definePanel
+          );
+          const badge = getDefineTabBadge(tab);
+          if (badge) {
+            badge.textContent = `${changes} changes`;
+          }
+        });
+      };
+
       defineParametersTabs.forEach((tab) => {
         tab.addEventListener("click", () => {
           setDefineParametersActiveTab(tab.dataset.defineTab);
@@ -4435,6 +4483,7 @@
           if (!checkbox.checked) {
             input.value = input.dataset.default || "46";
           }
+          updateDefineChangeCounts();
         });
       });
 
@@ -4446,6 +4495,7 @@
               input.disabled = !checkbox.checked;
             }
           });
+          updateDefineChangeCounts();
         });
       }
 
@@ -4508,6 +4558,9 @@
       };
 
       syncLaborDefaults();
+
+      initDefineChangeTracking();
+      updateDefineChangeCounts();
 
       if (serviceDeliveryActuals || serviceDeliveryStandards) {
         serviceDeliveryActuals?.addEventListener(
@@ -4666,6 +4719,7 @@
         }
         updateViewBaselineState();
         setDefineParametersActiveTab(draftState.defineTab || "Facilities");
+        updateDefineChangeCounts();
         setView(draftState.lastView || "scenario");
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
