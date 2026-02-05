@@ -718,10 +718,12 @@
           <div
             class="mt-6 flex gap-6 rounded-lg bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
           >
-            <div class="flex w-fit flex-col gap-6">
-              <div class="flex items-center gap-2 rounded-lg border border-[#d8e7fb] bg-[#f5f9ff] p-1">
-                <div
-                  class="flex h-8 items-center gap-1 rounded-lg px-3 text-[14px] text-[#2d2d2d]"
+            <div class="flex w-[360px] flex-col gap-6">
+              <div class="flex w-fit items-center gap-2 rounded-lg border border-[#d8e7fb] bg-[#f5f9ff] p-1">
+                <button
+                  class="define-scope-tab flex h-8 items-center gap-1 rounded-lg px-3 text-[14px] text-[#2d2d2d]"
+                  data-scope-tab="select"
+                  type="button"
                 >
                   <span
                     class="material-icons text-[20px] text-[#2d2d2d]"
@@ -729,15 +731,17 @@
                     pin_drop
                   </span>
                   Select Locations
-                </div>
-                <div
-                  class="flex h-8 items-center gap-1 rounded-lg border border-[#004895] bg-white px-3 text-[14px] font-bold text-[#004895]"
+                </button>
+                <button
+                  class="define-scope-tab flex h-8 items-center gap-1 rounded-lg border border-[#004895] bg-white px-3 text-[14px] font-bold text-[#004895]"
+                  data-scope-tab="upload"
+                  type="button"
                 >
                   <span class="material-icons text-[20px] text-[#004895]">
                     cloud_upload
                   </span>
                   Upload Store List
-                </div>
+                </button>
               </div>
 
               <div class="flex gap-5">
@@ -843,83 +847,317 @@
                   ></div>
                 </div>
               </div>
-            </div>
+              <div class="flex w-[300px] flex-col gap-2 hidden" data-scope-panel="select">
+                <div class="flex items-center justify-between text-[12px]">
+                  <div class="flex items-center gap-2 font-medium">
+                    <span>Select State(s)</span>
+                    <span class="material-icons text-[16px] text-[#4b4b4b]">
+                      info
+                    </span>
+                  </div>
+                  <span class="text-[#4b4b4b]">*Required</span>
+                </div>
+                <div class="relative">
+                  <div
+                    id="state-select-field"
+                    class="flex h-8 items-center justify-between rounded border border-[#c0c0c0] bg-white px-2 text-[14px]"
+                    role="button"
+                    tabindex="0"
+                  >
+                    <span id="state-select-value" class="text-[#4b4b4b]">Select</span>
+                    <span class="material-icons text-[16px] text-[#4b4b4b]">
+                      keyboard_arrow_down
+                    </span>
+                  </div>
+                  <div
+                    id="state-select-menu"
+                    class="absolute left-0 right-0 top-[36px] z-20 hidden max-h-[240px] overflow-auto rounded border border-[#d8e7fb] bg-white p-2 text-[14px] text-[#4b4b4b] shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
+                  >
+                    <input
+                      id="state-select-search"
+                      type="text"
+                      placeholder="Search states"
+                      class="mb-2 w-full rounded border border-[#d8e7fb] px-2 py-1 text-[12px] text-[#2d2d2d] outline-none focus:border-[#004895]"
+                    />
+                    <div id="state-select-options" class="flex flex-col gap-1"></div>
+                  </div>
+                </div>
+              </div>
 
-            <div class="flex w-full max-w-[500px] flex-col gap-2 mx-auto">
-              <div class="flex items-center justify-between text-[12px]">
-                <div class="flex items-center gap-2 font-medium">
-                  <span>Upload Store IDs</span>
-                  <span class="material-icons text-[16px] text-[#4b4b4b]">
+              <div class="flex w-[300px] flex-col gap-2 hidden" data-scope-panel="select">
+                <div
+                  id="food-location-label"
+                  class="flex items-center gap-2 text-[12px] font-medium text-[#b1b1b1]"
+                >
+                  <span>Select Food Locations</span>
+                  <span
+                    id="food-location-icon"
+                    class="material-icons text-[16px] text-[#b1b1b1]"
+                  >
                     info
                   </span>
                 </div>
-                <span class="text-[#4b4b4b]">*Required</span>
-              </div>
-              <div
-                id="upload-dropzone"
-                class="flex flex-1 flex-col items-center justify-center gap-4 rounded border border-dashed border-[#d8e7fb] bg-[#f5f9ff] px-4 py-4"
-              >
-                <div class="flex flex-col items-center gap-2 text-center text-[12px]">
-                  <span class="material-icons text-[32px] text-[#2d2d2d]">
-                    cloud_upload
-                  </span>
-                  <div>
-                    Drag and drop your file here
-                    <br />
-                    (only .cvs)
+                <div class="relative">
+                  <div
+                    id="food-location-field"
+                    class="flex h-8 items-center justify-between rounded border border-[#dadada] bg-[#efefef] px-2 text-[14px] text-[#b1b1b1]"
+                    role="button"
+                    tabindex="-1"
+                    aria-disabled="true"
+                  >
+                    <span id="food-location-value">Select</span>
+                    <span
+                      id="food-location-chevron"
+                      class="material-icons text-[16px] text-[#b1b1b1]"
+                    >
+                      keyboard_arrow_down
+                    </span>
+                  </div>
+                  <div
+                    id="food-location-menu"
+                    class="absolute left-0 right-0 top-[36px] z-20 hidden max-h-[240px] overflow-auto rounded border border-[#d8e7fb] bg-white p-2 text-[14px] text-[#4b4b4b] shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
+                  >
+                    <input
+                      id="food-location-search"
+                      type="text"
+                      placeholder="Search locations"
+                      class="mb-2 w-full rounded border border-[#d8e7fb] px-2 py-1 text-[12px] text-[#2d2d2d] outline-none focus:border-[#004895]"
+                    />
+                    <div id="food-location-options" class="flex flex-col gap-1"></div>
                   </div>
                 </div>
-                <button
-                  id="upload-file-button"
-                  class="flex h-8 items-center gap-2 rounded-full border border-[#004895] px-4 text-[14px] font-bold text-[#004895] hover:border-[#002B5E] hover:text-[#002B5E]"
-                  type="button"
+              </div>
+
+              <div class="flex w-[300px] flex-col gap-2 hidden" data-scope-panel="select">
+                <div
+                  id="beverage-location-label"
+                  class="flex items-center gap-2 text-[12px] font-medium text-[#b1b1b1]"
                 >
-                  <span class="material-icons text-[16px] text-current">
-                    file_upload
+                  <span>Select Beverage Locations</span>
+                  <span
+                    id="beverage-location-icon"
+                    class="material-icons text-[16px] text-[#b1b1b1]"
+                  >
+                    info
                   </span>
-                  Upload file
-                </button>
+                </div>
+                <div class="relative">
+                  <div
+                    id="beverage-location-field"
+                    class="flex h-8 items-center justify-between rounded border border-[#dadada] bg-[#efefef] px-2 text-[14px] text-[#b1b1b1]"
+                    role="button"
+                    tabindex="-1"
+                    aria-disabled="true"
+                  >
+                    <span id="beverage-location-value">Select</span>
+                    <span
+                      id="beverage-location-chevron"
+                      class="material-icons text-[16px] text-[#b1b1b1]"
+                    >
+                      keyboard_arrow_down
+                    </span>
+                  </div>
+                  <div
+                    id="beverage-location-menu"
+                    class="absolute left-0 right-0 top-[36px] z-20 hidden max-h-[240px] overflow-auto rounded border border-[#d8e7fb] bg-white p-2 text-[14px] text-[#4b4b4b] shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
+                  >
+                    <input
+                      id="beverage-location-search"
+                      type="text"
+                      placeholder="Search locations"
+                      class="mb-2 w-full rounded border border-[#d8e7fb] px-2 py-1 text-[12px] text-[#2d2d2d] outline-none focus:border-[#004895]"
+                    />
+                    <div id="beverage-location-options" class="flex flex-col gap-1"></div>
+                  </div>
+                </div>
               </div>
-              <div
-                id="uploaded-file"
-                class="hidden flex h-[58px] items-center justify-between rounded border border-[#d8e7fb] bg-white px-3 py-2 text-[12px]"
+
+              <div class="flex w-[300px] flex-col gap-2 hidden" data-scope-panel="select">
+                <div
+                  id="food-beverage-location-label"
+                  class="flex items-center gap-2 text-[12px] font-medium text-[#b1b1b1]"
+                >
+                  <span>Select Food &amp; Beverage Locations</span>
+                  <span
+                    id="food-beverage-location-icon"
+                    class="material-icons text-[16px] text-[#b1b1b1]"
+                  >
+                    info
+                  </span>
+                </div>
+                <div class="relative">
+                  <div
+                    id="food-beverage-location-field"
+                    class="flex h-8 items-center justify-between rounded border border-[#dadada] bg-[#efefef] px-2 text-[14px] text-[#b1b1b1]"
+                    role="button"
+                    tabindex="-1"
+                    aria-disabled="true"
+                  >
+                    <span id="food-beverage-location-value">Select</span>
+                    <span
+                      id="food-beverage-location-chevron"
+                      class="material-icons text-[16px] text-[#b1b1b1]"
+                    >
+                      keyboard_arrow_down
+                    </span>
+                  </div>
+                  <div
+                    id="food-beverage-location-menu"
+                    class="absolute left-0 right-0 top-[36px] z-20 hidden max-h-[240px] overflow-auto rounded border border-[#d8e7fb] bg-white p-2 text-[14px] text-[#4b4b4b] shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
+                  >
+                    <input
+                      id="food-beverage-location-search"
+                      type="text"
+                      placeholder="Search locations"
+                      class="mb-2 w-full rounded border border-[#d8e7fb] px-2 py-1 text-[12px] text-[#2d2d2d] outline-none focus:border-[#004895]"
+                    />
+                    <div id="food-beverage-location-options" class="flex flex-col gap-1"></div>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                id="apply-selections-button"
+                class="mt-2 flex h-8 w-[180px] items-center justify-center gap-1 rounded-full bg-[#dadada] px-4 text-[14px] font-bold text-[#b1b1b1] transition-colors hidden"
+                type="button"
+                disabled
+                data-scope-panel="select"
               >
-                <div class="flex items-center gap-2">
-                  <span class="material-icons text-[16px] text-[#004895]">
-                    description
-                  </span>
-                  <span id="uploaded-file-name" class="font-medium">
-                    Select design is Figma
-                  </span>
+                Apply Selections
+              </button>
+
+            </div>
+
+            <div class="flex-1 hidden" data-scope-panel="upload">
+              <div class="flex w-full max-w-[500px] flex-col gap-2 mx-auto">
+                <div class="flex items-center justify-between text-[12px]">
+                  <div class="flex items-center gap-2 font-medium">
+                    <span>Upload Store IDs</span>
+                    <span class="material-icons text-[16px] text-[#4b4b4b]">
+                      info
+                    </span>
+                  </div>
+                  <span class="text-[#4b4b4b]">*Required</span>
                 </div>
-                <div class="flex items-center gap-3 text-[#004895]">
+                <div
+                  id="upload-dropzone"
+                  class="flex flex-1 flex-col items-center justify-center gap-4 rounded border border-dashed border-[#d8e7fb] bg-[#f5f9ff] px-4 py-4"
+                >
+                  <div class="flex flex-col items-center gap-2 text-center text-[12px]">
+                    <span class="material-icons text-[32px] text-[#2d2d2d]">
+                      cloud_upload
+                    </span>
+                    <div>
+                      Drag and drop your file here
+                      <br />
+                      (only .cvs)
+                    </div>
+                  </div>
                   <button
-                    id="uploaded-download"
-                    class="flex items-center"
+                    id="upload-file-button"
+                    class="flex h-8 items-center gap-2 rounded-full border border-[#004895] px-4 text-[14px] font-bold text-[#004895] hover:border-[#002B5E] hover:text-[#002B5E]"
                     type="button"
-                    aria-label="Download file"
-                    title="Download"
                   >
-                    <span class="material-icons text-[16px]">download</span>
-                  </button>
-                  <button
-                    id="uploaded-delete"
-                    class="flex items-center"
-                    type="button"
-                    aria-label="Delete file"
-                    title="Delete"
-                  >
-                    <span class="material-icons text-[16px]">delete</span>
+                    <span class="material-icons text-[16px] text-current">
+                      file_upload
+                    </span>
+                    Upload file
                   </button>
                 </div>
-              </div>
-              <div class="flex items-center gap-1 text-[12px] text-[#4b4b4b]">
-                <span class="material-icons text-[16px] text-[#4b4b4b]">
-                  info
-                </span>
-                Only one file is allowed
+                <div
+                  id="uploaded-file"
+                  class="hidden flex h-[58px] items-center justify-between rounded border border-[#d8e7fb] bg-white px-3 py-2 text-[12px]"
+                >
+                  <div class="flex items-center gap-2">
+                    <span class="material-icons text-[16px] text-[#004895]">
+                      description
+                    </span>
+                    <span id="uploaded-file-name" class="font-medium">
+                      Select design is Figma
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-3 text-[#004895]">
+                    <button
+                      id="uploaded-download"
+                      class="flex items-center"
+                      type="button"
+                      aria-label="Download file"
+                      title="Download"
+                    >
+                      <span class="material-icons text-[16px]">download</span>
+                    </button>
+                    <button
+                      id="uploaded-delete"
+                      class="flex items-center"
+                      type="button"
+                      aria-label="Delete file"
+                      title="Delete"
+                    >
+                      <span class="material-icons text-[16px]">delete</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                  <span class="material-icons text-[16px] text-[#4b4b4b]">
+                    info
+                  </span>
+                  Only one file is allowed
+                </div>
               </div>
             </div>
+
+            <div class="flex-1 hidden" data-scope-panel="select-map">
+              <div class="relative h-full min-h-[520px] rounded-lg border border-[#d8e7fb] bg-[#e6e8e3]">
+                <img
+                  src="./map1.png"
+                  alt="Map"
+                  class="absolute inset-0 h-full w-full rounded-lg object-cover"
+                />
+                <div class="absolute left-4 top-4 rounded bg-white/90 px-3 py-2 text-[12px] text-[#2d2d2d] shadow">
+                  <div class="font-bold uppercase text-[11px] text-[#4b4b4b]">
+                    Locations
+                  </div>
+                  <div class="mt-1 space-y-1">
+                    <div class="flex items-center gap-2">
+                      <span class="inline-flex h-5 w-5 items-center justify-center text-[16px] leading-none text-[#2d2d2d]">◆</span>
+                      <span class="text-left">DCs: [# of DCs]</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="inline-flex h-5 w-5 items-center justify-center text-[14px] leading-none text-[#2d2d2d]">▲</span>
+                      <span class="text-left">Plant Warehouses: [# of Plant Warehouses]</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="inline-flex h-5 w-5 items-center justify-center text-[16px] leading-none text-[#2d2d2d]">■</span>
+                      <span class="text-left">PEC/BINs: [# of PEC/BINs]</span>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2">
+                      <span class="inline-flex h-5 w-5 items-center justify-center">
+                        <span class="h-3 w-3 rounded-full bg-[#E5BB08]"></span>
+                      </span>
+                      <span class="text-left">Foods: [# of Food Locations]</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="inline-flex h-5 w-5 items-center justify-center">
+                        <span class="h-3 w-3 rounded-full bg-[#0662C4]"></span>
+                      </span>
+                      <span class="text-left">Beverages: [# of Beverage Locations]</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="inline-flex h-5 w-5 items-center justify-center">
+                        <span class="h-3 w-3 rounded-full bg-[#027C06]"></span>
+                      </span>
+                      <span class="text-left">Foods &amp; Beverages: [# of Food &amp; Beverage Locations]</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="absolute bottom-4 right-4 flex flex-col overflow-hidden rounded border border-[#d8e7fb] bg-white">
+                  <button class="flex h-8 w-8 items-center justify-center text-[#4b4b4b]" type="button">+</button>
+                  <button class="flex h-8 w-8 items-center justify-center text-[#4b4b4b]" type="button">−</button>
+                </div>
+              </div>
+            </div>
+
+            
           </div>
         </section>
 
@@ -3638,6 +3876,12 @@
       const statusApply = document.getElementById("status-apply");
       const portfolioCancel = document.getElementById("portfolio-cancel");
       const statusCancel = document.getElementById("status-cancel");
+      const defineScopeTabs = Array.from(
+        document.querySelectorAll(".define-scope-tab")
+      );
+      const defineScopePanels = Array.from(
+        document.querySelectorAll("[data-scope-panel]")
+      );
       const startDateField = document.getElementById("start-date-field");
       const endDateField = document.getElementById("end-date-field");
       const startDateMenu = document.getElementById("start-date-menu");
@@ -3669,6 +3913,62 @@
       const portfolioSelectField = document.getElementById("portfolio-select-field");
       const portfolioSelectMenu = document.getElementById("portfolio-select-menu");
       const portfolioSelectValue = document.getElementById("portfolio-select-value");
+      const stateSelectField = document.getElementById("state-select-field");
+      const stateSelectMenu = document.getElementById("state-select-menu");
+      const stateSelectValue = document.getElementById("state-select-value");
+      const stateSelectSearch = document.getElementById("state-select-search");
+      const stateSelectOptions = document.getElementById("state-select-options");
+      const applySelectionsButton = document.getElementById(
+        "apply-selections-button"
+      );
+      const foodLocationField = document.getElementById("food-location-field");
+      const foodLocationValue = document.getElementById("food-location-value");
+      const foodLocationMenu = document.getElementById("food-location-menu");
+      const foodLocationSearch = document.getElementById("food-location-search");
+      const foodLocationOptions = document.getElementById("food-location-options");
+      const foodLocationLabel = document.getElementById("food-location-label");
+      const foodLocationIcon = document.getElementById("food-location-icon");
+      const foodLocationChevron = document.getElementById(
+        "food-location-chevron"
+      );
+      const beverageLocationField = document.getElementById("beverage-location-field");
+      const beverageLocationValue = document.getElementById("beverage-location-value");
+      const beverageLocationMenu = document.getElementById("beverage-location-menu");
+      const beverageLocationSearch = document.getElementById("beverage-location-search");
+      const beverageLocationOptions = document.getElementById("beverage-location-options");
+      const beverageLocationLabel = document.getElementById(
+        "beverage-location-label"
+      );
+      const beverageLocationIcon = document.getElementById(
+        "beverage-location-icon"
+      );
+      const beverageLocationChevron = document.getElementById(
+        "beverage-location-chevron"
+      );
+      const foodBeverageLocationField = document.getElementById(
+        "food-beverage-location-field"
+      );
+      const foodBeverageLocationValue = document.getElementById(
+        "food-beverage-location-value"
+      );
+      const foodBeverageLocationMenu = document.getElementById(
+        "food-beverage-location-menu"
+      );
+      const foodBeverageLocationSearch = document.getElementById(
+        "food-beverage-location-search"
+      );
+      const foodBeverageLocationOptions = document.getElementById(
+        "food-beverage-location-options"
+      );
+      const foodBeverageLocationLabel = document.getElementById(
+        "food-beverage-location-label"
+      );
+      const foodBeverageLocationIcon = document.getElementById(
+        "food-beverage-location-icon"
+      );
+      const foodBeverageLocationChevron = document.getElementById(
+        "food-beverage-location-chevron"
+      );
       const viewBaselineButton = document.getElementById("view-baseline-button");
       const baselineKpiTop = Array.from({ length: 5 }, (_, index) =>
         document.getElementById(`baseline-kpi-top-${index}`)
@@ -3932,6 +4232,7 @@
         defineParametersSticky.classList.toggle("hidden", !showDefineParameters);
         setNavActive(showWorkspace ? "workspace" : "scenario");
         currentView = view;
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
       }
 
       navWorkspace.addEventListener("click", () => setView("workspace"));
@@ -4629,6 +4930,83 @@
 
       const portfolioSelectOptions = ["Foods and Beverages", "Foods", "Beverages"];
       let portfolioSelected = "";
+      const stateOptions = [
+        "Alabama",
+        "Alaska",
+        "Arizona",
+        "Arkansas",
+        "California",
+        "Colorado",
+        "Connecticut",
+        "Delaware",
+        "Florida",
+        "Georgia",
+        "Hawaii",
+        "Idaho",
+        "Illinois",
+        "Indiana",
+        "Iowa",
+        "Kansas",
+        "Kentucky",
+        "Louisiana",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "Minnesota",
+        "Mississippi",
+        "Missouri",
+        "Montana",
+        "Nebraska",
+        "Nevada",
+        "New Hampshire",
+        "New Jersey",
+        "New Mexico",
+        "New York",
+        "North Carolina",
+        "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        "Oregon",
+        "Pennsylvania",
+        "Rhode Island",
+        "South Carolina",
+        "South Dakota",
+        "Tennessee",
+        "Texas",
+        "Utah",
+        "Vermont",
+        "Virginia",
+        "Washington",
+        "West Virginia",
+        "Wisconsin",
+        "Wyoming",
+      ];
+      const selectedStates = new Set();
+      const foodLocationTemplates = [
+        "Food DC",
+        "Produce Hub",
+        "Cold Storage",
+        "Fresh Facility",
+        "Regional Warehouse",
+      ];
+      const beverageLocationTemplates = [
+        "Beverage DC",
+        "Bottling Facility",
+        "Keg Depot",
+        "Cold Beverage Hub",
+        "Beverage Warehouse",
+      ];
+      const foodBeverageLocationTemplates = [
+        "Foods & Bevs Hub",
+        "Mixed Distribution Center",
+        "Combined Warehouse",
+        "Mixed Facility",
+        "Foods & Bevs Plant",
+      ];
+      const selectedFoodLocations = new Set();
+      const selectedBeverageLocations = new Set();
+      const selectedFoodBeverageLocations = new Set();
 
       function startScenarioSession() {
         scenarioSessionId += 1;
@@ -4636,12 +5014,21 @@
         startDateSelected = "";
         endDateSelected = "";
         portfolioSelected = "";
+        selectedStates.clear();
+        selectedFoodLocations.clear();
+        selectedBeverageLocations.clear();
+        selectedFoodBeverageLocations.clear();
         startDateValue.textContent = "";
         endDateValue.textContent = "";
         portfolioSelectValue.textContent = "";
+        updateStateSelectValue();
+        updateLocationSelectValues();
+        updateLocationSelectState();
         clearUploadedFile();
         closeDateMenus();
         closePortfolioSelectMenu();
+        closeStateSelectMenu();
+        closeLocationMenus();
         updateViewBaselineState();
         setView("scenario");
       }
@@ -4684,6 +5071,229 @@
             `;
           })
           .join("");
+      }
+
+      function updateStateSelectValue() {
+        const selections = Array.from(selectedStates);
+        if (!selections.length) {
+          stateSelectValue.textContent = "Select";
+          return;
+        }
+        if (selections.length === 1) {
+          stateSelectValue.textContent = selections[0];
+          return;
+        }
+        stateSelectValue.textContent = `${selections.length} selected`;
+      }
+
+      function updateLocationSelectValues() {
+        updateLocationValue(selectedFoodLocations, foodLocationValue);
+        updateLocationValue(selectedBeverageLocations, beverageLocationValue);
+        updateLocationValue(
+          selectedFoodBeverageLocations,
+          foodBeverageLocationValue
+        );
+        updateApplySelectionsState();
+      }
+
+      function updateLocationValue(selections, target) {
+        const values = Array.from(selections);
+        if (!values.length) {
+          target.textContent = "Select";
+          return;
+        }
+        if (values.length === 1) {
+          target.textContent = values[0];
+          return;
+        }
+        target.textContent = `${values.length} selected`;
+      }
+
+      function updateApplySelectionsState() {
+        const hasSelection =
+          selectedFoodLocations.size > 0 ||
+          selectedBeverageLocations.size > 0 ||
+          selectedFoodBeverageLocations.size > 0;
+        applySelectionsButton.disabled = !hasSelection;
+        applySelectionsButton.classList.toggle("bg-[#004895]", hasSelection);
+        applySelectionsButton.classList.toggle("text-white", hasSelection);
+        applySelectionsButton.classList.toggle("hover:bg-[#002B5E]", hasSelection);
+        applySelectionsButton.classList.toggle("bg-[#dadada]", !hasSelection);
+        applySelectionsButton.classList.toggle("text-[#b1b1b1]", !hasSelection);
+        applySelectionsButton.classList.toggle("cursor-not-allowed", !hasSelection);
+      }
+
+      function getLocationOptions(templates) {
+        const states = Array.from(selectedStates);
+        return states.flatMap((state) =>
+          templates.map((template) => ({
+            label: `${state} ${template}`,
+            state,
+          }))
+        );
+      }
+
+      function renderLocationOptions(
+        list,
+        selections,
+        target,
+        filterValue = ""
+      ) {
+        const query = filterValue.trim().toLowerCase();
+        const visibleItems = list.filter((item) =>
+          item.label.toLowerCase().includes(query)
+        );
+        target.innerHTML = "";
+        if (!visibleItems.length) {
+          const empty = document.createElement("div");
+          empty.className = "px-2 py-1 text-[12px] text-[#4b4b4b]";
+          empty.textContent = "No locations found";
+          target.appendChild(empty);
+          return;
+        }
+        visibleItems.forEach((item) => {
+          const row = document.createElement("label");
+          row.className =
+            "flex items-center gap-2 rounded px-2 py-1 hover:bg-[#f5f9ff] cursor-pointer";
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.value = item.label;
+          checkbox.className = "h-4 w-4 accent-[#004895]";
+          checkbox.checked = selections.has(item.label);
+          const label = document.createElement("span");
+          label.textContent = item.label;
+          row.append(checkbox, label);
+          target.appendChild(row);
+
+          checkbox.addEventListener("change", () => {
+            if (checkbox.checked) {
+              selections.add(item.label);
+            } else {
+              selections.delete(item.label);
+            }
+            updateLocationSelectValues();
+          });
+        });
+      }
+
+      function setLocationSelectEnabled(field, label, icon, chevron, isEnabled) {
+        field.setAttribute("aria-disabled", String(!isEnabled));
+        field.setAttribute("tabindex", isEnabled ? "0" : "-1");
+        field.classList.toggle("bg-white", isEnabled);
+        field.classList.toggle("border-[#c0c0c0]", isEnabled);
+        field.classList.toggle("text-[#4b4b4b]", isEnabled);
+        field.classList.toggle("cursor-pointer", isEnabled);
+        field.classList.toggle("pointer-events-none", !isEnabled);
+        field.classList.toggle("bg-[#efefef]", !isEnabled);
+        field.classList.toggle("border-[#dadada]", !isEnabled);
+        field.classList.toggle("text-[#b1b1b1]", !isEnabled);
+        label.classList.toggle("text-[#4b4b4b]", isEnabled);
+        label.classList.toggle("text-[#b1b1b1]", !isEnabled);
+        icon.classList.toggle("text-[#4b4b4b]", isEnabled);
+        icon.classList.toggle("text-[#b1b1b1]", !isEnabled);
+        chevron.classList.toggle("text-[#4b4b4b]", isEnabled);
+        chevron.classList.toggle("text-[#b1b1b1]", !isEnabled);
+      }
+
+      function updateLocationSelectState() {
+        const isEnabled =
+          selectedStates.size > 0 &&
+          Boolean(startDateSelected.trim()) &&
+          Boolean(endDateSelected.trim()) &&
+          Boolean(portfolioSelected.trim());
+        setLocationSelectEnabled(
+          foodLocationField,
+          foodLocationLabel,
+          foodLocationIcon,
+          foodLocationChevron,
+          isEnabled
+        );
+        setLocationSelectEnabled(
+          beverageLocationField,
+          beverageLocationLabel,
+          beverageLocationIcon,
+          beverageLocationChevron,
+          isEnabled
+        );
+        setLocationSelectEnabled(
+          foodBeverageLocationField,
+          foodBeverageLocationLabel,
+          foodBeverageLocationIcon,
+          foodBeverageLocationChevron,
+          isEnabled
+        );
+        if (!isEnabled) {
+          selectedFoodLocations.clear();
+          selectedBeverageLocations.clear();
+          selectedFoodBeverageLocations.clear();
+          updateLocationSelectValues();
+        }
+      }
+
+      function renderStateOptions(filterValue = "") {
+        const query = filterValue.trim().toLowerCase();
+        const visibleStates = stateOptions.filter((state) =>
+          state.toLowerCase().includes(query)
+        );
+        stateSelectOptions.innerHTML = "";
+        if (!visibleStates.length) {
+          const empty = document.createElement("div");
+          empty.className = "px-2 py-1 text-[12px] text-[#4b4b4b]";
+          empty.textContent = "No states found";
+          stateSelectOptions.appendChild(empty);
+          return;
+        }
+        visibleStates.forEach((state) => {
+          const row = document.createElement("label");
+          row.className =
+            "flex items-center gap-2 rounded px-2 py-1 hover:bg-[#f5f9ff] cursor-pointer";
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.value = state;
+          checkbox.className = "h-4 w-4 accent-[#004895]";
+          checkbox.checked = selectedStates.has(state);
+          const label = document.createElement("span");
+          label.textContent = state;
+          row.append(checkbox, label);
+          stateSelectOptions.appendChild(row);
+
+          checkbox.addEventListener("change", () => {
+            if (checkbox.checked) {
+              selectedStates.add(state);
+            } else {
+              selectedStates.delete(state);
+            }
+            updateStateSelectValue();
+            updateLocationSelectState();
+            if (!foodLocationMenu.classList.contains("hidden")) {
+              renderLocationOptions(
+                getLocationOptions(foodLocationTemplates),
+                selectedFoodLocations,
+                foodLocationOptions,
+                foodLocationSearch.value
+              );
+            }
+            if (!beverageLocationMenu.classList.contains("hidden")) {
+              renderLocationOptions(
+                getLocationOptions(beverageLocationTemplates),
+                selectedBeverageLocations,
+                beverageLocationOptions,
+                beverageLocationSearch.value
+              );
+            }
+            if (!foodBeverageLocationMenu.classList.contains("hidden")) {
+              renderLocationOptions(
+                getLocationOptions(foodBeverageLocationTemplates),
+                selectedFoodBeverageLocations,
+                foodBeverageLocationOptions,
+                foodBeverageLocationSearch.value
+              );
+            }
+            if (selectedStates.size === 0) {
+              closeLocationMenus();
+            }
+          });
+        });
       }
 
       function setUploadButtonDisabled(isDisabled) {
@@ -5147,6 +5757,20 @@
         setDateFieldActive(portfolioSelectField, false);
       }
 
+      function closeStateSelectMenu() {
+        stateSelectMenu.classList.add("hidden");
+        setDateFieldActive(stateSelectField, false);
+      }
+
+      function closeLocationMenus() {
+        foodLocationMenu.classList.add("hidden");
+        beverageLocationMenu.classList.add("hidden");
+        foodBeverageLocationMenu.classList.add("hidden");
+        setDateFieldActive(foodLocationField, false);
+        setDateFieldActive(beverageLocationField, false);
+        setDateFieldActive(foodBeverageLocationField, false);
+      }
+
       function openDateMenu(field, menu, selectedLabel) {
         if (!menu.classList.contains("hidden")) {
           menu.classList.add("hidden");
@@ -5167,9 +5791,45 @@
         }
         closeDateMenus();
         closeMenus();
+        closeStateSelectMenu();
         renderPortfolioMenu();
         portfolioSelectMenu.classList.remove("hidden");
         setDateFieldActive(portfolioSelectField, true);
+      }
+
+      function openStateSelectMenu() {
+        if (!stateSelectMenu.classList.contains("hidden")) {
+          closeStateSelectMenu();
+          return;
+        }
+        closeDateMenus();
+        closeMenus();
+        closePortfolioSelectMenu();
+        closeLocationMenus();
+        renderStateOptions(stateSelectSearch.value);
+        stateSelectMenu.classList.remove("hidden");
+        setDateFieldActive(stateSelectField, true);
+        stateSelectSearch.focus();
+      }
+
+      function openLocationMenu(field, menu, search, list, selections, options) {
+        if (field.getAttribute("aria-disabled") === "true") {
+          return;
+        }
+        if (!menu.classList.contains("hidden")) {
+          menu.classList.add("hidden");
+          setDateFieldActive(field, false);
+          return;
+        }
+        closeDateMenus();
+        closeMenus();
+        closePortfolioSelectMenu();
+        closeStateSelectMenu();
+        closeLocationMenus();
+        renderLocationOptions(options, selections, list, search.value);
+        menu.classList.remove("hidden");
+        setDateFieldActive(field, true);
+        search.focus();
       }
 
       portfolioChip.addEventListener("click", (event) => {
@@ -5193,6 +5853,7 @@
         openDateMenu(startDateField, startDateMenu, startDateSelected);
         closeMenus();
         closePortfolioSelectMenu();
+        closeStateSelectMenu();
       });
 
       endDateField.addEventListener("click", (event) => {
@@ -5200,11 +5861,60 @@
         openDateMenu(endDateField, endDateMenu, endDateSelected);
         closeMenus();
         closePortfolioSelectMenu();
+        closeStateSelectMenu();
       });
 
       portfolioSelectField.addEventListener("click", (event) => {
         event.stopPropagation();
         openPortfolioSelectMenu();
+      });
+
+      stateSelectField.addEventListener("click", (event) => {
+        event.stopPropagation();
+        openStateSelectMenu();
+      });
+
+      stateSelectField.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openStateSelectMenu();
+        }
+      });
+
+      foodLocationField.addEventListener("click", (event) => {
+        event.stopPropagation();
+        openLocationMenu(
+          foodLocationField,
+          foodLocationMenu,
+          foodLocationSearch,
+          foodLocationOptions,
+          selectedFoodLocations,
+          getLocationOptions(foodLocationTemplates)
+        );
+      });
+
+      beverageLocationField.addEventListener("click", (event) => {
+        event.stopPropagation();
+        openLocationMenu(
+          beverageLocationField,
+          beverageLocationMenu,
+          beverageLocationSearch,
+          beverageLocationOptions,
+          selectedBeverageLocations,
+          getLocationOptions(beverageLocationTemplates)
+        );
+      });
+
+      foodBeverageLocationField.addEventListener("click", (event) => {
+        event.stopPropagation();
+        openLocationMenu(
+          foodBeverageLocationField,
+          foodBeverageLocationMenu,
+          foodBeverageLocationSearch,
+          foodBeverageLocationOptions,
+          selectedFoodBeverageLocations,
+          getLocationOptions(foodBeverageLocationTemplates)
+        );
       });
 
       startDateMenu.addEventListener("click", (event) => {
@@ -5216,6 +5926,7 @@
         startDateSelected = option.dataset.value;
         startDateValue.textContent = startDateSelected;
         closeDateMenus();
+        updateLocationSelectState();
         updateViewBaselineState();
       });
 
@@ -5228,6 +5939,7 @@
         endDateSelected = option.dataset.value;
         endDateValue.textContent = endDateSelected;
         closeDateMenus();
+        updateLocationSelectState();
         updateViewBaselineState();
       });
 
@@ -5240,7 +5952,55 @@
         portfolioSelected = option.dataset.value;
         portfolioSelectValue.textContent = portfolioSelected;
         closePortfolioSelectMenu();
+        updateLocationSelectState();
         updateViewBaselineState();
+      });
+
+      stateSelectMenu.addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
+
+      stateSelectSearch.addEventListener("input", () => {
+        renderStateOptions(stateSelectSearch.value);
+      });
+
+      foodLocationMenu.addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
+
+      beverageLocationMenu.addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
+
+      foodBeverageLocationMenu.addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
+
+      foodLocationSearch.addEventListener("input", () => {
+        renderLocationOptions(
+          getLocationOptions(foodLocationTemplates),
+          selectedFoodLocations,
+          foodLocationOptions,
+          foodLocationSearch.value
+        );
+      });
+
+      beverageLocationSearch.addEventListener("input", () => {
+        renderLocationOptions(
+          getLocationOptions(beverageLocationTemplates),
+          selectedBeverageLocations,
+          beverageLocationOptions,
+          beverageLocationSearch.value
+        );
+      });
+
+      foodBeverageLocationSearch.addEventListener("input", () => {
+        renderLocationOptions(
+          getLocationOptions(foodBeverageLocationTemplates),
+          selectedFoodBeverageLocations,
+          foodBeverageLocationOptions,
+          foodBeverageLocationSearch.value
+        );
       });
 
       portfolioClear.addEventListener("click", (event) => {
@@ -5298,6 +6058,8 @@
         closeMenus();
         closeDateMenus();
         closePortfolioSelectMenu();
+        closeStateSelectMenu();
+        closeLocationMenus();
       });
 
       function clearSelections() {
@@ -5388,6 +6150,35 @@
       tabAll.addEventListener("click", () => setActiveTab("all"));
       tabMy.addEventListener("click", () => setActiveTab("mine"));
 
+      const setDefineScopeTab = (active) => {
+        defineScopeTabs.forEach((tab) => {
+          const isActive = tab.dataset.scopeTab === active;
+          tab.classList.toggle("border", isActive);
+          tab.classList.toggle("border-[#004895]", isActive);
+          tab.classList.toggle("bg-white", isActive);
+          tab.classList.toggle("text-[#004895]", isActive);
+          tab.classList.toggle("font-bold", isActive);
+          if (!isActive) {
+            tab.classList.remove("border", "border-[#004895]", "bg-white", "text-[#004895]", "font-bold");
+          }
+        });
+        defineScopePanels.forEach((panel) => {
+          const panelType = panel.dataset.scopePanel;
+          const shouldShow =
+            (active === "select" && panelType === "select") ||
+            (active === "select" && panelType === "select-map") ||
+            (active === "upload" && panelType === "upload");
+          panel.classList.toggle("hidden", !shouldShow);
+        });
+      };
+
+      defineScopeTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          setDefineScopeTab(tab.dataset.scopeTab);
+        });
+      });
+      setDefineScopeTab("upload");
+
       if (startDateSelected) {
         startDateValue.textContent = startDateSelected;
       }
@@ -5397,6 +6188,9 @@
       if (portfolioSelected) {
         portfolioSelectValue.textContent = portfolioSelected;
       }
+      updateStateSelectValue();
+      updateLocationSelectValues();
+      updateLocationSelectState();
 
       setView("workspace");
       renderTable();
