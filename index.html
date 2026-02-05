@@ -864,7 +864,12 @@
                     role="button"
                     tabindex="0"
                   >
-                    <span id="state-select-value" class="text-[#4b4b4b]">Select</span>
+                    <input
+                      id="state-select-value"
+                      type="text"
+                      placeholder="Select"
+                      class="w-full bg-transparent text-[#4b4b4b] outline-none"
+                    />
                     <span class="material-icons text-[16px] text-[#4b4b4b]">
                       keyboard_arrow_down
                     </span>
@@ -873,12 +878,6 @@
                     id="state-select-menu"
                     class="absolute left-0 right-0 top-[36px] z-20 hidden max-h-[240px] overflow-auto rounded border border-[#d8e7fb] bg-white p-2 text-[14px] text-[#4b4b4b] shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
                   >
-                    <input
-                      id="state-select-search"
-                      type="text"
-                      placeholder="Search states"
-                      class="mb-2 w-full rounded border border-[#d8e7fb] px-2 py-1 text-[12px] text-[#2d2d2d] outline-none focus:border-[#004895]"
-                    />
                     <div id="state-select-options" class="flex flex-col gap-1"></div>
                   </div>
                 </div>
@@ -905,7 +904,12 @@
                     tabindex="-1"
                     aria-disabled="true"
                   >
-                    <span id="food-location-value">Select</span>
+                    <input
+                      id="food-location-value"
+                      type="text"
+                      placeholder="Select"
+                      class="w-full bg-transparent text-current outline-none placeholder:text-[#b1b1b1]"
+                    />
                     <span
                       id="food-location-chevron"
                       class="material-icons text-[16px] text-[#b1b1b1]"
@@ -917,12 +921,6 @@
                     id="food-location-menu"
                     class="absolute left-0 right-0 top-[36px] z-20 hidden max-h-[240px] overflow-auto rounded border border-[#d8e7fb] bg-white p-2 text-[14px] text-[#4b4b4b] shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
                   >
-                    <input
-                      id="food-location-search"
-                      type="text"
-                      placeholder="Search locations"
-                      class="mb-2 w-full rounded border border-[#d8e7fb] px-2 py-1 text-[12px] text-[#2d2d2d] outline-none focus:border-[#004895]"
-                    />
                     <div id="food-location-options" class="flex flex-col gap-1"></div>
                   </div>
                 </div>
@@ -949,7 +947,12 @@
                     tabindex="-1"
                     aria-disabled="true"
                   >
-                    <span id="beverage-location-value">Select</span>
+                    <input
+                      id="beverage-location-value"
+                      type="text"
+                      placeholder="Select"
+                      class="w-full bg-transparent text-current outline-none placeholder:text-[#b1b1b1]"
+                    />
                     <span
                       id="beverage-location-chevron"
                       class="material-icons text-[16px] text-[#b1b1b1]"
@@ -961,12 +964,6 @@
                     id="beverage-location-menu"
                     class="absolute left-0 right-0 top-[36px] z-20 hidden max-h-[240px] overflow-auto rounded border border-[#d8e7fb] bg-white p-2 text-[14px] text-[#4b4b4b] shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
                   >
-                    <input
-                      id="beverage-location-search"
-                      type="text"
-                      placeholder="Search locations"
-                      class="mb-2 w-full rounded border border-[#d8e7fb] px-2 py-1 text-[12px] text-[#2d2d2d] outline-none focus:border-[#004895]"
-                    />
                     <div id="beverage-location-options" class="flex flex-col gap-1"></div>
                   </div>
                 </div>
@@ -993,7 +990,12 @@
                     tabindex="-1"
                     aria-disabled="true"
                   >
-                    <span id="food-beverage-location-value">Select</span>
+                    <input
+                      id="food-beverage-location-value"
+                      type="text"
+                      placeholder="Select"
+                      class="w-full bg-transparent text-current outline-none placeholder:text-[#b1b1b1]"
+                    />
                     <span
                       id="food-beverage-location-chevron"
                       class="material-icons text-[16px] text-[#b1b1b1]"
@@ -1005,12 +1007,6 @@
                     id="food-beverage-location-menu"
                     class="absolute left-0 right-0 top-[36px] z-20 hidden max-h-[240px] overflow-auto rounded border border-[#d8e7fb] bg-white p-2 text-[14px] text-[#4b4b4b] shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
                   >
-                    <input
-                      id="food-beverage-location-search"
-                      type="text"
-                      placeholder="Search locations"
-                      class="mb-2 w-full rounded border border-[#d8e7fb] px-2 py-1 text-[12px] text-[#2d2d2d] outline-none focus:border-[#004895]"
-                    />
                     <div id="food-beverage-location-options" class="flex flex-col gap-1"></div>
                   </div>
                 </div>
@@ -3920,7 +3916,6 @@
       const stateSelectField = document.getElementById("state-select-field");
       const stateSelectMenu = document.getElementById("state-select-menu");
       const stateSelectValue = document.getElementById("state-select-value");
-      const stateSelectSearch = document.getElementById("state-select-search");
       const stateSelectOptions = document.getElementById("state-select-options");
       const applySelectionsButton = document.getElementById(
         "apply-selections-button"
@@ -3929,7 +3924,6 @@
       const foodLocationField = document.getElementById("food-location-field");
       const foodLocationValue = document.getElementById("food-location-value");
       const foodLocationMenu = document.getElementById("food-location-menu");
-      const foodLocationSearch = document.getElementById("food-location-search");
       const foodLocationOptions = document.getElementById("food-location-options");
       const foodLocationLabel = document.getElementById("food-location-label");
       const foodLocationIcon = document.getElementById("food-location-icon");
@@ -3939,7 +3933,6 @@
       const beverageLocationField = document.getElementById("beverage-location-field");
       const beverageLocationValue = document.getElementById("beverage-location-value");
       const beverageLocationMenu = document.getElementById("beverage-location-menu");
-      const beverageLocationSearch = document.getElementById("beverage-location-search");
       const beverageLocationOptions = document.getElementById("beverage-location-options");
       const beverageLocationLabel = document.getElementById(
         "beverage-location-label"
@@ -3958,9 +3951,6 @@
       );
       const foodBeverageLocationMenu = document.getElementById(
         "food-beverage-location-menu"
-      );
-      const foodBeverageLocationSearch = document.getElementById(
-        "food-beverage-location-search"
       );
       const foodBeverageLocationOptions = document.getElementById(
         "food-beverage-location-options"
@@ -5028,10 +5018,14 @@
         startDateValue.textContent = "";
         endDateValue.textContent = "";
         portfolioSelectValue.textContent = "";
-        stateSelectSearch.value = "";
-        foodLocationSearch.value = "";
-        beverageLocationSearch.value = "";
-        foodBeverageLocationSearch.value = "";
+        stateSelectValue.value = "";
+        stateSelectValue.placeholder = "Select";
+        foodLocationValue.value = "";
+        foodLocationValue.placeholder = "Select";
+        beverageLocationValue.value = "";
+        beverageLocationValue.placeholder = "Select";
+        foodBeverageLocationValue.value = "";
+        foodBeverageLocationValue.placeholder = "Select";
         if (mapImage) {
           mapImage.src = "./map1.png";
         }
@@ -5044,7 +5038,7 @@
         closePortfolioSelectMenu();
         closeStateSelectMenu();
         closeLocationMenus();
-        setDefineScopeTab("upload");
+        setDefineScopeTab("select");
         updateViewBaselineState();
         setView("scenario");
       }
@@ -5092,38 +5086,60 @@
 
       function updateStateSelectValue() {
         const selections = Array.from(selectedStates);
+        const summary = selections.length
+          ? selections.length === 1
+            ? selections[0]
+            : `${selections.length} selected`
+          : "Select";
+        stateSelectValue.placeholder = summary;
+        if (stateSelectMenu.classList.contains("hidden")) {
+          stateSelectValue.value = summary === "Select" ? "" : summary;
+        }
         if (!selections.length) {
-          stateSelectValue.textContent = "Select";
           return;
         }
         if (selections.length === 1) {
-          stateSelectValue.textContent = selections[0];
           return;
         }
-        stateSelectValue.textContent = `${selections.length} selected`;
       }
 
       function updateLocationSelectValues() {
-        updateLocationValue(selectedFoodLocations, foodLocationValue);
-        updateLocationValue(selectedBeverageLocations, beverageLocationValue);
+        updateLocationValue(
+          selectedFoodLocations,
+          foodLocationValue,
+          foodLocationMenu
+        );
+        updateLocationValue(
+          selectedBeverageLocations,
+          beverageLocationValue,
+          beverageLocationMenu
+        );
         updateLocationValue(
           selectedFoodBeverageLocations,
-          foodBeverageLocationValue
+          foodBeverageLocationValue,
+          foodBeverageLocationMenu
         );
         updateApplySelectionsState();
       }
 
-      function updateLocationValue(selections, target) {
+      function updateLocationValue(selections, target, menu) {
         const values = Array.from(selections);
+        const summary = values.length
+          ? values.length === 1
+            ? values[0]
+            : `${values.length} selected`
+          : "Select";
+        target.placeholder = summary;
+        if (menu && !menu.classList.contains("hidden")) {
+          return;
+        }
+        target.value = summary === "Select" ? "" : summary;
         if (!values.length) {
-          target.textContent = "Select";
           return;
         }
         if (values.length === 1) {
-          target.textContent = values[0];
           return;
         }
-        target.textContent = `${values.length} selected`;
       }
 
       function updateApplySelectionsState() {
@@ -5259,6 +5275,10 @@
       function setLocationSelectEnabled(field, label, icon, chevron, isEnabled) {
         field.setAttribute("aria-disabled", String(!isEnabled));
         field.setAttribute("tabindex", isEnabled ? "0" : "-1");
+        const input = field.querySelector("input");
+        if (input) {
+          input.disabled = !isEnabled;
+        }
         field.classList.toggle("bg-white", isEnabled);
         field.classList.toggle("border-[#c0c0c0]", isEnabled);
         field.classList.toggle("text-[#4b4b4b]", isEnabled);
@@ -5350,7 +5370,7 @@
                 getLocationOptions(foodLocationTemplates),
                 selectedFoodLocations,
                 foodLocationOptions,
-                foodLocationSearch.value
+                foodLocationValue.value
               );
             }
             if (!beverageLocationMenu.classList.contains("hidden")) {
@@ -5358,7 +5378,7 @@
                 getLocationOptions(beverageLocationTemplates),
                 selectedBeverageLocations,
                 beverageLocationOptions,
-                beverageLocationSearch.value
+                beverageLocationValue.value
               );
             }
             if (!foodBeverageLocationMenu.classList.contains("hidden")) {
@@ -5366,7 +5386,7 @@
                 getLocationOptions(foodBeverageLocationTemplates),
                 selectedFoodBeverageLocations,
                 foodBeverageLocationOptions,
-                foodBeverageLocationSearch.value
+                foodBeverageLocationValue.value
               );
             }
             if (selectedStates.size === 0) {
@@ -5840,6 +5860,7 @@
       function closeStateSelectMenu() {
         stateSelectMenu.classList.add("hidden");
         setDateFieldActive(stateSelectField, false);
+        updateStateSelectValue();
       }
 
       function closeLocationMenus() {
@@ -5849,6 +5870,7 @@
         setDateFieldActive(foodLocationField, false);
         setDateFieldActive(beverageLocationField, false);
         setDateFieldActive(foodBeverageLocationField, false);
+        updateLocationSelectValues();
       }
 
       function openDateMenu(field, menu, selectedLabel) {
@@ -5886,13 +5908,14 @@
         closeMenus();
         closePortfolioSelectMenu();
         closeLocationMenus();
-        renderStateOptions(stateSelectSearch.value);
+        stateSelectValue.value = "";
+        renderStateOptions(stateSelectValue.value);
         stateSelectMenu.classList.remove("hidden");
         setDateFieldActive(stateSelectField, true);
-        stateSelectSearch.focus();
+        stateSelectValue.focus();
       }
 
-      function openLocationMenu(field, menu, search, list, selections, options) {
+      function openLocationMenu(field, menu, input, list, selections, options) {
         if (field.getAttribute("aria-disabled") === "true") {
           return;
         }
@@ -5906,10 +5929,11 @@
         closePortfolioSelectMenu();
         closeStateSelectMenu();
         closeLocationMenus();
-        renderLocationOptions(options, selections, list, search.value);
+        input.value = "";
+        renderLocationOptions(options, selections, list, input.value);
         menu.classList.remove("hidden");
         setDateFieldActive(field, true);
-        search.focus();
+        input.focus();
       }
 
       portfolioChip.addEventListener("click", (event) => {
@@ -5966,7 +5990,7 @@
         openLocationMenu(
           foodLocationField,
           foodLocationMenu,
-          foodLocationSearch,
+          foodLocationValue,
           foodLocationOptions,
           selectedFoodLocations,
           getLocationOptions(foodLocationTemplates)
@@ -5978,7 +6002,7 @@
         openLocationMenu(
           beverageLocationField,
           beverageLocationMenu,
-          beverageLocationSearch,
+          beverageLocationValue,
           beverageLocationOptions,
           selectedBeverageLocations,
           getLocationOptions(beverageLocationTemplates)
@@ -5990,7 +6014,7 @@
         openLocationMenu(
           foodBeverageLocationField,
           foodBeverageLocationMenu,
-          foodBeverageLocationSearch,
+          foodBeverageLocationValue,
           foodBeverageLocationOptions,
           selectedFoodBeverageLocations,
           getLocationOptions(foodBeverageLocationTemplates)
@@ -6040,8 +6064,11 @@
         event.stopPropagation();
       });
 
-      stateSelectSearch.addEventListener("input", () => {
-        renderStateOptions(stateSelectSearch.value);
+      stateSelectValue.addEventListener("input", () => {
+        if (stateSelectMenu.classList.contains("hidden")) {
+          openStateSelectMenu();
+        }
+        renderStateOptions(stateSelectValue.value);
       });
 
       foodLocationMenu.addEventListener("click", (event) => {
@@ -6056,30 +6083,60 @@
         event.stopPropagation();
       });
 
-      foodLocationSearch.addEventListener("input", () => {
+      foodLocationValue.addEventListener("input", () => {
+        if (foodLocationMenu.classList.contains("hidden")) {
+          openLocationMenu(
+            foodLocationField,
+            foodLocationMenu,
+            foodLocationValue,
+            foodLocationOptions,
+            selectedFoodLocations,
+            getLocationOptions(foodLocationTemplates)
+          );
+        }
         renderLocationOptions(
           getLocationOptions(foodLocationTemplates),
           selectedFoodLocations,
           foodLocationOptions,
-          foodLocationSearch.value
+          foodLocationValue.value
         );
       });
 
-      beverageLocationSearch.addEventListener("input", () => {
+      beverageLocationValue.addEventListener("input", () => {
+        if (beverageLocationMenu.classList.contains("hidden")) {
+          openLocationMenu(
+            beverageLocationField,
+            beverageLocationMenu,
+            beverageLocationValue,
+            beverageLocationOptions,
+            selectedBeverageLocations,
+            getLocationOptions(beverageLocationTemplates)
+          );
+        }
         renderLocationOptions(
           getLocationOptions(beverageLocationTemplates),
           selectedBeverageLocations,
           beverageLocationOptions,
-          beverageLocationSearch.value
+          beverageLocationValue.value
         );
       });
 
-      foodBeverageLocationSearch.addEventListener("input", () => {
+      foodBeverageLocationValue.addEventListener("input", () => {
+        if (foodBeverageLocationMenu.classList.contains("hidden")) {
+          openLocationMenu(
+            foodBeverageLocationField,
+            foodBeverageLocationMenu,
+            foodBeverageLocationValue,
+            foodBeverageLocationOptions,
+            selectedFoodBeverageLocations,
+            getLocationOptions(foodBeverageLocationTemplates)
+          );
+        }
         renderLocationOptions(
           getLocationOptions(foodBeverageLocationTemplates),
           selectedFoodBeverageLocations,
           foodBeverageLocationOptions,
-          foodBeverageLocationSearch.value
+          foodBeverageLocationValue.value
         );
       });
 
