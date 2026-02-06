@@ -7499,7 +7499,16 @@
         const rng = createSeededRandom(seed);
         const r = (min, max) => Math.round(rng() * (max - min) + min);
         const rd = (min, max) => +(rng() * (max - min) + min).toFixed(1);
+        const timeline = "P01 2025 - P13 2025";
+        const stores = r(180, 320);
+        const annualNr = formatMoneyMillions(rd(12, 22));
+        const annualCases = formatMillions(rd(2.5, 4.5));
+        const casesCount = r(2600, 4200);
         return {
+          timeline,
+          stores,
+          annualNr,
+          annualCases,
           profitToServe: r(380, 520),
           profitToServeChange: rd(2.0, 5.5),
           weeklyHours: r(1800, 2600),
@@ -7513,26 +7522,100 @@
             cdlDms: { hc: r(10, 16), wages: rd(0.80, 1.10), salary: r(86000, 98000), hrsWk: rd(40.0, 45.0) },
             merchandisers: { hc: r(10, 16), wages: rd(0.45, 0.70), salary: r(86000, 98000), hrsWk: rd(40.0, 45.0) },
           },
-          service: {
-            storesPerWeek: r(180, 300),
-            avgFrequency: rd(2.0, 4.0),
-            wsa: r(85, 99),
-            avgDropSize: r(30, 60),
-          },
+          service: (() => {
+            const makeSection = (foodsLfRange, foodsSfRange, bevsLfRange, bevsSfRange, bevsDelta) => {
+              const foods = {
+                lf: r(...foodsLfRange),
+                sf: r(...foodsSfRange),
+                lfDelta: "+0%",
+                sfDelta: "+0%",
+              };
+              const bevs = {
+                lf: r(...bevsLfRange),
+                sf: r(...bevsSfRange),
+                lfDelta: bevsDelta,
+                sfDelta: bevsDelta,
+              };
+              return {
+                lf: foods.lf + bevs.lf,
+                sf: foods.sf + bevs.sf,
+                foods,
+                bevs,
+              };
+            };
+            return {
+              freq: makeSection([0, 2], [0, 2], [0, 2], [0, 2], "+3"),
+              wsa: makeSection([70, 90], [8, 16], [90, 110], [18, 32], "+70%"),
+              dropSize: makeSection([70, 90], [8, 16], [90, 110], [18, 32], "+70%"),
+            };
+          })(),
           assets_detail: {
             vehicles: r(12, 28),
             mileagePerWeek: r(8000, 14000),
             fuelCostWeek: r(3200, 6400),
             depreciationMonthly: r(12000, 24000),
+            table: [
+              { label: "Class 6 Non CDL Bulk Truck", count: r(90, 120), delta: "+70%" },
+              { label: "Class 7 CDL Bulk Truck", count: r(90, 120), delta: "+70%" },
+              { label: "GeoBox Tractor with Liftgate", count: r(90, 120), delta: "+70%" },
+              { label: "GeoBox Tractor without Liftgate", count: r(90, 120), delta: "+70%" },
+              { label: "Route Truck", count: r(90, 120), delta: "+70%" },
+              { label: "Market Place Truck", count: r(90, 120), delta: "+70%" },
+            ],
           },
-          pnl: {
-            revenue: r(14000, 20000),
-            cogs: r(8000, 12000),
-            grossMargin: r(4000, 8000),
-            laborCost: r(2400, 4200),
-            deliveryCost: r(800, 1800),
-            netIncome: r(600, 2400),
-          },
+          pnl: (() => {
+            const netRevenue = r(14000, 20000);
+            const cogs = Math.round(netRevenue * (rng() * 0.12 + 0.58));
+            const grossMargin = netRevenue - cogs;
+            const sellingFrontline = Math.round(netRevenue * (rng() * 0.05 + 0.06));
+            const sellingMgmt = Math.round(netRevenue * (rng() * 0.03 + 0.03));
+            const selling = sellingFrontline + sellingMgmt;
+            const deliveryFleet = Math.round(netRevenue * (rng() * 0.03 + 0.03));
+            const depreciation = Math.round(netRevenue * (rng() * 0.02 + 0.02));
+            const fuel = Math.round(netRevenue * (rng() * 0.02 + 0.015));
+            const rm = Math.round(netRevenue * (rng() * 0.015 + 0.01));
+            const distribution = deliveryFleet + depreciation + fuel + rm;
+            const sellingDistribution = selling + distribution;
+            const pts = grossMargin - sellingDistribution;
+            const row = (label, value, isBold = false, indent = false) => ({
+              label,
+              value,
+              percent: netRevenue === 0 ? 0 : (value / netRevenue) * 100,
+              perCase: casesCount === 0 ? 0 : value / casesCount,
+              isBold,
+              indent,
+            });
+            return {
+              netRevenue,
+              cogs,
+              grossMargin,
+              sellingDistribution,
+              selling,
+              sellingFrontline,
+              sellingMgmt,
+              distribution,
+              deliveryFleet,
+              depreciation,
+              fuel,
+              rm,
+              pts,
+              rows: [
+                row("Net Revenue", netRevenue, true),
+                row("Cost of Sales", cogs, true),
+                row("Gross Margin", grossMargin, true),
+                row("Selling & Distribution", sellingDistribution, true),
+                row("Selling", selling, false),
+                row("Frontline Labor", sellingFrontline, false, true),
+                row("Mgmt Labor", sellingMgmt, false, true),
+                row("Distribution", distribution, true),
+                row("Delivery Fleet Cost", deliveryFleet, false, true),
+                row("Depreciation and Leases", depreciation, false, true),
+                row("Fuel", fuel, false, true),
+                row("R&M", rm, false, true),
+                row("PTS", pts, true),
+              ],
+            };
+          })(),
         };
       }
 
@@ -7542,23 +7625,23 @@
           .map((cb) => cb.closest(".table-row").querySelector(".scenario-link")?.textContent.trim());
       }
 
-      function renderCompareTileRow(rowEl, label) {
+      function renderCompareTileRow(rowEl, label, data) {
         rowEl.innerHTML = `
           <div class="flex flex-col items-end pr-4" style="min-width:154px">
             <span class="text-[11px] font-bold uppercase tracking-wide text-[#4b4b4b]">${label}</span>
-            <span class="text-[13px] text-[#2d2d2d]">P01 2025 - P13 2025</span>
+            <span class="text-[13px] text-[#2d2d2d]">${data.timeline}</span>
           </div>
           <div class="flex flex-col items-end pr-4" style="min-width:105px">
             <span class="text-[11px] font-bold uppercase tracking-wide text-[#4b4b4b]">Total Stores</span>
-            <span class="text-[13px] text-[#2d2d2d]">228</span>
+            <span class="text-[13px] text-[#2d2d2d]">${data.stores}</span>
           </div>
           <div class="flex flex-col items-end pr-4" style="min-width:87px">
             <span class="text-[11px] font-bold uppercase tracking-wide text-[#4b4b4b]">Annual NR</span>
-            <span class="text-[13px] text-[#2d2d2d]">$16.6MM</span>
+            <span class="text-[13px] text-[#2d2d2d]">${data.annualNr}</span>
           </div>
           <div class="flex flex-col items-end" style="min-width:110px">
             <span class="text-[11px] font-bold uppercase tracking-wide text-[#4b4b4b]">Annual Cases</span>
-            <span class="text-[13px] text-[#2d2d2d]">3.4MM</span>
+            <span class="text-[13px] text-[#2d2d2d]">${data.annualCases}</span>
           </div>
         `;
       }
@@ -7576,14 +7659,74 @@
         const optimalDot = `<span class="inline-block h-[7px] w-[7px] rounded-full bg-[#004895] mr-1.5 shrink-0"></span>`;
 
         const metrics = [
-          { name: "Profit to Serve", v1: "$00MM", v2: "$00MM", c1: "+3.4 points", c2: "+4.2points", bw: "+0.8 points", opt1: false, opt2: true },
-          { name: "Weekly Hours", v1: "00", v2: "00", c1: "-0%", c2: "-0%", bw: "+0%", opt1: false, opt2: true },
-          { name: "Weekly Miles", v1: "00", v2: "00", c1: "-0%", c2: "-0%", bw: "+0%" },
-          { name: "Headcount", v1: "00", v2: "00", c1: "-5", c2: "-2", bw: "-0%" },
-          { name: "Weekly Deliveries", v1: "00", v2: "00", c1: "-0%", c2: "-0%", bw: "+0%", opt1: true },
-          { name: "Drop Size Cases", v1: "00", v2: "00", c1: "+0%", c2: "+0%", bw: "+0%" },
-          { name: "Net Revenue/hour", v1: "$0.0", v2: "$0.0", c1: "+0%", c2: "+0%", bw: "+0%", opt1: true },
-          { name: "Assets", v1: "00", v2: "00", c1: "+0%", c2: "+0%", bw: "+0%" },
+          {
+            name: "Profit to Serve",
+            v1: `$${d1.profitToServe}MM`,
+            v2: `$${d2.profitToServe}MM`,
+            c1: `+${d1.profitToServeChange.toFixed(1)} points`,
+            c2: `+${d2.profitToServeChange.toFixed(1)} points`,
+            bw: `${(d2.profitToServe - d1.profitToServe) >= 0 ? "+" : "-"}${Math.abs(d2.profitToServe - d1.profitToServe)}MM`,
+            opt1: d1.profitToServe >= d2.profitToServe,
+            opt2: d2.profitToServe > d1.profitToServe,
+          },
+          {
+            name: "Weekly Hours",
+            v1: d1.weeklyHours,
+            v2: d2.weeklyHours,
+            c1: `${formatSigned(d1.weeklyHours - d2.weeklyHours, "")}`,
+            c2: `${formatSigned(d2.weeklyHours - d1.weeklyHours, "")}`,
+            bw: `${formatSigned(d2.weeklyHours - d1.weeklyHours, "")}`,
+          },
+          {
+            name: "Weekly Miles",
+            v1: d1.weeklyMiles,
+            v2: d2.weeklyMiles,
+            c1: `${formatSigned(d1.weeklyMiles - d2.weeklyMiles, "")}`,
+            c2: `${formatSigned(d2.weeklyMiles - d1.weeklyMiles, "")}`,
+            bw: `${formatSigned(d2.weeklyMiles - d1.weeklyMiles, "")}`,
+          },
+          {
+            name: "Headcount",
+            v1: d1.headcount,
+            v2: d2.headcount,
+            c1: `${formatSigned(d1.headcount - d2.headcount, "")}`,
+            c2: `${formatSigned(d2.headcount - d1.headcount, "")}`,
+            bw: `${formatSigned(d2.headcount - d1.headcount, "")}`,
+          },
+          {
+            name: "Weekly Deliveries",
+            v1: d1.weeklyDeliveries,
+            v2: d2.weeklyDeliveries,
+            c1: `${formatSigned(d1.weeklyDeliveries - d2.weeklyDeliveries, "")}`,
+            c2: `${formatSigned(d2.weeklyDeliveries - d1.weeklyDeliveries, "")}`,
+            bw: `${formatSigned(d2.weeklyDeliveries - d1.weeklyDeliveries, "")}`,
+            opt1: d1.weeklyDeliveries >= d2.weeklyDeliveries,
+          },
+          {
+            name: "Drop Size Cases",
+            v1: d1.dropSizeCases,
+            v2: d2.dropSizeCases,
+            c1: `${formatSigned(d1.dropSizeCases - d2.dropSizeCases, "")}`,
+            c2: `${formatSigned(d2.dropSizeCases - d1.dropSizeCases, "")}`,
+            bw: `${formatSigned(d2.dropSizeCases - d1.dropSizeCases, "")}`,
+          },
+          {
+            name: "Net Revenue/hour",
+            v1: `$${d1.netRevenuePerHour.toFixed(1)}`,
+            v2: `$${d2.netRevenuePerHour.toFixed(1)}`,
+            c1: `${formatSigned(d1.netRevenuePerHour - d2.netRevenuePerHour, "")}`,
+            c2: `${formatSigned(d2.netRevenuePerHour - d1.netRevenuePerHour, "")}`,
+            bw: `${formatSigned(d2.netRevenuePerHour - d1.netRevenuePerHour, "")}`,
+            opt1: d1.netRevenuePerHour >= d2.netRevenuePerHour,
+          },
+          {
+            name: "Assets",
+            v1: d1.assets,
+            v2: d2.assets,
+            c1: `${formatSigned(d1.assets - d2.assets, "")}`,
+            c2: `${formatSigned(d2.assets - d1.assets, "")}`,
+            bw: `${formatSigned(d2.assets - d1.assets, "")}`,
+          },
         ];
 
         compareMetricsBody.innerHTML = metrics
@@ -7657,126 +7800,211 @@
 
       function renderCompareDetailTable(containerId, label, data) {
         const container = containerId === "left" ? compareDetailLeft : compareDetailRight;
-        const headerBg = containerId === "left" ? "#FFF8E1" : "#E3F2FD";
-        const headerColor = containerId === "left" ? "#E8A800" : "#004895";
-        const hcChange1 = data.labor.cdlDms.hc > 12 ? `<span class="text-[#0B7D12] text-[11px] font-bold ml-1">+0%</span>` : `<span class="text-[#0B7D12] text-[11px] font-bold ml-1">+0%</span>`;
-        const hcChange2 = data.labor.merchandisers.hc < 14 ? `<span class="text-[#c12c01] text-[11px] font-bold ml-1">-0%</span>` : `<span class="text-[#0B7D12] text-[11px] font-bold ml-1">+0%</span>`;
+        const headerBg = "#FFF8E1";
+        const headerColor = "#E8A800";
+        const hcChange1 =
+          data.labor.cdlDms.hc >= 12
+            ? `<span class="ml-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]">+0%</span>`
+            : `<span class="ml-1 inline-flex rounded bg-[#FEECEA] px-2 py-[2px] text-[10px] font-bold text-[#C0392B]">-0%</span>`;
+        const hcChange2 =
+          data.labor.merchandisers.hc >= 12
+            ? `<span class="ml-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]">+0%</span>`
+            : `<span class="ml-1 inline-flex rounded bg-[#FEECEA] px-2 py-[2px] text-[10px] font-bold text-[#C0392B]">-0%</span>`;
 
         container.innerHTML = `
-          <div class="px-4 py-3 text-[12px] font-bold uppercase" style="background:${headerBg};border-left:3px solid ${headerColor};color:#2d2d2d">
-            Labor ${label}
+          <div class="table-text overflow-hidden rounded-[8px] bg-white" style="border:1px solid ${headerColor}" data-service-table>
+            <div class="table-header px-4 py-2 font-bold uppercase" style="background:${headerBg};color:#2d2d2d">
+              LABOR ${label.toUpperCase()}
+            </div>
+            <table class="w-full">
+              <thead>
+                <tr class="table-header border-b border-[#f0c44f] font-bold uppercase text-[#4b4b4b]">
+                  <th class="px-4 py-2 text-left">Role Type</th>
+                  <th class="px-4 py-2 text-center">HC</th>
+                  <th class="px-4 py-2 text-right">Wages $/Hr</th>
+                  <th class="px-4 py-2 text-right">Annual Salary</th>
+                  <th class="px-4 py-2 text-right">Hrs/Wk</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-[#f0c44f]">
+                  <td class="px-4 py-2 text-[14px] text-[#2d2d2d]">CDL(A) DMS</td>
+                  <td class="px-4 py-2 text-center text-[14px] text-[#2d2d2d]">
+                    <span class="inline-flex items-center gap-1 whitespace-nowrap">${data.labor.cdlDms.hc} ${hcChange1}</span>
+                  </td>
+                  <td class="px-4 py-2 text-right text-[14px] text-[#2d2d2d]">$${data.labor.cdlDms.wages.toFixed(2)}</td>
+                  <td class="px-4 py-2 text-right text-[14px] text-[#2d2d2d]">$${data.labor.cdlDms.salary.toLocaleString()}</td>
+                  <td class="px-4 py-2 text-right text-[14px] text-[#2d2d2d]">${data.labor.cdlDms.hrsWk}</td>
+                </tr>
+                <tr class="border-b border-[#f0c44f]">
+                  <td class="px-4 py-2 text-[14px] text-[#2d2d2d]">Merchandisers</td>
+                  <td class="px-4 py-2 text-center text-[14px] text-[#2d2d2d]">
+                    <span class="inline-flex items-center gap-1 whitespace-nowrap">${data.labor.merchandisers.hc} ${hcChange2}</span>
+                  </td>
+                  <td class="px-4 py-2 text-right text-[14px] text-[#2d2d2d]">$${data.labor.merchandisers.wages.toFixed(2)}</td>
+                  <td class="px-4 py-2 text-right text-[14px] text-[#2d2d2d]">$${data.labor.merchandisers.salary.toLocaleString()}</td>
+                  <td class="px-4 py-2 text-right text-[14px] text-[#2d2d2d]">${data.labor.merchandisers.hrsWk}</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2 text-[14px] font-bold text-[#2d2d2d]">TOTAL</td>
+                  <td class="px-4 py-2 text-center text-[14px] font-bold text-[#2d2d2d]">${data.labor.cdlDms.hc + data.labor.merchandisers.hc}</td>
+                  <td class="px-4 py-2 text-right text-[14px] font-bold text-[#2d2d2d]">0</td>
+                  <td class="px-4 py-2 text-right text-[14px] font-bold text-[#2d2d2d]">0</td>
+                  <td class="px-4 py-2 text-right text-[14px] font-bold text-[#2d2d2d]">0</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <table class="w-full text-[13px]">
-            <thead>
-              <tr class="border-b border-[#e8e8e8] text-[11px] font-bold uppercase text-[#4b4b4b]">
-                <th class="px-4 py-2 text-left">Role Type</th>
-                <th class="px-4 py-2 text-center">HC</th>
-                <th class="px-4 py-2 text-right">Wages $/hr</th>
-                <th class="px-4 py-2 text-right">Annual Salary</th>
-                <th class="px-4 py-2 text-right">Hrs/wk</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-b border-[#f0f0f0]">
-                <td class="px-4 py-2 text-[#2d2d2d]">CDL(A) DMS</td>
-                <td class="px-4 py-2 text-center text-[#2d2d2d]">${data.labor.cdlDms.hc} ${hcChange1}</td>
-                <td class="px-4 py-2 text-right text-[#2d2d2d]">$${data.labor.cdlDms.wages.toFixed(2)}</td>
-                <td class="px-4 py-2 text-right text-[#2d2d2d]">$${data.labor.cdlDms.salary.toLocaleString()}</td>
-                <td class="px-4 py-2 text-right text-[#2d2d2d]">${data.labor.cdlDms.hrsWk}</td>
-              </tr>
-              <tr class="border-b border-[#f0f0f0]">
-                <td class="px-4 py-2 text-[#2d2d2d]">Merchandisers</td>
-                <td class="px-4 py-2 text-center text-[#2d2d2d]">${data.labor.merchandisers.hc} ${hcChange2}</td>
-                <td class="px-4 py-2 text-right text-[#2d2d2d]">$${data.labor.merchandisers.wages.toFixed(2)}</td>
-                <td class="px-4 py-2 text-right text-[#2d2d2d]">$${data.labor.merchandisers.salary.toLocaleString()}</td>
-                <td class="px-4 py-2 text-right text-[#2d2d2d]">${data.labor.merchandisers.hrsWk}</td>
-              </tr>
-              <tr>
-                <td class="px-4 py-2 font-bold text-[#2d2d2d]">TOTAL</td>
-                <td class="px-4 py-2 text-center font-bold text-[#2d2d2d]">${data.labor.cdlDms.hc + data.labor.merchandisers.hc}</td>
-                <td class="px-4 py-2 text-right font-bold text-[#2d2d2d]">0</td>
-                <td class="px-4 py-2 text-right font-bold text-[#2d2d2d]">0</td>
-                <td class="px-4 py-2 text-right font-bold text-[#2d2d2d]">0</td>
-              </tr>
-            </tbody>
-          </table>
         `;
       }
 
       function renderCompareDetailService(containerId, label, data) {
         const container = containerId === "left" ? compareDetailLeft : compareDetailRight;
-        const headerBg = containerId === "left" ? "#FFF8E1" : "#E3F2FD";
-        const headerColor = containerId === "left" ? "#E8A800" : "#004895";
-        container.innerHTML = `
-          <div class="px-4 py-3 text-[12px] font-bold uppercase" style="background:${headerBg};border-left:3px solid ${headerColor};color:#2d2d2d">
-            Service ${label}
+        const headerBg = "#FFF8E1";
+        const headerColor = "#E8A800";
+        const formatRow = (key, labelText, values) => `
+          <div
+            class="grid grid-cols-[1.2fr_1fr_1fr] items-center border-b border-[#f0c44f] px-4 py-3 text-[14px] text-[#2d2d2d]"
+            data-section="${key}"
+          >
+            <button
+              type="button"
+              class="flex items-center gap-2 font-bold"
+              data-toggle-section="${key}"
+            >
+              <span class="material-icons text-[16px] text-[#4b4b4b]" data-caret>
+                expand_more
+              </span>
+              ${labelText}
+            </button>
+            <div class="text-center font-bold">${values.lf}</div>
+            <div class="text-center font-bold">${values.sf}</div>
           </div>
-          <table class="w-full text-[13px]">
-            <thead>
-              <tr class="border-b border-[#e8e8e8] text-[11px] font-bold uppercase text-[#4b4b4b]">
-                <th class="px-4 py-2 text-left">Metric</th>
-                <th class="px-4 py-2 text-right">Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-b border-[#f0f0f0]"><td class="px-4 py-2 text-[#2d2d2d]">Stores/Week</td><td class="px-4 py-2 text-right text-[#2d2d2d]">${data.service.storesPerWeek}</td></tr>
-              <tr class="border-b border-[#f0f0f0]"><td class="px-4 py-2 text-[#2d2d2d]">Avg Frequency</td><td class="px-4 py-2 text-right text-[#2d2d2d]">${data.service.avgFrequency}x/wk</td></tr>
-              <tr class="border-b border-[#f0f0f0]"><td class="px-4 py-2 text-[#2d2d2d]">WSA %</td><td class="px-4 py-2 text-right text-[#2d2d2d]">${data.service.wsa}%</td></tr>
-              <tr><td class="px-4 py-2 text-[#2d2d2d]">Avg Drop Size</td><td class="px-4 py-2 text-right text-[#2d2d2d]">${data.service.avgDropSize}</td></tr>
-            </tbody>
-          </table>
+          <div class="border-b border-[#f0c44f] bg-[#fffaf1]" data-children="${key}">
+            <div class="grid grid-cols-[1.2fr_1fr_1fr] items-center px-4 py-3 text-[14px] text-[#2d2d2d]">
+              <div class="flex items-center gap-2 pl-6 italic text-[#4b4b4b]">Foods</div>
+              <div class="flex items-center justify-center gap-2">
+                <span class="font-bold">${values.foods.lf}</span>
+                <span class="inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]">${values.foods.lfDelta}</span>
+              </div>
+              <div class="flex items-center justify-center gap-2">
+                <span class="font-bold">${values.foods.sf}</span>
+                <span class="inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]">${values.foods.sfDelta}</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-[1.2fr_1fr_1fr] items-center px-4 py-3 text-[14px] text-[#2d2d2d]">
+              <div class="flex items-center gap-2 pl-6 italic text-[#4b4b4b]">Bevs</div>
+              <div class="flex items-center justify-center gap-2">
+                <span class="font-bold">${values.bevs.lf}</span>
+                <span class="inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]">${values.bevs.lfDelta}</span>
+              </div>
+              <div class="flex items-center justify-center gap-2">
+                <span class="font-bold">${values.bevs.sf}</span>
+                <span class="inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]">${values.bevs.sfDelta}</span>
+              </div>
+            </div>
+          </div>
+        `;
+
+        const sectionPrefix = containerId;
+        container.innerHTML = `
+          <div class="table-text overflow-hidden rounded-[8px] bg-white" style="border:1px solid ${headerColor}">
+            <div class="table-header flex items-center justify-between px-4 py-2 font-bold uppercase" style="background:${headerBg};color:#2d2d2d">
+              <span>Service ${label.toUpperCase()}</span>
+              <span class="font-bold text-[#9c6b00]">Expand all</span>
+            </div>
+            <div class="table-header grid grid-cols-[1.2fr_1fr_1fr] items-center border-b border-[#f0c44f] px-4 py-2 font-bold uppercase text-[#4b4b4b]">
+              <div>Segment</div>
+              <div class="text-center">Large Format</div>
+              <div class="text-center">Small Format</div>
+            </div>
+            ${formatRow(`${sectionPrefix}-freq`, "Freq./Week", data.service.freq)}
+            ${formatRow(`${sectionPrefix}-wsa`, "WSA", data.service.wsa)}
+            ${formatRow(`${sectionPrefix}-drop`, "Drop Size", data.service.dropSize)}
+            <div class="grid grid-cols-[1.2fr_1fr_1fr] items-center px-4 py-3 text-[14px] font-bold text-[#2d2d2d]">
+              <div>Total</div>
+              <div class="text-center">${data.service.dropSize.lf}</div>
+              <div class="text-center">${data.service.dropSize.sf}</div>
+            </div>
+          </div>
         `;
       }
 
       function renderCompareDetailAssets(containerId, label, data) {
         const container = containerId === "left" ? compareDetailLeft : compareDetailRight;
-        const headerBg = containerId === "left" ? "#FFF8E1" : "#E3F2FD";
-        const headerColor = containerId === "left" ? "#E8A800" : "#004895";
+        const headerBg = "#FFF8E1";
+        const headerColor = "#E8A800";
+        const totalCount = data.assets_detail.table.reduce((sum, row) => sum + row.count, 0);
         container.innerHTML = `
-          <div class="px-4 py-3 text-[12px] font-bold uppercase" style="background:${headerBg};border-left:3px solid ${headerColor};color:#2d2d2d">
-            Assets ${label}
+          <div class="table-text overflow-hidden rounded-[8px] bg-white" style="border:1px solid ${headerColor}">
+            <div class="table-header flex items-center justify-between px-4 py-2 font-bold uppercase" style="background:${headerBg};color:#2d2d2d">
+              <span>Assets ${label.toUpperCase()}</span>
+            </div>
+            <div class="table-header grid grid-cols-[1.4fr_1fr] items-center border-b border-[#f0c44f] px-4 py-2 font-bold uppercase text-[#4b4b4b]">
+              <div>Asset Type</div>
+              <div class="text-right"># of Assets</div>
+            </div>
+            ${data.assets_detail.table
+              .map(
+                (row) => `
+              <div class="grid grid-cols-[1.4fr_1fr] items-center border-b border-[#f0c44f] px-4 py-3 text-[14px] text-[#2d2d2d]">
+                <div>${row.label}</div>
+                <div class="flex items-center justify-end gap-2">
+                  <span class="font-bold">${row.count}</span>
+                  <span class="inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]">${row.delta}</span>
+                </div>
+              </div>
+            `
+              )
+              .join("")}
+            <div class="grid grid-cols-[1.4fr_1fr] items-center px-4 py-3 text-[14px] font-bold text-[#2d2d2d]">
+              <div>Total</div>
+              <div class="flex items-center justify-end gap-2">
+                <span class="font-bold">${totalCount}</span>
+                <span class="inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]">+70%</span>
+              </div>
+            </div>
           </div>
-          <table class="w-full text-[13px]">
-            <thead>
-              <tr class="border-b border-[#e8e8e8] text-[11px] font-bold uppercase text-[#4b4b4b]">
-                <th class="px-4 py-2 text-left">Metric</th>
-                <th class="px-4 py-2 text-right">Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-b border-[#f0f0f0]"><td class="px-4 py-2 text-[#2d2d2d]">Vehicles</td><td class="px-4 py-2 text-right text-[#2d2d2d]">${data.assets_detail.vehicles}</td></tr>
-              <tr class="border-b border-[#f0f0f0]"><td class="px-4 py-2 text-[#2d2d2d]">Mileage/Week</td><td class="px-4 py-2 text-right text-[#2d2d2d]">${data.assets_detail.mileagePerWeek.toLocaleString()}</td></tr>
-              <tr class="border-b border-[#f0f0f0]"><td class="px-4 py-2 text-[#2d2d2d]">Fuel Cost/Week</td><td class="px-4 py-2 text-right text-[#2d2d2d]">$${data.assets_detail.fuelCostWeek.toLocaleString()}</td></tr>
-              <tr><td class="px-4 py-2 text-[#2d2d2d]">Depreciation/Mo</td><td class="px-4 py-2 text-right text-[#2d2d2d]">$${data.assets_detail.depreciationMonthly.toLocaleString()}</td></tr>
-            </tbody>
-          </table>
         `;
       }
 
       function renderCompareDetailPnl(containerId, label, data) {
         const container = containerId === "left" ? compareDetailLeft : compareDetailRight;
-        const headerBg = containerId === "left" ? "#FFF8E1" : "#E3F2FD";
-        const headerColor = containerId === "left" ? "#E8A800" : "#004895";
+        const headerBg = "#FFF8E1";
+        const headerColor = "#E8A800";
+        const formatValue = (value) => value.toLocaleString();
+        const formatPercent = (value) => value.toFixed(1);
+        const formatPerCase = (value) => value.toFixed(1);
         container.innerHTML = `
-          <div class="px-4 py-3 text-[12px] font-bold uppercase" style="background:${headerBg};border-left:3px solid ${headerColor};color:#2d2d2d">
-            P&L ${label}
+          <div class="table-text overflow-hidden rounded-[8px] bg-white" style="border:1px solid ${headerColor}">
+            <div class="table-header px-4 py-2 font-bold uppercase" style="background:${headerBg};color:#2d2d2d">
+              P&L ${label}
+            </div>
+            <table class="w-full">
+              <thead>
+                <tr class="table-header border-b border-[#f0c44f] font-bold uppercase text-[#4b4b4b]">
+                  <th class="px-4 py-2 text-left">Segment</th>
+                  <th class="px-4 py-2 text-right">$</th>
+                  <th class="px-4 py-2 text-right">%NR</th>
+                  <th class="px-4 py-2 text-right">$/Case</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${data.pnl.rows
+                  .map(
+                    (row) => `
+                <tr class="border-b border-[#f0c44f]">
+                  <td class="px-4 py-2 text-[14px] text-[#2d2d2d] ${row.isBold ? "font-bold" : ""} ${row.indent ? "pl-8" : ""}">${row.label}</td>
+                  <td class="px-4 py-2 text-right text-[14px] text-[#2d2d2d] ${row.isBold ? "font-bold" : ""}">${formatValue(row.value)}</td>
+                  <td class="px-4 py-2 text-right text-[14px] text-[#2d2d2d] ${row.isBold ? "font-bold" : ""}">${formatPercent(row.percent)}</td>
+                  <td class="px-4 py-2 text-right text-[14px] text-[#2d2d2d] ${row.isBold ? "font-bold" : ""}">${formatPerCase(row.perCase)}</td>
+                </tr>
+                `
+                  )
+                  .join("")}
+              </tbody>
+            </table>
           </div>
-          <table class="w-full text-[13px]">
-            <thead>
-              <tr class="border-b border-[#e8e8e8] text-[11px] font-bold uppercase text-[#4b4b4b]">
-                <th class="px-4 py-2 text-left">Line Item</th>
-                <th class="px-4 py-2 text-right">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-b border-[#f0f0f0]"><td class="px-4 py-2 text-[#2d2d2d]">Revenue</td><td class="px-4 py-2 text-right text-[#2d2d2d]">$${data.pnl.revenue.toLocaleString()}K</td></tr>
-              <tr class="border-b border-[#f0f0f0]"><td class="px-4 py-2 text-[#2d2d2d]">COGS</td><td class="px-4 py-2 text-right text-[#2d2d2d]">$${data.pnl.cogs.toLocaleString()}K</td></tr>
-              <tr class="border-b border-[#f0f0f0]"><td class="px-4 py-2 text-[#2d2d2d]">Gross Margin</td><td class="px-4 py-2 text-right text-[#2d2d2d]">$${data.pnl.grossMargin.toLocaleString()}K</td></tr>
-              <tr class="border-b border-[#f0f0f0]"><td class="px-4 py-2 text-[#2d2d2d]">Labor Cost</td><td class="px-4 py-2 text-right text-[#2d2d2d]">$${data.pnl.laborCost.toLocaleString()}K</td></tr>
-              <tr class="border-b border-[#f0f0f0]"><td class="px-4 py-2 text-[#2d2d2d]">Delivery Cost</td><td class="px-4 py-2 text-right text-[#2d2d2d]">$${data.pnl.deliveryCost.toLocaleString()}K</td></tr>
-              <tr><td class="px-4 py-2 font-bold text-[#2d2d2d]">Net Income</td><td class="px-4 py-2 text-right font-bold text-[#2d2d2d]">$${data.pnl.netIncome.toLocaleString()}K</td></tr>
-            </tbody>
-          </table>
         `;
       }
 
@@ -7825,8 +8053,8 @@
         compareData2 = buildCompareData(seed2);
 
         compareTitle.textContent = `Comparing ${compareId1} and ${compareId2}`;
-        renderCompareTileRow(compareTileRow1, "Scenario 1");
-        renderCompareTileRow(compareTileRow2, "Scenario 2");
+        renderCompareTileRow(compareTileRow1, "Scenario 1", compareData1);
+        renderCompareTileRow(compareTileRow2, "Scenario 2", compareData2);
         renderCompareMetrics(compareData1, compareData2);
         renderCompareDiffs(compareId1, compareId2);
         setCompareDetailTab("Labor");
@@ -7851,6 +8079,26 @@
         tab.addEventListener("click", () => {
           setCompareDetailTab(tab.getAttribute("data-compare-tab"));
         });
+      });
+
+      document.addEventListener("click", (event) => {
+        const toggle = event.target.closest("[data-toggle-section]");
+        if (!toggle) {
+          return;
+        }
+        const section = toggle.getAttribute("data-toggle-section");
+        const parent = toggle.closest("[data-service-table]");
+        const children = parent?.querySelector(`[data-children="${section}"]`);
+        if (!children) {
+          return;
+        }
+        children.classList.toggle("hidden");
+        const caret = toggle.querySelector("[data-caret]");
+        if (caret) {
+          caret.textContent = children.classList.contains("hidden")
+            ? "chevron_right"
+            : "expand_more";
+        }
       });
 
       setView("workspace");
