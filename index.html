@@ -4030,25 +4030,8 @@
             </div>
           </div>
 
-          <!-- Bottom Bar -->
-          <div class="mx-12 mb-8 flex items-center justify-between border-t border-[#e8e8e8] bg-white py-4">
-            <button
-              id="compare-back"
-              class="flex h-8 items-center gap-1 text-[14px] font-bold text-[#004895] transition-colors hover:text-[#002B5E]"
-              type="button"
-            >
-              <span class="material-icons text-[20px] text-current">arrow_back</span>
-              Back to Workspace
-            </button>
-            <button
-              id="compare-download"
-              class="flex h-8 items-center gap-2 rounded-full border border-[#004895] bg-white px-4 text-[12px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
-              type="button"
-            >
-              <span class="material-icons text-[16px] text-current">download</span>
-              Download
-            </button>
-          </div>
+          <!-- spacer for sticky bottom bar -->
+          <div class="h-16"></div>
         </section>
       </main>
       <div
@@ -4124,6 +4107,31 @@
             </span>
           </button>
         </div>
+      </div>
+      <div
+        id="compare-sticky"
+        class="fixed bottom-0 left-0 right-0 hidden flex items-center justify-between bg-white px-12 py-4 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]"
+      >
+        <button
+          id="compare-back"
+          class="flex h-8 items-center gap-1 text-[14px] font-bold text-[#004895] transition-colors hover:text-[#002B5E]"
+          type="button"
+        >
+          <span class="material-icons text-[20px] text-current">
+            arrow_back
+          </span>
+          Back to Workspace
+        </button>
+        <button
+          id="compare-download"
+          class="flex h-8 items-center gap-2 rounded-full border border-[#004895] bg-white px-4 text-[12px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+          type="button"
+        >
+          <span class="material-icons text-[16px] text-current">
+            download
+          </span>
+          Download
+        </button>
       </div>
       <div
         id="scenario-sticky"
@@ -4400,6 +4408,7 @@
       const compareBack = document.getElementById("compare-back");
       const compareDownload = document.getElementById("compare-download");
       const compareBreadcrumbWorkspace = document.getElementById("compare-breadcrumb-workspace");
+      const compareSticky = document.getElementById("compare-sticky");
       const scenarioSticky = document.getElementById("scenario-sticky");
       const baselineSticky = document.getElementById("baseline-sticky");
       const baselineBack = document.getElementById("baseline-back");
@@ -4771,6 +4780,7 @@
         scenarioSticky.classList.toggle("hidden", !showScenario);
         baselineSticky.classList.toggle("hidden", !showBaseline);
         defineParametersSticky.classList.toggle("hidden", !showDefineParameters);
+        compareSticky.classList.toggle("hidden", !showCompare);
         setNavActive(showWorkspace || showOutput || showCompare ? "workspace" : "scenario");
         currentView = view;
         window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -7413,21 +7423,16 @@
           }
         }
 
-        selectAll.onchange = () => {
-          const shouldCheck = selectAll.checked;
-          if (!shouldCheck) {
-            rowCheckboxes.forEach((checkbox) => {
-              checkbox.checked = false;
-            });
-            updateSelectionState();
-            return;
-          }
-
-          rowCheckboxes.forEach((checkbox, index) => {
-            checkbox.checked = index < MAX_SELECTED;
+        selectAll.addEventListener("click", (event) => {
+          event.preventDefault();
+          const allChecked = getCheckedCount() === rowCheckboxes.length;
+          rowCheckboxes.forEach((checkbox) => {
+            checkbox.checked = !allChecked;
           });
+          selectAll.indeterminate = false;
+          selectAll.checked = !allChecked;
           updateSelectionState();
-        };
+        });
 
         rowCheckboxes.forEach((checkbox) => {
           checkbox.addEventListener("change", () => {
