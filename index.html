@@ -214,8 +214,51 @@
       .waterfall-chart {
         border-radius: 8px;
         background: #fff;
-        padding: 12px 8px 10px 8px;
+        padding: 8px 10px 10px 10px;
         width: 100%;
+      }
+      .waterfall-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 6px;
+      }
+      .waterfall-title {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #6f6f6f;
+      }
+      .waterfall-axis {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        color: #8a8a8a;
+      }
+      .waterfall-axis-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+        border: 1px solid #dfe9fb;
+        border-radius: 8px;
+        padding: 2px;
+        background: #fff;
+      }
+      .waterfall-axis-pill {
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 10px;
+        font-weight: 700;
+        color: #7a7a7a;
+      }
+      .waterfall-axis-pill.is-active {
+        background: #e7f0ff;
+        color: #1b5bd6;
       }
       .waterfall-body {
         display: flex;
@@ -224,34 +267,32 @@
         width: 100%;
       }
       .waterfall-y {
-        width: 56px;
-        height: 280px;
+        width: 46px;
+        height: 240px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        font-size: 11px;
+        font-size: 10px;
         color: #7a7a7a;
         padding-right: 6px;
-        border-right: 1px solid #e6e6e6;
       }
       .waterfall-plot {
         position: relative;
         display: grid;
         grid-template-columns: repeat(9, minmax(0, 1fr));
         gap: 10px;
-        height: 280px;
+        height: 240px;
         width: 100%;
         flex: 1;
         min-width: 0;
         background-image: repeating-linear-gradient(
           to top,
-          #e6e6e6 0,
-          #e6e6e6 1px,
+          #ededed 0,
+          #ededed 1px,
           transparent 1px,
-          transparent 56px
+          transparent 48px
         );
-        border-left: 1px solid #e6e6e6;
-        border-bottom: 1px solid #e6e6e6;
+        border-bottom: 1px solid #ededed;
       }
       .waterfall-col {
         position: relative;
@@ -262,7 +303,7 @@
         position: absolute;
         left: 50%;
         width: calc(100% + 10px);
-        border-top: 1px dashed #cfcfcf;
+        border-top: 1px dotted #cfcfcf;
         bottom: var(--connector, -9999px);
         z-index: 1;
       }
@@ -271,10 +312,11 @@
       }
       .waterfall-bar {
         position: absolute;
-        left: 12%;
-        width: 76%;
+        left: 14%;
+        width: 72%;
         bottom: var(--bar-bottom);
         height: var(--bar-height);
+        min-height: 10px;
         border-radius: 2px;
         display: block;
         overflow: visible;
@@ -309,14 +351,159 @@
         color: #4b4b4b;
       }
       .waterfall-x {
-        margin-left: 66px;
-        margin-top: 8px;
+        margin-left: 52px;
+        margin-top: 6px;
         display: grid;
         grid-template-columns: repeat(9, minmax(0, 1fr));
         gap: 10px;
-        font-size: 11px;
+        font-size: 10px;
         color: #7a7a7a;
         text-align: center;
+      }
+      .elevation-shadow {
+        box-shadow: 0 0 24px rgba(0, 94, 192, 0.08);
+      }
+      .sensitivities {
+        margin-top: 12px;
+        font-size: 12px;
+        color: #4b4b4b;
+      }
+      .sens-top {
+        display: grid;
+        grid-template-columns: 1.6fr 3fr 1.2fr;
+        align-items: center;
+        margin-bottom: 6px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        color: #7a7a7a;
+        text-transform: uppercase;
+      }
+      .sens-impact-label {
+        text-align: center;
+      }
+      .sens-head {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr 1fr 1fr 1.2fr;
+        gap: 16px;
+        align-items: center;
+        border-top: 1px solid #d8e7fb;
+        padding: 10px 0;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #7a7a7a;
+      }
+      .sens-sort {
+        margin-left: 6px;
+        font-size: 9px;
+        color: #9a9a9a;
+        letter-spacing: -1px;
+      }
+      .sens-row {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr 1fr 1fr 1.2fr;
+        gap: 16px;
+        align-items: center;
+        border-top: 1px solid #d8e7fb;
+        padding: 16px 0;
+      }
+      .sens-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #4b4b4b;
+      }
+      .sens-impact {
+        grid-column: 2 / 5;
+      }
+      .sens-bar {
+        position: relative;
+        display: flex;
+        height: 28px;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #f2f2f2;
+        --neg: 38%;
+        --base: 12%;
+        --pos: 50%;
+        --center: 44%;
+      }
+      .sens-seg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+        color: #fff;
+        white-space: nowrap;
+        padding: 0 6px;
+      }
+      .sens-neg {
+        flex: 0 0 var(--neg);
+        background: #b43a1c;
+      }
+      .sens-base {
+        flex: 0 0 var(--base);
+        background: #a6e7a8;
+      }
+      .sens-pos {
+        flex: 0 0 var(--pos);
+        background: #0a7d24;
+      }
+      .sens-center {
+        position: absolute;
+        top: -6px;
+        bottom: -6px;
+        width: 1px;
+        background: #d9d9d9;
+        left: var(--center);
+      }
+      .sens-axis {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 6px;
+        font-size: 11px;
+        color: #7a7a7a;
+      }
+      .sens-break {
+        position: absolute;
+        left: 50%;
+        top: -2px;
+        transform: translateX(-50%);
+        background: #2f2f2f;
+        color: #fff;
+        font-size: 9px;
+        font-weight: 700;
+        padding: 2px 6px;
+        border-radius: 3px;
+        white-space: nowrap;
+      }
+      .sens-range {
+        text-align: right;
+        font-size: 13px;
+        font-weight: 600;
+        color: #4b4b4b;
+      }
+      .sens-total {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid #d8e7fb;
+        background: #f5f9ff;
+        padding: 10px 12px;
+        margin-top: 8px;
+      }
+      .sens-total-label {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #4b4b4b;
+      }
+      .sens-total-value {
+        font-size: 13px;
+        font-weight: 600;
+        color: #4b4b4b;
       }
     </style>
   </head>
@@ -3900,7 +4087,7 @@
 
           <div class="px-12 pb-6">
             <div class="flex flex-col gap-6">
-              <div class="rounded-[12px] bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]">
+              <div class="rounded-[12px] bg-white p-6 elevation-shadow">
                 <div data-output-panel="summary">
                   <span class="inline-flex rounded-full bg-[#0662C4] px-2 py-[2px] text-[10px] font-bold text-white">
                     Generated by AI
@@ -3910,20 +4097,20 @@
                       bar_chart
                     </span>
                     <div id="output-total-savings" class="text-[16px] font-bold text-[#2d2d2d]">
-                      $1.24M Total Savings
+                      $1.18M Total Savings
                     </div>
                   </div>
 
                   <div class="mt-4 flex flex-col gap-6">
                     <div class="text-[13px] text-[#2d2d2d]">
                       <div id="output-improvement" class="text-[13px] font-bold text-[#008A3B]">
-                        +3.4 Points Margin Improvement
+                        +3.2 Points Margin Improvement
                       </div>
                       <p id="output-summary-line-1" class="mt-2 text-[12px] text-[#4b4b4b]">
-                        The proposed optimization generates <span class="font-bold text-[#2d2d2d]">$1.24M in total savings</span>, driven largely by a <span class="font-bold text-[#2d2d2d]">12.9% reduction in overall spend</span>. Labor costs are cut by <span class="font-bold text-[#2d2d2d]">$1.04M</span> through a strategic headcount reduction of 8 positions and role transitions.
+                        The proposed optimization generates <span class="font-bold text-[#2d2d2d]">$1.18M in total savings</span>, driven largely by a <span class="font-bold text-[#2d2d2d]">10.8% reduction in overall spend</span>. Labor costs are reduced by <span class="font-bold text-[#2d2d2d]">$0.92M</span> through a targeted headcount reduction of 5 positions and scheduling changes.
                       </p>
                       <p id="output-summary-line-2" class="mt-2 text-[12px] text-[#4b4b4b]">
-                        The fleet is streamlined by 11 units, replacing smaller vans with higher-capacity bulk trucks to improve efficiency. Additionally, improved route sequencing has <span class="font-bold text-[#2d2d2d]">boosted revenue per drop by 23.7%</span>, increasing it to $1,382.
+                        The fleet is streamlined by 17 units, improving route efficiency and lowering miles by 240 per week. Additionally, improved sequencing has <span class="font-bold text-[#2d2d2d]">boosted revenue per drop by 11.9%</span>, increasing it to $1,245.
                       </p>
                     </div>
 
@@ -3933,24 +4120,24 @@
                           <span class="text-[11px] text-[#4b4b4b]">Profit to Serve</span>
                           <span class="material-icons text-[16px] text-[#4b4b4b]">show_chart</span>
                         </div>
-                        <div class="text-[16px] font-bold" data-output-value>+$00M</div>
-                        <span class="mt-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]" data-output-delta>+3.4 points</span>
+                        <div class="text-[16px] font-bold" data-output-value>+$1.18MM</div>
+                        <span class="mt-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]" data-output-delta>+3.2 points</span>
                       </div>
                       <div class="rounded-[8px] border border-[#d8e7fb] p-3" data-output-card="1">
                         <div class="flex items-center justify-between">
                           <span class="text-[11px] text-[#4b4b4b]">Weekly Hours</span>
                           <span class="material-icons text-[16px] text-[#4b4b4b]">event</span>
                         </div>
-                        <div class="text-[16px] font-bold" data-output-value>+00</div>
-                        <span class="mt-1 inline-flex rounded bg-[#FEECEA] px-2 py-[2px] text-[10px] font-bold text-[#C0392B]" data-output-delta>-05%</span>
+                        <div class="text-[16px] font-bold" data-output-value>-128</div>
+                        <span class="mt-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]" data-output-delta>-5%</span>
                       </div>
                       <div class="rounded-[8px] border border-[#d8e7fb] p-3" data-output-card="2">
                         <div class="flex items-center justify-between">
                           <span class="text-[11px] text-[#4b4b4b]">Weekly Miles</span>
                           <span class="material-icons text-[16px] text-[#4b4b4b]">bar_chart</span>
                         </div>
-                        <div class="text-[16px] font-bold" data-output-value>-200</div>
-                        <span class="mt-1 inline-flex rounded bg-[#FEECEA] px-2 py-[2px] text-[10px] font-bold text-[#C0392B]" data-output-delta>-00%</span>
+                        <div class="text-[16px] font-bold" data-output-value>-240</div>
+                        <span class="mt-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]" data-output-delta>-6%</span>
                       </div>
                       <div class="rounded-[8px] border border-[#d8e7fb] p-3" data-output-card="3">
                         <div class="flex items-center justify-between">
@@ -3958,23 +4145,23 @@
                           <span class="material-icons text-[16px] text-[#4b4b4b]">person</span>
                         </div>
                         <div class="text-[16px] font-bold" data-output-value>-5</div>
-                        <span class="mt-1 inline-flex rounded bg-[#FEECEA] px-2 py-[2px] text-[10px] font-bold text-[#C0392B]" data-output-delta>-5%</span>
+                        <span class="mt-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]" data-output-delta>-3%</span>
                       </div>
                       <div class="rounded-[8px] border border-[#d8e7fb] p-3" data-output-card="4">
                         <div class="flex items-center justify-between">
                           <span class="text-[11px] text-[#4b4b4b]">Weekly Deliveries</span>
                           <span class="material-icons text-[16px] text-[#4b4b4b]">event</span>
                         </div>
-                        <div class="text-[16px] font-bold" data-output-value>+00</div>
-                        <span class="mt-1 inline-flex rounded bg-[#FEECEA] px-2 py-[2px] text-[10px] font-bold text-[#C0392B]" data-output-delta>-00%</span>
+                        <div class="text-[16px] font-bold" data-output-value>-40</div>
+                        <span class="mt-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]" data-output-delta>-2%</span>
                       </div>
                       <div class="rounded-[8px] border border-[#d8e7fb] p-3" data-output-card="5">
                         <div class="flex items-center justify-between">
                           <span class="text-[11px] text-[#4b4b4b]">Drop Size Cases</span>
                           <span class="material-icons text-[16px] text-[#4b4b4b]">bar_chart</span>
                         </div>
-                        <div class="text-[16px] font-bold" data-output-value>+00</div>
-                        <span class="mt-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]" data-output-delta>+00%</span>
+                        <div class="text-[16px] font-bold" data-output-value>+15</div>
+                        <span class="mt-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]" data-output-delta>+12%</span>
                       </div>
                       <div class="rounded-[8px] border border-[#d8e7fb] p-3" data-output-card="6">
                         <div class="flex items-center justify-between">
@@ -3989,71 +4176,78 @@
                           <span class="text-[11px] text-[#4b4b4b]">Assets</span>
                           <span class="material-icons text-[16px] text-[#4b4b4b]">local_shipping</span>
                         </div>
-                        <div class="text-[16px] font-bold" data-output-value>+00</div>
-                        <span class="mt-1 inline-flex rounded bg-[#FEECEA] px-2 py-[2px] text-[10px] font-bold text-[#C0392B]" data-output-delta>-00%</span>
+                        <div class="text-[16px] font-bold" data-output-value>-17</div>
+                        <span class="mt-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]" data-output-delta>-6%</span>
                       </div>
                     </div>
                   </div>
 
                   <div class="mt-6 rounded-[12px] border border-[#d8e7fb] p-4">
-                    <div class="text-[14px] font-bold text-[#2d2d2d]">
-                      Profit to Serve - Sources of Value
-                    </div>
-                    <div id="output-waterfall" class="mt-4">
+                    <div id="output-waterfall" class="mt-2">
                       <div class="waterfall-chart">
+                        <div class="waterfall-header">
+                          <div class="waterfall-title">Profit to Serve - Sources of Value</div>
+                          <div class="waterfall-axis">
+                            Axis Scaling
+                            <div class="waterfall-axis-toggle">
+                              <span class="waterfall-axis-pill is-active">Fixed</span>
+                              <span class="waterfall-axis-pill">Auto</span>
+                            </div>
+                          </div>
+                        </div>
                         <div class="waterfall-body">
                           <div class="waterfall-y">
-                            <div>$700K</div>
-                            <div>$600K</div>
                             <div>$500K</div>
                             <div>$400K</div>
                             <div>$300K</div>
                             <div>$200K</div>
+                            <div>$100K</div>
+                            <div>0</div>
                           </div>
                           <div class="waterfall-plot">
-                            <div class="waterfall-col" style="--connector: 140px;">
-                              <div class="waterfall-bar is-start" style="--bar-bottom: 0px; --bar-height: 140px;">
-                                <span class="waterfall-value">$450K</span>
+                            <div class="waterfall-col" style="--connector: 120px;">
+                              <div class="waterfall-bar is-start" style="--bar-bottom: 0px; --bar-height: 120px;">
+                                <span class="waterfall-value">$250K</span>
                               </div>
                             </div>
-                            <div class="waterfall-col" style="--connector: 168px;">
-                              <div class="waterfall-bar is-positive" style="--bar-bottom: 140px; --bar-height: 28px;">
+                            <div class="waterfall-col" style="--connector: 144px;">
+                              <div class="waterfall-bar is-positive" style="--bar-bottom: 120px; --bar-height: 24px;">
                                 <span class="waterfall-value">+$50K</span>
                               </div>
                             </div>
-                            <div class="waterfall-col" style="--connector: 154px;">
-                              <div class="waterfall-bar is-negative" style="--bar-bottom: 154px; --bar-height: 14px;">
+                            <div class="waterfall-col" style="--connector: 132px;">
+                              <div class="waterfall-bar is-negative" style="--bar-bottom: 132px; --bar-height: 12px;">
                                 <span class="waterfall-value">-$25K</span>
                               </div>
                             </div>
-                            <div class="waterfall-col" style="--connector: 179.2px;">
-                              <div class="waterfall-bar is-positive" style="--bar-bottom: 154px; --bar-height: 25.2px;">
+                            <div class="waterfall-col" style="--connector: 153.6px;">
+                              <div class="waterfall-bar is-positive" style="--bar-bottom: 132px; --bar-height: 21.6px;">
                                 <span class="waterfall-value">+$45K</span>
                               </div>
                             </div>
-                            <div class="waterfall-col" style="--connector: 221.2px;">
-                              <div class="waterfall-bar is-positive" style="--bar-bottom: 179.2px; --bar-height: 42px;">
+                            <div class="waterfall-col" style="--connector: 189.6px;">
+                              <div class="waterfall-bar is-positive" style="--bar-bottom: 153.6px; --bar-height: 36px;">
                                 <span class="waterfall-value">+$75K</span>
                               </div>
                             </div>
-                            <div class="waterfall-col" style="--connector: 235.2px;">
-                              <div class="waterfall-bar is-positive" style="--bar-bottom: 221.2px; --bar-height: 14px;">
+                            <div class="waterfall-col" style="--connector: 201.6px;">
+                              <div class="waterfall-bar is-positive" style="--bar-bottom: 189.6px; --bar-height: 12px;">
                                 <span class="waterfall-value">+$25K</span>
                               </div>
                             </div>
-                            <div class="waterfall-col" style="--connector: 243.6px;">
-                              <div class="waterfall-bar is-positive" style="--bar-bottom: 235.2px; --bar-height: 8.4px;">
+                            <div class="waterfall-col" style="--connector: 208.8px;">
+                              <div class="waterfall-bar is-positive" style="--bar-bottom: 201.6px; --bar-height: 7.2px;">
                                 <span class="waterfall-value">+$15K</span>
                               </div>
                             </div>
-                            <div class="waterfall-col" style="--connector: 280px;">
-                              <div class="waterfall-bar is-positive" style="--bar-bottom: 243.6px; --bar-height: 36.4px;">
+                            <div class="waterfall-col" style="--connector: 240px;">
+                              <div class="waterfall-bar is-positive" style="--bar-bottom: 208.8px; --bar-height: 31.2px;">
                                 <span class="waterfall-value">+$65K</span>
                               </div>
                             </div>
                             <div class="waterfall-col">
-                              <div class="waterfall-bar is-total" style="--bar-bottom: 0px; --bar-height: 280px;">
-                                <span class="waterfall-value">750K</span>
+                              <div class="waterfall-bar is-total" style="--bar-bottom: 0px; --bar-height: 240px;">
+                                <span class="waterfall-value">$500K</span>
                               </div>
                             </div>
                           </div>
@@ -4077,15 +4271,66 @@
                     <div class="text-[16px] font-bold text-[#2d2d2d]">
                       Scenario Sensitivities
                     </div>
-                    <div class="mt-4 text-[12px] text-[#4b4b4b]">
-                      <div class="grid grid-cols-[1.3fr_1fr_1fr_1fr_1fr] border-b border-[#d8e7fb] pb-2 font-bold uppercase">
+                    <div class="sensitivities">
+                      <div class="sens-top">
+                        <div></div>
+                        <div class="sens-impact-label">Savings Impact ($MM)</div>
+                        <div></div>
+                      </div>
+                      <div class="sens-head">
                         <div>Sensitivity</div>
                         <div>Worse</div>
                         <div>Base</div>
                         <div>Better</div>
                         <div class="text-right">Total Savings Range</div>
                       </div>
-                      <div id="output-sensitivities" class="divide-y divide-[#d8e7fb]"></div>
+
+                      <div class="sens-row">
+                        <div class="sens-label">Labor Efficiency (+/- 10%)</div>
+                        <div class="sens-impact">
+                          <div
+                            class="sens-bar"
+                            style="--neg: 38%; --base: 12%; --pos: 50%; --center: 44%;"
+                          >
+                            <div class="sens-seg sens-neg">($1.5)MM</div>
+                            <div class="sens-seg sens-base"></div>
+                            <div class="sens-seg sens-pos">$1.1MM</div>
+                            <div class="sens-center"></div>
+                          </div>
+                          <div class="sens-axis">
+                            <span>-10%</span>
+                            <span class="sens-break">BREAK-EVEN:-8%</span>
+                            <span>+10%</span>
+                          </div>
+                        </div>
+                        <div class="sens-range">($3.3)MM - $3.2MM</div>
+                      </div>
+
+                      <div class="sens-row">
+                        <div class="sens-label">Wage Rates (+/- 5%)</div>
+                        <div class="sens-impact">
+                          <div
+                            class="sens-bar"
+                            style="--neg: 36%; --base: 10%; --pos: 54%; --center: 41%;"
+                          >
+                            <div class="sens-seg sens-neg">($1.5)MM</div>
+                            <div class="sens-seg sens-base"></div>
+                            <div class="sens-seg sens-pos">$1.1MM</div>
+                            <div class="sens-center"></div>
+                          </div>
+                          <div class="sens-axis">
+                            <span>-5%</span>
+                            <span class="sens-break">BREAK-EVEN:-3%</span>
+                            <span>+5%</span>
+                          </div>
+                        </div>
+                        <div class="sens-range">$0.5MM - $1.9MM</div>
+                      </div>
+
+                      <div class="sens-total">
+                        <div class="sens-total-label">Total Range</div>
+                        <div class="sens-total-value">($1.0)MM - $4.0MM</div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -6508,16 +6753,22 @@
         const random = createSeededRandom(seed);
         const randomBetween = (min, max) => min + random() * (max - min);
 
-        const totalSavings = randomBetween(0.8, 3.5);
-        const improvement = randomBetween(8, 15);
-        const reduction = randomBetween(10, 14);
-        const laborSavings = randomBetween(0.6, 1.6);
-        const headcountReduction = Math.round(randomBetween(6, 12));
-        const fleetReduction = Math.round(randomBetween(8, 14));
-        const revenueBoost = randomBetween(18, 28);
-        const revenuePerDrop = Math.round(randomBetween(1200, 1500));
+        const totalSavings = randomBetween(0.95, 3.1);
+        const marginPoints = randomBetween(2.4, 4.1);
+        const reduction = randomBetween(9.5, 13.2);
+        const laborSavings = totalSavings * randomBetween(0.62, 0.78);
+        const headcountReduction = Math.round(randomBetween(4, 10));
+        const fleetReduction = Math.round(randomBetween(10, 18));
+        const weeklyHours = -Math.round(randomBetween(90, 170));
+        const weeklyMiles = -Math.round(randomBetween(190, 320));
+        const weeklyDeliveries = -Math.round(randomBetween(25, 55));
+        const dropSize = Math.round(randomBetween(8, 18));
+        const netRevenuePerHour = randomBetween(1.6, 3.1);
+        const assets = -Math.round(randomBetween(12, 22));
+        const revenueBoost = randomBetween(9.0, 15.5);
+        const revenuePerDrop = Math.round(randomBetween(1180, 1385));
 
-        const startValue = randomBetween(2.0, 4.5);
+        const startValue = randomBetween(2.0, 4.2);
         const stepLabels = [
           "Wage Arbitrage",
           "Selling Labor Efficiency",
@@ -6529,12 +6780,12 @@
         ];
         const rawSteps = [
           randomBetween(0.2, 0.6),
-          -randomBetween(0.08, 0.25),
-          randomBetween(0.15, 0.45),
-          randomBetween(0.25, 0.7),
+          -randomBetween(0.08, 0.22),
+          randomBetween(0.15, 0.4),
+          randomBetween(0.25, 0.65),
           randomBetween(0.05, 0.2),
-          randomBetween(0.05, 0.2),
-          randomBetween(0.2, 0.6),
+          randomBetween(0.05, 0.18),
+          randomBetween(0.2, 0.55),
         ];
         const rawSum = rawSteps.reduce((sum, value) => sum + value, 0);
         const scale = totalSavings / rawSum;
@@ -6551,26 +6802,36 @@
           annualNr: formatMoneyMillions(randomBetween(12, 22)),
           annualCases: formatMillions(randomBetween(2.5, 4.5)),
           totalSavings: `$${totalSavings.toFixed(2)}M`,
-          improvement: `${formatSigned(improvement, "%")} IMPROVEMENT`,
+          improvement: `+${marginPoints.toFixed(1)} Points Margin Improvement`,
           summaryLine1: `The proposed optimization generates <span class="font-bold text-[#2d2d2d]">$${totalSavings.toFixed(
             2
           )}M in total savings</span>, driven largely by a <span class="font-bold text-[#2d2d2d]">${reduction.toFixed(
             1
-          )}% reduction in overall spend</span>. Labor costs are cut by <span class="font-bold text-[#2d2d2d]">$${laborSavings.toFixed(
+          )}% reduction in overall spend</span>. Labor costs are reduced by <span class="font-bold text-[#2d2d2d]">$${laborSavings.toFixed(
             2
-          )}M</span> through a strategic headcount reduction of ${headcountReduction} positions and role transitions.`,
-          summaryLine2: `The fleet is streamlined by ${fleetReduction} units, replacing smaller vans with higher-capacity bulk trucks to improve efficiency. Additionally, improved route sequencing has <span class="font-bold text-[#2d2d2d]">boosted revenue per drop by ${revenueBoost.toFixed(
+          )}M</span> through a targeted headcount reduction of ${headcountReduction} positions and scheduling changes.`,
+          summaryLine2: `The fleet is streamlined by ${fleetReduction} units, improving route efficiency and lowering miles by ${Math.abs(
+            weeklyMiles
+          )} per week. Additionally, improved sequencing has <span class="font-bold text-[#2d2d2d]">boosted revenue per drop by ${revenueBoost.toFixed(
             1
           )}%</span>, increasing it to $${revenuePerDrop.toLocaleString()}.`,
           cards: [
-            { value: `${formatSigned(totalSavings)}M`, delta: "+3.4 points", trend: "up" },
-            { value: formatSignedInt(randomBetween(-5, 5)), delta: "-05%", trend: "down" },
-            { value: formatSignedInt(randomBetween(-300, -80)), delta: "-00%", trend: "down" },
-            { value: formatSignedInt(-headcountReduction), delta: "-5%", trend: "down" },
-            { value: formatSignedInt(randomBetween(-5, 5)), delta: "-00%", trend: "down" },
-            { value: formatSignedInt(randomBetween(0, 20)), delta: "+00%", trend: "up" },
-            { value: `+$${randomBetween(1.5, 3.2).toFixed(2)}`, delta: `+${improvement.toFixed(1)}%`, trend: "up" },
-            { value: formatSignedInt(randomBetween(-5, 5)), delta: "-00%", trend: "down" },
+            {
+              value: `+$${totalSavings.toFixed(2)}MM`,
+              delta: `+${marginPoints.toFixed(1)} points`,
+              trend: "up",
+            },
+            { value: formatSignedInt(weeklyHours), delta: "-5%", trend: "up" },
+            { value: formatSignedInt(weeklyMiles), delta: "-6%", trend: "up" },
+            { value: formatSignedInt(-headcountReduction), delta: "-3%", trend: "up" },
+            { value: formatSignedInt(weeklyDeliveries), delta: "-2%", trend: "up" },
+            { value: formatSignedInt(dropSize), delta: "+12%", trend: "up" },
+            {
+              value: `+$${netRevenuePerHour.toFixed(2)}`,
+              delta: `+${revenueBoost.toFixed(1)}%`,
+              trend: "up",
+            },
+            { value: formatSignedInt(assets), delta: "-6%", trend: "up" },
           ],
           waterfall: {
             start: startValue,
