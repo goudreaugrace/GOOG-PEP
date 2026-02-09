@@ -214,85 +214,103 @@
       .waterfall-chart {
         border-radius: 8px;
         background: #fff;
-        padding: 8px 10px 10px 10px;
+        padding: 24px;
         width: 100%;
+        box-shadow: 0 0 24px rgba(0, 94, 192, 0.08);
       }
       .waterfall-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 6px;
+        margin-bottom: 24px;
       }
       .waterfall-title {
-        font-size: 10px;
+        font-size: 14px;
         font-weight: 700;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.02em;
         text-transform: uppercase;
-        color: #6f6f6f;
+        color: #616161;
       }
       .waterfall-axis {
         display: flex;
         align-items: center;
-        gap: 6px;
-        font-size: 10px;
+        gap: 10px;
+        font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.03em;
         text-transform: uppercase;
-        color: #8a8a8a;
+        color: #616161;
       }
       .waterfall-axis-toggle {
         display: inline-flex;
         align-items: center;
         gap: 2px;
-        border: 1px solid #dfe9fb;
+        border: 1px solid #d8e7fb;
         border-radius: 8px;
         padding: 2px;
-        background: #fff;
+        background: #f5f9ff;
       }
       .waterfall-axis-pill {
-        padding: 2px 8px;
-        border-radius: 6px;
-        font-size: 10px;
+        height: 32px;
+        padding: 0 12px;
+        border-radius: 8px;
+        font-size: 12px;
         font-weight: 700;
-        color: #7a7a7a;
+        color: #2d2d2d;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
       }
       .waterfall-axis-pill.is-active {
-        background: #e7f0ff;
-        color: #1b5bd6;
+        background: #fff;
+        border: 1px solid #004895;
+        color: #004895;
       }
       .waterfall-body {
         display: flex;
-        gap: 10px;
+        gap: 24px;
         align-items: stretch;
         width: 100%;
       }
       .waterfall-y {
-        width: 46px;
-        height: 240px;
+        width: 64px;
+        height: 384px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        font-size: 10px;
-        color: #7a7a7a;
-        padding-right: 6px;
+        font-size: 12px;
+        color: #616161;
+        padding-right: 8px;
       }
       .waterfall-plot {
         position: relative;
         display: grid;
         grid-template-columns: repeat(9, minmax(0, 1fr));
-        gap: 10px;
-        height: 240px;
+        gap: 24px;
+        height: 384px;
         width: 100%;
         flex: 1;
         min-width: 0;
+        overflow: hidden;
         background-image: repeating-linear-gradient(
           to top,
-          #ededed 0,
-          #ededed 1px,
+          #dfdfdf 0,
+          #dfdfdf 1px,
           transparent 1px,
-          transparent 48px
+          transparent var(--grid-step, 76px)
         );
-        border-bottom: 1px solid #ededed;
+        border-top: 1px solid #dfdfdf;
+      }
+      .waterfall-plot::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1px;
+        background: #dfdfdf;
+        z-index: 999;
+        pointer-events: none;
       }
       .waterfall-col {
         position: relative;
@@ -302,18 +320,18 @@
         content: "";
         position: absolute;
         left: 50%;
-        width: calc(100% + 10px);
+        width: calc(100% + 24px);
         border-top: 1px dotted #cfcfcf;
         bottom: var(--connector, -9999px);
-        z-index: 1;
+        z-index: 0;
       }
       .waterfall-col:last-child::after {
         display: none;
       }
       .waterfall-bar {
         position: absolute;
-        left: 14%;
-        width: 72%;
+        left: 20%;
+        width: 60%;
         bottom: var(--bar-bottom);
         height: var(--bar-height);
         min-height: 10px;
@@ -321,44 +339,55 @@
         display: block;
         overflow: visible;
         box-sizing: border-box;
-        z-index: 2;
+        z-index: 1;
       }
       .waterfall-bar.is-start {
-        background: #4a4a4a;
+        background: #4b4b4b;
       }
       .waterfall-bar.is-positive {
-        background: #0a7d24;
+        background: #027c06;
       }
       .waterfall-bar.is-negative {
-        background: #b23a1a;
+        background: #c12c01;
       }
       .waterfall-bar.is-total {
-        background: #d9d9d9;
+        background: #dadada;
       }
       .waterfall-value {
         position: absolute;
         top: 3px;
         left: 50%;
         transform: translateX(-50%);
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 700;
         color: #fff;
         line-height: 1;
         white-space: nowrap;
         text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
       }
+      .waterfall-value.is-outside {
+        top: -16px;
+        color: #2d2d2d;
+        text-shadow: none;
+      }
+      .waterfall-value.is-outside.is-below {
+        top: auto;
+        bottom: -16px;
+      }
       .waterfall-bar.is-total .waterfall-value {
-        color: #4b4b4b;
+        color: #2d2d2d;
+        text-shadow: none;
       }
       .waterfall-x {
-        margin-left: 52px;
-        margin-top: 6px;
+        margin-left: 88px;
+        margin-top: 8px;
         display: grid;
         grid-template-columns: repeat(9, minmax(0, 1fr));
-        gap: 10px;
-        font-size: 10px;
-        color: #7a7a7a;
+        gap: 24px;
+        font-size: 12px;
+        color: #616161;
         text-align: center;
+        line-height: 1.4;
       }
       .elevation-shadow {
         box-shadow: 0 0 24px rgba(0, 94, 192, 0.08);
@@ -4089,185 +4118,160 @@
             <div class="flex flex-col gap-6">
               <div class="rounded-[12px] bg-white p-6 elevation-shadow">
                 <div data-output-panel="summary">
-                  <span class="inline-flex rounded-full bg-[#0662C4] px-2 py-[2px] text-[10px] font-bold text-white">
-                    Generated by AI
-                  </span>
-                  <div class="mt-2 flex items-center gap-2">
-                    <span class="material-icons text-[18px] text-[#4b4b4b]">
-                      bar_chart
-                    </span>
-                    <div id="output-total-savings" class="text-[16px] font-bold text-[#2d2d2d]">
-                      $1.18M Total Savings
-                    </div>
-                  </div>
-
-                  <div class="mt-4 flex flex-col gap-6">
-                    <div class="text-[13px] text-[#2d2d2d]">
-                      <div id="output-improvement" class="text-[13px] font-bold text-[#008A3B]">
-                        +3.2 Points Margin Improvement
+                  <div
+                    class="rounded-[8px] p-6 elevation-shadow"
+                    style="background-image:linear-gradient(96.1425deg,#ffffff 1.2699%,#e4edfe 52.945%,#dbe8fe 80.606%,#f5f9ff 97.058%)"
+                  >
+                    <div class="flex items-center justify-between">
+                      <span class="material-icons text-[24px] text-[#444746]">auto_awesome</span>
+                      <div class="flex items-center gap-1 rounded-full bg-[#0662c4] px-2 py-1 text-[11px] font-bold text-white">
+                        <span class="material-icons text-[16px] text-white">auto_awesome</span>
+                        Generated by AI
                       </div>
-                      <p id="output-summary-line-1" class="mt-2 text-[12px] text-[#4b4b4b]">
-                        The proposed optimization generates <span class="font-bold text-[#2d2d2d]">$1.18M in total savings</span>, driven largely by a <span class="font-bold text-[#2d2d2d]">10.8% reduction in overall spend</span>. Labor costs are reduced by <span class="font-bold text-[#2d2d2d]">$0.92M</span> through a targeted headcount reduction of 5 positions and scheduling changes.
+                    </div>
+
+                    <div id="output-total-savings" class="mt-4 text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                      $1.24MM Total Savings
+                    </div>
+
+                    <div class="mt-4 flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-12">
+                    <div class="w-[394px] shrink-0">
+                      <div
+                        id="output-improvement"
+                        class="text-[16px] font-bold uppercase leading-[24px] text-[#027c06]"
+                      >
+                        +3.4 points pts improvement
+                      </div>
+                      <p id="output-summary-line-1" class="mt-1 text-[14px] leading-[22px] text-[#2d2d2d]">
+                        The proposed optimization generates <span class="font-bold">$1.24M in total savings</span>, driven largely by a <span class="font-bold">12.9% reduction in overall spend</span>. Labor costs are <span class="font-bold">cut by $1.04M through a strategic headcount reduction</span> of 8 positions and role transitions.
                       </p>
-                      <p id="output-summary-line-2" class="mt-2 text-[12px] text-[#4b4b4b]">
-                        The fleet is streamlined by 17 units, improving route efficiency and lowering miles by 240 per week. Additionally, improved sequencing has <span class="font-bold text-[#2d2d2d]">boosted revenue per drop by 11.9%</span>, increasing it to $1,245.
+                      <p id="output-summary-line-2" class="mt-2 text-[14px] leading-[22px] text-[#2d2d2d]">
+                        The fleet is being streamlined by 11 units, replacing smaller vans with higher-capacity bulk trucks to improve efficiency. Additionally, improved route sequencing has <span class="font-bold">boosted revenue per drop by 23.7%</span>, increasing it to $1,382.
                       </p>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-3 text-[12px] text-[#2d2d2d] lg:grid-cols-4">
-                      <div class="rounded-[8px] border border-[#d8e7fb] p-3" data-output-card="0">
-                        <div class="flex items-center justify-between">
-                          <span class="text-[11px] text-[#4b4b4b]">Profit to Serve</span>
-                          <span class="material-icons text-[16px] text-[#4b4b4b]">show_chart</span>
-                        </div>
-                        <div class="text-[16px] font-bold" data-output-value>+$1.18MM</div>
-                        <span class="mt-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]" data-output-delta>+3.2 points</span>
-                      </div>
-                      <div class="rounded-[8px] border border-[#d8e7fb] p-3" data-output-card="1">
-                        <div class="flex items-center justify-between">
-                          <span class="text-[11px] text-[#4b4b4b]">Weekly Hours</span>
-                          <span class="material-icons text-[16px] text-[#4b4b4b]">event</span>
-                        </div>
-                        <div class="text-[16px] font-bold" data-output-value>-128</div>
-                        <span class="mt-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]" data-output-delta>-5%</span>
-                      </div>
-                      <div class="rounded-[8px] border border-[#d8e7fb] p-3" data-output-card="2">
-                        <div class="flex items-center justify-between">
-                          <span class="text-[11px] text-[#4b4b4b]">Weekly Miles</span>
-                          <span class="material-icons text-[16px] text-[#4b4b4b]">bar_chart</span>
-                        </div>
-                        <div class="text-[16px] font-bold" data-output-value>-240</div>
-                        <span class="mt-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]" data-output-delta>-6%</span>
-                      </div>
-                      <div class="rounded-[8px] border border-[#d8e7fb] p-3" data-output-card="3">
-                        <div class="flex items-center justify-between">
-                          <span class="text-[11px] text-[#4b4b4b]">Headcount</span>
-                          <span class="material-icons text-[16px] text-[#4b4b4b]">person</span>
-                        </div>
-                        <div class="text-[16px] font-bold" data-output-value>-5</div>
-                        <span class="mt-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]" data-output-delta>-3%</span>
-                      </div>
-                      <div class="rounded-[8px] border border-[#d8e7fb] p-3" data-output-card="4">
-                        <div class="flex items-center justify-between">
-                          <span class="text-[11px] text-[#4b4b4b]">Weekly Deliveries</span>
-                          <span class="material-icons text-[16px] text-[#4b4b4b]">event</span>
-                        </div>
-                        <div class="text-[16px] font-bold" data-output-value>-40</div>
-                        <span class="mt-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]" data-output-delta>-2%</span>
-                      </div>
-                      <div class="rounded-[8px] border border-[#d8e7fb] p-3" data-output-card="5">
-                        <div class="flex items-center justify-between">
-                          <span class="text-[11px] text-[#4b4b4b]">Drop Size Cases</span>
-                          <span class="material-icons text-[16px] text-[#4b4b4b]">bar_chart</span>
-                        </div>
-                        <div class="text-[16px] font-bold" data-output-value>+15</div>
-                        <span class="mt-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]" data-output-delta>+12%</span>
-                      </div>
-                      <div class="rounded-[8px] border border-[#d8e7fb] p-3" data-output-card="6">
-                        <div class="flex items-center justify-between">
-                          <span class="text-[11px] text-[#4b4b4b]">Net Revenue/hour</span>
-                          <span class="material-icons text-[16px] text-[#4b4b4b]">attach_money</span>
-                        </div>
-                        <div class="text-[16px] font-bold" data-output-value>+$2.50</div>
-                        <span class="mt-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]" data-output-delta>+11.9%</span>
-                      </div>
-                      <div class="rounded-[8px] border border-[#d8e7fb] p-3" data-output-card="7">
-                        <div class="flex items-center justify-between">
-                          <span class="text-[11px] text-[#4b4b4b]">Assets</span>
-                          <span class="material-icons text-[16px] text-[#4b4b4b]">local_shipping</span>
-                        </div>
-                        <div class="text-[16px] font-bold" data-output-value>-17</div>
-                        <span class="mt-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]" data-output-delta>-6%</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="mt-6 rounded-[12px] border border-[#d8e7fb] p-4">
-                    <div id="output-waterfall" class="mt-2">
-                      <div class="waterfall-chart">
-                        <div class="waterfall-header">
-                          <div class="waterfall-title">Profit to Serve - Sources of Value</div>
-                          <div class="waterfall-axis">
-                            Axis Scaling
-                            <div class="waterfall-axis-toggle">
-                              <span class="waterfall-axis-pill is-active">Fixed</span>
-                              <span class="waterfall-axis-pill">Auto</span>
+                    <div class="flex-1">
+                      <div class="grid grid-cols-4 gap-2">
+                        <div class="rounded-[8px] border border-[#d8e7fb] bg-white p-2" data-output-card="0">
+                          <div class="flex items-start justify-between gap-2">
+                            <div>
+                              <div class="text-[11px] text-[#4b4b4b] opacity-90">Profit to Serve</div>
+                              <div class="text-[18px] font-bold leading-[24px] text-[#2d2d2d]" data-output-value>+$1.24MM</div>
+                              <span class="mt-2 inline-flex h-[24px] items-center rounded-[4px] px-2 text-[12px] font-bold" data-output-delta>+3.4 points</span>
                             </div>
+                              <div class="flex h-6 w-6 items-center justify-center">
+                                <img alt="" class="h-5 w-5 object-contain" src="https://www.figma.com/api/mcp/asset/638a1d15-7282-49ee-94fe-95900a61ba45" />
+                              </div>
                           </div>
                         </div>
-                        <div class="waterfall-body">
-                          <div class="waterfall-y">
-                            <div>$500K</div>
-                            <div>$400K</div>
-                            <div>$300K</div>
-                            <div>$200K</div>
-                            <div>$100K</div>
-                            <div>0</div>
-                          </div>
-                          <div class="waterfall-plot">
-                            <div class="waterfall-col" style="--connector: 120px;">
-                              <div class="waterfall-bar is-start" style="--bar-bottom: 0px; --bar-height: 120px;">
-                                <span class="waterfall-value">$250K</span>
-                              </div>
+                        <div class="rounded-[8px] border border-[#d8e7fb] bg-white p-2" data-output-card="1">
+                          <div class="flex items-start justify-between gap-2">
+                            <div>
+                              <div class="text-[11px] text-[#4b4b4b] opacity-90">Weekly Hours</div>
+                              <div class="text-[18px] font-bold leading-[24px] text-[#2d2d2d]" data-output-value>-128</div>
+                              <span class="mt-2 inline-flex h-[24px] items-center rounded-[4px] px-2 text-[12px] font-bold" data-output-delta>-5%</span>
                             </div>
-                            <div class="waterfall-col" style="--connector: 144px;">
-                              <div class="waterfall-bar is-positive" style="--bar-bottom: 120px; --bar-height: 24px;">
-                                <span class="waterfall-value">+$50K</span>
+                              <div class="flex h-6 w-6 items-center justify-center">
+                                <img alt="" class="h-5 w-5 object-contain" src="https://www.figma.com/api/mcp/asset/9a132361-ed74-41e7-b1ed-543e8b294b3f" />
                               </div>
-                            </div>
-                            <div class="waterfall-col" style="--connector: 132px;">
-                              <div class="waterfall-bar is-negative" style="--bar-bottom: 132px; --bar-height: 12px;">
-                                <span class="waterfall-value">-$25K</span>
-                              </div>
-                            </div>
-                            <div class="waterfall-col" style="--connector: 153.6px;">
-                              <div class="waterfall-bar is-positive" style="--bar-bottom: 132px; --bar-height: 21.6px;">
-                                <span class="waterfall-value">+$45K</span>
-                              </div>
-                            </div>
-                            <div class="waterfall-col" style="--connector: 189.6px;">
-                              <div class="waterfall-bar is-positive" style="--bar-bottom: 153.6px; --bar-height: 36px;">
-                                <span class="waterfall-value">+$75K</span>
-                              </div>
-                            </div>
-                            <div class="waterfall-col" style="--connector: 201.6px;">
-                              <div class="waterfall-bar is-positive" style="--bar-bottom: 189.6px; --bar-height: 12px;">
-                                <span class="waterfall-value">+$25K</span>
-                              </div>
-                            </div>
-                            <div class="waterfall-col" style="--connector: 208.8px;">
-                              <div class="waterfall-bar is-positive" style="--bar-bottom: 201.6px; --bar-height: 7.2px;">
-                                <span class="waterfall-value">+$15K</span>
-                              </div>
-                            </div>
-                            <div class="waterfall-col" style="--connector: 240px;">
-                              <div class="waterfall-bar is-positive" style="--bar-bottom: 208.8px; --bar-height: 31.2px;">
-                                <span class="waterfall-value">+$65K</span>
-                              </div>
-                            </div>
-                            <div class="waterfall-col">
-                              <div class="waterfall-bar is-total" style="--bar-bottom: 0px; --bar-height: 240px;">
-                                <span class="waterfall-value">$500K</span>
-                              </div>
-                            </div>
                           </div>
                         </div>
-                        <div class="waterfall-x">
-                          <div>From</div>
-                          <div>Wage Arbitrage</div>
-                          <div>Labor Hours &amp;<br />Headcount</div>
-                          <div>Frontline<br />Management</div>
-                          <div>Delivery Fleet<br />Miles</div>
-                          <div>Personal<br />Mileage</div>
-                          <div>Number of Assets/<br />Depreciation</div>
-                          <div>Asset Operating<br />Costs (R&amp;M, Fuel)</div>
-                          <div>To</div>
+                        <div class="rounded-[8px] border border-[#d8e7fb] bg-white p-2" data-output-card="2">
+                          <div class="flex items-start justify-between gap-2">
+                            <div>
+                              <div class="text-[11px] text-[#4b4b4b] opacity-90">Weekly Miles</div>
+                              <div class="text-[18px] font-bold leading-[24px] text-[#2d2d2d]" data-output-value>-240</div>
+                              <span class="mt-2 inline-flex h-[24px] items-center rounded-[4px] px-2 text-[12px] font-bold" data-output-delta>-5%</span>
+                            </div>
+                              <div class="flex h-6 w-6 items-center justify-center">
+                                <img alt="" class="h-5 w-5 object-contain" src="https://www.figma.com/api/mcp/asset/b813f299-b67a-47bc-848f-a050b5bf2b9d" />
+                              </div>
+                          </div>
+                        </div>
+                        <div class="rounded-[8px] border border-[#d8e7fb] bg-white p-2" data-output-card="3">
+                          <div class="flex items-start justify-between gap-2">
+                            <div>
+                              <div class="text-[11px] text-[#4b4b4b] opacity-90">Headcount</div>
+                              <div class="text-[18px] font-bold leading-[24px] text-[#2d2d2d]" data-output-value>-5</div>
+                              <span class="mt-2 inline-flex h-[24px] items-center rounded-[4px] px-2 text-[12px] font-bold" data-output-delta>-2%</span>
+                            </div>
+                              <div class="flex h-6 w-6 items-center justify-center">
+                                <img alt="" class="h-5 w-5 object-contain" src="https://www.figma.com/api/mcp/asset/2bb194f5-21c2-48dd-8824-3cde880b711c" />
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mt-2 grid grid-cols-4 gap-2">
+                        <div class="rounded-[8px] border border-[#d8e7fb] bg-white p-2" data-output-card="4">
+                          <div class="flex items-start justify-between gap-2">
+                            <div>
+                              <div class="text-[11px] text-[#4b4b4b] opacity-90">Weekly Deliveries</div>
+                              <div class="text-[18px] font-bold leading-[24px] text-[#2d2d2d]" data-output-value>-40</div>
+                              <span class="mt-2 inline-flex h-[24px] items-center rounded-[4px] px-2 text-[12px] font-bold" data-output-delta>-2%</span>
+                            </div>
+                              <div class="flex h-6 w-6 items-center justify-center">
+                                <img alt="" class="h-5 w-5 object-contain" src="https://www.figma.com/api/mcp/asset/0b681de0-ca7a-4db3-ac82-f82f23ddc013" />
+                              </div>
+                          </div>
+                        </div>
+                        <div class="rounded-[8px] border border-[#d8e7fb] bg-white p-2" data-output-card="5">
+                          <div class="flex items-start justify-between gap-2">
+                            <div>
+                              <div class="text-[11px] text-[#4b4b4b] opacity-90">Drop Size Cases</div>
+                              <div class="text-[18px] font-bold leading-[24px] text-[#2d2d2d]" data-output-value>+15</div>
+                              <span class="mt-2 inline-flex h-[24px] items-center rounded-[4px] px-2 text-[12px] font-bold" data-output-delta>+12%</span>
+                            </div>
+                              <div class="flex h-6 w-6 items-center justify-center">
+                                <img alt="" class="h-5 w-5 object-contain" src="https://www.figma.com/api/mcp/asset/e9dc0c09-39f7-45d2-85c3-6faf0309eba4" />
+                              </div>
+                          </div>
+                        </div>
+                        <div class="rounded-[8px] border border-[#d8e7fb] bg-white p-2" data-output-card="6">
+                          <div class="flex items-start justify-between gap-2">
+                            <div>
+                              <div class="text-[11px] text-[#4b4b4b] opacity-90">Net Revenue/hour</div>
+                              <div class="text-[18px] font-bold leading-[24px] text-[#2d2d2d]" data-output-value>+$2.50</div>
+                              <span class="mt-2 inline-flex h-[24px] items-center rounded-[4px] px-2 text-[12px] font-bold" data-output-delta>+11.9%</span>
+                            </div>
+                              <div class="flex h-6 w-6 items-center justify-center">
+                                <img alt="" class="h-5 w-5 object-contain" src="https://www.figma.com/api/mcp/asset/e2d65471-17c7-465d-9815-9b0caf344cf8" />
+                              </div>
+                          </div>
+                        </div>
+                        <div class="rounded-[8px] border border-[#d8e7fb] bg-white p-2" data-output-card="7">
+                          <div class="flex items-start justify-between gap-2">
+                            <div>
+                              <div class="text-[11px] text-[#4b4b4b] opacity-90">Assets</div>
+                              <div class="text-[18px] font-bold leading-[24px] text-[#2d2d2d]" data-output-value>-17</div>
+                              <span class="mt-2 inline-flex h-[24px] items-center rounded-[4px] px-2 text-[12px] font-bold" data-output-delta>-6%</span>
+                            </div>
+                              <div class="flex h-6 w-6 items-center justify-center">
+                                <img alt="" class="h-5 w-5 object-contain" src="https://www.figma.com/api/mcp/asset/44f2665a-495d-438a-8ee5-7ad940057f85" />
+                              </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                  </div>
 
-                  <div class="mt-6 rounded-[12px] border border-[#d8e7fb] p-4">
+                  <div class="mt-6">
+                    <div class="waterfall-chart">
+                      <div class="waterfall-header">
+                        <div class="waterfall-title">Profit to Serve - Sources of Value</div>
+                        <div class="waterfall-axis">
+                          Axis Scaling
+                          <div class="waterfall-axis-toggle">
+                            <span class="waterfall-axis-pill is-active">Fixed</span>
+                            <span class="waterfall-axis-pill">Auto</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="output-waterfall"></div>
+                    </div>
+                  </div>
+
+                  <div class="mt-6 waterfall-chart">
                     <div class="text-[16px] font-bold text-[#2d2d2d]">
                       Scenario Sensitivities
                     </div>
@@ -4336,14 +4340,15 @@
                 </div>
 
                 <div class="hidden" data-output-panel="details">
-                  <div class="rounded-[12px] border border-[#d8e7fb] p-4 text-[14px] text-[#4b4b4b]">
-                    From/To details placeholder.
-                  </div>
+                  <div id="output-fromto" class="flex flex-col gap-6"></div>
                 </div>
 
                 <div class="hidden" data-output-panel="insights">
-                  <div class="rounded-[12px] border border-[#d8e7fb] p-4 text-[14px] text-[#4b4b4b]">
-                    Input parameters placeholder.
+                  <div class="flex flex-col gap-4">
+                    <div class="text-[12px] text-[#4b4b4b]">
+                      View-only inputs used to generate this scenario.
+                    </div>
+                    <div id="output-input-parameters" class="w-full"></div>
                   </div>
                 </div>
               </div>
@@ -4370,9 +4375,12 @@
                 <span class="material-icons text-[20px] text-[#4b4b4b]">auto_awesome</span>
                 <span id="compare-title" class="text-[24px] font-bold text-[#2d2d2d]"></span>
               </div>
-              <div class="flex flex-col gap-2">
-                <div id="compare-tile-row-1" class="flex items-center"></div>
-                <div id="compare-tile-row-2" class="flex items-center"></div>
+              <div class="flex flex-col px-4">
+                <div
+                  id="compare-tile-row-1"
+                  class="flex items-center gap-6 border-b border-[#e8e8e8] py-3"
+                ></div>
+                <div id="compare-tile-row-2" class="flex items-center gap-6 py-3"></div>
               </div>
             </div>
           </div>
@@ -4388,16 +4396,16 @@
             <table class="w-full border-collapse">
               <thead>
                 <tr class="border-b border-[#e8e8e8]">
-                  <th class="w-[25%] py-3 pl-6 pr-4 text-left text-[12px] font-bold uppercase tracking-wide text-[#2d2d2d]">
+                  <th class="w-[25%] py-4 pl-6 pr-6 text-left text-[12px] font-bold uppercase tracking-wide text-[#2d2d2d]">
                     <div class="flex items-center gap-1">Comparison Metric <span class="material-icons text-[14px] text-[#4b4b4b]">unfold_more</span></div>
                   </th>
-                  <th class="w-[25%] py-3 px-4 text-left text-[12px] font-bold uppercase tracking-wide text-[#2d2d2d]">
+                  <th class="w-[25%] py-4 px-6 text-left text-[12px] font-bold uppercase tracking-wide text-[#2d2d2d]">
                     <div class="flex items-center gap-1">Scenario 1 <span class="material-icons text-[14px] text-[#4b4b4b]">unfold_more</span></div>
                   </th>
-                  <th class="w-[25%] py-3 px-4 text-left text-[12px] font-bold uppercase tracking-wide text-[#2d2d2d]">
+                  <th class="w-[25%] border-l border-[#e8e8e8] py-4 pl-6 pr-6 text-left text-[12px] font-bold uppercase tracking-wide text-[#2d2d2d]">
                     <div class="flex items-center gap-1">Scenario 2 <span class="material-icons text-[14px] text-[#4b4b4b]">unfold_more</span></div>
                   </th>
-                  <th class="w-[25%] py-3 px-4 text-left text-[12px] font-bold uppercase tracking-wide text-[#2d2d2d]">
+                  <th class="w-[25%] py-4 px-6 text-left text-[12px] font-bold uppercase tracking-wide text-[#2d2d2d]">
                     <div class="flex items-center gap-1">S2 B(W) S1 <span class="material-icons text-[14px] text-[#4b4b4b]">unfold_more</span></div>
                   </th>
                 </tr>
@@ -4862,6 +4870,10 @@
       const outputPanels = Array.from(
         document.querySelectorAll("[data-output-panel]")
       );
+      const outputInputParameters = document.getElementById(
+        "output-input-parameters"
+      );
+      const outputFromTo = document.getElementById("output-fromto");
       const draftModal = document.getElementById("draft-modal");
       const draftModalConfirm = document.getElementById("draft-modal-confirm");
       const draftModalCancel = document.getElementById("draft-modal-cancel");
@@ -5194,6 +5206,9 @@
 
       let currentView = "workspace";
       function setView(view) {
+        if (currentView === "workspace" && view !== "workspace") {
+          clearSelections();
+        }
         const showWorkspace = view === "workspace";
         const showScenario = view === "scenario";
         const showBaseline = view === "baseline";
@@ -5923,6 +5938,46 @@
         applyDraftState(draftState);
       }
 
+      const buildOutputInputParameters = () => {
+        if (!outputInputParameters || outputInputParameters.dataset.ready === "true") {
+          return;
+        }
+        const sourceCard = defineParametersView?.querySelector(".rounded-lg.bg-white");
+        if (!sourceCard) {
+          return;
+        }
+        const clone = sourceCard.cloneNode(true);
+        clone.querySelectorAll("[id]").forEach((el) => el.removeAttribute("id"));
+        clone.querySelectorAll("input, select, textarea, button").forEach((el) => {
+          if (el.classList.contains("define-parameters-tab")) {
+            return;
+          }
+          el.setAttribute("disabled", "true");
+          el.classList.add("cursor-not-allowed");
+        });
+        const tabs = Array.from(clone.querySelectorAll(".define-parameters-tab"));
+        const panels = Array.from(clone.querySelectorAll("[data-define-panel]"));
+        const setActiveTab = (label) => {
+          tabs.forEach((tab) => {
+            const isActive = tab.dataset.defineTab === label;
+            tab.classList.toggle("border-l-2", isActive);
+            tab.classList.toggle("border-[#004895]", isActive);
+            tab.classList.toggle("font-bold", isActive);
+            tab.classList.toggle("border-l", !isActive);
+            tab.classList.toggle("border-[#d8e7fb]", !isActive);
+          });
+          panels.forEach((panel) => {
+            panel.classList.toggle("hidden", panel.dataset.definePanel !== label);
+          });
+        };
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", () => setActiveTab(tab.dataset.defineTab));
+        });
+        setActiveTab("Facilities");
+        outputInputParameters.appendChild(clone);
+        outputInputParameters.dataset.ready = "true";
+      };
+
       const setOutputTab = (activeTab) => {
         outputTabs.forEach((tab) => {
           const isActive = tab.dataset.outputTab === activeTab;
@@ -5939,6 +5994,9 @@
             panel.dataset.outputPanel !== activeTab
           );
         });
+        if (activeTab === "insights") {
+          buildOutputInputParameters();
+        }
       };
 
       const openOutputScenario = (scenario) => {
@@ -6861,11 +6919,6 @@
         if (!container) {
           return;
         }
-        const width = Math.max(640, container.getBoundingClientRect().width || 740);
-        const height = 220;
-        const paddingTop = 10;
-        const paddingBottom = 50;
-        const chartHeight = height - paddingTop - paddingBottom;
         const steps = [
           { label: "From", value: data.start, type: "total" },
           ...data.steps.map((step) => ({ ...step, type: "delta" })),
@@ -6878,51 +6931,67 @@
           cumulative += step.value;
           values.push(cumulative);
         });
-        const min = Math.min(...values);
-        const max = Math.max(...values);
-        const scale = chartHeight / (max - min || 1);
-        const baselineY = paddingTop + (max - data.start) * scale;
-        const barWidth = Math.max(24, Math.floor((width - 80) / (steps.length * 1.8)));
-        const gap = Math.max(18, Math.floor((width - 80 - barWidth * steps.length) / (steps.length - 1)));
-        const startX = 20;
+
+        const maxValue = Math.max(...values);
+        const minValue = Math.min(...values);
+        const padding = Math.max(0.05, (maxValue - minValue) * 0.08);
+        const displayMin = Math.max(0, Math.floor((minValue - padding) * 10) / 10);
+        const displayMax = Math.max(displayMin + 0.1, Math.ceil((maxValue + padding) * 10) / 10);
+        const plotHeight = 384;
+        const gridLines = 6;
+        const gridStep = plotHeight / (gridLines - 1);
+        const scale = plotHeight / (displayMax - displayMin);
+
+        const formatK = (value, sign = "") => {
+          const kValue = Math.round(value * 1000);
+          return `${sign}$${kValue}K`;
+        };
+
+        const yLabels = Array.from({ length: gridLines }, (_, index) => {
+          const value = displayMax - ((displayMax - displayMin) / (gridLines - 1)) * index;
+          return `$${Math.round(value * 1000)}K`;
+        });
 
         let current = data.start;
         const bars = steps.map((step, index) => {
-          const x = startX + index * (barWidth + gap);
-          let y;
-          let h;
+          let topVal;
+          let bottomVal;
           if (step.type === "total") {
-            const topVal = step.value;
-            const yTop = paddingTop + (max - topVal) * scale;
-            const yBottom = paddingTop + (max - min) * scale;
-            y = yTop;
-            h = yBottom - yTop;
+            topVal = step.value;
+            bottomVal = displayMin;
+            current = step.value;
           } else {
             const next = current + step.value;
-            const topVal = Math.max(current, next);
-            const bottomVal = Math.min(current, next);
-            y = paddingTop + (max - topVal) * scale;
-            h = (topVal - bottomVal) * scale;
+            topVal = Math.max(current, next);
+            bottomVal = Math.min(current, next);
             current = next;
           }
-          const color =
-            step.type === "total"
-              ? step.label === "To"
-                ? "#d9d9d9"
-                : "#4b4b4b"
-              : step.value >= 0
-                ? "#0B7D12"
-                : "#C0392B";
-          return { x, y, h, color, label: step.label, type: step.type };
-        });
-
-        const connectorLines = bars.slice(0, -1).map((bar, index) => {
-          const next = bars[index + 1];
-          const x1 = bar.x + barWidth;
-          const x2 = next.x;
-          const y1 = bar.y;
-          const y2 = next.y;
-          return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#b1b1b1" stroke-dasharray="3 3" />`;
+          const barBottom = (bottomVal - displayMin) * scale;
+          const barHeight = Math.max(2, (topVal - bottomVal) * scale);
+          const connector = (current - displayMin) * scale;
+          const isTotal = step.type === "total";
+          const className = isTotal
+            ? step.label === "From"
+              ? "is-start"
+              : "is-total"
+            : step.value >= 0
+              ? "is-positive"
+              : "is-negative";
+          const label =
+            step.type === "delta"
+              ? formatK(Math.abs(step.value), step.value >= 0 ? "+" : "-")
+              : formatK(step.value);
+          const isSmall = barHeight < 18;
+          return {
+            label: step.label,
+            className,
+            barBottom,
+            barHeight,
+            connector,
+            valueLabel: label,
+            valueOutside: isSmall,
+            valueBelow: isSmall && step.type === "delta" && step.value < 0,
+          };
         });
 
         const labelLines = (label) => {
@@ -6931,7 +7000,7 @@
           let currentLine = "";
           words.forEach((word) => {
             const test = currentLine ? `${currentLine} ${word}` : word;
-            if (test.length > 12 && currentLine) {
+            if (test.length > 14 && currentLine) {
               lines.push(currentLine);
               currentLine = word;
             } else {
@@ -6945,33 +7014,346 @@
         };
 
         container.innerHTML = `
-          <svg class="h-[${height}px] w-full" viewBox="0 0 ${width} ${height}">
-            <line x1="10" y1="${paddingTop + chartHeight}" x2="${width - 10}" y2="${paddingTop + chartHeight}" stroke="#d8e7fb" stroke-width="1" />
-            ${bars
-              .map(
-                (bar) =>
-                  `<rect x="${bar.x}" y="${bar.y}" width="${barWidth}" height="${Math.max(
-                    2,
-                    bar.h
-                  )}" fill="${bar.color}" />`
-              )
-              .join("")}
-            ${connectorLines.join("")}
+          <div class="waterfall-body">
+            <div class="waterfall-y">
+              ${yLabels.map((label) => `<div>${label}</div>`).join("")}
+            </div>
+            <div class="waterfall-plot" style="--grid-step:${gridStep}px">
+              ${bars
+                .map(
+                  (bar) => `
+                <div class="waterfall-col" style="--connector:${bar.connector}px;">
+                  <div class="waterfall-bar ${bar.className}" style="--bar-bottom:${bar.barBottom}px; --bar-height:${bar.barHeight}px;">
+                    <span class="waterfall-value${bar.valueOutside ? " is-outside" : ""}${bar.valueBelow ? " is-below" : ""}">${bar.valueLabel}</span>
+                  </div>
+                </div>
+              `
+                )
+                .join("")}
+            </div>
+          </div>
+          <div class="waterfall-x">
             ${bars
               .map((bar) => {
                 const lines = labelLines(bar.label);
-                const x = bar.x + barWidth / 2;
-                const y = height - 8;
-                const tspans = lines
-                  .map(
-                    (line, idx) =>
-                      `<tspan x="${x}" dy="${idx === 0 ? "0" : "12"}">${line}</tspan>`
-                  )
-                  .join("");
-                return `<text x="${x}" y="${y}" text-anchor="middle" font-size="10">${tspans}</text>`;
+                return `<div>${lines.join("<br />")}</div>`;
               })
               .join("")}
-          </svg>
+          </div>
+        `;
+      }
+
+      function buildFromToDetails(scenario, outputData) {
+        const seed = (Number(String(scenario.id).replace(/\D/g, "")) || 1) + 77;
+        const random = createSeededRandom(seed);
+        const randomBetween = (min, max) => min + random() * (max - min);
+        const headcountReduction = Math.abs(parseInt(outputData.cards?.[3]?.value ?? "-5", 10)) || 5;
+        const weeklyMiles = Math.abs(parseInt(outputData.cards?.[2]?.value ?? "-240", 10)) || 240;
+        const weeklyDeliveries = Math.abs(parseInt(outputData.cards?.[4]?.value ?? "-40", 10)) || 40;
+        const dropSize = Math.abs(parseInt(outputData.cards?.[5]?.value ?? "+15", 10)) || 15;
+        const assetsReduction = Math.abs(parseInt(outputData.cards?.[7]?.value ?? "-17", 10)) || 17;
+        const totalSavingsValue = parseFloat(
+          String(outputData.totalSavings || "").replace(/[^0-9.]/g, "")
+        ) || 1.2;
+
+        const laborRoles = ["Sales Rep", "Merchandiser", "Non-CDL DMS", "CDL(A) DMS"];
+        const laborBase = laborRoles.map((role) => {
+          const hc = Math.round(randomBetween(8, 16));
+          const wages = randomBetween(22, 32);
+          const hours = randomBetween(36, 44);
+          return {
+            role,
+            hc,
+            wages,
+            hours,
+            salary: wages * hours * 52,
+          };
+        });
+        let remainingHc = headcountReduction;
+        const laborTo = laborBase.map((row) => {
+          const reduction = remainingHc > 0 ? Math.min(remainingHc, 2) : 0;
+          remainingHc -= reduction;
+          const hc = Math.max(0, row.hc - reduction);
+          return { ...row, hc, salary: row.wages * row.hours * 52 };
+        });
+
+        const serviceBase = [
+          {
+            label: "Large Format",
+            stores: Math.round(randomBetween(700, 1100)),
+            freq: randomBetween(1.1, 1.7).toFixed(2),
+            drop: Math.round(randomBetween(1400, 2200)),
+          },
+          {
+            label: "Small Format",
+            stores: Math.round(randomBetween(300, 600)),
+            freq: randomBetween(0.7, 1.2).toFixed(2),
+            drop: Math.round(randomBetween(900, 1400)),
+          },
+          {
+            label: "AFH",
+            stores: Math.round(randomBetween(120, 320)),
+            freq: randomBetween(2.0, 2.6).toFixed(2),
+            drop: Math.round(randomBetween(1800, 2600)),
+          },
+        ];
+        const serviceTo = serviceBase.map((row) => ({
+          ...row,
+          stores: row.stores,
+          freq: (parseFloat(row.freq) + weeklyDeliveries / 1000).toFixed(2),
+          drop: row.drop + dropSize,
+        }));
+        const totalStoresFrom = serviceBase.reduce((sum, row) => sum + row.stores, 0);
+        const totalStoresTo = serviceTo.reduce((sum, row) => sum + row.stores, 0);
+
+        const assetsBase = [
+          { label: "Route Trucks", assets: Math.round(randomBetween(120, 160)), miles: 4200, fuel: 180 },
+          { label: "GeoBox", assets: Math.round(randomBetween(40, 80)), miles: 1200, fuel: 60 },
+          { label: "Other Fleet", assets: Math.round(randomBetween(20, 50)), miles: 900, fuel: 35 },
+        ];
+        let remainingAssets = assetsReduction;
+        const assetsTo = assetsBase.map((row) => {
+          const reduction = remainingAssets > 0 ? Math.min(remainingAssets, 6) : 0;
+          remainingAssets -= reduction;
+          return {
+            ...row,
+            assets: Math.max(0, row.assets - reduction),
+            miles: Math.max(0, row.miles - Math.round(weeklyMiles / 3)),
+            fuel: Math.max(0, row.fuel - Math.round(weeklyMiles / 40)),
+          };
+        });
+        const assetsFrom = assetsBase.map((row) => ({
+          ...row,
+          rmFuel: formatCurrency(randomBetween(1.4, 2.2), 2),
+          depreciation: formatCurrency(randomBetween(0.6, 1.2), 2),
+        }));
+        const assetsToFormatted = assetsTo.map((row) => ({
+          ...row,
+          rmFuel: formatCurrency(randomBetween(1.2, 2.0), 2),
+          depreciation: formatCurrency(randomBetween(0.5, 1.1), 2),
+        }));
+
+        const pnlBase = [
+          { label: "Net Revenue", from: randomBetween(14, 22) },
+          { label: "Cost of Sales", from: randomBetween(6, 10) },
+          { label: "Selling", from: randomBetween(4, 7) },
+          { label: "Distribution", from: randomBetween(3, 5) },
+          { label: "PTS", from: randomBetween(1, 3) },
+        ];
+        const annualNr = parseFloat(String(outputData.annualNr || "").replace(/[^0-9.]/g, "")) || 18;
+        const annualCases = parseFloat(String(outputData.annualCases || "").replace(/[^0-9.]/g, "")) || 3.4;
+        const calcPnl = (value) => {
+          const percent = (value / annualNr) * 100;
+          const perCase = (value * 1_000_000) / (annualCases * 1_000_000);
+          return { percent, perCase };
+        };
+        const pnlFrom = pnlBase.map((row) => {
+          const metrics = calcPnl(row.from);
+          return { ...row, percent: metrics.percent, perCase: metrics.perCase };
+        });
+        const pnlTo = pnlBase.map((row) => {
+          const toValue = Math.max(0.2, row.from - totalSavingsValue * 0.15);
+          const metrics = calcPnl(toValue);
+          return { ...row, to: toValue, percent: metrics.percent, perCase: metrics.perCase };
+        });
+
+        return {
+          from: { labor: laborBase, service: serviceBase, assets: assetsFrom, pnl: pnlFrom, totalStores: totalStoresFrom },
+          to: { labor: laborTo, service: serviceTo, assets: assetsToFormatted, pnl: pnlTo, totalStores: totalStoresTo },
+        };
+      }
+
+      function renderFromToSection(title, columns, rows, columnWidths) {
+        return `
+          <div class="mt-2 overflow-hidden rounded border border-[#d8e7fb] table-text">
+            <div class="bg-[#f5f9ff] px-4 py-3 text-[12px] font-bold uppercase text-[#2d2d2d]">
+              ${title}
+            </div>
+            <div class="border-b border-[#d8e7fb]">
+              <div class="grid items-center px-4 py-2 text-[12px] font-bold uppercase text-[#4b4b4b]" style="grid-template-columns:${columnWidths}">
+                ${columns.map((col) => `<div>${col}</div>`).join("")}
+              </div>
+            </div>
+            <div class="divide-y divide-[#d8e7fb] text-[14px]">
+              ${rows
+                .map(
+                  (row) => `
+                  <div class="grid items-center px-4 py-2" style="grid-template-columns:${columnWidths}">
+                    ${row.map((cell) => `<div>${cell}</div>`).join("")}
+                  </div>
+                `
+                )
+                .join("")}
+            </div>
+          </div>
+        `;
+      }
+
+      function renderFromToKpis(outputData) {
+        const cards = outputData.cards || [];
+        const kpis = [
+          {
+            label: "Profit to Serve",
+            value: cards[0]?.value || "+$1.24MM",
+            delta: cards[0]?.delta || "+3.4 points",
+            icon: "https://www.figma.com/api/mcp/asset/e49ddb07-afd4-4762-b1f2-a4f3eafacc23",
+          },
+          {
+            label: "Weekly Hours",
+            value: cards[1]?.value || "-128",
+            delta: cards[1]?.delta || "-5%",
+            icon: "https://www.figma.com/api/mcp/asset/f120a909-8d58-4a18-a8e3-2fd638e65069",
+          },
+          {
+            label: "Weekly Miles",
+            value: cards[2]?.value || "-240",
+            delta: cards[2]?.delta || "-5%",
+            icon: "https://www.figma.com/api/mcp/asset/af9bf3a1-b000-4094-a7db-31822d22b219",
+          },
+          {
+            label: "Headcount",
+            value: cards[3]?.value || "-5",
+            delta: cards[3]?.delta || "-2%",
+            icon: "https://www.figma.com/api/mcp/asset/795f38e0-32bd-400b-8914-330b982675d7",
+          },
+          {
+            label: "Weekly Deliveries",
+            value: cards[4]?.value || "-40",
+            delta: cards[4]?.delta || "-2%",
+            icon: "https://www.figma.com/api/mcp/asset/1fbb7100-ca7a-493c-97ec-8a1636cbe933",
+          },
+          {
+            label: "Drop Size Cases",
+            value: cards[5]?.value || "+15",
+            delta: cards[5]?.delta || "+12%",
+            icon: "https://www.figma.com/api/mcp/asset/733f56f9-390f-46fa-87a2-f320a1aba1ef",
+          },
+          {
+            label: "Net Revenue/hour",
+            value: cards[6]?.value || "+$2.50",
+            delta: cards[6]?.delta || "+11.9%",
+            icon: "https://www.figma.com/api/mcp/asset/6ecdfa5a-02b7-4a56-865e-86669185a11d",
+          },
+          {
+            label: "Assets",
+            value: cards[7]?.value || "-17",
+            delta: cards[7]?.delta || "-6%",
+            icon: "https://www.figma.com/api/mcp/asset/d6fec8fc-4e92-4f81-a4c1-972a390d5292",
+          },
+        ];
+
+        const formatDelta = (delta) => {
+          const isNegative = String(delta).trim().startsWith("-");
+          const bg = isNegative ? "#FEECEA" : "#E6F6ED";
+          const color = isNegative ? "#C0392B" : "#008A3B";
+          return `<span class="mt-2 inline-flex h-[24px] items-center rounded-[4px] px-2 text-[12px] font-bold" style="background:${bg};color:${color};">${delta}</span>`;
+        };
+
+        return `
+          <div class="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-4">
+            ${kpis
+              .map(
+                (kpi) => `
+              <div class="rounded-[8px] border border-[#d8e7fb] bg-white p-2">
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <div class="text-[12px] text-[#4b4b4b] opacity-90">${kpi.label}</div>
+                    <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">${kpi.value}</div>
+                    ${formatDelta(kpi.delta)}
+                  </div>
+                  <div class="flex h-6 w-6 items-center justify-center">
+                    <img alt="" class="h-5 w-5 object-contain" src="${kpi.icon}" />
+                  </div>
+                </div>
+              </div>
+            `
+              )
+              .join("")}
+          </div>
+        `;
+      }
+
+      function renderFromToCard(label, accent, accentText, data) {
+        const laborColumns = ["Role", "HC", "Wages", "Annual Salary", "Hours"];
+        const laborRows = data.labor.map((row) => [
+          row.role,
+          row.hc,
+          formatCurrency(row.wages, 0),
+          formatCurrency(row.salary, 0),
+          row.hours.toFixed(1),
+        ]);
+        const serviceColumns = ["Segment", "Large Format", "Small Format", "AFH"];
+        const serviceRows = [
+          [
+            "Stores",
+            formatNumber(data.service[0].stores),
+            formatNumber(data.service[1].stores),
+            formatNumber(data.service[2].stores),
+          ],
+          [
+            "Freq/Week",
+            data.service[0].freq,
+            data.service[1].freq,
+            data.service[2].freq,
+          ],
+          [
+            "Drop Size (NR)",
+            formatCurrency(data.service[0].drop, 0),
+            formatCurrency(data.service[1].drop, 0),
+            formatCurrency(data.service[2].drop, 0),
+          ],
+        ];
+        const assetsColumns = ["Asset Type", "Miles", "Est. $/Mile Fuel & R&M", "Est. $/Mile Depreciation"];
+        const assetsRows = data.assets.map((row) => [
+          row.label,
+          formatNumber(row.miles),
+          row.rmFuel,
+          row.depreciation,
+        ]);
+        const pnlColumns = ["P&L", "$", "% NR", "$/Case"];
+        const pnlRows = data.pnl.map((row) => [
+          row.label,
+          formatMoneyMillions(label === "From" ? row.from : row.to),
+          `${(row.percent ?? 0).toFixed(1)}%`,
+          formatCurrency(row.perCase ?? 0, 2),
+        ]);
+        return `
+          <div class="rounded-[8px] border border-[#d8e7fb]">
+            <div class="rounded-t-[8px] border-t-[8px]" style="border-color:${accent}">
+              <div class="flex items-center justify-between border-b border-[#d8e7fb] px-4 py-3">
+                <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                  ${label.toUpperCase()}
+                </div>
+                <div class="flex items-center gap-2 text-[14px] font-bold text-[#2d2d2d]">
+                  <span style="color:${accentText}">${formatNumber(data.totalStores)}</span>
+                  Total Stores
+                  <span class="material-icons text-[22px] text-[#2d2d2d]">
+                    storefront
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 p-4">
+              ${renderFromToSection("Labor", laborColumns, laborRows, "1.6fr 0.6fr 1fr 1fr 0.6fr")}
+              ${renderFromToSection("Service", serviceColumns, serviceRows, "1.2fr 0.8fr 0.8fr 0.8fr")}
+              ${renderFromToSection("Assets", assetsColumns, assetsRows, "1.2fr 0.8fr 1fr 1fr")}
+              ${renderFromToSection("P&L", pnlColumns, pnlRows, "1fr 100px 100px 100px")}
+            </div>
+          </div>
+        `;
+      }
+
+      function renderFromToDetails(scenario, outputData) {
+        if (!outputFromTo) {
+          return;
+        }
+        const details = buildFromToDetails(scenario, outputData);
+        outputFromTo.innerHTML = `
+          ${renderFromToKpis(outputData)}
+          <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            ${renderFromToCard("From", "#0662C4", "#0662C4", details.from)}
+            ${renderFromToCard("To", "#E8A800", "#f3c12e", details.to)}
+          </div>
         `;
       }
 
@@ -6997,15 +7379,18 @@
           if (value) value.textContent = cardData.value;
           if (delta) {
             delta.textContent = cardData.delta;
-            const isUp = cardData.trend === "up";
-            delta.classList.toggle("bg-[#E6F6ED]", isUp);
-            delta.classList.toggle("text-[#008A3B]", isUp);
-            delta.classList.toggle("bg-[#FEECEA]", !isUp);
-            delta.classList.toggle("text-[#C0392B]", !isUp);
+            if (!delta.hasAttribute("data-output-delta-static")) {
+              const isUp = cardData.trend === "up";
+              delta.classList.toggle("bg-[#E6F6ED]", isUp);
+              delta.classList.toggle("text-[#008A3B]", isUp);
+              delta.classList.toggle("bg-[#FEECEA]", !isUp);
+              delta.classList.toggle("text-[#C0392B]", !isUp);
+            }
           }
         });
 
         renderWaterfall(document.getElementById("output-waterfall"), data.waterfall);
+        renderFromToDetails(scenario, data);
 
         const sensitivityContainer = document.getElementById("output-sensitivities");
         if (sensitivityContainer) {
@@ -7810,8 +8195,16 @@
       });
 
       function clearSelections() {
+        const rowCheckboxes = Array.from(document.querySelectorAll(".row-checkbox"));
+        rowCheckboxes.forEach((checkbox) => {
+          checkbox.checked = false;
+          checkbox.closest(".table-row")?.classList.remove("is-selected");
+        });
+        selectedCount.textContent = 0;
+        bulkBar.style.display = "none";
         selectAll.checked = false;
         selectAll.indeterminate = false;
+        updateCompareState();
       }
 
       function updateCompareState() {
@@ -8073,15 +8466,15 @@
 
       function renderCompareTileRow(rowEl, label, data) {
         rowEl.innerHTML = `
-          <div class="flex flex-col items-end pr-4" style="min-width:154px">
+          <div class="flex flex-col items-end pr-6" style="min-width:154px">
             <span class="text-[11px] font-bold uppercase tracking-wide text-[#4b4b4b]">${label}</span>
             <span class="text-[13px] text-[#2d2d2d]">${data.timeline}</span>
           </div>
-          <div class="flex flex-col items-end pr-4" style="min-width:105px">
+          <div class="flex flex-col items-end pr-6" style="min-width:105px">
             <span class="text-[11px] font-bold uppercase tracking-wide text-[#4b4b4b]">Total Stores</span>
             <span class="text-[13px] text-[#2d2d2d]">${data.stores}</span>
           </div>
-          <div class="flex flex-col items-end pr-4" style="min-width:87px">
+          <div class="flex flex-col items-end pr-6" style="min-width:87px">
             <span class="text-[11px] font-bold uppercase tracking-wide text-[#4b4b4b]">Annual NR</span>
             <span class="text-[13px] text-[#2d2d2d]">${data.annualNr}</span>
           </div>
@@ -8178,18 +8571,18 @@
         compareMetricsBody.innerHTML = metrics
           .map((m) => {
             return `<tr class="border-b border-[#f0f0f0] last:border-b-0">
-              <td class="py-3 pl-6 pr-4 text-[14px] text-[#2d2d2d]">${m.name}</td>
-              <td class="py-3 px-4 text-[14px] text-[#2d2d2d]">
+              <td class="py-4 pl-6 pr-6 text-[14px] text-[#2d2d2d]">${m.name}</td>
+              <td class="py-4 px-6 text-[14px] text-[#2d2d2d]">
                 <div class="flex items-center gap-2">
                   ${m.opt1 ? optimalDot : ""}${m.v1} ${formatChangeTag(m.c1)}
                 </div>
               </td>
-              <td class="py-3 px-4 text-[14px] text-[#2d2d2d]">
+              <td class="border-l border-[#e8e8e8] py-4 pl-6 pr-6 text-[14px] text-[#2d2d2d]">
                 <div class="flex items-center gap-2">
                   ${m.opt2 ? optimalDot : ""}${m.v2} ${formatChangeTag(m.c2)}
                 </div>
               </td>
-              <td class="py-3 px-4 text-[14px] text-[#2d2d2d]">${formatChangeTag(m.bw)}</td>
+              <td class="py-4 px-6 text-[14px] text-[#2d2d2d]">${formatChangeTag(m.bw)}</td>
             </tr>`;
           })
           .join("");
