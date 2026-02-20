@@ -159,6 +159,215 @@
       .table-header * {
         font-size: 12px;
       }
+      .fromto-v2-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+      }
+      .fromto-v2-card {
+        border: 1px solid #b0d0fb;
+        border-top: 2px solid #0662c4;
+        border-radius: 8px;
+        background: #fff;
+        overflow: hidden;
+        box-shadow: 0 0 24px rgba(0, 94, 192, 0.08);
+      }
+      .fromto-v2-card-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 24px 24px 12px;
+      }
+      .fromto-v2-card-title {
+        font-size: 22px;
+        line-height: 28px;
+        font-weight: 700;
+        color: #2d2d2d;
+      }
+      .fromto-v2-card-stores {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 700;
+        color: #2d2d2d;
+      }
+      .fromto-v2-card-stores .stores-value {
+        font-size: 20px;
+        font-weight: 700;
+      }
+      .fromto-v2-table {
+        border: 1px solid #b0d0fb;
+        border-radius: 8px;
+        margin: 0 12px 16px;
+        overflow: hidden;
+      }
+      .fromto-v2-table-head {
+        height: 44px;
+        background: #f5f9ff;
+        border-bottom: 1px solid #b0d0fb;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+      }
+      .fromto-v2-table-head .label {
+        font-size: 12px;
+        line-height: 20px;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: #2d2d2d;
+      }
+      .fromto-v2-table-head .action {
+        font-size: 12px;
+        line-height: 20px;
+        font-weight: 700;
+        color: #004895;
+      }
+      .fromto-v2-col-header {
+        display: grid;
+        min-height: 40px;
+        border-bottom: 1px solid #b0d0fb;
+        padding: 8px 0;
+      }
+      .fromto-v2-col-header > div {
+        padding: 0 8px;
+        font-size: 12px;
+        line-height: 20px;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: #4b4b4b;
+      }
+      .fromto-v2-row {
+        display: grid;
+        min-height: 48px;
+        align-items: center;
+        border-bottom: 1px solid #b0d0fb;
+        padding: 8px 0;
+        font-size: 14px;
+        line-height: 22px;
+        color: #2d2d2d;
+      }
+      .fromto-v2-row > div {
+        padding: 0 8px;
+      }
+      .fromto-v2-row.is-placeholder > div {
+        color: transparent;
+      }
+      .fromto-v2-row.is-sub-food {
+        background: #fffdf3;
+        border-left: 2px solid #e5bb08;
+      }
+      .fromto-v2-row.is-sub-bev {
+        background: #f5f9ff;
+        border-left: 2px solid #0662c4;
+      }
+      .fromto-v2-row.is-total {
+        font-weight: 700;
+      }
+      .fromto-v2-delta-up {
+        color: #4fa95f;
+        font-size: 11px;
+        font-weight: 700;
+        margin-left: 6px;
+        white-space: nowrap;
+      }
+      .fromto-v2-delta-down {
+        color: #c0392b;
+        font-size: 11px;
+        font-weight: 700;
+        margin-left: 6px;
+        white-space: nowrap;
+      }
+      .fromto-v2-pnl {
+        border: 1px solid #b0d0fb;
+        border-radius: 8px;
+        background: #fff;
+        margin-top: 24px;
+        padding: 16px 16px 20px;
+        box-shadow: 0 0 24px rgba(0, 94, 192, 0.08);
+      }
+      .fromto-v2-pnl-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+      .fromto-v2-pnl-title {
+        font-size: 20px;
+        line-height: 28px;
+        font-weight: 700;
+        color: #2d2d2d;
+      }
+      .fromto-v2-pnl-tabs {
+        display: inline-flex;
+        gap: 14px;
+        color: #0662c4;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .fromto-v2-pnl-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        color: #0662c4;
+        background: transparent;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+      }
+      .fromto-v2-pnl-toggle .material-icons {
+        font-size: 14px;
+        line-height: 14px;
+      }
+      .fromto-v2-pnl-toggle.is-hidden {
+        color: #b1b1b1;
+      }
+      .fromto-v2-pnl-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .fromto-v2-pnl-table {
+        border: 1px solid #b0d0fb;
+        border-radius: 6px;
+        overflow: hidden;
+      }
+      .fromto-v2-pnl-table .pnl-head {
+        background: #f5f9ff;
+        border-bottom: 1px solid #b0d0fb;
+        font-size: 12px;
+        line-height: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #4b4b4b;
+        padding: 10px 12px;
+      }
+      .fromto-v2-pnl-row {
+        display: grid;
+        grid-template-columns: 1.4fr 0.8fr 0.8fr 0.6fr;
+        min-height: 42px;
+        align-items: center;
+        border-bottom: 1px solid #b0d0fb;
+      }
+      .fromto-v2-pnl-colhead > div {
+        text-transform: uppercase;
+        font-size: 12px;
+        color: #4b4b4b;
+      }
+      .fromto-v2-pnl-row:last-child {
+        border-bottom: 0;
+      }
+      .fromto-v2-pnl-row > div {
+        padding: 0 8px;
+        font-size: 12px;
+        line-height: 20px;
+      }
+      @media (max-width: 1279px) {
+        .fromto-v2-pnl-grid {
+          grid-template-columns: 1fr;
+        }
+      }
       .facility-input {
         width: 100%;
         height: 32px;
@@ -4160,7 +4369,7 @@
                               <span class="mt-2 inline-flex h-[24px] items-center rounded-[4px] px-2 text-[12px] font-bold" data-output-delta>+3.4 points</span>
                             </div>
                               <div class="flex h-6 w-6 items-center justify-center">
-                                <img alt="" class="h-5 w-5 object-contain" src="https://www.figma.com/api/mcp/asset/638a1d15-7282-49ee-94fe-95900a61ba45" />
+                                <span class="material-icons text-[20px] text-[#4b4b4b]">monetization_on</span>
                               </div>
                           </div>
                         </div>
@@ -4172,7 +4381,7 @@
                               <span class="mt-2 inline-flex h-[24px] items-center rounded-[4px] px-2 text-[12px] font-bold" data-output-delta>-5%</span>
                             </div>
                               <div class="flex h-6 w-6 items-center justify-center">
-                                <img alt="" class="h-5 w-5 object-contain" src="https://www.figma.com/api/mcp/asset/9a132361-ed74-41e7-b1ed-543e8b294b3f" />
+                                <span class="material-icons text-[20px] text-[#4b4b4b]">hourglass_empty</span>
                               </div>
                           </div>
                         </div>
@@ -4184,7 +4393,7 @@
                               <span class="mt-2 inline-flex h-[24px] items-center rounded-[4px] px-2 text-[12px] font-bold" data-output-delta>-5%</span>
                             </div>
                               <div class="flex h-6 w-6 items-center justify-center">
-                                <img alt="" class="h-5 w-5 object-contain" src="https://www.figma.com/api/mcp/asset/b813f299-b67a-47bc-848f-a050b5bf2b9d" />
+                                <span class="material-icons text-[20px] text-[#4b4b4b]">add_road</span>
                               </div>
                           </div>
                         </div>
@@ -4196,7 +4405,7 @@
                               <span class="mt-2 inline-flex h-[24px] items-center rounded-[4px] px-2 text-[12px] font-bold" data-output-delta>-2%</span>
                             </div>
                               <div class="flex h-6 w-6 items-center justify-center">
-                                <img alt="" class="h-5 w-5 object-contain" src="https://www.figma.com/api/mcp/asset/2bb194f5-21c2-48dd-8824-3cde880b711c" />
+                                <span class="material-icons text-[20px] text-[#4b4b4b]">person</span>
                               </div>
                           </div>
                         </div>
@@ -4210,7 +4419,7 @@
                               <span class="mt-2 inline-flex h-[24px] items-center rounded-[4px] px-2 text-[12px] font-bold" data-output-delta>-2%</span>
                             </div>
                               <div class="flex h-6 w-6 items-center justify-center">
-                                <img alt="" class="h-5 w-5 object-contain" src="https://www.figma.com/api/mcp/asset/0b681de0-ca7a-4db3-ac82-f82f23ddc013" />
+                                <span class="material-icons text-[20px] text-[#4b4b4b]">local_shipping</span>
                               </div>
                           </div>
                         </div>
@@ -4222,7 +4431,7 @@
                               <span class="mt-2 inline-flex h-[24px] items-center rounded-[4px] px-2 text-[12px] font-bold" data-output-delta>+12%</span>
                             </div>
                               <div class="flex h-6 w-6 items-center justify-center">
-                                <img alt="" class="h-5 w-5 object-contain" src="https://www.figma.com/api/mcp/asset/e9dc0c09-39f7-45d2-85c3-6faf0309eba4" />
+                                <span class="material-icons text-[20px] text-[#4b4b4b]">bar_chart</span>
                               </div>
                           </div>
                         </div>
@@ -4234,7 +4443,7 @@
                               <span class="mt-2 inline-flex h-[24px] items-center rounded-[4px] px-2 text-[12px] font-bold" data-output-delta>+11.9%</span>
                             </div>
                               <div class="flex h-6 w-6 items-center justify-center">
-                                <img alt="" class="h-5 w-5 object-contain" src="https://www.figma.com/api/mcp/asset/e2d65471-17c7-465d-9815-9b0caf344cf8" />
+                                <span class="material-icons text-[20px] text-[#4b4b4b]">attach_money</span>
                               </div>
                           </div>
                         </div>
@@ -4246,7 +4455,7 @@
                               <span class="mt-2 inline-flex h-[24px] items-center rounded-[4px] px-2 text-[12px] font-bold" data-output-delta>-6%</span>
                             </div>
                               <div class="flex h-6 w-6 items-center justify-center">
-                                <img alt="" class="h-5 w-5 object-contain" src="https://www.figma.com/api/mcp/asset/44f2665a-495d-438a-8ee5-7ad940057f85" />
+                                <span class="material-icons text-[20px] text-[#4b4b4b]">analytics</span>
                               </div>
                           </div>
                         </div>
@@ -7056,89 +7265,74 @@
           String(outputData.totalSavings || "").replace(/[^0-9.]/g, "")
         ) || 1.2;
 
-        const laborRoles = ["Sales Rep", "Merchandiser", "Non-CDL DMS", "CDL(A) DMS"];
-        const laborBase = laborRoles.map((role) => {
-          const hc = Math.round(randomBetween(8, 16));
-          const wages = randomBetween(22, 32);
-          const hours = randomBetween(36, 44);
-          return {
-            role,
-            hc,
-            wages,
-            hours,
-            salary: wages * hours * 52,
-          };
-        });
+        const laborBase = [
+          { role: "CDL(A) DMS", hc: Math.round(randomBetween(8, 12)), wages: randomBetween(0.8, 1.1), hours: randomBetween(40, 44) },
+          { role: "Merchandisers", hc: Math.round(randomBetween(12, 18)), wages: randomBetween(0.5, 0.9), hours: randomBetween(40, 44) },
+        ].map((row) => ({ ...row, salary: row.wages * 100000 }));
         let remainingHc = headcountReduction;
         const laborTo = laborBase.map((row) => {
           const reduction = remainingHc > 0 ? Math.min(remainingHc, 2) : 0;
           remainingHc -= reduction;
           const hc = Math.max(0, row.hc - reduction);
-          return { ...row, hc, salary: row.wages * row.hours * 52 };
+          const wages = Math.max(0.4, row.wages + randomBetween(-0.05, 0.05));
+          const hours = Math.max(36, row.hours + randomBetween(-1.2, 0.8));
+          return { ...row, hc, wages, hours, salary: wages * 100000 };
         });
 
         const serviceBase = [
-          {
-            label: "Large Format",
-            stores: Math.round(randomBetween(700, 1100)),
-            freq: randomBetween(1.1, 1.7).toFixed(2),
-            drop: Math.round(randomBetween(1400, 2200)),
-          },
-          {
-            label: "Small Format",
-            stores: Math.round(randomBetween(300, 600)),
-            freq: randomBetween(0.7, 1.2).toFixed(2),
-            drop: Math.round(randomBetween(900, 1400)),
-          },
-          {
-            label: "AFH",
-            stores: Math.round(randomBetween(120, 320)),
-            freq: randomBetween(2.0, 2.6).toFixed(2),
-            drop: Math.round(randomBetween(1800, 2600)),
-          },
+          { label: "Large Format", freq: randomBetween(1.2, 1.7), wsaNr: randomBetween(70, 100), dropEq: randomBetween(150, 190), wsaCs: randomBetween(70, 110), dropCs: randomBetween(150, 190) },
+          { label: "Small Format", freq: randomBetween(0.8, 1.2), wsaNr: randomBetween(10, 35), dropEq: randomBetween(20, 45), wsaCs: randomBetween(10, 35), dropCs: randomBetween(20, 45) },
+          { label: "AFH", freq: randomBetween(2.1, 2.5), wsaNr: randomBetween(10, 35), dropEq: randomBetween(28, 48), wsaCs: randomBetween(10, 35), dropCs: randomBetween(28, 48) },
         ];
         const serviceTo = serviceBase.map((row) => ({
           ...row,
-          stores: row.stores,
-          freq: (parseFloat(row.freq) + weeklyDeliveries / 1000).toFixed(2),
-          drop: row.drop + dropSize,
+          freq: row.freq + weeklyDeliveries / 1000,
+          wsaNr: row.wsaNr + randomBetween(0.2, 1.8),
+          dropEq: row.dropEq + randomBetween(0.2, 1.8),
+          wsaCs: row.wsaCs + randomBetween(0.2, 1.8),
+          dropCs: row.dropCs + randomBetween(0.2, 1.8),
         }));
-        const totalStoresFrom = serviceBase.reduce((sum, row) => sum + row.stores, 0);
-        const totalStoresTo = serviceTo.reduce((sum, row) => sum + row.stores, 0);
+        const totalStoresFrom = Math.round(randomBetween(1200, 1500));
+        const totalStoresTo = totalStoresFrom;
 
         const assetsBase = [
-          { label: "Route Trucks", assets: Math.round(randomBetween(120, 160)), miles: 4200, fuel: 180 },
-          { label: "GeoBox", assets: Math.round(randomBetween(40, 80)), miles: 1200, fuel: 60 },
-          { label: "Other Fleet", assets: Math.round(randomBetween(20, 50)), miles: 900, fuel: 35 },
+          { label: "Class 6 Non Bulk Truck", assets: Math.round(randomBetween(80, 120)), miles: 0 },
+          { label: "Class 7 CDL Bulk Truck", assets: Math.round(randomBetween(80, 120)), miles: 0 },
+          { label: "GeoBox Tractor with Liftgate", assets: Math.round(randomBetween(80, 120)), miles: 0 },
+          { label: "GeoBox Tractor without Liftgate", assets: Math.round(randomBetween(80, 120)), miles: 0 },
+          { label: "Market Piece Truck", assets: Math.round(randomBetween(80, 120)), miles: 0 },
         ];
         let remainingAssets = assetsReduction;
-        const assetsTo = assetsBase.map((row) => {
-          const reduction = remainingAssets > 0 ? Math.min(remainingAssets, 6) : 0;
+        const assetsFrom = assetsBase.map((row) => ({
+          ...row,
+          rmFuel: randomBetween(0.8, 1.2),
+          depreciation: randomBetween(0.8, 1.2),
+        }));
+        const assetsToFormatted = assetsFrom.map((row, index) => {
+          const reduction = remainingAssets > 0 ? Math.min(remainingAssets, 4) : 0;
           remainingAssets -= reduction;
           return {
             ...row,
             assets: Math.max(0, row.assets - reduction),
-            miles: Math.max(0, row.miles - Math.round(weeklyMiles / 3)),
-            fuel: Math.max(0, row.fuel - Math.round(weeklyMiles / 40)),
+            rmFuel: Math.max(0, row.rmFuel + randomBetween(-0.25, 0.15)),
+            depreciation: Math.max(0, row.depreciation + randomBetween(-0.25, 0.15)),
+            miles: index === assetsFrom.length - 1 ? Math.max(0, Math.round(weeklyMiles / 5)) : 0,
           };
         });
-        const assetsFrom = assetsBase.map((row) => ({
-          ...row,
-          rmFuel: formatCurrency(randomBetween(1.4, 2.2), 2),
-          depreciation: formatCurrency(randomBetween(0.6, 1.2), 2),
-        }));
-        const assetsToFormatted = assetsTo.map((row) => ({
-          ...row,
-          rmFuel: formatCurrency(randomBetween(1.2, 2.0), 2),
-          depreciation: formatCurrency(randomBetween(0.5, 1.1), 2),
-        }));
 
         const pnlBase = [
-          { label: "Net Revenue", from: randomBetween(14, 22) },
-          { label: "Cost of Sales", from: randomBetween(6, 10) },
-          { label: "Selling", from: randomBetween(4, 7) },
-          { label: "Distribution", from: randomBetween(3, 5) },
-          { label: "PTS", from: randomBetween(1, 3) },
+          { label: "Net Revenue", from: randomBetween(22, 26) },
+          { label: "Cost of Sales", from: randomBetween(9, 11) },
+          { label: "Gross Margin", from: randomBetween(12, 16) },
+          { label: "Selling", from: randomBetween(5.5, 7.2) },
+          { label: "  Frontline Labor", from: randomBetween(2.4, 3.2) },
+          { label: "  Mgmt Labor", from: randomBetween(1.1, 1.8) },
+          { label: "Distribution", from: randomBetween(4.5, 5.8) },
+          { label: "  Delivery Fleet Cost", from: randomBetween(0.35, 0.9) },
+          { label: "  Depreciation and Leases", from: randomBetween(0.3, 0.9) },
+          { label: "  Fuel", from: randomBetween(0.45, 0.8) },
+          { label: "  R&M", from: randomBetween(0.3, 0.8) },
+          { label: "PTS", from: randomBetween(4.8, 5.8) },
         ];
         const annualNr = parseFloat(String(outputData.annualNr || "").replace(/[^0-9.]/g, "")) || 18;
         const annualCases = parseFloat(String(outputData.annualCases || "").replace(/[^0-9.]/g, "")) || 3.4;
@@ -7152,7 +7346,7 @@
           return { ...row, percent: metrics.percent, perCase: metrics.perCase };
         });
         const pnlTo = pnlBase.map((row) => {
-          const toValue = Math.max(0.2, row.from - totalSavingsValue * 0.15);
+          const toValue = Math.max(0.1, row.from + randomBetween(-0.3, 0.15) - totalSavingsValue * 0.03);
           const metrics = calcPnl(toValue);
           return { ...row, to: toValue, percent: metrics.percent, perCase: metrics.perCase };
         });
@@ -7163,28 +7357,46 @@
         };
       }
 
-      function renderFromToSection(title, columns, rows, columnWidths) {
+      function parseNumeric(value) {
+        if (typeof value === "number") return value;
+        const parsed = parseFloat(String(value ?? "").replace(/[^0-9.-]/g, ""));
+        return Number.isFinite(parsed) ? parsed : 0;
+      }
+
+      function renderPctDelta(fromValue, toValue) {
+        const from = parseNumeric(fromValue);
+        const to = parseNumeric(toValue);
+        if (Math.abs(from) < 0.0001 && Math.abs(to) < 0.0001) {
+          return `<span class="fromto-v2-delta-up">↗0%</span>`;
+        }
+        const base = Math.abs(from) < 0.0001 ? Math.max(1, Math.abs(to)) : Math.abs(from);
+        const pct = ((to - from) / base) * 100;
+        const bounded = Math.max(-99, Math.min(99, pct));
+        const isUp = bounded >= 0;
+        const arrow = isUp ? "↗" : "↘";
+        const cls = isUp ? "fromto-v2-delta-up" : "fromto-v2-delta-down";
+        return `<span class="${cls}">${arrow}${Math.abs(bounded).toFixed(0)}%</span>`;
+      }
+
+      function renderFromToTableV2(title, columns, rows, columnTemplate, showExpand = false) {
         return `
-          <div class="mt-2 overflow-hidden rounded border border-[#d8e7fb] table-text">
-            <div class="bg-[#f5f9ff] px-4 py-3 text-[12px] font-bold uppercase text-[#2d2d2d]">
-              ${title}
+          <div class="fromto-v2-table">
+            <div class="fromto-v2-table-head">
+              <span class="label">${title}</span>
+              <span class="action">${showExpand ? "Expand all" : ""}</span>
             </div>
-            <div class="border-b border-[#d8e7fb]">
-              <div class="grid items-center px-4 py-2 text-[12px] font-bold uppercase text-[#4b4b4b]" style="grid-template-columns:${columnWidths}">
-                ${columns.map((col) => `<div>${col}</div>`).join("")}
-              </div>
+            <div class="fromto-v2-col-header" style="grid-template-columns:${columnTemplate}">
+              ${columns.map((column) => `<div>${column}</div>`).join("")}
             </div>
-            <div class="divide-y divide-[#d8e7fb] text-[14px]">
-              ${rows
-                .map(
-                  (row) => `
-                  <div class="grid items-center px-4 py-2" style="grid-template-columns:${columnWidths}">
-                    ${row.map((cell) => `<div>${cell}</div>`).join("")}
+            ${rows
+              .map(
+                (row) => `
+                  <div class="fromto-v2-row ${row.kind || ""}" style="grid-template-columns:${columnTemplate}">
+                    ${row.cells.map((cell) => `<div>${cell}</div>`).join("")}
                   </div>
                 `
-                )
-                .join("")}
-            </div>
+              )
+              .join("")}
           </div>
         `;
       }
@@ -7196,49 +7408,49 @@
             label: "Profit to Serve",
             value: cards[0]?.value || "+$1.24MM",
             delta: cards[0]?.delta || "+3.4 points",
-            icon: "https://www.figma.com/api/mcp/asset/e49ddb07-afd4-4762-b1f2-a4f3eafacc23",
+            icon: "monetization_on",
           },
           {
             label: "Weekly Hours",
             value: cards[1]?.value || "-128",
             delta: cards[1]?.delta || "-5%",
-            icon: "https://www.figma.com/api/mcp/asset/f120a909-8d58-4a18-a8e3-2fd638e65069",
+            icon: "hourglass_empty",
           },
           {
             label: "Weekly Miles",
             value: cards[2]?.value || "-240",
             delta: cards[2]?.delta || "-5%",
-            icon: "https://www.figma.com/api/mcp/asset/af9bf3a1-b000-4094-a7db-31822d22b219",
+            icon: "add_road",
           },
           {
             label: "Headcount",
             value: cards[3]?.value || "-5",
             delta: cards[3]?.delta || "-2%",
-            icon: "https://www.figma.com/api/mcp/asset/795f38e0-32bd-400b-8914-330b982675d7",
+            icon: "person",
           },
           {
             label: "Weekly Deliveries",
             value: cards[4]?.value || "-40",
             delta: cards[4]?.delta || "-2%",
-            icon: "https://www.figma.com/api/mcp/asset/1fbb7100-ca7a-493c-97ec-8a1636cbe933",
+            icon: "local_shipping",
           },
           {
             label: "Drop Size Cases",
             value: cards[5]?.value || "+15",
             delta: cards[5]?.delta || "+12%",
-            icon: "https://www.figma.com/api/mcp/asset/733f56f9-390f-46fa-87a2-f320a1aba1ef",
+            icon: "bar_chart",
           },
           {
             label: "Net Revenue/hour",
             value: cards[6]?.value || "+$2.50",
             delta: cards[6]?.delta || "+11.9%",
-            icon: "https://www.figma.com/api/mcp/asset/6ecdfa5a-02b7-4a56-865e-86669185a11d",
+            icon: "attach_money",
           },
           {
             label: "Assets",
             value: cards[7]?.value || "-17",
             delta: cards[7]?.delta || "-6%",
-            icon: "https://www.figma.com/api/mcp/asset/d6fec8fc-4e92-4f81-a4c1-972a390d5292",
+            icon: "analytics",
           },
         ];
 
@@ -7262,7 +7474,7 @@
                     ${formatDelta(kpi.delta)}
                   </div>
                   <div class="flex h-6 w-6 items-center justify-center">
-                    <img alt="" class="h-5 w-5 object-contain" src="${kpi.icon}" />
+                    <span class="material-icons text-[20px] text-[#4b4b4b]">${kpi.icon}</span>
                   </div>
                 </div>
               </div>
@@ -7273,74 +7485,247 @@
         `;
       }
 
-      function renderFromToCard(label, accent, accentText, data) {
-        const laborColumns = ["Role", "HC", "Wages", "Annual Salary", "Hours"];
-        const laborRows = data.labor.map((row) => [
-          row.role,
-          row.hc,
-          formatCurrency(row.wages, 0),
-          formatCurrency(row.salary, 0),
-          row.hours.toFixed(1),
-        ]);
-        const serviceColumns = ["Segment", "Large Format", "Small Format", "AFH"];
-        const serviceRows = [
-          [
-            "Stores",
-            formatNumber(data.service[0].stores),
-            formatNumber(data.service[1].stores),
-            formatNumber(data.service[2].stores),
-          ],
-          [
-            "Freq/Week",
-            data.service[0].freq,
-            data.service[1].freq,
-            data.service[2].freq,
-          ],
-          [
-            "Drop Size (NR)",
-            formatCurrency(data.service[0].drop, 0),
-            formatCurrency(data.service[1].drop, 0),
-            formatCurrency(data.service[2].drop, 0),
-          ],
+      function renderFromToCard(label, accentText, data, baseline) {
+        const showDelta = label === "To" && baseline;
+        const cdl = data.labor.find((row) => row.role.includes("CDL")) || data.labor[0];
+        const merch = data.labor.find((row) => row.role.includes("Merch")) || data.labor[1] || data.labor[0];
+        const baseCdl = baseline?.labor.find((row) => row.role.includes("CDL")) || baseline?.labor[0];
+        const baseMerch = baseline?.labor.find((row) => row.role.includes("Merch")) || baseline?.labor[1] || baseline?.labor[0];
+        const splitRow = (row, baseRow, labelText, includeChildren) => {
+          const foodsHc = Math.max(0, Math.floor((row?.hc || 0) / 2));
+          const bevsHc = Math.max(0, (row?.hc || 0) - foodsHc);
+          const baseFoodsHc = Math.max(0, Math.floor((baseRow?.hc || 0) / 2));
+          const baseBevsHc = Math.max(0, (baseRow?.hc || 0) - baseFoodsHc);
+          const rows = [
+            {
+              cells: [
+                labelText,
+                `${row?.hc ?? 0}${showDelta ? renderPctDelta(baseRow?.hc ?? 0, row?.hc ?? 0) : ""}`,
+                `${formatCurrency(row?.wages ?? 0, 2)}${showDelta ? renderPctDelta(baseRow?.wages ?? 0, row?.wages ?? 0) : ""}`,
+                `${formatCurrency(row?.salary ?? 0, 0)}${showDelta ? renderPctDelta(baseRow?.salary ?? 0, row?.salary ?? 0) : ""}`,
+                `${(row?.hours ?? 0).toFixed(1)}${showDelta ? renderPctDelta(baseRow?.hours ?? 0, row?.hours ?? 0) : ""}`,
+              ],
+            },
+          ];
+          if (includeChildren) {
+            rows.push(
+              {
+                kind: "is-sub-food",
+                cells: [
+                  "<em>Foods</em>",
+                  `${foodsHc}${showDelta ? renderPctDelta(baseFoodsHc, foodsHc) : ""}`,
+                  `${formatCurrency((row?.wages ?? 0) / 2, 2)}`,
+                  `${formatCurrency((row?.salary ?? 0) / 2, 0)}`,
+                  `${(row?.hours ?? 0).toFixed(1)}`,
+                ],
+              },
+              {
+                kind: "is-sub-bev",
+                cells: [
+                  "<em>Bevs</em>",
+                  `${bevsHc}${showDelta ? renderPctDelta(baseBevsHc, bevsHc) : ""}`,
+                  `${formatCurrency((row?.wages ?? 0) / 2, 2)}`,
+                  `${formatCurrency((row?.salary ?? 0) / 2, 0)}`,
+                  `${(row?.hours ?? 0).toFixed(1)}`,
+                ],
+              }
+            );
+          } else {
+            // Preserve row-for-row alignment between FROM and TO tables.
+            rows.push(
+              { kind: "is-placeholder", cells: ["", "", "", "", ""] },
+              { kind: "is-placeholder", cells: ["", "", "", "", ""] }
+            );
+          }
+          return rows;
+        };
+
+        const laborRows = [
+          ...splitRow(cdl, baseCdl, "CDL(A) DMS", label === "From"),
+          ...splitRow(merch, baseMerch, "Merchandisers", label === "From"),
+          { kind: "is-total", cells: ["TOTAL", "0", "0", "0", "0"] },
         ];
-        const assetsColumns = ["Asset Type", "Miles", "Est. $/Mile Fuel & R&M", "Est. $/Mile Depreciation"];
-        const assetsRows = data.assets.map((row) => [
-          row.label,
-          formatNumber(row.miles),
-          row.rmFuel,
-          row.depreciation,
-        ]);
-        const pnlColumns = ["P&L", "$", "% NR", "$/Case"];
-        const pnlRows = data.pnl.map((row) => [
-          row.label,
-          formatMoneyMillions(label === "From" ? row.from : row.to),
-          `${(row.percent ?? 0).toFixed(1)}%`,
-          formatCurrency(row.perCase ?? 0, 2),
-        ]);
+
+        const buildServiceGroup = (title, key, asCurrency = false) => {
+          const header = {
+            cells: [
+              `<span class="inline-flex items-center gap-1"><span class="material-icons text-[14px] leading-none text-[#4b4b4b]">keyboard_arrow_down</span>${title}</span>`,
+              `${asCurrency ? formatCurrency(data.service[0][key], 0) : data.service[0][key].toFixed(2)}${showDelta ? renderPctDelta(baseline?.service?.[0]?.[key] ?? 0, data.service[0][key]) : ""}`,
+              `${asCurrency ? formatCurrency(data.service[1][key], 0) : data.service[1][key].toFixed(2)}${showDelta ? renderPctDelta(baseline?.service?.[1]?.[key] ?? 0, data.service[1][key]) : ""}`,
+              `${asCurrency ? formatCurrency(data.service[2][key], 0) : data.service[2][key].toFixed(2)}${showDelta ? renderPctDelta(baseline?.service?.[2]?.[key] ?? 0, data.service[2][key]) : ""}`,
+            ],
+          };
+          const foods = {
+            kind: "is-sub-food",
+            cells: [
+              "<em>Foods</em>",
+              `${Math.round(data.service[0][key] * 0.45)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[0]?.[key] ?? 0) * 0.45), Math.round(data.service[0][key] * 0.45)) : ""}`,
+              `${Math.round(data.service[1][key] * 0.45)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[1]?.[key] ?? 0) * 0.45), Math.round(data.service[1][key] * 0.45)) : ""}`,
+              `${Math.round(data.service[2][key] * 0.45)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[2]?.[key] ?? 0) * 0.45), Math.round(data.service[2][key] * 0.45)) : ""}`,
+            ],
+          };
+          const bevs = {
+            kind: "is-sub-bev",
+            cells: [
+              "<em>Bevs</em>",
+              `${Math.round(data.service[0][key] * 0.55)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[0]?.[key] ?? 0) * 0.55), Math.round(data.service[0][key] * 0.55)) : ""}`,
+              `${Math.round(data.service[1][key] * 0.55)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[1]?.[key] ?? 0) * 0.55), Math.round(data.service[1][key] * 0.55)) : ""}`,
+              `${Math.round(data.service[2][key] * 0.55)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[2]?.[key] ?? 0) * 0.55), Math.round(data.service[2][key] * 0.55)) : ""}`,
+            ],
+          };
+          return [header, foods, bevs];
+        };
+
+        const serviceRows = [
+          ...buildServiceGroup("Freq./Week", "freq"),
+          ...buildServiceGroup("WSA (NR)", "wsaNr"),
+          ...buildServiceGroup("Drop Size (EQ)", "dropEq"),
+          ...buildServiceGroup("WSA (Cs)", "wsaCs"),
+          ...buildServiceGroup("Drop Size (Cs)", "dropCs"),
+          { kind: "is-total", cells: ["TOTAL", "0", "0", "0"] },
+        ];
+
+        const assetsRows = data.assets.map((row) => {
+          const baseRow = showDelta ? baseline.assets.find((item) => item.label === row.label) || baseline.assets[0] : null;
+          return {
+            cells: [
+              row.label,
+              `${row.assets ?? 0}${showDelta ? renderPctDelta(baseRow?.assets ?? 0, row.assets ?? 0) : ""}`,
+              `${parseNumeric(row.rmFuel).toFixed(2)}${showDelta ? renderPctDelta(parseNumeric(baseRow?.rmFuel ?? 0), parseNumeric(row.rmFuel)) : ""}`,
+              `${parseNumeric(row.depreciation).toFixed(2)}${showDelta ? renderPctDelta(parseNumeric(baseRow?.depreciation ?? 0), parseNumeric(row.depreciation)) : ""}`,
+              `${formatNumber(row.miles)}${showDelta ? renderPctDelta(baseRow?.miles ?? 0, row.miles ?? 0) : ""}`,
+            ],
+          };
+        });
+        assetsRows.push({ kind: "is-total", cells: ["TOTAL", "0", "0", "0", "0"] });
+
         return `
-          <div class="rounded-[8px] border border-[#d8e7fb]">
-            <div class="rounded-t-[8px] border-t-[8px]" style="border-color:${accent}">
-              <div class="flex items-center justify-between border-b border-[#d8e7fb] px-4 py-3">
-                <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
-                  ${label.toUpperCase()}
-                </div>
-                <div class="flex items-center gap-2 text-[14px] font-bold text-[#2d2d2d]">
-                  <span style="color:${accentText}">${formatNumber(data.totalStores)}</span>
-                  Total Stores
-                  <span class="material-icons text-[22px] text-[#2d2d2d]">
-                    storefront
-                  </span>
-                </div>
+          <div class="fromto-v2-card">
+            <div class="fromto-v2-card-head">
+              <span class="fromto-v2-card-title">${label.toUpperCase()}</span>
+            </div>
+            ${renderFromToTableV2(
+              "Labor",
+              ["Role Type", "HC", "Wages $/HR", "Annual Salary", "HRS WK"],
+              laborRows,
+              "140px repeat(4, minmax(0,1fr))",
+              true
+            )}
+            ${renderFromToTableV2(
+              "Service",
+              ["Segment", "Large Format", "Small Format", "AFH"],
+              serviceRows,
+              "140px repeat(3, minmax(0,1fr))",
+              true
+            )}
+            ${renderFromToTableV2(
+              "Assets",
+              ["Asset Type", "# of Assets", "Est. Small Fleet $/RM", "Est. Annual Depr/Accrtn", "Miles"],
+              assetsRows,
+              "140px repeat(4, minmax(0,1fr))"
+            )}
+          </div>
+        `;
+      }
+
+      function renderFromToPnl(details) {
+        const rows = details.from.pnl.map((fromRow, index) => {
+          const toRow = details.to.pnl[index] || {};
+          return { label: fromRow.label, from: fromRow, to: toRow };
+        });
+        const renderBw = (delta, mode) => {
+          const isUp = delta >= 0;
+          const cls = isUp ? "fromto-v2-delta-up" : "fromto-v2-delta-down";
+          if (mode === "percent") {
+            return `<span class="${cls}">${isUp ? `${Math.abs(delta).toFixed(1)}%` : `(${Math.abs(delta).toFixed(1)}%)`}</span>`;
+          }
+          if (mode === "currency") return `<span class="${cls}">${isUp ? "$" : "($"}${Math.abs(delta).toFixed(2)}${isUp ? "" : ")"}</span>`;
+          return `<span class="${cls}">${isUp ? "$" : "($"}${Math.abs(delta).toFixed(2)}${isUp ? "" : ")"}</span>`;
+        };
+        const renderPnlTable = (title, valueFormatter, diffMode) => `
+          <div class="fromto-v2-pnl-table" data-pnl-table="${diffMode}">
+            <div class="pnl-head">${title}</div>
+            <div class="fromto-v2-pnl-row fromto-v2-pnl-colhead">
+              <div>Segment</div><div>From</div><div>To</div><div>B(W)</div>
+            </div>
+            ${rows
+              .map((row) => {
+                const fromValue = valueFormatter(row.from);
+                const toValue = valueFormatter(row.to);
+                const isSub = row.label.startsWith("  ");
+                const labelText = isSub ? `&nbsp;&nbsp;${row.label.trim()}` : row.label;
+                const deltaBase =
+                  diffMode === "percent"
+                    ? (row.to.percent ?? 0) - (row.from.percent ?? 0)
+                    : diffMode === "currency"
+                      ? (row.to.perCase ?? 0) - (row.from.perCase ?? 0)
+                      : (row.to.to ?? 0) - (row.from.from ?? 0);
+                return `
+                  <div class="fromto-v2-pnl-row">
+                    <div class="${isSub ? "" : "font-bold"}">${labelText}</div>
+                    <div>${fromValue}</div>
+                    <div>${toValue}</div>
+                    <div>${renderBw(deltaBase, diffMode)}</div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        `;
+        return `
+          <div class="fromto-v2-pnl">
+            <div class="fromto-v2-pnl-head">
+              <div class="fromto-v2-pnl-title">P&L</div>
+              <div class="fromto-v2-pnl-tabs">
+                <button class="fromto-v2-pnl-toggle" type="button" data-pnl-toggle="money" aria-pressed="true">
+                  <span class="material-icons" data-pnl-toggle-icon="money">visibility</span>
+                  <span>Dollars</span>
+                </button>
+                <button class="fromto-v2-pnl-toggle" type="button" data-pnl-toggle="percent" aria-pressed="true">
+                  <span class="material-icons" data-pnl-toggle-icon="percent">visibility</span>
+                  <span>% NR</span>
+                </button>
+                <button class="fromto-v2-pnl-toggle" type="button" data-pnl-toggle="currency" aria-pressed="true">
+                  <span class="material-icons" data-pnl-toggle-icon="currency">visibility</span>
+                  <span>$/Case</span>
+                </button>
               </div>
             </div>
-            <div class="flex flex-col gap-4 p-4">
-              ${renderFromToSection("Labor", laborColumns, laborRows, "1.6fr 0.6fr 1fr 1fr 0.6fr")}
-              ${renderFromToSection("Service", serviceColumns, serviceRows, "1.2fr 0.8fr 0.8fr 0.8fr")}
-              ${renderFromToSection("Assets", assetsColumns, assetsRows, "1.2fr 0.8fr 1fr 1fr")}
-              ${renderFromToSection("P&L", pnlColumns, pnlRows, "1fr 100px 100px 100px")}
+            <div class="fromto-v2-pnl-grid">
+              ${renderPnlTable("Dollars (MM)", (row) => formatMoneyMillions(row.from ?? row.to ?? 0), "money")}
+              ${renderPnlTable("% NR", (row) => `${(row.percent ?? 0).toFixed(1)}%`, "percent")}
+              ${renderPnlTable("$/Case", (row) => formatCurrency(row.perCase ?? 0, 2), "currency")}
             </div>
           </div>
         `;
+      }
+
+      function setupFromToPnlToggles() {
+        const updatePnlGridLayout = () => {
+          const grid = document.querySelector(".fromto-v2-pnl-grid");
+          if (!grid) return;
+          const tables = Array.from(grid.querySelectorAll(".fromto-v2-pnl-table"));
+          const visibleCount = tables.filter((table) => table.style.display !== "none").length;
+          grid.style.gridTemplateColumns = `repeat(${Math.max(1, visibleCount)}, minmax(0, 1fr))`;
+        };
+        const buttons = Array.from(document.querySelectorAll("[data-pnl-toggle]"));
+        if (!buttons.length) return;
+        buttons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const key = button.getAttribute("data-pnl-toggle");
+            if (!key) return;
+            const table = document.querySelector(`[data-pnl-table="${key}"]`);
+            const icon = button.querySelector(`[data-pnl-toggle-icon="${key}"]`);
+            if (!table || !icon) return;
+            const isHidden = table.style.display !== "none";
+            table.style.display = isHidden ? "none" : "";
+            button.classList.toggle("is-hidden", isHidden);
+            button.setAttribute("aria-pressed", String(!isHidden));
+            icon.textContent = isHidden ? "visibility_off" : "visibility";
+            updatePnlGridLayout();
+          });
+        });
+        updatePnlGridLayout();
       }
 
       function renderFromToDetails(scenario, outputData) {
@@ -7350,11 +7735,13 @@
         const details = buildFromToDetails(scenario, outputData);
         outputFromTo.innerHTML = `
           ${renderFromToKpis(outputData)}
-          <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            ${renderFromToCard("From", "#0662C4", "#0662C4", details.from)}
-            ${renderFromToCard("To", "#E8A800", "#f3c12e", details.to)}
+          <div class="fromto-v2-grid">
+            ${renderFromToCard("From", "#0662C4", details.from, details.from)}
+            ${renderFromToCard("To", "#E8A800", details.to, details.from)}
           </div>
+          ${renderFromToPnl(details)}
         `;
+        setupFromToPnlToggles();
       }
 
       function renderOutputScenario(scenario) {
