@@ -287,6 +287,14 @@
         padding: 16px 16px 20px;
         box-shadow: 0 0 24px rgba(0, 94, 192, 0.08);
       }
+      .fromto-v2-pnl.fromto-v2-pnl-compact {
+        margin-top: 0;
+        padding: 0;
+        background: transparent;
+      }
+      .fromto-v2-pnl.fromto-v2-pnl-compact .fromto-v2-pnl-head {
+        margin-bottom: 8px;
+      }
       .fromto-v2-pnl-head {
         display: flex;
         align-items: center;
@@ -4594,58 +4602,48 @@
             </div>
           </div>
 
-          <!-- Comparison Metrics Table -->
-          <div class="mx-12 overflow-hidden rounded-xl bg-white shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]">
-            <div class="flex items-center justify-end px-6 pt-5 pb-2">
-              <div class="flex items-center gap-1.5 text-[12px] text-[#4b4b4b]">
-                <span class="inline-block h-[7px] w-[7px] rounded-full bg-[#004895]"></span>
-                Optimal
+          <div class="mx-12 rounded-xl bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]">
+            <!-- Comparison Metrics Table -->
+            <div class="overflow-hidden rounded-xl bg-white shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]">
+              <div class="flex items-center justify-end px-6 pt-5 pb-2">
+                <div class="flex items-center gap-1.5 text-[12px] text-[#4b4b4b]">
+                  <span class="inline-block h-[7px] w-[7px] rounded-full bg-[#004895]"></span>
+                  Optimal
+                </div>
               </div>
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="border-b border-[#d8e7fb]">
+                    <th class="w-[25%] py-4 pl-6 pr-6 text-left text-[12px] font-bold uppercase tracking-wide text-[#2d2d2d]">
+                      <div class="flex items-center gap-1">Comparison Metric <span class="material-icons text-[14px] text-[#4b4b4b]">unfold_more</span></div>
+                    </th>
+                    <th class="w-[25%] py-4 px-6 text-left text-[12px] font-bold uppercase tracking-wide text-[#2d2d2d]">
+                      <div class="flex items-center gap-1">Scenario 1 <span class="material-icons text-[14px] text-[#4b4b4b]">unfold_more</span></div>
+                    </th>
+                    <th class="w-[25%] py-4 pl-6 pr-6 text-left text-[12px] font-bold uppercase tracking-wide text-[#2d2d2d]">
+                      <div class="flex items-center gap-1">Scenario 2 <span class="material-icons text-[14px] text-[#4b4b4b]">unfold_more</span></div>
+                    </th>
+                    <th class="w-[25%] py-4 px-6 text-left text-[12px] font-bold uppercase tracking-wide text-[#2d2d2d]">
+                      <div class="flex items-center gap-1">S2 B(W) S1 <span class="material-icons text-[14px] text-[#4b4b4b]">unfold_more</span></div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="compare-metrics-body"></tbody>
+              </table>
             </div>
-            <table class="w-full border-collapse">
-              <thead>
-                <tr class="border-b border-[#e8e8e8]">
-                  <th class="w-[25%] py-4 pl-6 pr-6 text-left text-[12px] font-bold uppercase tracking-wide text-[#2d2d2d]">
-                    <div class="flex items-center gap-1">Comparison Metric <span class="material-icons text-[14px] text-[#4b4b4b]">unfold_more</span></div>
-                  </th>
-                  <th class="w-[25%] py-4 px-6 text-left text-[12px] font-bold uppercase tracking-wide text-[#2d2d2d]">
-                    <div class="flex items-center gap-1">Scenario 1 <span class="material-icons text-[14px] text-[#4b4b4b]">unfold_more</span></div>
-                  </th>
-                  <th class="w-[25%] border-l border-[#e8e8e8] py-4 pl-6 pr-6 text-left text-[12px] font-bold uppercase tracking-wide text-[#2d2d2d]">
-                    <div class="flex items-center gap-1">Scenario 2 <span class="material-icons text-[14px] text-[#4b4b4b]">unfold_more</span></div>
-                  </th>
-                  <th class="w-[25%] py-4 px-6 text-left text-[12px] font-bold uppercase tracking-wide text-[#2d2d2d]">
-                    <div class="flex items-center gap-1">S2 B(W) S1 <span class="material-icons text-[14px] text-[#4b4b4b]">unfold_more</span></div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody id="compare-metrics-body"></tbody>
-            </table>
-          </div>
 
-          <!-- Input Differences Summary -->
-          <div class="mx-12 overflow-hidden rounded-xl bg-white shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]">
-            <div class="flex items-center justify-between px-6 pt-6 pb-4">
-              <div class="flex items-center gap-2">
-                <span class="material-icons text-[18px] text-[#4b4b4b]">table_chart</span>
-                <span class="text-[16px] font-bold text-[#2d2d2d]">Input Differences Summary</span>
+            <!-- Detail Tabs (Labor / Service / Assets / P&L) -->
+            <div class="mt-6 rounded-xl bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]">
+              <div class="flex gap-6 border-b border-[#d8e7fb]">
+                <button class="compare-detail-tab border-b-2 border-[#004895] pb-2 text-[14px] font-bold text-[#004895]" data-compare-tab="Labor">Labor</button>
+                <button class="compare-detail-tab border-b-2 border-transparent pb-2 text-[14px] text-[#4b4b4b] hover:text-[#004895]" data-compare-tab="Service">Service</button>
+                <button class="compare-detail-tab border-b-2 border-transparent pb-2 text-[14px] text-[#4b4b4b] hover:text-[#004895]" data-compare-tab="Assets">Assets</button>
+                <button class="compare-detail-tab border-b-2 border-transparent pb-2 text-[14px] text-[#4b4b4b] hover:text-[#004895]" data-compare-tab="P&L">P&L</button>
               </div>
-              <span class="rounded-full border border-[#004895] bg-[#d8e7fb] px-3 py-1 text-[11px] font-bold text-[#004895]">Generated by AI</span>
-            </div>
-            <div id="compare-diff-container" class="px-6 pb-6"></div>
-          </div>
-
-          <!-- Detail Tabs (Labor / Service / Assets / P&L) -->
-          <div class="mx-12">
-            <div class="flex gap-6 border-b border-[#e8e8e8]">
-              <button class="compare-detail-tab border-b-2 border-[#004895] pb-2 text-[14px] font-bold text-[#004895]" data-compare-tab="Labor">Labor</button>
-              <button class="compare-detail-tab border-b-2 border-transparent pb-2 text-[14px] text-[#4b4b4b] hover:text-[#004895]" data-compare-tab="Service">Service</button>
-              <button class="compare-detail-tab border-b-2 border-transparent pb-2 text-[14px] text-[#4b4b4b] hover:text-[#004895]" data-compare-tab="Assets">Assets</button>
-              <button class="compare-detail-tab border-b-2 border-transparent pb-2 text-[14px] text-[#4b4b4b] hover:text-[#004895]" data-compare-tab="P&L">P&L</button>
-            </div>
-            <div class="mt-4 grid grid-cols-2 gap-6">
-              <div id="compare-detail-left" class="rounded-lg border border-[#e8e8e8] overflow-hidden"></div>
-              <div id="compare-detail-right" class="rounded-lg border border-[#e8e8e8] overflow-hidden"></div>
+              <div class="mt-4 grid grid-cols-2 gap-6">
+                <div id="compare-detail-left" class="overflow-hidden"></div>
+                <div id="compare-detail-right" class="overflow-hidden"></div>
+              </div>
             </div>
           </div>
 
@@ -7628,7 +7626,16 @@
         `;
       }
 
-      function renderFromToPnl(details) {
+      function renderFromToPnl(details, options = {}) {
+        const {
+          title = "P&L",
+          fromLabel = "From",
+          toLabel = "To",
+          scopeId = "fromto",
+          hideTitle = false,
+          noShadow = false,
+          compact = false,
+        } = options;
         const rows = details.from.pnl.map((fromRow, index) => {
           const toRow = details.to.pnl[index] || {};
           return { label: fromRow.label, from: fromRow, to: toRow };
@@ -7642,11 +7649,11 @@
           if (mode === "currency") return `<span class="${cls}">${isUp ? "$" : "($"}${Math.abs(delta).toFixed(2)}${isUp ? "" : ")"}</span>`;
           return `<span class="${cls}">${isUp ? "$" : "($"}${Math.abs(delta).toFixed(2)}${isUp ? "" : ")"}</span>`;
         };
-        const renderPnlTable = (title, valueFormatter, diffMode) => `
-          <div class="fromto-v2-pnl-table" data-pnl-table="${diffMode}">
-            <div class="pnl-head">${title}</div>
+        const renderPnlTable = (tableTitle, valueFormatter, diffMode) => `
+          <div class="fromto-v2-pnl-table" data-pnl-table="${scopeId}:${diffMode}">
+            <div class="pnl-head">${tableTitle}</div>
             <div class="fromto-v2-pnl-row fromto-v2-pnl-colhead">
-              <div>Segment</div><div>From</div><div>To</div><div>B(W)</div>
+              <div>Segment</div><div>${fromLabel}</div><div>${toLabel}</div><div>B(W)</div>
             </div>
             ${rows
               .map((row) => {
@@ -7673,20 +7680,20 @@
           </div>
         `;
         return `
-          <div class="fromto-v2-pnl">
+          <div class="fromto-v2-pnl ${noShadow ? "shadow-none" : ""} ${compact ? "fromto-v2-pnl-compact" : ""}">
             <div class="fromto-v2-pnl-head">
-              <div class="fromto-v2-pnl-title">P&L</div>
+              ${hideTitle ? "" : `<div class="fromto-v2-pnl-title">${title}</div>`}
               <div class="fromto-v2-pnl-tabs">
-                <button class="fromto-v2-pnl-toggle" type="button" data-pnl-toggle="money" aria-pressed="true">
-                  <span class="material-icons" data-pnl-toggle-icon="money">visibility</span>
+                <button class="fromto-v2-pnl-toggle" type="button" data-pnl-toggle="${scopeId}:money" aria-pressed="true">
+                  <span class="material-icons" data-pnl-toggle-icon="${scopeId}:money">visibility</span>
                   <span>Dollars</span>
                 </button>
-                <button class="fromto-v2-pnl-toggle" type="button" data-pnl-toggle="percent" aria-pressed="true">
-                  <span class="material-icons" data-pnl-toggle-icon="percent">visibility</span>
+                <button class="fromto-v2-pnl-toggle" type="button" data-pnl-toggle="${scopeId}:percent" aria-pressed="true">
+                  <span class="material-icons" data-pnl-toggle-icon="${scopeId}:percent">visibility</span>
                   <span>% NR</span>
                 </button>
-                <button class="fromto-v2-pnl-toggle" type="button" data-pnl-toggle="currency" aria-pressed="true">
-                  <span class="material-icons" data-pnl-toggle-icon="currency">visibility</span>
+                <button class="fromto-v2-pnl-toggle" type="button" data-pnl-toggle="${scopeId}:currency" aria-pressed="true">
+                  <span class="material-icons" data-pnl-toggle-icon="${scopeId}:currency">visibility</span>
                   <span>$/Case</span>
                 </button>
               </div>
@@ -7700,15 +7707,8 @@
         `;
       }
 
-      function setupFromToPnlToggles() {
-        const updatePnlGridLayout = () => {
-          const grid = document.querySelector(".fromto-v2-pnl-grid");
-          if (!grid) return;
-          const tables = Array.from(grid.querySelectorAll(".fromto-v2-pnl-table"));
-          const visibleCount = tables.filter((table) => table.style.display !== "none").length;
-          grid.style.gridTemplateColumns = `repeat(${Math.max(1, visibleCount)}, minmax(0, 1fr))`;
-        };
-        const buttons = Array.from(document.querySelectorAll("[data-pnl-toggle]"));
+      function setupFromToPnlToggles(scopeId = "fromto") {
+        const buttons = Array.from(document.querySelectorAll(`[data-pnl-toggle^="${scopeId}:"]`));
         if (!buttons.length) return;
         buttons.forEach((button) => {
           button.addEventListener("click", () => {
@@ -7722,10 +7722,20 @@
             button.classList.toggle("is-hidden", isHidden);
             button.setAttribute("aria-pressed", String(!isHidden));
             icon.textContent = isHidden ? "visibility_off" : "visibility";
-            updatePnlGridLayout();
+            const grid = table.closest(".fromto-v2-pnl-grid");
+            if (!grid) return;
+            const tables = Array.from(grid.querySelectorAll(".fromto-v2-pnl-table"));
+            const visibleCount = tables.filter((tbl) => tbl.style.display !== "none").length;
+            grid.style.gridTemplateColumns = `repeat(${Math.max(1, visibleCount)}, minmax(0, 1fr))`;
           });
+          const table = document.querySelector(`[data-pnl-table="${button.getAttribute("data-pnl-toggle")}"]`);
+          const grid = table?.closest(".fromto-v2-pnl-grid");
+          if (grid) {
+            const tables = Array.from(grid.querySelectorAll(".fromto-v2-pnl-table"));
+            const visibleCount = tables.filter((tbl) => tbl.style.display !== "none").length;
+            grid.style.gridTemplateColumns = `repeat(${Math.max(1, visibleCount)}, minmax(0, 1fr))`;
+          }
         });
-        updatePnlGridLayout();
       }
 
       function renderFromToDetails(scenario, outputData) {
@@ -7739,9 +7749,9 @@
             ${renderFromToCard("From", "#0662C4", details.from, details.from)}
             ${renderFromToCard("To", "#E8A800", details.to, details.from)}
           </div>
-          ${renderFromToPnl(details)}
+          ${renderFromToPnl(details, { scopeId: "fromto", fromLabel: "From", toLabel: "To", title: "P&L" })}
         `;
-        setupFromToPnlToggles();
+        setupFromToPnlToggles("fromto");
       }
 
       function renderOutputScenario(scenario) {
@@ -8883,6 +8893,16 @@
 
       function renderCompareMetrics(d1, d2) {
         const optimalDot = `<span class="inline-block h-[7px] w-[7px] rounded-full bg-[#004895] mr-1.5 shrink-0"></span>`;
+        const metricIcons = {
+          "Profit to Serve": "show_chart",
+          "Weekly Hours": "schedule",
+          "Weekly Miles": "bar_chart",
+          Headcount: "person_outline",
+          "Weekly Deliveries": "calendar_today",
+          "Drop Size Cases": "insert_chart",
+          "Net Revenue/hour": "monetization_on",
+          Assets: "directions_car",
+        };
 
         const metrics = [
           {
@@ -8957,19 +8977,24 @@
 
         compareMetricsBody.innerHTML = metrics
           .map((m) => {
-            return `<tr class="border-b border-[#f0f0f0] last:border-b-0">
-              <td class="py-4 pl-6 pr-6 text-[14px] text-[#2d2d2d]">${m.name}</td>
-              <td class="py-4 px-6 text-[14px] text-[#2d2d2d]">
+            return `<tr class="border-b border-[#d8e7fb] last:border-b-0">
+              <td class="py-3 pl-6 pr-6 text-[14px] text-[#2d2d2d]">
+                <span class="inline-flex items-center gap-2">
+                  <span class="material-icons text-[18px] leading-none text-[#4b4b4b]">${metricIcons[m.name] || "table_chart"}</span>
+                  <span>${m.name}</span>
+                </span>
+              </td>
+              <td class="py-3 px-6 text-[14px] text-[#2d2d2d]">
                 <div class="flex items-center gap-2">
                   ${m.opt1 ? optimalDot : ""}${m.v1} ${formatChangeTag(m.c1)}
                 </div>
               </td>
-              <td class="border-l border-[#e8e8e8] py-4 pl-6 pr-6 text-[14px] text-[#2d2d2d]">
+              <td class="py-3 pl-6 pr-6 text-[14px] text-[#2d2d2d]">
                 <div class="flex items-center gap-2">
                   ${m.opt2 ? optimalDot : ""}${m.v2} ${formatChangeTag(m.c2)}
                 </div>
               </td>
-              <td class="py-4 px-6 text-[14px] text-[#2d2d2d]">${formatChangeTag(m.bw)}</td>
+              <td class="py-3 px-6 text-[14px] text-[#2d2d2d]">${formatChangeTag(m.bw)}</td>
             </tr>`;
           })
           .join("");
@@ -8991,6 +9016,7 @@
       }
 
       function renderCompareDiffs(id1, id2) {
+        if (!compareDiffContainer) return;
         const diffData = [
           {
             label: "SCENARIO 1",
@@ -9026,8 +9052,8 @@
 
       function renderCompareDetailTable(containerId, label, data) {
         const container = containerId === "left" ? compareDetailLeft : compareDetailRight;
-        const headerBg = "#FFF8E1";
-        const headerColor = "#E8A800";
+        const headerBg = "#f5f9ff";
+        const headerColor = "#b0d0fb";
         const hcChange1 =
           data.labor.cdlDms.hc >= 12
             ? `<span class="ml-1 inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]">+0%</span>`
@@ -9044,7 +9070,7 @@
             </div>
             <table class="w-full">
               <thead>
-                <tr class="table-header border-b border-[#f0c44f] font-bold uppercase text-[#4b4b4b]">
+                <tr class="table-header border-b border-[#b0d0fb] font-bold uppercase text-[#4b4b4b]">
                   <th class="px-4 py-2 text-left">Role Type</th>
                   <th class="px-4 py-2 text-center">HC</th>
                   <th class="px-4 py-2 text-right">Wages $/Hr</th>
@@ -9053,7 +9079,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="border-b border-[#f0c44f]">
+                <tr class="border-b border-[#b0d0fb]">
                   <td class="px-4 py-2 text-[14px] text-[#2d2d2d]">CDL(A) DMS</td>
                   <td class="px-4 py-2 text-center text-[14px] text-[#2d2d2d]">
                     <span class="inline-flex items-center gap-1 whitespace-nowrap">${data.labor.cdlDms.hc} ${hcChange1}</span>
@@ -9062,7 +9088,7 @@
                   <td class="px-4 py-2 text-right text-[14px] text-[#2d2d2d]">$${data.labor.cdlDms.salary.toLocaleString()}</td>
                   <td class="px-4 py-2 text-right text-[14px] text-[#2d2d2d]">${data.labor.cdlDms.hrsWk}</td>
                 </tr>
-                <tr class="border-b border-[#f0c44f]">
+                <tr class="border-b border-[#b0d0fb]">
                   <td class="px-4 py-2 text-[14px] text-[#2d2d2d]">Merchandisers</td>
                   <td class="px-4 py-2 text-center text-[14px] text-[#2d2d2d]">
                     <span class="inline-flex items-center gap-1 whitespace-nowrap">${data.labor.merchandisers.hc} ${hcChange2}</span>
@@ -9086,11 +9112,11 @@
 
       function renderCompareDetailService(containerId, label, data) {
         const container = containerId === "left" ? compareDetailLeft : compareDetailRight;
-        const headerBg = "#FFF8E1";
-        const headerColor = "#E8A800";
+        const headerBg = "#f5f9ff";
+        const headerColor = "#b0d0fb";
         const formatRow = (key, labelText, values) => `
           <div
-            class="grid grid-cols-[1.2fr_1fr_1fr] items-center border-b border-[#f0c44f] px-4 py-3 text-[14px] text-[#2d2d2d]"
+            class="grid grid-cols-[1.2fr_1fr_1fr] items-center border-b border-[#b0d0fb] px-4 py-3 text-[14px] text-[#2d2d2d]"
             data-section="${key}"
           >
             <button
@@ -9106,7 +9132,7 @@
             <div class="text-center font-bold">${values.lf}</div>
             <div class="text-center font-bold">${values.sf}</div>
           </div>
-          <div class="border-b border-[#f0c44f] bg-[#fffaf1]" data-children="${key}">
+          <div class="border-b border-[#b0d0fb] bg-[#fffaf1]" data-children="${key}">
             <div class="grid grid-cols-[1.2fr_1fr_1fr] items-center px-4 py-3 text-[14px] text-[#2d2d2d]">
               <div class="flex items-center gap-2 pl-6 italic text-[#4b4b4b]">Foods</div>
               <div class="flex items-center justify-center gap-2">
@@ -9137,9 +9163,9 @@
           <div class="table-text overflow-hidden rounded-[8px] bg-white" style="border:1px solid ${headerColor}">
             <div class="table-header flex items-center justify-between px-4 py-2 font-bold uppercase" style="background:${headerBg};color:#2d2d2d">
               <span>Service ${label.toUpperCase()}</span>
-              <span class="font-bold text-[#9c6b00]">Expand all</span>
+              <span class="font-bold text-[#004895]">Expand all</span>
             </div>
-            <div class="table-header grid grid-cols-[1.2fr_1fr_1fr] items-center border-b border-[#f0c44f] px-4 py-2 font-bold uppercase text-[#4b4b4b]">
+            <div class="table-header grid grid-cols-[1.2fr_1fr_1fr] items-center border-b border-[#b0d0fb] px-4 py-2 font-bold uppercase text-[#4b4b4b]">
               <div>Segment</div>
               <div class="text-center">Large Format</div>
               <div class="text-center">Small Format</div>
@@ -9158,22 +9184,22 @@
 
       function renderCompareDetailAssets(containerId, label, data) {
         const container = containerId === "left" ? compareDetailLeft : compareDetailRight;
-        const headerBg = "#FFF8E1";
-        const headerColor = "#E8A800";
+        const headerBg = "#f5f9ff";
+        const headerColor = "#b0d0fb";
         const totalCount = data.assets_detail.table.reduce((sum, row) => sum + row.count, 0);
         container.innerHTML = `
           <div class="table-text overflow-hidden rounded-[8px] bg-white" style="border:1px solid ${headerColor}">
             <div class="table-header flex items-center justify-between px-4 py-2 font-bold uppercase" style="background:${headerBg};color:#2d2d2d">
               <span>Assets ${label.toUpperCase()}</span>
             </div>
-            <div class="table-header grid grid-cols-[1.4fr_1fr] items-center border-b border-[#f0c44f] px-4 py-2 font-bold uppercase text-[#4b4b4b]">
+            <div class="table-header grid grid-cols-[1.4fr_1fr] items-center border-b border-[#b0d0fb] px-4 py-2 font-bold uppercase text-[#4b4b4b]">
               <div>Asset Type</div>
               <div class="text-right"># of Assets</div>
             </div>
             ${data.assets_detail.table
               .map(
                 (row) => `
-              <div class="grid grid-cols-[1.4fr_1fr] items-center border-b border-[#f0c44f] px-4 py-3 text-[14px] text-[#2d2d2d]">
+              <div class="grid grid-cols-[1.4fr_1fr] items-center border-b border-[#b0d0fb] px-4 py-3 text-[14px] text-[#2d2d2d]">
                 <div>${row.label}</div>
                 <div class="flex items-center justify-end gap-2">
                   <span class="font-bold">${row.count}</span>
@@ -9194,44 +9220,32 @@
         `;
       }
 
-      function renderCompareDetailPnl(containerId, label, data) {
-        const container = containerId === "left" ? compareDetailLeft : compareDetailRight;
-        const headerBg = "#FFF8E1";
-        const headerColor = "#E8A800";
-        const formatValue = (value) => value.toLocaleString();
-        const formatPercent = (value) => value.toFixed(1);
-        const formatPerCase = (value) => value.toFixed(1);
-        container.innerHTML = `
-          <div class="table-text overflow-hidden rounded-[8px] bg-white" style="border:1px solid ${headerColor}">
-            <div class="table-header px-4 py-2 font-bold uppercase" style="background:${headerBg};color:#2d2d2d">
-              P&L ${label}
-            </div>
-            <table class="w-full">
-              <thead>
-                <tr class="table-header border-b border-[#f0c44f] font-bold uppercase text-[#4b4b4b]">
-                  <th class="px-4 py-2 text-left">Segment</th>
-                  <th class="px-4 py-2 text-right">$</th>
-                  <th class="px-4 py-2 text-right">%NR</th>
-                  <th class="px-4 py-2 text-right">$/Case</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${data.pnl.rows
-                  .map(
-                    (row) => `
-                <tr class="border-b border-[#f0c44f]">
-                  <td class="px-4 py-2 text-[14px] text-[#2d2d2d] ${row.isBold ? "font-bold" : ""} ${row.indent ? "pl-8" : ""}">${row.label}</td>
-                  <td class="px-4 py-2 text-right text-[14px] text-[#2d2d2d] ${row.isBold ? "font-bold" : ""}">${formatValue(row.value)}</td>
-                  <td class="px-4 py-2 text-right text-[14px] text-[#2d2d2d] ${row.isBold ? "font-bold" : ""}">${formatPercent(row.percent)}</td>
-                  <td class="px-4 py-2 text-right text-[14px] text-[#2d2d2d] ${row.isBold ? "font-bold" : ""}">${formatPerCase(row.perCase)}</td>
-                </tr>
-                `
-                  )
-                  .join("")}
-              </tbody>
-            </table>
-          </div>
-        `;
+      function renderCompareDetailPnl(leftData, rightData) {
+        const toFromToRows = (rows) =>
+          (rows || []).map((row) => ({
+            label: row.indent ? `  ${row.label}` : row.label,
+            from: row.value ?? 0,
+            percent: row.percent ?? 0,
+            perCase: row.perCase ?? 0,
+          }));
+
+        const details = {
+          from: { pnl: toFromToRows(leftData?.pnl?.rows) },
+          to: { pnl: toFromToRows(rightData?.pnl?.rows) },
+        };
+
+        compareDetailLeft.classList.add("col-span-2");
+        compareDetailRight.classList.add("hidden");
+        compareDetailLeft.innerHTML = renderFromToPnl(details, {
+          scopeId: "compare-pnl",
+          fromLabel: "Scenario 1",
+          toLabel: "Scenario 2",
+          hideTitle: true,
+          noShadow: true,
+          compact: true,
+        });
+        compareDetailRight.innerHTML = "";
+        setupFromToPnlToggles("compare-pnl");
       }
 
       let compareData1 = null;
@@ -9242,6 +9256,8 @@
 
       function setCompareDetailTab(tab) {
         currentCompareTab = tab;
+        compareDetailLeft.classList.remove("col-span-2");
+        compareDetailRight.classList.remove("hidden");
         document.querySelectorAll(".compare-detail-tab").forEach((t) => {
           const isActive = t.getAttribute("data-compare-tab") === tab;
           t.classList.toggle("border-[#004895]", isActive);
@@ -9262,8 +9278,7 @@
           renderCompareDetailAssets("left", label1, compareData1);
           renderCompareDetailAssets("right", label2, compareData2);
         } else if (tab === "P&L") {
-          renderCompareDetailPnl("left", label1, compareData1);
-          renderCompareDetailPnl("right", label2, compareData2);
+          renderCompareDetailPnl(compareData1, compareData2);
         }
       }
 
