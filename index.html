@@ -51,12 +51,22 @@
         appearance: none;
         width: 16px;
         height: 16px;
+        min-width: 16px;
+        min-height: 16px;
         border: 1.5px solid #2d2d2d;
         border-radius: 3px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        flex-shrink: 0;
+        box-sizing: border-box;
         background: #fff;
+      }
+      .gtm-type-checkbox.table-checkbox {
+        width: 16px;
+        height: 16px;
+        min-width: 16px;
+        min-height: 16px;
       }
       .table-checkbox:checked {
         border-color: #004895;
@@ -70,6 +80,19 @@
         border-bottom: 2px solid #fff;
         transform: rotate(-45deg);
         display: block;
+      }
+      .table-checkbox:disabled {
+        border-color: #c0c0c0;
+        background-color: #e5e5e5;
+        cursor: not-allowed;
+      }
+      .table-checkbox:checked:disabled {
+        border-color: #b1b1b1;
+        background-color: #b1b1b1;
+      }
+      .table-checkbox:checked:disabled::after {
+        border-left-color: #fff;
+        border-bottom-color: #fff;
       }
       .table-checkbox:indeterminate {
         border-color: #004895;
@@ -263,6 +286,14 @@
         background: #f5f9ff;
         border-left: 2px solid #0662c4;
       }
+      .table-sub-food {
+        background: #fffdf3;
+        border-left: 2px solid #e5bb08;
+      }
+      .table-sub-bev {
+        background: #f5f9ff;
+        border-left: 2px solid #0662c4;
+      }
       .fromto-v2-row.is-total {
         font-weight: 700;
       }
@@ -390,6 +421,11 @@
       .facility-input:active {
         outline: none;
         border-color: #0662c4;
+      }
+      .run-modal-input:focus,
+      .run-modal-input:active {
+        outline: none;
+        border-color: #004895;
       }
       .facility-input:disabled {
         background: #dadada;
@@ -751,10 +787,26 @@
         font-weight: 600;
         color: #4b4b4b;
       }
+      /* Define Parameters: fill viewport, end 8px above bottom bar; tabs fixed, content scrolls */
+      #define-parameters-view:not(.hidden) {
+        position: fixed;
+        top: 64px;
+        bottom: 72px;
+        left: 0;
+        right: 0;
+        padding-left: 3rem;
+        padding-right: 3rem;
+        box-sizing: border-box;
+      }
+      /* Workspace (and other views): no body scroll; main is the single scroll area */
+      html, body {
+        height: 100%;
+        overflow: hidden;
+      }
     </style>
   </head>
   <body class="bg-[#f5f9ff] text-[#2d2d2d]">
-    <div class="min-h-screen">
+    <div class="flex h-full flex-col overflow-hidden">
       <header
         class="bg-white border-b border-[#d8e7fb] shadow-[4px_0px_24px_0px_rgba(0,94,192,0.08)]"
       >
@@ -847,7 +899,7 @@
         </div>
       </header>
 
-      <main class="px-12 pb-24 pt-6">
+      <main class="min-h-0 flex-1 overflow-y-auto px-12 pb-24 pt-6">
         <section id="workspace-view" class="mx-auto max-w-[1344px]">
           <div
             class="rounded-lg bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
@@ -1239,7 +1291,7 @@
                     circle
                   </span>
                   <div class="flex-1">
-                    <div class="h-[2px] w-full bg-[#0662C4]"></div>
+                    <div class="h-[2px] w-full bg-[#4b4b4b]"></div>
                   </div>
                 </div>
                 <p class="pt-1 text-[14px] text-[#4b4b4b]">View Baseline</p>
@@ -1293,12 +1345,7 @@
                 <div
                   class="flex items-center justify-between text-[12px] font-medium"
                 >
-                  <div class="flex items-center gap-2">
-                    <span>Start Date</span>
-                    <span class="material-icons text-[16px] text-[#4b4b4b]">
-                      info
-                    </span>
-                  </div>
+                  <span>Start Date</span>
                   <span class="text-[#4b4b4b]">*Required</span>
                 </div>
                   <div class="relative">
@@ -1318,23 +1365,12 @@
                       class="absolute left-0 right-0 top-[36px] z-30 hidden max-h-[240px] overflow-auto rounded border border-[#d8e7fb] bg-white p-2 text-[14px] text-[#4b4b4b] shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
                     ></div>
                   </div>
-                  <div class="flex items-center gap-1 text-[12px] text-[#4b4b4b]">
-                    <span class="material-icons text-[16px] text-[#4b4b4b]">
-                      info
-                    </span>
-                    Lorem Ipsum
-                  </div>
                 </div>
                 <div class="flex flex-1 flex-col gap-2">
                 <div
                   class="flex items-center justify-between text-[12px] font-medium"
                 >
-                  <div class="flex items-center gap-2">
-                    <span>End Date</span>
-                    <span class="material-icons text-[16px] text-[#4b4b4b]">
-                      info
-                    </span>
-                  </div>
+                  <span>End Date</span>
                   <span class="text-[#4b4b4b]">*Required</span>
                 </div>
                   <div class="relative">
@@ -1353,12 +1389,6 @@
                       id="end-date-menu"
                       class="absolute left-0 right-0 top-[36px] z-30 hidden max-h-[240px] overflow-auto rounded border border-[#d8e7fb] bg-white p-2 text-[14px] text-[#4b4b4b] shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
                     ></div>
-                  </div>
-                  <div class="flex items-center gap-1 text-[12px] text-[#4b4b4b]">
-                    <span class="material-icons text-[16px] text-[#4b4b4b]">
-                      info
-                    </span>
-                    Lorem Ipsum
                   </div>
                 </div>
               </div>
@@ -2172,9 +2202,9 @@
 
         <section
           id="define-parameters-view"
-          class="mx-auto hidden max-w-[1344px] flex-col gap-6"
+          class="mx-auto flex max-w-[1344px] flex-1 flex-col gap-6 overflow-hidden"
         >
-          <div class="flex flex-col gap-4 pb-6">
+          <div class="shrink-0 flex flex-col gap-4 pb-6 pt-6">
             <p class="text-[18px] leading-[24px] text-[#4b4b4b]">
               SCENARIO CREATION
             </p>
@@ -2225,10 +2255,10 @@
           </div>
 
           <div
-            class="rounded-lg bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)] w-full"
+            class="mb-2 flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
           >
-            <div class="flex gap-6">
-              <div class="w-[220px] shrink-0 border-l border-[#d8e7fb] h-fit">
+            <div class="flex min-h-0 flex-1 gap-6 overflow-hidden">
+              <div class="w-[220px] shrink-0">
                 <div class="flex flex-col text-[14px] text-[#4b4b4b]">
                   <button
                     class="define-parameters-tab flex min-h-[32px] items-center justify-between border-l border-[#d8e7fb] px-2 py-1 transition-colors hover:border-l-2 hover:border-[#B0D0FB]"
@@ -2303,7 +2333,7 @@
                 </div>
               </div>
 
-              <div class="flex-1 min-w-0">
+              <div class="min-h-0 min-w-0 flex-1 overflow-y-auto overflow-x-hidden p-6">
                 <div class="hidden w-full min-w-0" data-define-panel="Facilities">
                   <div
                     class="w-full rounded-[8px] bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
@@ -3645,6 +3675,209 @@
                     </div>
                   </div>
                 </div>
+                <div class="hidden w-full min-w-0" data-define-panel="GTM Types">
+                  <div class="flex flex-col gap-6">
+                    <!-- Select GTM Types (no card background - uses main card) -->
+                    <div class="w-full p-6">
+                      <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                        Select GTM Types
+                      </div>
+                      <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
+                        <div class="p-4">
+                          <label class="flex cursor-pointer items-start gap-3">
+                            <input type="checkbox" class="gtm-type-checkbox table-checkbox mt-0.5 shrink-0" checked disabled />
+                            <div>
+                              <div class="font-semibold text-[#2d2d2d]">DSD</div>
+                              <p class="mt-1 text-[14px] leading-[20px] text-[#4b4b4b]">
+                                DSD refers to PepsiCo's primary GTM design where employees Deliver, Merch, Order, and Sell. Any store not meeting the criteria for eB2B or Drop &amp; Go DSD will receive DSD service
+                              </p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="p-4">
+                          <label class="flex cursor-pointer items-start gap-3">
+                            <input type="checkbox" class="gtm-type-checkbox table-checkbox mt-0.5 shrink-0" checked />
+                            <div>
+                              <div class="font-semibold text-[#2d2d2d]">Drop &amp; Go DSD</div>
+                              <p class="mt-1 text-[14px] leading-[20px] text-[#4b4b4b]">
+                                Drop &amp; Go DSD refers to a GTM design where PepsiCo employees are only responsible for Delivery. This GTM design applies only to existing Drop &amp; Go customers. These include: stores on PBUS Pepsi Direct Routes, eCommerce customers (e.g., GoPuff, Doordash) and eCommerce Customer Fulfillment Centers / MFCs
+                              </p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="p-4">
+                          <label class="flex cursor-pointer items-start gap-3">
+                            <input type="checkbox" id="gtm-eb2b-checkbox" class="gtm-type-checkbox table-checkbox mt-0.5 shrink-0" checked />
+                            <div>
+                              <div class="font-semibold text-[#2d2d2d]">eB2B</div>
+                              <p class="mt-1 text-[14px] leading-[20px] text-[#4b4b4b]">
+                                eB2B refers to a GTM design where customers place orders through a web interface and PepsiCo employees are only responsible for Delivery, Merch, and Sell
+                              </p>
+                            </div>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- eB2B Volume Thresholds (hidden when eB2B unchecked) -->
+                    <div
+                      class="gtm-eb2b-section w-full rounded-[8px] bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
+                    >
+                      <div class="flex items-center justify-between">
+                        <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                          eB2B Volume Thresholds
+                        </div>
+                        <button
+                          class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[12px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+                          type="button"
+                          data-reset-default="gtm-volume-thresholds"
+                        >
+                          <span class="material-icons text-[16px] text-current">
+                            refresh
+                          </span>
+                          Reset to default
+                        </button>
+                      </div>
+                      <div
+                        class="mt-4 w-full text-[12px] text-[#2d2d2d] table-text overflow-x-auto"
+                        data-define-table="gtm-volume-thresholds"
+                      >
+                        <div class="min-w-full w-max">
+                          <div
+                            class="table-header grid min-h-[40px] grid-cols-[1.2fr_1.5fr] items-center gap-4 border-b-2 border-t-2 border-[#d8e7fb] px-2 py-2 font-bold uppercase text-[#4b4b4b]"
+                          >
+                            <div class="flex items-center gap-1">
+                              Business Unit
+                              <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                unfold_more
+                              </span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                              Maximum Weekly Case Quantity
+                              <span class="material-icons text-[16px] text-[#4b4b4b]">
+                                unfold_more
+                              </span>
+                            </div>
+                          </div>
+                          <div class="divide-y divide-[#d8e7fb]">
+                            <div class="grid min-h-[48px] grid-cols-[1.2fr_1.5fr] items-center gap-4 px-2 py-2">
+                              <div>1NA</div>
+                              <div>
+                                <input class="facility-input" value="10" />
+                                <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                  <span class="material-icons text-[16px] text-[#4b4b4b]">info</span>
+                                  Default: 10
+                                </div>
+                              </div>
+                            </div>
+                            <div class="grid min-h-[48px] grid-cols-[1.2fr_1.5fr] items-center gap-4 px-2 py-2">
+                              <div>PFUS</div>
+                              <div>
+                                <input class="facility-input" value="10" />
+                                <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                  <span class="material-icons text-[16px] text-[#4b4b4b]">info</span>
+                                  Default: 10
+                                </div>
+                              </div>
+                            </div>
+                            <div class="grid min-h-[48px] grid-cols-[1.2fr_1.5fr] items-center gap-4 px-2 py-2">
+                              <div>PBUS</div>
+                              <div>
+                                <input class="facility-input" value="15" />
+                                <div class="mt-1 flex items-center gap-1 text-[12px] text-[#4b4b4b]">
+                                  <span class="material-icons text-[16px] text-[#4b4b4b]">info</span>
+                                  Default: 15
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- eB2B Stores (hidden when eB2B unchecked) -->
+                    <div
+                      class="gtm-eb2b-section w-full rounded-[8px] bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
+                    >
+                      <div class="flex items-center justify-between">
+                        <div class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                          eB2B Stores
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <button
+                            id="gtm-add-chain-button"
+                            class="flex h-8 items-center gap-1 rounded-full bg-[#004895] px-4 text-[12px] font-bold text-white transition-colors hover:bg-[#002B5E]"
+                            type="button"
+                          >
+                            <span class="material-icons text-[16px] text-current">add</span>
+                            Add Chain
+                          </button>
+                          <button
+                            class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[12px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+                            type="button"
+                            data-reset-default="gtm-eb2b-stores"
+                          >
+                            <span class="material-icons text-[16px] text-current">refresh</span>
+                            Reset to default
+                          </button>
+                        </div>
+                      </div>
+                      <div
+                        class="mt-4 w-full min-w-0 text-[12px] text-[#2d2d2d] table-text"
+                        data-define-table="gtm-eb2b-stores"
+                      >
+                        <div class="w-full min-w-0">
+                          <div
+                            class="table-header grid min-h-[40px] grid-cols-[240px_80px_1fr] items-center gap-4 border-b-2 border-t-2 border-[#d8e7fb] px-2 py-2 font-bold uppercase text-[#4b4b4b]"
+                          >
+                            <div class="flex min-w-0 items-center gap-1">
+                              Customer Classification
+                              <span class="material-icons shrink-0 text-[16px] text-[#4b4b4b]">
+                                unfold_more
+                              </span>
+                            </div>
+                            <div>Inc.</div>
+                            <div class="flex min-w-0 items-center gap-1">
+                              Description
+                              <span class="material-icons shrink-0 text-[16px] text-[#4b4b4b]">
+                                unfold_more
+                              </span>
+                            </div>
+                          </div>
+                          <div id="gtm-eb2b-stores-body" class="divide-y divide-[#d8e7fb]">
+                            <div class="grid min-h-[48px] grid-cols-[240px_80px_1fr] items-center gap-4 px-2 py-2">
+                              <div>Independent Business (IBS)</div>
+                              <div class="flex items-center">
+                                <input type="checkbox" class="table-checkbox" checked />
+                              </div>
+                              <div class="min-w-0 break-words text-[14px] text-[#4b4b4b]">
+                                Small Format customers falling under the Independents Business channel in both PFUS and PBUS
+                              </div>
+                            </div>
+                            <div class="grid min-h-[48px] grid-cols-[240px_80px_1fr] items-center gap-4 px-2 py-2">
+                              <div>Convenience &amp; Gas (C&amp;G) Independents</div>
+                              <div class="flex items-center">
+                                <input type="checkbox" class="table-checkbox" checked />
+                              </div>
+                              <div class="min-w-0 break-words text-[14px] text-[#4b4b4b]">
+                                Small Format customers falling under the C&amp;G Channel where Chain Name is either (1) Independents &amp; Small Chains or (2) Unassigned customers
+                              </div>
+                            </div>
+                            <div class="grid min-h-[48px] grid-cols-[240px_80px_1fr] items-center gap-4 px-2 py-2">
+                              <div>PFUS Snacks 2 You Customers</div>
+                              <div class="flex items-center">
+                                <input type="checkbox" class="table-checkbox" checked />
+                              </div>
+                              <div class="min-w-0 break-words text-[14px] text-[#4b4b4b]">
+                                PFUS stores served today via Snacks 2 You GTM model where customers place orders using a web portal and receive delivery via UPS
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div class="hidden w-full min-w-0" data-define-panel="Time Estimates">
                   <div
                     class="w-full rounded-[8px] bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
@@ -4653,7 +4886,7 @@
       </main>
       <div
         id="baseline-sticky"
-        class="fixed bottom-0 left-0 right-0 hidden flex items-center justify-between bg-white px-12 py-4 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]"
+        class="fixed bottom-0 left-0 right-0 z-[100] hidden flex items-center justify-between bg-white px-12 py-4 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]"
       >
         <button
           id="baseline-back"
@@ -4690,7 +4923,7 @@
       </div>
       <div
         id="define-parameters-sticky"
-        class="fixed bottom-0 left-0 right-0 hidden flex items-center justify-between bg-white px-12 py-4 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]"
+        class="fixed bottom-0 left-0 right-0 z-[100] hidden flex items-center justify-between bg-white px-12 py-4 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]"
       >
         <button
           id="define-parameters-back"
@@ -4727,7 +4960,7 @@
       </div>
       <div
         id="compare-sticky"
-        class="fixed bottom-0 left-0 right-0 hidden flex items-center justify-between bg-white px-12 py-4 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]"
+        class="fixed bottom-0 left-0 right-0 z-[100] hidden flex items-center justify-between bg-white px-12 py-4 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]"
       >
         <button
           id="compare-back"
@@ -4752,7 +4985,7 @@
       </div>
       <div
         id="output-sticky"
-        class="fixed bottom-0 left-0 right-0 hidden flex items-center justify-between bg-white px-12 py-4 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]"
+        class="fixed bottom-0 left-0 right-0 z-[100] hidden flex items-center justify-between bg-white px-12 py-4 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]"
       >
         <button
           id="output-back"
@@ -4777,7 +5010,7 @@
       </div>
       <div
         id="scenario-sticky"
-        class="fixed bottom-0 left-0 right-0 z-50 hidden flex h-16 items-center justify-end bg-white pl-12 pr-6 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]"
+        class="fixed bottom-0 left-0 right-0 z-[100] hidden flex h-16 items-center justify-end bg-white pl-12 pr-6 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]"
       >
         <button
           id="view-baseline-button"
@@ -4793,7 +5026,7 @@
       </div>
       <div
         id="draft-modal"
-        class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 px-6"
+        class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/40 px-6"
       >
         <div class="w-full max-w-[420px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
           <div class="text-[18px] font-bold text-[#2d2d2d]">
@@ -4802,6 +5035,15 @@
           <p class="mt-2 text-[14px] text-[#4b4b4b]">
             This will save your current progress as a draft and return you to the workspace.
           </p>
+          <label class="mt-4 flex flex-col gap-2 text-[12px] text-[#4b4b4b]">
+            Description
+            <input
+              id="draft-modal-description"
+              type="text"
+              class="run-modal-input h-9 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+              placeholder="Enter scenario description"
+            />
+          </label>
           <div class="mt-5 flex items-center justify-end gap-3">
             <button
               id="draft-modal-cancel"
@@ -4812,8 +5054,9 @@
             </button>
             <button
               id="draft-modal-confirm"
-              class="flex h-8 items-center gap-1 rounded-full bg-[#004895] px-4 text-[14px] font-bold text-white transition-colors hover:bg-[#002B5E]"
+              class="flex h-8 items-center gap-1 rounded-full bg-[#dadada] px-4 text-[14px] font-bold text-[#b1b1b1] transition-colors cursor-not-allowed"
               type="button"
+              disabled
             >
               Yes, save
             </button>
@@ -4822,7 +5065,7 @@
       </div>
       <div
         id="chain-modal"
-        class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 px-6"
+        class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/40 px-6"
       >
         <div class="w-full max-w-[520px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
           <div class="text-[18px] font-bold text-[#2d2d2d]">
@@ -4880,8 +5123,84 @@
         </div>
       </div>
       <div
+        id="gtm-add-chain-modal"
+        class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/40 px-6"
+      >
+        <div class="w-full max-w-[520px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
+          <div class="flex items-start justify-between">
+            <div class="text-[18px] font-bold text-[#2d2d2d]">
+              Add Chain
+            </div>
+            <button
+              id="gtm-add-chain-modal-close"
+              type="button"
+              class="flex h-8 w-8 items-center justify-center rounded-full text-[#4b4b4b] transition-colors hover:bg-[#f0f0f0] hover:text-[#2d2d2d]"
+              aria-label="Close"
+            >
+              <span class="material-icons text-[24px]">close</span>
+            </button>
+          </div>
+          <p class="mt-2 text-[14px] text-[#4b4b4b]">
+            To add a chain to eB2B Stores search the list and select one to add to the table.
+          </p>
+          <div class="mt-4">
+            <label class="flex flex-col gap-2 text-[12px] text-[#4b4b4b]">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1">
+                  Chain Name
+                  <span class="material-icons text-[16px] text-[#4b4b4b]" title="Chain name for customer classification">info</span>
+                </div>
+                <span class="text-[#4b4b4b]">*Required</span>
+              </div>
+              <div class="relative">
+                <div
+                  id="gtm-chain-name-field"
+                  class="flex h-9 w-full cursor-pointer items-center justify-between rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+                  role="button"
+                  tabindex="0"
+                >
+                  <span id="gtm-chain-name-value" class="truncate text-[#2d2d2d]">Start Typing...</span>
+                  <span class="material-icons shrink-0 text-[16px] text-[#4b4b4b]">
+                    keyboard_arrow_down
+                  </span>
+                </div>
+                <div
+                  id="gtm-chain-name-menu"
+                  class="absolute left-0 right-0 top-[38px] z-30 hidden max-h-[240px] overflow-auto rounded border border-[#d8e7fb] bg-white p-2 text-[14px] text-[#4b4b4b] shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
+                >
+                  <input
+                    id="gtm-chain-name-search"
+                    type="text"
+                    class="mb-2 h-8 w-full rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+                    placeholder="Search..."
+                  />
+                  <div id="gtm-chain-name-options" class="flex flex-col gap-0.5"></div>
+                </div>
+              </div>
+            </label>
+          </div>
+          <div class="mt-6 flex items-center justify-end gap-3">
+            <button
+              id="gtm-add-chain-modal-cancel"
+              class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[14px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              id="gtm-add-chain-modal-confirm"
+              class="flex h-8 items-center gap-1 rounded-full bg-[#dadada] px-4 text-[14px] font-bold text-[#b1b1b1] transition-colors cursor-not-allowed"
+              type="button"
+              disabled
+            >
+              Add Chain
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
         id="facility-modal"
-        class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 px-6"
+        class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/40 px-6"
       >
         <div class="w-full max-w-[560px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
           <div class="text-[18px] font-bold text-[#2d2d2d]">
@@ -4959,7 +5278,7 @@
       </div>
       <div
         id="run-modal"
-        class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 px-6"
+        class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/40 px-6"
       >
         <div class="w-full max-w-[420px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
           <div class="text-[18px] font-bold text-[#2d2d2d]">
@@ -4968,6 +5287,15 @@
           <p class="mt-2 text-[14px] text-[#4b4b4b]">
             This will start the scenario run and return you to the workspace.
           </p>
+          <label class="mt-4 flex flex-col gap-2 text-[12px] text-[#4b4b4b]">
+            Description
+            <input
+              id="run-modal-description"
+              type="text"
+              class="run-modal-input h-9 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+              placeholder="Enter scenario description"
+            />
+          </label>
           <div class="mt-5 flex items-center justify-end gap-3">
             <button
               id="run-modal-cancel"
@@ -4978,8 +5306,9 @@
             </button>
             <button
               id="run-modal-confirm"
-              class="flex h-8 items-center gap-1 rounded-full bg-[#004895] px-4 text-[14px] font-bold text-white transition-colors hover:bg-[#002B5E]"
+              class="flex h-8 items-center gap-1 rounded-full bg-[#dadada] px-4 text-[14px] font-bold text-[#b1b1b1] transition-colors cursor-not-allowed"
               type="button"
+              disabled
             >
               Yes, run
             </button>
@@ -5084,6 +5413,7 @@
       const draftModal = document.getElementById("draft-modal");
       const draftModalConfirm = document.getElementById("draft-modal-confirm");
       const draftModalCancel = document.getElementById("draft-modal-cancel");
+      const draftModalDescription = document.getElementById("draft-modal-description");
       const chainModal = document.getElementById("chain-modal");
       const chainModalConfirm = document.getElementById("chain-modal-confirm");
       const chainModalCancel = document.getElementById("chain-modal-cancel");
@@ -5093,6 +5423,17 @@
       const exceptionsTableBody = document.getElementById(
         "exceptions-table-body"
       );
+      const gtmAddChainModal = document.getElementById("gtm-add-chain-modal");
+      const gtmAddChainButton = document.getElementById("gtm-add-chain-button");
+      const gtmAddChainModalClose = document.getElementById("gtm-add-chain-modal-close");
+      const gtmAddChainModalCancel = document.getElementById("gtm-add-chain-modal-cancel");
+      const gtmAddChainModalConfirm = document.getElementById("gtm-add-chain-modal-confirm");
+      const gtmChainNameField = document.getElementById("gtm-chain-name-field");
+      const gtmChainNameValue = document.getElementById("gtm-chain-name-value");
+      const gtmChainNameMenu = document.getElementById("gtm-chain-name-menu");
+      const gtmChainNameSearch = document.getElementById("gtm-chain-name-search");
+      const gtmChainNameOptions = document.getElementById("gtm-chain-name-options");
+      const gtmEb2bStoresBody = document.getElementById("gtm-eb2b-stores-body");
       const facilityModal = document.getElementById("facility-modal");
       const facilityModalConfirm = document.getElementById("facility-modal-confirm");
       const facilityModalCancel = document.getElementById("facility-modal-cancel");
@@ -5108,6 +5449,7 @@
       const runModal = document.getElementById("run-modal");
       const runModalConfirm = document.getElementById("run-modal-confirm");
       const runModalCancel = document.getElementById("run-modal-cancel");
+      const runModalDescription = document.getElementById("run-modal-description");
       const newScenario = document.getElementById("new-scenario");
       const portfolioSelectField = document.getElementById("portfolio-select-field");
       const portfolioSelectMenu = document.getElementById("portfolio-select-menu");
@@ -5268,6 +5610,7 @@
       let endDateSelected = "";
       const fakeUploadedFileName = "Placeholder101.csv";
       let scenarioSessionId = 0;
+      let currentDraftScenarioId = null;
       let currentBaselineData = null;
       const scenarios = [
         {
@@ -5477,19 +5820,39 @@
         setView("baseline");
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
-      const showDraftModal = () => {
-        if (!draftModal) {
-          return;
-        }
-        draftModal.classList.remove("hidden");
-        draftModal.classList.add("flex");
-      };
       const hideDraftModal = () => {
         if (!draftModal) {
           return;
         }
         draftModal.classList.add("hidden");
         draftModal.classList.remove("flex");
+      };
+      const updateDraftModalState = () => {
+        if (!draftModalConfirm) {
+          return;
+        }
+        const isReady = Boolean(draftModalDescription?.value.trim());
+        draftModalConfirm.disabled = !isReady;
+        draftModalConfirm.classList.toggle("bg-[#004895]", isReady);
+        draftModalConfirm.classList.toggle("text-white", isReady);
+        draftModalConfirm.classList.toggle("hover:bg-[#002B5E]", isReady);
+        draftModalConfirm.classList.toggle("bg-[#dadada]", !isReady);
+        draftModalConfirm.classList.toggle("text-[#b1b1b1]", !isReady);
+        draftModalConfirm.classList.toggle("cursor-not-allowed", !isReady);
+      };
+      const showDraftModal = () => {
+        if (!draftModal) {
+          return;
+        }
+        if (currentDraftScenarioId) {
+          const draft = scenarios.find((s) => s.id === currentDraftScenarioId);
+          if (draftModalDescription) draftModalDescription.value = draft?.description ?? "";
+        } else {
+          if (draftModalDescription) draftModalDescription.value = "";
+        }
+        updateDraftModalState();
+        draftModal.classList.remove("hidden");
+        draftModal.classList.add("flex");
       };
       const normalizePortfolioLabel = (label) => {
         if (!label) return label;
@@ -5504,31 +5867,70 @@
         const displayPortfolio = normalizePortfolioLabel(
           portfolioSelected || portfolioSelectValue.textContent || "1NA"
         );
+        const draftState = {
+          startDateSelected,
+          endDateSelected,
+          portfolioSelected,
+          hasFile: !uploadedFile.classList.contains("hidden"),
+          lastView: currentView,
+          defineTab: activeDefineTab || "Facilities",
+        };
+        const draftDescription = draftModalDescription?.value.trim() || "Draft scenario";
+        if (currentDraftScenarioId) {
+          const index = scenarios.findIndex((s) => s.id === currentDraftScenarioId);
+          if (index !== -1) {
+            scenarios[index] = {
+              ...scenarios[index],
+              description: draftDescription,
+              portfolio: displayPortfolio,
+              status: "Draft",
+              dateModified: formatScenarioDate(now),
+              ptsImpact: "$0",
+              draftState,
+              owner: currentUser,
+            };
+            workspacePage = 1;
+            renderTable();
+            return;
+          }
+        }
         const scenario = {
           id: getNextScenarioId(),
-          description: "Draft scenario",
+          description: draftDescription,
           portfolio: displayPortfolio,
           status: "Draft",
           dateModified: formatScenarioDate(now),
           ptsImpact: "$0",
-          draftState: {
-            startDateSelected,
-            endDateSelected,
-            portfolioSelected,
-            hasFile: !uploadedFile.classList.contains("hidden"),
-            lastView: currentView,
-            defineTab: activeDefineTab || "Facilities",
-          },
+          draftState,
         };
         createScenario(scenario);
       };
-      const saveInProgressScenario = () => {
+      const saveInProgressScenario = (description) => {
         const displayPortfolio = normalizePortfolioLabel(
           portfolioSelected || portfolioSelectValue.textContent || "1NA"
         );
+        const scenarioDescription = description?.trim() || "Running scenario";
+        if (currentDraftScenarioId) {
+          const index = scenarios.findIndex((s) => s.id === currentDraftScenarioId);
+          if (index !== -1) {
+            scenarios[index] = {
+              ...scenarios[index],
+              description: scenarioDescription,
+              portfolio: displayPortfolio,
+              status: "In progress",
+              runningTime: "Running for 00hh 05mm",
+              ptsImpact: "$0",
+              owner: currentUser,
+            };
+            currentDraftScenarioId = null;
+            workspacePage = 1;
+            renderTable();
+            return;
+          }
+        }
         const scenario = {
           id: getNextScenarioId(),
-          description: "Running scenario",
+          description: scenarioDescription,
           portfolio: displayPortfolio,
           status: "In progress",
           runningTime: "Running for 00hh 05mm",
@@ -5555,11 +5957,27 @@
         }, 0);
       });
       draftModalCancel?.addEventListener("click", hideDraftModal);
+      draftModalDescription?.addEventListener("input", updateDraftModalState);
 
+      const updateRunModalState = () => {
+        if (!runModalConfirm) {
+          return;
+        }
+        const isReady = Boolean(runModalDescription?.value.trim());
+        runModalConfirm.disabled = !isReady;
+        runModalConfirm.classList.toggle("bg-[#004895]", isReady);
+        runModalConfirm.classList.toggle("text-white", isReady);
+        runModalConfirm.classList.toggle("hover:bg-[#002B5E]", isReady);
+        runModalConfirm.classList.toggle("bg-[#dadada]", !isReady);
+        runModalConfirm.classList.toggle("text-[#b1b1b1]", !isReady);
+        runModalConfirm.classList.toggle("cursor-not-allowed", !isReady);
+      };
       const showRunModal = () => {
         if (!runModal) {
           return;
         }
+        if (runModalDescription) runModalDescription.value = "";
+        updateRunModalState();
         runModal.classList.remove("hidden");
         runModal.classList.add("flex");
       };
@@ -5612,6 +6030,125 @@
         chainModal.classList.add("hidden");
         chainModal.classList.remove("flex");
       };
+
+      const gtmChainNames = [
+        ...(chainOptions.PFUS || []),
+        ...(chainOptions.PBUS || []),
+      ];
+      let gtmSelectedChainName = null;
+      const gtmAddChainDescriptionTemplates = [
+        "Small Format customers in this chain for eB2B delivery and merchandising.",
+        "eB2B stores in this channel with web-based ordering and PepsiCo delivery, merch, and sell.",
+        "Stores served via eB2B where customers place orders online and receive delivery and in-store support.",
+      ];
+      const getRandomGtmDescription = () => {
+        const i = Math.floor(Math.random() * gtmAddChainDescriptionTemplates.length);
+        return gtmAddChainDescriptionTemplates[i];
+      };
+      const renderGtmChainNameOptions = (searchTerm) => {
+        if (!gtmChainNameOptions) return;
+        const term = (searchTerm || "").trim().toLowerCase();
+        const filtered = term
+          ? gtmChainNames.filter((name) => name.toLowerCase().includes(term))
+          : gtmChainNames;
+        gtmChainNameOptions.innerHTML = filtered
+          .map(
+            (name) =>
+              `<div class="cursor-pointer rounded px-2 py-1.5 hover:bg-[#d8e7fb]" data-gtm-chain-name="${name.replace(/"/g, "&quot;")}">${name}</div>`
+          )
+          .join("");
+      };
+      const updateGtmAddChainModalState = () => {
+        if (!gtmAddChainModalConfirm) return;
+        const isReady = Boolean(gtmSelectedChainName);
+        gtmAddChainModalConfirm.disabled = !isReady;
+        gtmAddChainModalConfirm.classList.toggle("bg-[#004895]", isReady);
+        gtmAddChainModalConfirm.classList.toggle("text-white", isReady);
+        gtmAddChainModalConfirm.classList.toggle("hover:bg-[#002B5E]", isReady);
+        gtmAddChainModalConfirm.classList.toggle("bg-[#dadada]", !isReady);
+        gtmAddChainModalConfirm.classList.toggle("text-[#b1b1b1]", !isReady);
+        gtmAddChainModalConfirm.classList.toggle("cursor-not-allowed", !isReady);
+      };
+      const showGtmAddChainModal = () => {
+        if (!gtmAddChainModal) return;
+        gtmSelectedChainName = null;
+        if (gtmChainNameValue) gtmChainNameValue.textContent = "Start Typing...";
+        if (gtmChainNameValue) gtmChainNameValue.classList.add("text-[#b1b1b1]");
+        if (gtmChainNameSearch) gtmChainNameSearch.value = "";
+        renderGtmChainNameOptions("");
+        if (gtmChainNameMenu) gtmChainNameMenu.classList.add("hidden");
+        updateGtmAddChainModalState();
+        gtmAddChainModal.classList.remove("hidden");
+        gtmAddChainModal.classList.add("flex");
+      };
+      const hideGtmAddChainModal = () => {
+        if (!gtmAddChainModal) return;
+        gtmAddChainModal.classList.add("hidden");
+        gtmAddChainModal.classList.remove("flex");
+        if (gtmChainNameMenu) gtmChainNameMenu.classList.add("hidden");
+      };
+      gtmAddChainButton?.addEventListener("click", showGtmAddChainModal);
+      gtmAddChainModalClose?.addEventListener("click", hideGtmAddChainModal);
+      gtmAddChainModalCancel?.addEventListener("click", hideGtmAddChainModal);
+      gtmChainNameField?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (!gtmChainNameMenu) return;
+        const isHidden = gtmChainNameMenu.classList.contains("hidden");
+        if (isHidden) {
+          gtmChainNameMenu.classList.remove("hidden");
+          gtmChainNameSearch?.focus();
+        } else {
+          gtmChainNameMenu.classList.add("hidden");
+        }
+      });
+      gtmChainNameSearch?.addEventListener("input", () => {
+        renderGtmChainNameOptions(gtmChainNameSearch.value);
+      });
+      gtmChainNameSearch?.addEventListener("click", (e) => e.stopPropagation());
+      gtmChainNameMenu?.addEventListener("click", (e) => e.stopPropagation());
+      gtmChainNameOptions?.addEventListener("click", (e) => {
+        const row = e.target.closest("[data-gtm-chain-name]");
+        if (!row) return;
+        const name = row.getAttribute("data-gtm-chain-name");
+        if (!name) return;
+        gtmSelectedChainName = name.replace(/&quot;/g, '"');
+        if (gtmChainNameValue) {
+          gtmChainNameValue.textContent = gtmSelectedChainName;
+          gtmChainNameValue.classList.remove("text-[#b1b1b1]");
+        }
+        if (gtmChainNameMenu) gtmChainNameMenu.classList.add("hidden");
+        updateGtmAddChainModalState();
+      });
+      document.addEventListener("click", () => {
+        if (gtmChainNameMenu && !gtmChainNameMenu.classList.contains("hidden")) {
+          gtmChainNameMenu.classList.add("hidden");
+        }
+      });
+      gtmAddChainModalConfirm?.addEventListener("click", () => {
+        if (!gtmSelectedChainName || !gtmEb2bStoresBody) return;
+        const description = getRandomGtmDescription();
+        const rowHtml = `
+          <div class="grid min-h-[48px] grid-cols-[240px_80px_1fr] items-center gap-4 px-2 py-2">
+            <div>${gtmSelectedChainName.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
+            <div class="flex items-center">
+              <input type="checkbox" class="table-checkbox" checked />
+            </div>
+            <div class="min-w-0 break-words text-[14px] text-[#4b4b4b]">
+              ${description.replace(/</g, "&lt;").replace(/>/g, "&gt;")}
+            </div>
+          </div>
+        `;
+        gtmEb2bStoresBody.insertAdjacentHTML("beforeend", rowHtml);
+        const newRow = gtmEb2bStoresBody.lastElementChild;
+        if (newRow) {
+          newRow.querySelectorAll("input").forEach((input) =>
+            registerDefineInput(input, { setInitial: false })
+          );
+        }
+        updateDefineChangeCounts();
+        hideGtmAddChainModal();
+      });
+
       const updateFacilityModalState = () => {
         if (!facilityModalConfirm) {
           return;
@@ -5652,9 +6189,10 @@
 
       defineParametersRun?.addEventListener("click", showRunModal);
       runModalConfirm?.addEventListener("click", () => {
+        const description = runModalDescription?.value.trim() || "Running scenario";
         hideRunModal();
         try {
-          saveInProgressScenario();
+          saveInProgressScenario(description);
         } catch (error) {
           // Continue to workspace even if scenario creation fails.
         }
@@ -5669,6 +6207,7 @@
         }, 0);
       });
       runModalCancel?.addEventListener("click", hideRunModal);
+      runModalDescription?.addEventListener("input", updateRunModalState);
       outputBack?.addEventListener("click", () => {
         setView("workspace");
         renderTable();
@@ -5703,7 +6242,7 @@
         `;
         exceptionsTableBody.prepend(row);
         row.querySelectorAll("input").forEach((input) => {
-          registerDefineInput(input);
+          registerDefineInput(input, { setInitial: false });
         });
         updateDefineChangeCounts();
         hideChainModal();
@@ -5754,7 +6293,7 @@
         existingFacilitiesBody.prepend(row);
         const input = row.querySelector(".facility-input");
         const checkbox = row.querySelector(".table-checkbox");
-        registerFacilityRow(input, checkbox);
+        registerFacilityRow(input, checkbox, { setInitial: false });
         facilityRows.push({ input, checkbox });
         updateDefineChangeCounts();
         hideFacilityModal();
@@ -5794,7 +6333,7 @@
       const getDefineTabBadge = (tab) =>
         tab?.querySelector("span:last-child");
 
-      const registerFacilityRow = (input, checkbox) => {
+      const registerFacilityRow = (input, checkbox, options) => {
         if (!input || !checkbox) {
           return;
         }
@@ -5805,22 +6344,28 @@
           }
           updateDefineChangeCounts();
         });
-        registerDefineInput(checkbox);
-        registerDefineInput(input);
+        registerDefineInput(checkbox, options);
+        registerDefineInput(input, options);
       };
 
-      const registerDefineInput = (input) => {
+      /**
+       * Register an input for define-parameters change tracking.
+       * @param {HTMLInputElement} input
+       * @param {{ setInitial?: boolean }} [options] - setInitial: if false, do not set baseline (so modal-added rows count as a change). Default true.
+       */
+      const registerDefineInput = (input, options) => {
         if (!input) {
           return;
         }
+        const setInitial = options?.setInitial !== false;
         if (input.type === "checkbox") {
-          if (input.dataset.initialChecked === undefined) {
+          if (setInitial && input.dataset.initialChecked === undefined) {
             input.dataset.initialChecked = input.checked ? "true" : "false";
           }
           input.addEventListener("change", updateDefineChangeCounts);
           return;
         }
-        if (input.dataset.initialValue === undefined) {
+        if (setInitial && input.dataset.initialValue === undefined) {
           const defaultValue = input.dataset.default ?? input.value;
           input.dataset.initialValue = defaultValue;
         }
@@ -5857,9 +6402,22 @@
           );
           const badge = getDefineTabBadge(tab);
           if (badge) {
-            badge.textContent = `${changes} changes`;
+            badge.textContent = changes === 1 ? "1 change" : `${changes} changes`;
           }
         });
+      };
+
+      const resetDefineChangeBaseline = () => {
+        defineParametersPanels.forEach((panel) => {
+          panel.querySelectorAll("input").forEach((input) => {
+            if (input.type === "checkbox") {
+              input.dataset.initialChecked = input.checked ? "true" : "false";
+            } else {
+              input.dataset.initialValue = input.dataset.default ?? input.value ?? "";
+            }
+          });
+        });
+        updateDefineChangeCounts();
       };
 
       defineParametersTabs.forEach((tab) => {
@@ -5967,7 +6525,18 @@
       syncLaborDefaults();
 
       initDefineChangeTracking();
-      updateDefineChangeCounts();
+      resetDefineChangeBaseline();
+
+      const gtmEb2bCheckbox = document.getElementById("gtm-eb2b-checkbox");
+      const gtmEb2bSections = document.querySelectorAll(".gtm-eb2b-section");
+      const updateGtmEb2bVisibility = () => {
+        const show = gtmEb2bCheckbox?.checked ?? true;
+        gtmEb2bSections.forEach((el) => {
+          el.classList.toggle("hidden", !show);
+        });
+      };
+      gtmEb2bCheckbox?.addEventListener("change", updateGtmEb2bVisibility);
+      updateGtmEb2bVisibility();
 
       if (serviceDeliveryActuals || serviceDeliveryStandards) {
         serviceDeliveryActuals?.addEventListener(
@@ -6016,11 +6585,13 @@
           table.querySelectorAll(".facility-input").forEach((input) => {
             if (input.dataset.default !== undefined) {
               input.value = input.dataset.default;
+              input.dataset.initialValue = input.dataset.default;
             }
           });
           if (target === "assets") {
             syncAssetRows();
           }
+          updateDefineChangeCounts();
         });
       });
 
@@ -6127,12 +6698,13 @@
         }
         updateViewBaselineState();
         setDefineParametersActiveTab(draftState.defineTab || "Facilities");
-        updateDefineChangeCounts();
+        resetDefineChangeBaseline();
         setView(draftState.lastView || "scenario");
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
       function openDraftScenario(scenario) {
+        currentDraftScenarioId = scenario.id;
         const draftState =
           scenario.draftState || {
             startDateSelected: periodOptions[0] || "",
@@ -6539,6 +7111,7 @@
       const selectedFoodBeverageLocations = new Set();
 
       function startScenarioSession() {
+        currentDraftScenarioId = null;
         scenarioSessionId += 1;
         currentBaselineData = null;
         startDateSelected = "";
@@ -7361,19 +7934,20 @@
         return Number.isFinite(parsed) ? parsed : 0;
       }
 
-      function renderPctDelta(fromValue, toValue) {
+      function renderPctDelta(fromValue, toValue, noArrow = false) {
         const from = parseNumeric(fromValue);
         const to = parseNumeric(toValue);
         if (Math.abs(from) < 0.0001 && Math.abs(to) < 0.0001) {
-          return `<span class="fromto-v2-delta-up">↗0%</span>`;
+          return `<span class="fromto-v2-delta-up">${noArrow ? "0%" : "↗0%"}</span>`;
         }
         const base = Math.abs(from) < 0.0001 ? Math.max(1, Math.abs(to)) : Math.abs(from);
         const pct = ((to - from) / base) * 100;
         const bounded = Math.max(-99, Math.min(99, pct));
         const isUp = bounded >= 0;
-        const arrow = isUp ? "↗" : "↘";
+        const arrow = noArrow ? "" : (isUp ? "↗" : "↘");
         const cls = isUp ? "fromto-v2-delta-up" : "fromto-v2-delta-down";
-        return `<span class="${cls}">${arrow}${Math.abs(bounded).toFixed(0)}%</span>`;
+        const pctText = isUp ? `${Math.abs(bounded).toFixed(0)}%` : `(${Math.abs(bounded).toFixed(0)}%)`;
+        return `<span class="${cls}">${arrow}${pctText}</span>`;
       }
 
       function renderFromToTableV2(title, columns, rows, columnTemplate, showExpand = false) {
@@ -7388,11 +7962,17 @@
             </div>
             ${rows
               .map(
-                (row) => `
-                  <div class="fromto-v2-row ${row.kind || ""}" style="grid-template-columns:${columnTemplate}">
-                    ${row.cells.map((cell) => `<div>${cell}</div>`).join("")}
-                  </div>
-                `
+                (row) => {
+                  const isParent = row.fromtoType === "parent";
+                  const attrs = [
+                    `class="fromto-v2-row ${row.kind || ""} ${isParent ? "cursor-pointer" : ""}"`,
+                    `style="grid-template-columns:${columnTemplate}"`,
+                    row.fromtoGroup != null ? `data-fromto-group="${row.fromtoGroup}"` : "",
+                    row.fromtoType ? `data-fromto-type="${row.fromtoType}"` : "",
+                    isParent ? `data-fromto-toggle="true"` : "",
+                  ].filter(Boolean).join(" ");
+                  return `<div ${attrs}>${row.cells.map((cell) => `<div>${cell}</div>`).join("")}</div>`;
+                }
               )
               .join("")}
           </div>
@@ -7485,33 +8065,42 @@
 
       function renderFromToCard(label, accentText, data, baseline) {
         const showDelta = label === "To" && baseline;
+        const noArrow = label === "To";
         const cdl = data.labor.find((row) => row.role.includes("CDL")) || data.labor[0];
         const merch = data.labor.find((row) => row.role.includes("Merch")) || data.labor[1] || data.labor[0];
         const baseCdl = baseline?.labor.find((row) => row.role.includes("CDL")) || baseline?.labor[0];
         const baseMerch = baseline?.labor.find((row) => row.role.includes("Merch")) || baseline?.labor[1] || baseline?.labor[0];
-        const splitRow = (row, baseRow, labelText, includeChildren) => {
+        const splitRow = (row, baseRow, labelText, includeChildren, groupIndex = null) => {
           const foodsHc = Math.max(0, Math.floor((row?.hc || 0) / 2));
           const bevsHc = Math.max(0, (row?.hc || 0) - foodsHc);
           const baseFoodsHc = Math.max(0, Math.floor((baseRow?.hc || 0) / 2));
           const baseBevsHc = Math.max(0, (baseRow?.hc || 0) - baseFoodsHc);
-          const rows = [
-            {
-              cells: [
-                labelText,
-                `${row?.hc ?? 0}${showDelta ? renderPctDelta(baseRow?.hc ?? 0, row?.hc ?? 0) : ""}`,
-                `${formatCurrency(row?.wages ?? 0, 2)}${showDelta ? renderPctDelta(baseRow?.wages ?? 0, row?.wages ?? 0) : ""}`,
-                `${formatCurrency(row?.salary ?? 0, 0)}${showDelta ? renderPctDelta(baseRow?.salary ?? 0, row?.salary ?? 0) : ""}`,
-                `${(row?.hours ?? 0).toFixed(1)}${showDelta ? renderPctDelta(baseRow?.hours ?? 0, row?.hours ?? 0) : ""}`,
-              ],
-            },
-          ];
+          const firstCell = includeChildren && groupIndex != null
+            ? `<span class="inline-flex items-center gap-1"><span class="material-icons fromto-section-caret text-[14px] leading-none text-[#4b4b4b]">keyboard_arrow_down</span>${labelText}</span>`
+            : labelText;
+          const parentRow = {
+            cells: [
+              firstCell,
+`${row?.hc ?? 0}${showDelta ? renderPctDelta(baseRow?.hc ?? 0, row?.hc ?? 0, noArrow) : ""}`,
+                `${formatCurrency(row?.wages ?? 0, 2)}${showDelta ? renderPctDelta(baseRow?.wages ?? 0, row?.wages ?? 0, noArrow) : ""}`,
+                `${formatCurrency(row?.salary ?? 0, 0)}${showDelta ? renderPctDelta(baseRow?.salary ?? 0, row?.salary ?? 0, noArrow) : ""}`,
+                `${(row?.hours ?? 0).toFixed(1)}${showDelta ? renderPctDelta(baseRow?.hours ?? 0, row?.hours ?? 0, noArrow) : ""}`,
+            ],
+          };
+          if (includeChildren && groupIndex != null) {
+            parentRow.fromtoGroup = groupIndex;
+            parentRow.fromtoType = "parent";
+          }
+          const rows = [parentRow];
           if (includeChildren) {
             rows.push(
               {
                 kind: "is-sub-food",
+                fromtoGroup: groupIndex,
+                fromtoType: "sub-food",
                 cells: [
                   "<em>Foods</em>",
-                  `${foodsHc}${showDelta ? renderPctDelta(baseFoodsHc, foodsHc) : ""}`,
+                  `${foodsHc}${showDelta ? renderPctDelta(baseFoodsHc, foodsHc, noArrow) : ""}`,
                   `${formatCurrency((row?.wages ?? 0) / 2, 2)}`,
                   `${formatCurrency((row?.salary ?? 0) / 2, 0)}`,
                   `${(row?.hours ?? 0).toFixed(1)}`,
@@ -7519,9 +8108,11 @@
               },
               {
                 kind: "is-sub-bev",
+                fromtoGroup: groupIndex,
+                fromtoType: "sub-bev",
                 cells: [
                   "<em>Bevs</em>",
-                  `${bevsHc}${showDelta ? renderPctDelta(baseBevsHc, bevsHc) : ""}`,
+                  `${bevsHc}${showDelta ? renderPctDelta(baseBevsHc, bevsHc, noArrow) : ""}`,
                   `${formatCurrency((row?.wages ?? 0) / 2, 2)}`,
                   `${formatCurrency((row?.salary ?? 0) / 2, 0)}`,
                   `${(row?.hours ?? 0).toFixed(1)}`,
@@ -7539,47 +8130,53 @@
         };
 
         const laborRows = [
-          ...splitRow(cdl, baseCdl, "CDL(A) DMS", label === "From"),
-          ...splitRow(merch, baseMerch, "Merchandisers", label === "From"),
+          ...splitRow(cdl, baseCdl, "CDL(A) DMS", label === "From", 0),
+          ...splitRow(merch, baseMerch, "Merchandisers", label === "From", 1),
           { kind: "is-total", cells: ["TOTAL", "0", "0", "0", "0"] },
         ];
 
-        const buildServiceGroup = (title, key, asCurrency = false) => {
+        const buildServiceGroup = (title, key, groupIndex, asCurrency = false) => {
           const header = {
+            fromtoGroup: groupIndex,
+            fromtoType: "parent",
             cells: [
-              `<span class="inline-flex items-center gap-1"><span class="material-icons text-[14px] leading-none text-[#4b4b4b]">keyboard_arrow_down</span>${title}</span>`,
-              `${asCurrency ? formatCurrency(data.service[0][key], 0) : data.service[0][key].toFixed(2)}${showDelta ? renderPctDelta(baseline?.service?.[0]?.[key] ?? 0, data.service[0][key]) : ""}`,
-              `${asCurrency ? formatCurrency(data.service[1][key], 0) : data.service[1][key].toFixed(2)}${showDelta ? renderPctDelta(baseline?.service?.[1]?.[key] ?? 0, data.service[1][key]) : ""}`,
-              `${asCurrency ? formatCurrency(data.service[2][key], 0) : data.service[2][key].toFixed(2)}${showDelta ? renderPctDelta(baseline?.service?.[2]?.[key] ?? 0, data.service[2][key]) : ""}`,
+              `<span class="inline-flex items-center gap-1"><span class="material-icons fromto-section-caret text-[14px] leading-none text-[#4b4b4b]">keyboard_arrow_down</span>${title}</span>`,
+              `${asCurrency ? formatCurrency(data.service[0][key], 0) : data.service[0][key].toFixed(2)}${showDelta ? renderPctDelta(baseline?.service?.[0]?.[key] ?? 0, data.service[0][key], noArrow) : ""}`,
+              `${asCurrency ? formatCurrency(data.service[1][key], 0) : data.service[1][key].toFixed(2)}${showDelta ? renderPctDelta(baseline?.service?.[1]?.[key] ?? 0, data.service[1][key], noArrow) : ""}`,
+              `${asCurrency ? formatCurrency(data.service[2][key], 0) : data.service[2][key].toFixed(2)}${showDelta ? renderPctDelta(baseline?.service?.[2]?.[key] ?? 0, data.service[2][key], noArrow) : ""}`,
             ],
           };
           const foods = {
             kind: "is-sub-food",
+            fromtoGroup: groupIndex,
+            fromtoType: "sub-food",
             cells: [
               "<em>Foods</em>",
-              `${Math.round(data.service[0][key] * 0.45)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[0]?.[key] ?? 0) * 0.45), Math.round(data.service[0][key] * 0.45)) : ""}`,
-              `${Math.round(data.service[1][key] * 0.45)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[1]?.[key] ?? 0) * 0.45), Math.round(data.service[1][key] * 0.45)) : ""}`,
-              `${Math.round(data.service[2][key] * 0.45)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[2]?.[key] ?? 0) * 0.45), Math.round(data.service[2][key] * 0.45)) : ""}`,
+              `${Math.round(data.service[0][key] * 0.45)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[0]?.[key] ?? 0) * 0.45), Math.round(data.service[0][key] * 0.45), noArrow) : ""}`,
+              `${Math.round(data.service[1][key] * 0.45)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[1]?.[key] ?? 0) * 0.45), Math.round(data.service[1][key] * 0.45), noArrow) : ""}`,
+              `${Math.round(data.service[2][key] * 0.45)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[2]?.[key] ?? 0) * 0.45), Math.round(data.service[2][key] * 0.45), noArrow) : ""}`,
             ],
           };
           const bevs = {
             kind: "is-sub-bev",
+            fromtoGroup: groupIndex,
+            fromtoType: "sub-bev",
             cells: [
               "<em>Bevs</em>",
-              `${Math.round(data.service[0][key] * 0.55)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[0]?.[key] ?? 0) * 0.55), Math.round(data.service[0][key] * 0.55)) : ""}`,
-              `${Math.round(data.service[1][key] * 0.55)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[1]?.[key] ?? 0) * 0.55), Math.round(data.service[1][key] * 0.55)) : ""}`,
-              `${Math.round(data.service[2][key] * 0.55)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[2]?.[key] ?? 0) * 0.55), Math.round(data.service[2][key] * 0.55)) : ""}`,
+              `${Math.round(data.service[0][key] * 0.55)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[0]?.[key] ?? 0) * 0.55), Math.round(data.service[0][key] * 0.55), noArrow) : ""}`,
+              `${Math.round(data.service[1][key] * 0.55)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[1]?.[key] ?? 0) * 0.55), Math.round(data.service[1][key] * 0.55), noArrow) : ""}`,
+              `${Math.round(data.service[2][key] * 0.55)}${showDelta ? renderPctDelta(Math.round((baseline?.service?.[2]?.[key] ?? 0) * 0.55), Math.round(data.service[2][key] * 0.55), noArrow) : ""}`,
             ],
           };
           return [header, foods, bevs];
         };
 
         const serviceRows = [
-          ...buildServiceGroup("Freq./Week", "freq"),
-          ...buildServiceGroup("WSA (NR)", "wsaNr"),
-          ...buildServiceGroup("Drop Size (EQ)", "dropEq"),
-          ...buildServiceGroup("WSA (Cs)", "wsaCs"),
-          ...buildServiceGroup("Drop Size (Cs)", "dropCs"),
+          ...buildServiceGroup("Freq./Week", "freq", 0),
+          ...buildServiceGroup("WSA (NR)", "wsaNr", 1),
+          ...buildServiceGroup("Drop Size (EQ)", "dropEq", 2),
+          ...buildServiceGroup("WSA (Cs)", "wsaCs", 3),
+          ...buildServiceGroup("Drop Size (Cs)", "dropCs", 4),
           { kind: "is-total", cells: ["TOTAL", "0", "0", "0"] },
         ];
 
@@ -7588,10 +8185,10 @@
           return {
             cells: [
               row.label,
-              `${row.assets ?? 0}${showDelta ? renderPctDelta(baseRow?.assets ?? 0, row.assets ?? 0) : ""}`,
-              `${parseNumeric(row.rmFuel).toFixed(2)}${showDelta ? renderPctDelta(parseNumeric(baseRow?.rmFuel ?? 0), parseNumeric(row.rmFuel)) : ""}`,
-              `${parseNumeric(row.depreciation).toFixed(2)}${showDelta ? renderPctDelta(parseNumeric(baseRow?.depreciation ?? 0), parseNumeric(row.depreciation)) : ""}`,
-              `${formatNumber(row.miles)}${showDelta ? renderPctDelta(baseRow?.miles ?? 0, row.miles ?? 0) : ""}`,
+              `${row.assets ?? 0}${showDelta ? renderPctDelta(baseRow?.assets ?? 0, row.assets ?? 0, noArrow) : ""}`,
+              `${parseNumeric(row.rmFuel).toFixed(2)}${showDelta ? renderPctDelta(parseNumeric(baseRow?.rmFuel ?? 0), parseNumeric(row.rmFuel), noArrow) : ""}`,
+              `${parseNumeric(row.depreciation).toFixed(2)}${showDelta ? renderPctDelta(parseNumeric(baseRow?.depreciation ?? 0), parseNumeric(row.depreciation), noArrow) : ""}`,
+              `${formatNumber(row.miles)}${showDelta ? renderPctDelta(baseRow?.miles ?? 0, row.miles ?? 0, noArrow) : ""}`,
             ],
           };
         });
@@ -9132,8 +9729,8 @@
             <div class="text-center font-bold">${values.lf}</div>
             <div class="text-center font-bold">${values.sf}</div>
           </div>
-          <div class="border-b border-[#b0d0fb] bg-[#fffaf1]" data-children="${key}">
-            <div class="grid grid-cols-[1.2fr_1fr_1fr] items-center px-4 py-3 text-[14px] text-[#2d2d2d]">
+          <div class="border-b border-[#b0d0fb]" data-children="${key}">
+            <div class="table-sub-food grid grid-cols-[1.2fr_1fr_1fr] items-center px-4 py-3 text-[14px] text-[#2d2d2d]">
               <div class="flex items-center gap-2 pl-6 italic text-[#4b4b4b]">Foods</div>
               <div class="flex items-center justify-center gap-2">
                 <span class="font-bold">${values.foods.lf}</span>
@@ -9144,7 +9741,7 @@
                 <span class="inline-flex rounded bg-[#E6F6ED] px-2 py-[2px] text-[10px] font-bold text-[#008A3B]">${values.foods.sfDelta}</span>
               </div>
             </div>
-            <div class="grid grid-cols-[1.2fr_1fr_1fr] items-center px-4 py-3 text-[14px] text-[#2d2d2d]">
+            <div class="table-sub-bev grid grid-cols-[1.2fr_1fr_1fr] items-center px-4 py-3 text-[14px] text-[#2d2d2d]">
               <div class="flex items-center gap-2 pl-6 italic text-[#4b4b4b]">Bevs</div>
               <div class="flex items-center justify-center gap-2">
                 <span class="font-bold">${values.bevs.lf}</span>
@@ -9160,7 +9757,7 @@
 
         const sectionPrefix = containerId;
         container.innerHTML = `
-          <div class="table-text overflow-hidden rounded-[8px] bg-white" style="border:1px solid ${headerColor}">
+          <div class="table-text overflow-hidden rounded-[8px] bg-white" style="border:1px solid ${headerColor}" data-service-table>
             <div class="table-header flex items-center justify-between px-4 py-2 font-bold uppercase" style="background:${headerBg};color:#2d2d2d">
               <span>Service ${label.toUpperCase()}</span>
               <span class="font-bold text-[#004895]">Expand all</span>
@@ -9325,21 +9922,35 @@
 
       document.addEventListener("click", (event) => {
         const toggle = event.target.closest("[data-toggle-section]");
-        if (!toggle) {
+        if (toggle) {
+          const section = toggle.getAttribute("data-toggle-section");
+          const parent = toggle.closest("[data-service-table]");
+          const children = parent?.querySelector(`[data-children="${section}"]`);
+          if (children) {
+            children.classList.toggle("hidden");
+            const caret = toggle.querySelector("[data-caret]");
+            if (caret) {
+              caret.textContent = children.classList.contains("hidden")
+                ? "chevron_right"
+                : "expand_more";
+            }
+          }
           return;
         }
-        const section = toggle.getAttribute("data-toggle-section");
-        const parent = toggle.closest("[data-service-table]");
-        const children = parent?.querySelector(`[data-children="${section}"]`);
-        if (!children) {
-          return;
-        }
-        children.classList.toggle("hidden");
-        const caret = toggle.querySelector("[data-caret]");
-        if (caret) {
-          caret.textContent = children.classList.contains("hidden")
-            ? "chevron_right"
-            : "expand_more";
+        const fromtoToggle = event.target.closest("[data-fromto-toggle]");
+        if (fromtoToggle) {
+          const table = fromtoToggle.closest(".fromto-v2-table");
+          const group = fromtoToggle.getAttribute("data-fromto-group");
+          if (!table || group == null) return;
+          const childRows = table.querySelectorAll(
+            `[data-fromto-group="${group}"][data-fromto-type="sub-food"], [data-fromto-group="${group}"][data-fromto-type="sub-bev"]`
+          );
+          childRows.forEach((row) => row.classList.toggle("hidden"));
+          const caret = fromtoToggle.querySelector(".fromto-section-caret");
+          if (caret) {
+            const isHidden = childRows.length && childRows[0].classList.contains("hidden");
+            caret.textContent = isHidden ? "keyboard_arrow_right" : "keyboard_arrow_down";
+          }
         }
       });
 
