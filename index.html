@@ -427,6 +427,24 @@
         outline: none;
         border-color: #004895;
       }
+      #facility-modal input[type="text"]:focus,
+      #facility-modal input[type="number"]:focus,
+      #facility-modal input[type="text"]:active,
+      #facility-modal input[type="number"]:active {
+        outline: none;
+        border-color: #004895;
+      }
+      #facility-state-field:focus {
+        outline: none;
+        border-color: #004895;
+      }
+      #add-existing-facility-modal input:focus,
+      #add-existing-facility-modal input:active,
+      #add-existing-location-field:focus,
+      #add-existing-facility-name-field:focus {
+        outline: none;
+        border-color: #004895;
+      }
       .facility-input:disabled {
         background: #dadada;
         color: #b1b1b1;
@@ -786,6 +804,11 @@
         font-size: 13px;
         font-weight: 600;
         color: #4b4b4b;
+      }
+      /* All modals: 10px border outside the content so it doesn't cramp layout */
+      .modal-content {
+        outline: 10px solid #D8E7FB;
+        outline-offset: 0;
       }
       /* Define Parameters: fill viewport, end 8px above bottom bar; tabs fixed, content scrolls */
       #define-parameters-view:not(.hidden) {
@@ -1315,7 +1338,7 @@
             class="mt-6 flex gap-6 rounded-lg bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
           >
             <div class="flex w-[360px] flex-col gap-6">
-              <div class="flex w-fit items-center gap-2 rounded-lg border border-[#d8e7fb] bg-[#f5f9ff] p-1">
+              <div class="flex w-fit items-center gap-0 rounded-lg border border-[#d8e7fb] bg-[#f5f9ff]">
                 <button
                   class="define-scope-tab flex h-8 items-center gap-1 rounded-lg px-3 text-[14px] text-[#2d2d2d]"
                   data-scope-tab="select"
@@ -2258,7 +2281,7 @@
             class="mb-2 flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg bg-white p-6 shadow-[0px_0px_24px_0px_rgba(0,94,192,0.08)]"
           >
             <div class="flex min-h-0 flex-1 gap-6 overflow-hidden">
-              <div class="w-[220px] shrink-0">
+              <div class="w-[220px] shrink-0 border-r border-[#DADADA]">
                 <div class="flex flex-col text-[14px] text-[#4b4b4b]">
                   <button
                     class="define-parameters-tab flex min-h-[32px] items-center justify-between border-l border-[#d8e7fb] px-2 py-1 transition-colors hover:border-l-2 hover:border-[#B0D0FB]"
@@ -2344,6 +2367,7 @@
                       </div>
                       <div class="flex items-center gap-2">
                         <button
+                          id="add-existing-facility-button"
                           class="flex h-8 items-center gap-1 rounded-full bg-[#004895] px-3 text-[12px] font-bold text-white transition-colors hover:bg-[#002B5E]"
                           type="button"
                         >
@@ -2394,7 +2418,7 @@
                           </span>
                         </div>
                       </div>
-                      <div class="divide-y divide-[#d8e7fb]">
+                      <div id="existing-facilities-body" class="divide-y divide-[#d8e7fb]">
                         <div class="grid min-h-[48px] grid-cols-[1.2fr_80px_120px_220px_1.2fr] items-center gap-4 px-2 py-2">
                           <div>FLUS Forth Worth DC</div>
                           <div class="flex items-center">
@@ -2487,9 +2511,10 @@
                           </span>
                         </div>
                       </div>
-                      <div class="border-b-2 border-[#d8e7fb] px-2 py-6 text-center text-[14px] text-[#2d2d2d]">
+                      <div id="new-facilities-empty" class="border-b-2 border-[#d8e7fb] px-2 py-6 text-center text-[14px] text-[#2d2d2d]">
                         Create new facility to see information here
                       </div>
+                      <div id="new-facilities-body" class="hidden divide-y divide-[#d8e7fb]"></div>
                     </div>
                   </div>
                 </div>
@@ -3914,7 +3939,7 @@
                         </div>
                         <div>Daily Fixed Minutes (On Property, Meetings, Breaks)</div>
                       </div>
-                      <div id="existing-facilities-body" class="divide-y divide-[#d8e7fb]">
+                      <div id="time-estimates-daily-fixed-body" class="divide-y divide-[#d8e7fb]">
                         <div class="grid min-h-[64px] grid-cols-[200px_200px_1fr] items-center gap-4 px-2 py-2">
                           <div>Delivery</div>
                           <div>On property</div>
@@ -3966,55 +3991,51 @@
                         Time Estimates (Deliver, Merch, Order, and Sell)
                       </div>
                     </div>
-                    <div class="mt-4 flex flex-wrap items-center justify-between gap-4">
-                      <div class="flex flex-wrap items-center gap-2 text-[14px]">
-                        <button
-                          class="flex h-8 items-center gap-1 rounded-full border border-[#d8e7fb] bg-white px-4 text-[#004895]"
-                          type="button"
-                        >
-                          Role Type
-                          <span class="material-icons text-[16px] text-current">
-                            arrow_drop_down
-                          </span>
-                        </button>
-                        <button
-                          class="flex h-8 items-center gap-1 rounded-full border border-[#d8e7fb] bg-white px-4 text-[#004895]"
-                          type="button"
-                        >
-                          GTM Activity
-                          <span class="material-icons text-[16px] text-current">
-                            arrow_drop_down
-                          </span>
-                        </button>
-                        <button
-                          class="flex h-8 items-center gap-1 rounded-full border border-[#d8e7fb] bg-white px-4 text-[#004895]"
-                          type="button"
-                        >
-                          Trade Segment
-                          <span class="material-icons text-[16px] text-current">
-                            arrow_drop_down
-                          </span>
-                        </button>
-                        <div class="h-6 w-px bg-[#d8e7fb]"></div>
-                        <button class="text-[#004895] font-bold" type="button">
-                          Reset all filters
-                        </button>
-                      </div>
-                      <div class="flex items-center gap-3">
-                        <label class="flex items-center gap-2 text-[12px] text-[#4b4b4b]">
-                          <input type="checkbox" class="table-checkbox" />
-                          Show Legacy Standards
-                        </label>
-                        <button
-                          class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[12px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
-                          type="button"
-                        >
-                          <span class="material-icons text-[16px] text-current">
-                            add
-                          </span>
-                          Reset to default
-                        </button>
-                      </div>
+                    <div class="mt-4 flex flex-wrap items-center gap-3 text-[14px]">
+                      <button
+                        class="flex h-8 items-center gap-1 rounded-full border border-[#d8e7fb] bg-white px-4 text-[#004895]"
+                        type="button"
+                      >
+                        Role Type
+                        <span class="material-icons text-[16px] text-current">
+                          arrow_drop_down
+                        </span>
+                      </button>
+                      <button
+                        class="flex h-8 items-center gap-1 rounded-full border border-[#d8e7fb] bg-white px-4 text-[#004895]"
+                        type="button"
+                      >
+                        GTM Activity
+                        <span class="material-icons text-[16px] text-current">
+                          arrow_drop_down
+                        </span>
+                      </button>
+                      <button
+                        class="flex h-8 items-center gap-1 rounded-full border border-[#d8e7fb] bg-white px-4 text-[#004895]"
+                        type="button"
+                      >
+                        Trade Segment
+                        <span class="material-icons text-[16px] text-current">
+                          arrow_drop_down
+                        </span>
+                      </button>
+                      <div class="h-6 w-px bg-[#d8e7fb]"></div>
+                      <button class="text-[#004895] font-bold" type="button">
+                        Reset all filters
+                      </button>
+                      <label class="flex items-center gap-2 text-[12px] text-[#4b4b4b]">
+                        <input type="checkbox" class="table-checkbox" />
+                        Show Legacy Standards
+                      </label>
+                      <button
+                        class="ml-auto flex h-8 shrink-0 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[12px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+                        type="button"
+                      >
+                        <span class="material-icons text-[16px] text-current">
+                          refresh
+                        </span>
+                        Reset to default
+                      </button>
                     </div>
 
                     <div class="mt-4 w-full text-[12px] text-[#2d2d2d] table-text overflow-x-auto">
@@ -5028,7 +5049,7 @@
         id="draft-modal"
         class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/40 px-6"
       >
-        <div class="w-full max-w-[420px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
+        <div class="modal-content w-full max-w-[420px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
           <div class="text-[18px] font-bold text-[#2d2d2d]">
             Save as a draft?
           </div>
@@ -5067,7 +5088,7 @@
         id="chain-modal"
         class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/40 px-6"
       >
-        <div class="w-full max-w-[520px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
+        <div class="modal-content w-full max-w-[520px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
           <div class="text-[18px] font-bold text-[#2d2d2d]">
             Add Chain Exception
           </div>
@@ -5126,7 +5147,7 @@
         id="gtm-add-chain-modal"
         class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/40 px-6"
       >
-        <div class="w-full max-w-[520px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
+        <div class="modal-content w-full max-w-[520px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
           <div class="flex items-start justify-between">
             <div class="text-[18px] font-bold text-[#2d2d2d]">
               Add Chain
@@ -5199,55 +5220,262 @@
         </div>
       </div>
       <div
+        id="add-existing-facility-modal"
+        class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/40 px-6"
+      >
+        <div class="modal-content w-full max-w-[560px] rounded-lg border border-[#d8e7fb] bg-white p-8 shadow-[0px_2px_24px_0px_rgba(0,94,192,0.12)]">
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex flex-col gap-2 pr-6">
+              <h2 class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+                Add Existing Facility
+              </h2>
+              <p class="text-[14px] leading-[22px] text-[#2d2d2d]">
+                Search by facility name or location ID
+              </p>
+            </div>
+            <button
+              id="add-existing-facility-modal-close"
+              type="button"
+              class="flex h-8 w-8 shrink-0 items-center justify-center rounded text-[#2d2d2d] hover:bg-[#f5f9ff]"
+              aria-label="Close"
+            >
+              <span class="material-icons text-[24px]">close</span>
+            </button>
+          </div>
+          <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-[12px] font-medium leading-[20px] text-[#2d2d2d]">Facility Name</span>
+                  <span class="material-icons text-[20px] text-[#4b4b4b]" title="Facility name">info</span>
+                </div>
+                <span class="text-[12px] text-[#4b4b4b]">*Required</span>
+              </div>
+              <div class="relative">
+                <div
+                  id="add-existing-facility-name-field"
+                  class="flex h-9 w-full cursor-pointer items-center justify-between rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+                  role="button"
+                  tabindex="0"
+                >
+                  <span id="add-existing-facility-name-value" class="truncate text-[#b1b1b1]">Facility 101</span>
+                  <span class="material-icons shrink-0 text-[16px] text-[#4b4b4b]">keyboard_arrow_down</span>
+                </div>
+                <div
+                  id="add-existing-facility-name-menu"
+                  class="absolute left-0 right-0 top-[38px] z-30 hidden max-h-[240px] overflow-auto rounded border border-[#d8e7fb] bg-white p-2 text-[14px] text-[#4b4b4b] shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
+                >
+                  <input
+                    id="add-existing-facility-name-search"
+                    type="text"
+                    class="mb-2 h-8 w-full rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+                    placeholder="Search..."
+                  />
+                  <div id="add-existing-facility-name-options" class="flex flex-col gap-0.5"></div>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-[12px] font-medium leading-[20px] text-[#2d2d2d]">Location ID</span>
+                  <span class="material-icons text-[20px] text-[#4b4b4b]" title="Location ID">info</span>
+                </div>
+                <span class="text-[12px] text-[#4b4b4b]">*Required</span>
+              </div>
+              <div class="relative">
+                <div
+                  id="add-existing-location-field"
+                  class="flex h-9 w-full cursor-pointer items-center justify-between rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+                  role="button"
+                  tabindex="0"
+                >
+                  <span id="add-existing-location-value" class="truncate text-[#b1b1b1]">1201</span>
+                  <span class="material-icons shrink-0 text-[16px] text-[#4b4b4b]">keyboard_arrow_down</span>
+                </div>
+                <div
+                  id="add-existing-location-menu"
+                  class="absolute left-0 right-0 top-[38px] z-30 hidden max-h-[240px] overflow-auto rounded border border-[#d8e7fb] bg-white p-2 text-[14px] text-[#4b4b4b] shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
+                >
+                  <input
+                    id="add-existing-location-search"
+                    type="text"
+                    class="mb-2 h-8 w-full rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+                    placeholder="Search..."
+                  />
+                  <div id="add-existing-location-options" class="flex flex-col gap-0.5"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6 flex items-center justify-end gap-4">
+            <button
+              id="add-existing-facility-modal-cancel"
+              class="flex h-8 items-center px-4 text-[14px] font-bold text-[#004895] transition-colors hover:text-[#002B5E]"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              id="add-existing-facility-modal-confirm"
+              class="flex h-8 items-center gap-1 rounded-full bg-[#dadada] px-4 text-[14px] font-bold text-[#b1b1b1] transition-colors cursor-not-allowed disabled:bg-[#dadada] disabled:text-[#b1b1b1] disabled:cursor-not-allowed"
+              type="button"
+              disabled
+            >
+              Add Facility
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
         id="facility-modal"
         class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/40 px-6"
       >
-        <div class="w-full max-w-[560px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
-          <div class="text-[18px] font-bold text-[#2d2d2d]">
-            Create New Facility
+        <div class="modal-content w-full max-w-[500px] rounded-lg border border-[#d8e7fb] bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
+          <div class="flex items-center justify-between">
+            <h2 class="text-[22px] font-bold leading-[28px] text-[#2d2d2d]">
+              Create New Facility
+            </h2>
+            <button
+              id="facility-modal-close"
+              type="button"
+              class="flex h-8 w-8 items-center justify-center rounded text-[#2d2d2d] hover:bg-[#f5f9ff]"
+              aria-label="Close"
+            >
+              <span class="material-icons text-[24px]">close</span>
+            </button>
           </div>
-          <p class="mt-2 text-[14px] text-[#4b4b4b]">
-            Add a new facility to the existing facilities list for this scenario.
-          </p>
-          <div class="mt-4 grid gap-4">
-            <label class="flex flex-col gap-2 text-[12px] text-[#4b4b4b]">
-              Facility Name
+          <div class="mt-4 flex flex-col gap-6">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-[12px] font-medium leading-[20px] text-[#2d2d2d]">Facility Name</span>
+                  <span class="material-icons text-[20px] text-[#4b4b4b]" title="Facility name">info</span>
+                </div>
+                <span class="text-[12px] text-[#4b4b4b]">*Required</span>
+              </div>
               <input
                 id="facility-name-input"
                 type="text"
-                class="h-9 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
-                placeholder="Enter facility name"
+                class="h-8 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+                placeholder="Facility 101"
               />
-            </label>
-            <div class="grid grid-cols-2 gap-4">
-              <label class="flex flex-col gap-2 text-[12px] text-[#4b4b4b]">
-                Location ID
-                <input
-                  id="facility-location-id"
-                  type="text"
-                  class="h-9 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
-                  placeholder="Enter location ID"
-                />
-              </label>
-              <label class="flex flex-col gap-2 text-[12px] text-[#4b4b4b]">
-                Maximum Weekly Cases
-                <input
-                  id="facility-max-cases"
-                  type="number"
-                  class="h-9 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
-                  placeholder="0"
-                />
-              </label>
             </div>
-            <label class="flex flex-col gap-2 text-[12px] text-[#4b4b4b]">
-              Address
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-[12px] font-medium leading-[20px] text-[#2d2d2d]">Address</span>
+                  <span class="material-icons text-[20px] text-[#4b4b4b]" title="Street address">info</span>
+                </div>
+                <span class="text-[12px] text-[#4b4b4b]">*Required</span>
+              </div>
               <input
                 id="facility-address"
                 type="text"
-                class="h-9 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
-                placeholder="Enter address"
+                class="h-8 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+                placeholder="Street address"
               />
-            </label>
+            </div>
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-[12px] font-medium leading-[20px] text-[#2d2d2d]">Address 2</span>
+                  <span class="material-icons text-[20px] text-[#4b4b4b]" title="Address line 2">info</span>
+                </div>
+              </div>
+              <input
+                id="facility-address2"
+                type="text"
+                class="h-8 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+                placeholder=""
+              />
+            </div>
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-[12px] font-medium leading-[20px] text-[#2d2d2d]">City</span>
+                  <span class="material-icons text-[20px] text-[#4b4b4b]" title="City">info</span>
+                </div>
+                <span class="text-[12px] text-[#4b4b4b]">*Required</span>
+              </div>
+              <input
+                id="facility-city"
+                type="text"
+                class="h-8 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+                placeholder=""
+              />
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="relative flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="text-[12px] font-medium leading-[20px] text-[#2d2d2d]">State</span>
+                    <span class="material-icons text-[20px] text-[#4b4b4b]" title="State">info</span>
+                  </div>
+                  <span class="text-[12px] text-[#4b4b4b]">*Required</span>
+                </div>
+                <div
+                  id="facility-state-field"
+                  class="flex h-8 items-center justify-between rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d] cursor-pointer"
+                  role="button"
+                  tabindex="0"
+                >
+                  <span id="facility-state-value" class="text-[#b1b1b1]">Select State</span>
+                  <span class="material-icons text-[16px] text-[#4b4b4b]">keyboard_arrow_down</span>
+                </div>
+                <input type="hidden" id="facility-state" value="" />
+                <div
+                  id="facility-state-menu"
+                  class="absolute left-0 right-0 top-[68px] z-30 hidden max-h-[240px] overflow-auto rounded border border-[#d8e7fb] bg-white py-1 text-[14px] text-[#4b4b4b] shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
+                  style="min-width: 120px;"
+                ></div>
+              </div>
+              <div class="flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="text-[12px] font-medium leading-[20px] text-[#2d2d2d]">Zip Code</span>
+                    <span class="material-icons text-[20px] text-[#4b4b4b]" title="Zip code">info</span>
+                  </div>
+                  <span class="text-[12px] text-[#4b4b4b]">*Required</span>
+                </div>
+                <input
+                  id="facility-zip"
+                  type="text"
+                  class="h-8 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+                  placeholder=""
+                />
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="text-[12px] font-medium leading-[20px] text-[#2d2d2d]">Latitude</span>
+                    <span class="material-icons text-[20px] text-[#4b4b4b]" title="Latitude">info</span>
+                  </div>
+                </div>
+                <input
+                  id="facility-latitude"
+                  type="text"
+                  class="h-8 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+                  placeholder=""
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="text-[12px] font-medium leading-[20px] text-[#2d2d2d]">Longitude</span>
+                    <span class="material-icons text-[20px] text-[#4b4b4b]" title="Longitude">info</span>
+                  </div>
+                </div>
+                <input
+                  id="facility-longitude"
+                  type="text"
+                  class="h-8 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+                  placeholder=""
+                />
+              </div>
+            </div>
             <label class="flex items-center gap-2 text-[12px] text-[#4b4b4b]">
               <input
                 id="facility-inc"
@@ -5257,17 +5485,17 @@
               Include in scenario
             </label>
           </div>
-          <div class="mt-6 flex items-center justify-end gap-3">
+          <div class="mt-6 flex items-center justify-end gap-4">
             <button
               id="facility-modal-cancel"
-              class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[14px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+              class="flex h-8 items-center px-4 text-[14px] font-bold text-[#004895] transition-colors hover:text-[#002B5E]"
               type="button"
             >
               Cancel
             </button>
             <button
               id="facility-modal-confirm"
-              class="flex h-8 items-center gap-1 rounded-full bg-[#dadada] px-4 text-[14px] font-bold text-[#b1b1b1] transition-colors"
+              class="flex h-8 items-center gap-1 rounded-full bg-[#004895] px-4 text-[14px] font-bold text-white transition-colors hover:bg-[#002B5E] disabled:bg-[#dadada] disabled:text-[#b1b1b1] disabled:cursor-not-allowed"
               type="button"
               disabled
             >
@@ -5280,7 +5508,7 @@
         id="run-modal"
         class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/40 px-6"
       >
-        <div class="w-full max-w-[420px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
+        <div class="modal-content w-full max-w-[420px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
           <div class="text-[18px] font-bold text-[#2d2d2d]">
             Run this scenario?
           </div>
@@ -5439,13 +5667,47 @@
       const facilityModalCancel = document.getElementById("facility-modal-cancel");
       const createFacilityButton = document.getElementById("create-facility-button");
       const facilityNameInput = document.getElementById("facility-name-input");
-      const facilityLocationId = document.getElementById("facility-location-id");
-      const facilityMaxCases = document.getElementById("facility-max-cases");
       const facilityAddress = document.getElementById("facility-address");
+      const facilityAddress2 = document.getElementById("facility-address2");
+      const facilityCity = document.getElementById("facility-city");
+      const facilityState = document.getElementById("facility-state");
+      const facilityStateValue = document.getElementById("facility-state-value");
+      const facilityStateField = document.getElementById("facility-state-field");
+      const facilityStateMenu = document.getElementById("facility-state-menu");
+      const facilityZip = document.getElementById("facility-zip");
+      const facilityLatitude = document.getElementById("facility-latitude");
+      const facilityLongitude = document.getElementById("facility-longitude");
       const facilityInc = document.getElementById("facility-inc");
+      const facilityModalClose = document.getElementById("facility-modal-close");
+      const FACILITY_STATE_OPTIONS = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY","DC"];
       const existingFacilitiesBody = document.getElementById(
         "existing-facilities-body"
       );
+      const newFacilitiesBody = document.getElementById("new-facilities-body");
+      const newFacilitiesEmpty = document.getElementById("new-facilities-empty");
+      const addExistingFacilityButton = document.getElementById("add-existing-facility-button");
+      const addExistingFacilityModal = document.getElementById("add-existing-facility-modal");
+      const addExistingFacilityModalClose = document.getElementById("add-existing-facility-modal-close");
+      const addExistingFacilityModalCancel = document.getElementById("add-existing-facility-modal-cancel");
+      const addExistingFacilityModalConfirm = document.getElementById("add-existing-facility-modal-confirm");
+      const addExistingLocationField = document.getElementById("add-existing-location-field");
+      const addExistingLocationValue = document.getElementById("add-existing-location-value");
+      const addExistingLocationMenu = document.getElementById("add-existing-location-menu");
+      const addExistingLocationSearch = document.getElementById("add-existing-location-search");
+      const addExistingLocationOptions = document.getElementById("add-existing-location-options");
+      const addExistingFacilityNameField = document.getElementById("add-existing-facility-name-field");
+      const addExistingFacilityNameValue = document.getElementById("add-existing-facility-name-value");
+      const addExistingFacilityNameMenu = document.getElementById("add-existing-facility-name-menu");
+      const addExistingFacilityNameSearch = document.getElementById("add-existing-facility-name-search");
+      const addExistingFacilityNameOptions = document.getElementById("add-existing-facility-name-options");
+      const EXISTING_FACILITY_OPTIONS = [
+        { locationId: "1201", facilityName: "Facility 101", address: "4701 PYLON ST FORT WORTH TX 76106" },
+        { locationId: "1234", facilityName: "FLUS Forth Worth DC", address: "4701 PYLON ST FORT WORTH TX 76106" },
+        { locationId: "5678", facilityName: "PBC US Forth Worth DC", address: "5201 BLUE MOUND RD FORT WORTH TX 76106" },
+        { locationId: "9012", facilityName: "North Texas Distribution Center", address: "3100 S FREEWAY FORT WORTH TX 76110" },
+        { locationId: "3456", facilityName: "Dallas Regional Warehouse", address: "2100 N INDUSTRIAL BLVD DALLAS TX 75201" },
+        { locationId: "7890", facilityName: "Houston Gulf Coast DC", address: "8500 MARKET ST HOUSTON TX 77029" },
+      ];
       const runModal = document.getElementById("run-modal");
       const runModalConfirm = document.getElementById("run-modal-confirm");
       const runModalCancel = document.getElementById("run-modal-cancel");
@@ -6155,26 +6417,34 @@
         }
         const isReady =
           Boolean(facilityNameInput?.value.trim()) &&
-          Boolean(facilityLocationId?.value.trim()) &&
-          Boolean(facilityMaxCases?.value.trim()) &&
-          Boolean(facilityAddress?.value.trim());
+          Boolean(facilityAddress?.value.trim()) &&
+          Boolean(facilityCity?.value.trim()) &&
+          Boolean(facilityState?.value) &&
+          Boolean(facilityZip?.value.trim());
         facilityModalConfirm.disabled = !isReady;
-        facilityModalConfirm.classList.toggle("bg-[#004895]", isReady);
-        facilityModalConfirm.classList.toggle("text-white", isReady);
-        facilityModalConfirm.classList.toggle("hover:bg-[#002B5E]", isReady);
-        facilityModalConfirm.classList.toggle("bg-[#dadada]", !isReady);
-        facilityModalConfirm.classList.toggle("text-[#b1b1b1]", !isReady);
-        facilityModalConfirm.classList.toggle("cursor-not-allowed", !isReady);
       };
       const showFacilityModal = () => {
         if (!facilityModal) {
           return;
         }
         if (facilityNameInput) facilityNameInput.value = "";
-        if (facilityLocationId) facilityLocationId.value = "";
-        if (facilityMaxCases) facilityMaxCases.value = "";
         if (facilityAddress) facilityAddress.value = "";
+        if (facilityAddress2) facilityAddress2.value = "";
+        if (facilityCity) facilityCity.value = "";
+        if (facilityState) facilityState.value = "";
+        if (facilityStateValue) {
+          facilityStateValue.textContent = "Select State";
+          facilityStateValue.classList.add("text-[#b1b1b1]");
+        }
+        if (facilityZip) facilityZip.value = "";
+        if (facilityLatitude) facilityLatitude.value = "";
+        if (facilityLongitude) facilityLongitude.value = "";
         if (facilityInc) facilityInc.checked = false;
+        if (facilityStateMenu) facilityStateMenu.classList.add("hidden");
+        if (facilityStateField) {
+          facilityStateField.classList.remove("border-[#004895]");
+          facilityStateField.classList.add("border-[#c0c0c0]");
+        }
         updateFacilityModalState();
         facilityModal.classList.remove("hidden");
         facilityModal.classList.add("flex");
@@ -6251,35 +6521,189 @@
         updateChainNames(chainBusinessUnit.value);
       });
       createFacilityButton?.addEventListener("click", showFacilityModal);
-      facilityModalCancel?.addEventListener("click", hideFacilityModal);
-      facilityModalConfirm?.addEventListener("click", () => {
-        if (
-          !existingFacilitiesBody ||
-          !facilityNameInput ||
-          !facilityLocationId ||
-          !facilityMaxCases ||
-          !facilityAddress
-        ) {
-          hideFacilityModal();
+      let addExistingSelectedFacility = null;
+      const hideAddExistingFacilityModal = () => {
+        if (!addExistingFacilityModal) return;
+        addExistingFacilityModal.classList.add("hidden");
+        addExistingFacilityModal.classList.remove("flex");
+        if (addExistingLocationMenu) addExistingLocationMenu.classList.add("hidden");
+        if (addExistingFacilityNameMenu) addExistingFacilityNameMenu.classList.add("hidden");
+      };
+      const renderAddExistingLocationOptions = (searchTerm) => {
+        if (!addExistingLocationOptions) return;
+        const term = (searchTerm || "").trim().toLowerCase();
+        const filtered = term
+          ? EXISTING_FACILITY_OPTIONS.filter(
+              (f) =>
+                f.locationId.toLowerCase().includes(term) ||
+                f.facilityName.toLowerCase().includes(term)
+            )
+          : EXISTING_FACILITY_OPTIONS;
+        addExistingLocationOptions.innerHTML = filtered
+          .map(
+            (f) =>
+              `<div class="cursor-pointer rounded px-2 py-1.5 hover:bg-[#d8e7fb]" data-location-id="${f.locationId.replace(/"/g, "&quot;")}" data-facility-name="${f.facilityName.replace(/"/g, "&quot;")}" data-address="${f.address.replace(/"/g, "&quot;")}">${f.locationId} – ${f.facilityName}</div>`
+          )
+          .join("");
+      };
+      const renderAddExistingFacilityNameOptions = (searchTerm) => {
+        if (!addExistingFacilityNameOptions) return;
+        const term = (searchTerm || "").trim().toLowerCase();
+        const filtered = term
+          ? EXISTING_FACILITY_OPTIONS.filter(
+              (f) =>
+                f.facilityName.toLowerCase().includes(term) ||
+                f.locationId.toLowerCase().includes(term)
+            )
+          : EXISTING_FACILITY_OPTIONS;
+        addExistingFacilityNameOptions.innerHTML = filtered
+          .map(
+            (f) =>
+              `<div class="cursor-pointer rounded px-2 py-1.5 hover:bg-[#d8e7fb]" data-location-id="${f.locationId.replace(/"/g, "&quot;")}" data-facility-name="${f.facilityName.replace(/"/g, "&quot;")}" data-address="${f.address.replace(/"/g, "&quot;")}">${f.facilityName} – ${f.locationId}</div>`
+          )
+          .join("");
+      };
+      const updateAddExistingFacilityModalState = () => {
+        if (!addExistingFacilityModalConfirm) return;
+        const isReady = Boolean(addExistingSelectedFacility);
+        addExistingFacilityModalConfirm.disabled = !isReady;
+        addExistingFacilityModalConfirm.classList.toggle("bg-[#004895]", isReady);
+        addExistingFacilityModalConfirm.classList.toggle("text-white", isReady);
+        addExistingFacilityModalConfirm.classList.toggle("hover:bg-[#002B5E]", isReady);
+        addExistingFacilityModalConfirm.classList.toggle("bg-[#dadada]", !isReady);
+        addExistingFacilityModalConfirm.classList.toggle("text-[#b1b1b1]", !isReady);
+        addExistingFacilityModalConfirm.classList.toggle("cursor-not-allowed", !isReady);
+      };
+      const setAddExistingFacilitySelection = (facility) => {
+        addExistingSelectedFacility = facility;
+        if (facility) {
+          if (addExistingFacilityNameValue) {
+            addExistingFacilityNameValue.textContent = facility.facilityName;
+            addExistingFacilityNameValue.classList.remove("text-[#b1b1b1]");
+            addExistingFacilityNameValue.classList.add("text-[#2d2d2d]");
+          }
+          if (addExistingLocationValue) {
+            addExistingLocationValue.textContent = facility.locationId;
+            addExistingLocationValue.classList.remove("text-[#b1b1b1]");
+            addExistingLocationValue.classList.add("text-[#2d2d2d]");
+          }
+        } else {
+          if (addExistingFacilityNameValue) {
+            addExistingFacilityNameValue.textContent = "Facility 101";
+            addExistingFacilityNameValue.classList.add("text-[#b1b1b1]");
+            addExistingFacilityNameValue.classList.remove("text-[#2d2d2d]");
+          }
+          if (addExistingLocationValue) {
+            addExistingLocationValue.textContent = "1201";
+            addExistingLocationValue.classList.add("text-[#b1b1b1]");
+            addExistingLocationValue.classList.remove("text-[#2d2d2d]");
+          }
+        }
+        updateAddExistingFacilityModalState();
+      };
+      addExistingFacilityButton?.addEventListener("click", () => {
+        if (!addExistingFacilityModal) return;
+        setAddExistingFacilitySelection(null);
+        if (addExistingLocationSearch) addExistingLocationSearch.value = "";
+        if (addExistingFacilityNameSearch) addExistingFacilityNameSearch.value = "";
+        renderAddExistingLocationOptions("");
+        renderAddExistingFacilityNameOptions("");
+        if (addExistingLocationMenu) addExistingLocationMenu.classList.add("hidden");
+        if (addExistingFacilityNameMenu) addExistingFacilityNameMenu.classList.add("hidden");
+        addExistingFacilityModal.classList.remove("hidden");
+        addExistingFacilityModal.classList.add("flex");
+      });
+      addExistingFacilityModalClose?.addEventListener("click", hideAddExistingFacilityModal);
+      addExistingFacilityModalCancel?.addEventListener("click", hideAddExistingFacilityModal);
+      addExistingLocationField?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (!addExistingLocationMenu) return;
+        const isHidden = addExistingLocationMenu.classList.contains("hidden");
+        if (isHidden) {
+          addExistingLocationMenu.classList.remove("hidden");
+          addExistingLocationSearch?.focus();
+          if (addExistingFacilityNameMenu) addExistingFacilityNameMenu.classList.add("hidden");
+        } else {
+          addExistingLocationMenu.classList.add("hidden");
+        }
+      });
+      addExistingLocationSearch?.addEventListener("input", () => {
+        renderAddExistingLocationOptions(addExistingLocationSearch.value);
+      });
+      addExistingLocationSearch?.addEventListener("click", (e) => e.stopPropagation());
+      addExistingLocationMenu?.addEventListener("click", (e) => e.stopPropagation());
+      addExistingLocationOptions?.addEventListener("click", (e) => {
+        const row = e.target.closest("[data-location-id]");
+        if (!row) return;
+        const locationId = row.getAttribute("data-location-id")?.replace(/&quot;/g, '"');
+        const facilityName = row.getAttribute("data-facility-name")?.replace(/&quot;/g, '"');
+        const address = row.getAttribute("data-address")?.replace(/&quot;/g, '"');
+        if (!locationId || !facilityName || !address) return;
+        setAddExistingFacilitySelection({ locationId, facilityName, address });
+        if (addExistingLocationMenu) addExistingLocationMenu.classList.add("hidden");
+        if (addExistingFacilityNameMenu) addExistingFacilityNameMenu.classList.add("hidden");
+      });
+      addExistingFacilityNameField?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (!addExistingFacilityNameMenu) return;
+        const isHidden = addExistingFacilityNameMenu.classList.contains("hidden");
+        if (isHidden) {
+          addExistingFacilityNameMenu.classList.remove("hidden");
+          addExistingFacilityNameSearch?.focus();
+          if (addExistingLocationMenu) addExistingLocationMenu.classList.add("hidden");
+        } else {
+          addExistingFacilityNameMenu.classList.add("hidden");
+        }
+      });
+      addExistingFacilityNameSearch?.addEventListener("input", () => {
+        renderAddExistingFacilityNameOptions(addExistingFacilityNameSearch.value);
+      });
+      addExistingFacilityNameSearch?.addEventListener("click", (e) => e.stopPropagation());
+      addExistingFacilityNameMenu?.addEventListener("click", (e) => e.stopPropagation());
+      addExistingFacilityNameOptions?.addEventListener("click", (e) => {
+        const row = e.target.closest("[data-location-id]");
+        if (!row) return;
+        const locationId = row.getAttribute("data-location-id")?.replace(/&quot;/g, '"');
+        const facilityName = row.getAttribute("data-facility-name")?.replace(/&quot;/g, '"');
+        const address = row.getAttribute("data-address")?.replace(/&quot;/g, '"');
+        if (!locationId || !facilityName || !address) return;
+        setAddExistingFacilitySelection({ locationId, facilityName, address });
+        if (addExistingFacilityNameMenu) addExistingFacilityNameMenu.classList.add("hidden");
+        if (addExistingLocationMenu) addExistingLocationMenu.classList.add("hidden");
+      });
+      document.addEventListener("click", () => {
+        if (gtmChainNameMenu && !gtmChainNameMenu.classList.contains("hidden")) {
+          gtmChainNameMenu.classList.add("hidden");
+        }
+        if (addExistingLocationMenu && !addExistingLocationMenu.classList.contains("hidden")) {
+          addExistingLocationMenu.classList.add("hidden");
+        }
+        if (addExistingFacilityNameMenu && !addExistingFacilityNameMenu.classList.contains("hidden")) {
+          addExistingFacilityNameMenu.classList.add("hidden");
+        }
+      });
+      addExistingFacilityModalConfirm?.addEventListener("click", () => {
+        if (!addExistingSelectedFacility || !existingFacilitiesBody) {
+          hideAddExistingFacilityModal();
           return;
         }
+        const { facilityName, locationId, address } = addExistingSelectedFacility;
+        const defaultCases = "46";
         const row = document.createElement("div");
         row.className =
           "grid min-h-[48px] grid-cols-[1.2fr_80px_120px_220px_1.2fr] items-center gap-4 px-2 py-2";
-        const defaultCases = facilityMaxCases.value.trim();
         row.innerHTML = `
-          <div>${facilityNameInput.value.trim()}</div>
+          <div>${facilityName.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
           <div class="flex items-center">
-            <input type="checkbox" class="table-checkbox" ${facilityInc?.checked ? "checked" : ""} />
+            <input type="checkbox" class="table-checkbox" checked />
           </div>
-          <div>${facilityLocationId.value.trim()}</div>
+          <div>${locationId.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
           <div>
             <input
               type="number"
               class="facility-input"
               value="${defaultCases}"
               data-default="${defaultCases}"
-              ${facilityInc?.checked ? "" : "disabled"}
             />
             <div class="mt-1 flex items-center gap-1 text-[12px] text-[#b1b1b1]">
               <span class="material-icons text-[16px] text-[#b1b1b1]">
@@ -6288,7 +6712,7 @@
               Default: ${defaultCases}
             </div>
           </div>
-          <div>${facilityAddress.value.trim()}</div>
+          <div>${address.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
         `;
         existingFacilitiesBody.prepend(row);
         const input = row.querySelector(".facility-input");
@@ -6296,13 +6720,105 @@
         registerFacilityRow(input, checkbox, { setInitial: false });
         facilityRows.push({ input, checkbox });
         updateDefineChangeCounts();
+        hideAddExistingFacilityModal();
+      });
+      facilityModalClose?.addEventListener("click", hideFacilityModal);
+      facilityModalCancel?.addEventListener("click", hideFacilityModal);
+      facilityModalConfirm?.addEventListener("click", () => {
+        if (
+          !newFacilitiesBody ||
+          !newFacilitiesEmpty ||
+          !facilityNameInput ||
+          !facilityAddress ||
+          !facilityCity ||
+          !facilityState?.value ||
+          !facilityZip
+        ) {
+          hideFacilityModal();
+          return;
+        }
+        const addr2 = facilityAddress2?.value.trim() || "";
+        const parts = [
+          facilityAddress.value.trim(),
+          addr2,
+          facilityCity.value.trim(),
+          facilityState.value + " " + facilityZip.value.trim(),
+        ].filter(Boolean);
+        const fullAddress = parts.join(", ");
+        const row = document.createElement("div");
+        row.className =
+          "grid min-h-[48px] grid-cols-[1.2fr_80px_1fr_1.2fr] items-center gap-4 px-2 py-2";
+        const incChecked = facilityInc?.checked !== false;
+        row.innerHTML = `
+          <div>${facilityNameInput.value.trim().replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
+          <div class="flex items-center">
+            <input type="checkbox" class="table-checkbox" ${incChecked ? "checked" : ""} />
+          </div>
+          <div>
+            <input
+              type="number"
+              class="facility-input"
+              value=""
+              data-default=""
+              placeholder="0"
+              ${incChecked ? "" : "disabled"}
+            />
+          </div>
+          <div>${fullAddress.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
+        `;
+        newFacilitiesBody.appendChild(row);
+        newFacilitiesBody.classList.remove("hidden");
+        newFacilitiesEmpty.classList.add("hidden");
+        const input = row.querySelector(".facility-input");
+        const checkbox = row.querySelector(".table-checkbox");
+        registerFacilityRow(input, checkbox, { setInitial: false });
+        updateDefineChangeCounts();
         hideFacilityModal();
       });
+      if (facilityStateField && facilityStateMenu && facilityStateValue && facilityState) {
+        facilityStateField.addEventListener("click", () => {
+          const isHidden = facilityStateMenu.classList.contains("hidden");
+          facilityStateMenu.classList.toggle("hidden", !isHidden);
+          facilityStateField.classList.toggle("border-[#004895]", isHidden);
+          facilityStateField.classList.toggle("border-[#c0c0c0]", !isHidden);
+          if (isHidden) {
+            facilityStateMenu.innerHTML = "";
+            FACILITY_STATE_OPTIONS.forEach((abbr) => {
+              const opt = document.createElement("div");
+              opt.className = "cursor-pointer px-2 py-1 hover:bg-[#f5f9ff]";
+              opt.textContent = abbr;
+              opt.addEventListener("click", (e) => {
+                e.stopPropagation();
+                facilityState.value = abbr;
+                facilityStateValue.textContent = abbr;
+                facilityStateValue.classList.remove("text-[#b1b1b1]");
+                facilityStateValue.classList.add("text-[#2d2d2d]");
+                facilityStateMenu.classList.add("hidden");
+                facilityStateField.classList.remove("border-[#004895]");
+                facilityStateField.classList.add("border-[#c0c0c0]");
+                updateFacilityModalState();
+              });
+              facilityStateMenu.appendChild(opt);
+            });
+          }
+        });
+        document.addEventListener("click", (e) => {
+          if (facilityStateMenu && !facilityStateMenu.classList.contains("hidden") &&
+              !facilityStateField.contains(e.target) && !facilityStateMenu.contains(e.target)) {
+            facilityStateMenu.classList.add("hidden");
+            facilityStateField.classList.remove("border-[#004895]");
+            facilityStateField.classList.add("border-[#c0c0c0]");
+          }
+        });
+      }
       [
         facilityNameInput,
-        facilityLocationId,
-        facilityMaxCases,
         facilityAddress,
+        facilityAddress2,
+        facilityCity,
+        facilityZip,
+        facilityLatitude,
+        facilityLongitude,
       ].forEach((input) => {
         input?.addEventListener("input", updateFacilityModalState);
       });
