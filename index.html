@@ -427,6 +427,10 @@
         outline: none;
         border-color: #004895;
       }
+      .workspace-search-input:focus,
+      .workspace-search-input:active {
+        outline: none;
+      }
       #facility-modal input[type="text"]:focus,
       #facility-modal input[type="number"]:focus,
       #facility-modal input[type="text"]:active,
@@ -1078,20 +1082,40 @@
                     </button>
                   </div>
                   <div class="flex items-center gap-3">
-                    <div class="relative">
-                      <div
-                        class="flex h-8 w-8 items-center justify-center rounded border border-[#d8e7fb] bg-white"
+                    <div id="workspace-search-wrap" class="flex h-8 items-center gap-2">
+                      <button
+                        id="workspace-search-toggle"
+                        type="button"
+                        class="workspace-search-toggle flex h-8 w-8 flex-shrink-0 items-center justify-center rounded border border-[#d8e7fb] bg-white transition-colors hover:border-[#0662C4] hover:bg-[#f5f9ff]"
+                        aria-label="Search"
                       >
-                        <span
-                          class="material-icons inline-flex h-4 w-4 items-center justify-center text-[16px] leading-none text-[#004895]"
-                        >
+                        <span class="material-icons inline-flex h-4 w-4 items-center justify-center text-[16px] leading-none text-[#004895]">
                           search
                         </span>
-                      </div>
+                      </button>
                       <div
-                        class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 translate-y-[-35px] rounded bg-[#262626] px-2 py-1 text-[12px] text-[#efefef] opacity-0 shadow-[0px_4px_24px_0px_rgba(58,58,58,0.08)]"
+                        id="workspace-search-expanded"
+                        class="workspace-search-expanded hidden h-8 min-w-[200px] flex-1 flex items-center gap-2 bg-transparent pr-1"
                       >
-                        Search
+                        <div class="flex h-8 min-w-0 flex-1 items-center gap-2 border-0 border-b-2 border-[#c0c0c0] focus-within:!border-[#0662C4]">
+                          <input
+                            id="workspace-search-input"
+                            type="text"
+                            class="workspace-search-input h-full min-w-0 flex-1 border-0 bg-transparent px-1 text-[14px] text-[#2d2d2d] outline-none placeholder:text-[#9e9e9e]"
+                            placeholder="Search..."
+                            autocomplete="off"
+                          />
+                          <span class="material-icons inline-flex h-4 w-4 flex-shrink-0 text-[16px] leading-none text-[#4b4b4b]">
+                            search
+                          </span>
+                        </div>
+                        <button
+                          id="workspace-search-cancel"
+                          type="button"
+                          class="flex h-8 flex-shrink-0 items-center text-[14px] font-bold text-[#004895] transition-colors hover:text-[#002B5E]"
+                        >
+                          Cancel
+                        </button>
                       </div>
                     </div>
                     <div class="h-6 w-px bg-[#d8e7fb]"></div>
@@ -1164,48 +1188,48 @@
                     class="table-checkbox"
                   />
                 </div>
-                <div class="flex items-center gap-2 px-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                <button type="button" class="workspace-sort-header flex w-full min-w-0 items-center gap-2 px-2 text-left text-[12px] font-bold uppercase text-[#4b4b4b] cursor-pointer hover:text-[#004895]" data-sort="scenarioId">
                   Scenario ID
                   <span class="icon-16">
-                    <span class="material-icons icon-sort">unfold_more</span>
+                    <span class="material-icons icon-sort workspace-sort-icon">unfold_more</span>
                   </span>
-                </div>
-                <div class="flex items-center gap-2 px-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                </button>
+                <button type="button" class="workspace-sort-header flex w-full min-w-0 items-center gap-2 px-2 text-left text-[12px] font-bold uppercase text-[#4b4b4b] cursor-pointer hover:text-[#004895]" data-sort="description">
                   Description
                   <span class="icon-16">
-                    <span class="material-icons icon-sort">unfold_more</span>
+                    <span class="material-icons icon-sort workspace-sort-icon">unfold_more</span>
                   </span>
-                </div>
-                <div class="flex items-center gap-2 px-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                </button>
+                <button type="button" class="workspace-sort-header flex w-full min-w-0 items-center gap-2 px-2 text-left text-[12px] font-bold uppercase text-[#4b4b4b] cursor-pointer hover:text-[#004895]" data-sort="portfolio">
                   Portfolio
                   <span class="icon-16">
-                    <span class="material-icons icon-sort">unfold_more</span>
+                    <span class="material-icons icon-sort workspace-sort-icon">unfold_more</span>
                   </span>
-                </div>
-                <div class="flex items-center gap-2 px-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                </button>
+                <button type="button" class="workspace-sort-header flex w-full min-w-0 items-center gap-2 px-2 text-left text-[12px] font-bold uppercase text-[#4b4b4b] cursor-pointer hover:text-[#004895]" data-sort="owner">
                   Owner
                   <span class="icon-16">
-                    <span class="material-icons icon-sort">unfold_more</span>
+                    <span class="material-icons icon-sort workspace-sort-icon">unfold_more</span>
                   </span>
-                </div>
-                <div class="flex items-center gap-2 px-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                </button>
+                <button type="button" class="workspace-sort-header flex w-full min-w-0 items-center gap-2 px-2 text-left text-[12px] font-bold uppercase text-[#4b4b4b] cursor-pointer hover:text-[#004895]" data-sort="status">
                   Status
                   <span class="icon-16">
-                    <span class="material-icons icon-sort">unfold_more</span>
+                    <span class="material-icons icon-sort workspace-sort-icon">unfold_more</span>
                   </span>
-                </div>
-                <div class="flex items-center gap-2 px-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                </button>
+                <button type="button" class="workspace-sort-header flex w-full min-w-0 items-center gap-2 px-2 text-left text-[12px] font-bold uppercase text-[#4b4b4b] cursor-pointer hover:text-[#004895]" data-sort="dateModified">
                   Date Modified
                   <span class="icon-16">
-                    <span class="material-icons icon-sort">unfold_more</span>
+                    <span class="material-icons icon-sort workspace-sort-icon">unfold_more</span>
                   </span>
-                </div>
-                <div class="flex items-center gap-2 px-2 text-[12px] font-bold uppercase text-[#4b4b4b]">
+                </button>
+                <button type="button" class="workspace-sort-header flex w-full min-w-0 items-center gap-2 px-2 text-left text-[12px] font-bold uppercase text-[#4b4b4b] cursor-pointer hover:text-[#004895]" data-sort="ptsImpact">
                   PTS Impact
                   <span class="icon-16">
-                    <span class="material-icons icon-sort">unfold_more</span>
+                    <span class="material-icons icon-sort workspace-sort-icon">unfold_more</span>
                   </span>
-                </div>
+                </button>
               </div>
 
               <div
@@ -4925,10 +4949,7 @@
             class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[14px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
             type="button"
           >
-            <span class="material-icons text-[20px] text-current">
-              refresh
-            </span>
-            Re-run
+            Run with default parameters
           </button>
           <button
             id="baseline-define-parameters"
@@ -5505,6 +5526,45 @@
         </div>
       </div>
       <div
+        id="run-default-modal"
+        class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/40 px-6"
+      >
+        <div class="modal-content w-full max-w-[420px] rounded-lg bg-white p-6 shadow-[0px_8px_24px_0px_rgba(0,0,0,0.12)]">
+          <div class="text-[18px] font-bold text-[#2d2d2d]">
+            Run with default parameters?
+          </div>
+          <p class="mt-2 text-[14px] text-[#4b4b4b]">
+            This will start the scenario with default parameters and return you to the workspace.
+          </p>
+          <label class="mt-4 flex flex-col gap-2 text-[12px] text-[#4b4b4b]">
+            Description
+            <input
+              id="run-default-modal-description"
+              type="text"
+              class="run-modal-input h-9 rounded border border-[#c0c0c0] bg-white px-2 text-[14px] text-[#2d2d2d]"
+              placeholder="Enter scenario description"
+            />
+          </label>
+          <div class="mt-5 flex items-center justify-end gap-3">
+            <button
+              id="run-default-modal-cancel"
+              class="flex h-8 items-center gap-1 rounded-full border border-[#004895] bg-white px-4 text-[14px] font-bold text-[#004895] transition-colors hover:border-[#002B5E] hover:text-[#002B5E]"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              id="run-default-modal-confirm"
+              class="flex h-8 items-center gap-1 rounded-full bg-[#dadada] px-4 text-[14px] font-bold text-[#b1b1b1] transition-colors cursor-not-allowed"
+              type="button"
+              disabled
+            >
+              Yes, run
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
         id="run-modal"
         class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/40 px-6"
       >
@@ -5577,6 +5637,10 @@
       const statusApply = document.getElementById("status-apply");
       const portfolioCancel = document.getElementById("portfolio-cancel");
       const statusCancel = document.getElementById("status-cancel");
+      const workspaceSearchToggle = document.getElementById("workspace-search-toggle");
+      const workspaceSearchExpanded = document.getElementById("workspace-search-expanded");
+      const workspaceSearchInput = document.getElementById("workspace-search-input");
+      const workspaceSearchCancel = document.getElementById("workspace-search-cancel");
       const defineScopeTabs = Array.from(
         document.querySelectorAll(".define-scope-tab")
       );
@@ -5708,6 +5772,10 @@
         { locationId: "3456", facilityName: "Dallas Regional Warehouse", address: "2100 N INDUSTRIAL BLVD DALLAS TX 75201" },
         { locationId: "7890", facilityName: "Houston Gulf Coast DC", address: "8500 MARKET ST HOUSTON TX 77029" },
       ];
+      const runDefaultModal = document.getElementById("run-default-modal");
+      const runDefaultModalConfirm = document.getElementById("run-default-modal-confirm");
+      const runDefaultModalCancel = document.getElementById("run-default-modal-cancel");
+      const runDefaultModalDescription = document.getElementById("run-default-modal-description");
       const runModal = document.getElementById("run-modal");
       const runModalConfirm = document.getElementById("run-modal-confirm");
       const runModalCancel = document.getElementById("run-modal-cancel");
@@ -5969,10 +6037,20 @@
       let activeTab = "all";
       const WORKSPACE_PAGE_SIZE = 10;
       let workspacePage = 1;
+      let workspaceSearchTerm = "";
+      let workspaceSortColumn = "scenarioId";
+      let workspaceSortDirection = "asc";
       const formatScenarioDate = (date) => {
         const month = String(date.getMonth() + 1).padStart(2, "0");
         const day = String(date.getDate()).padStart(2, "0");
         return `${month} ${day}, ${date.getFullYear()}`;
+      };
+      /** Format PTS Impact as 0.00MM (millions, two decimal places). Stored values are in thousands, so divide by 1000 for display. */
+      const formatPtsImpact = (ptsImpact) => {
+        if (ptsImpact == null || ptsImpact === "") return "0.00MM";
+        const raw = Number(String(ptsImpact).replace(/[$,M]/g, "").replace(/,/g, "").trim()) || 0;
+        const millions = raw / 1000;
+        return millions.toFixed(2) + "MM";
       };
       const getNextScenarioId = () => {
         const maxId = scenarios.reduce((currentMax, scenario) => {
@@ -6066,10 +6144,7 @@
       });
 
       baselineRerun.addEventListener("click", () => {
-        currentBaselineData = buildBaselineData();
-        renderBaseline(currentBaselineData);
-        setView("baseline");
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        showRunDefaultModal();
       });
 
       baselineDefineParameters.addEventListener("click", () => {
@@ -6249,6 +6324,30 @@
         }
         runModal.classList.add("hidden");
         runModal.classList.remove("flex");
+      };
+
+      const updateRunDefaultModalState = () => {
+        if (!runDefaultModalConfirm) return;
+        const isReady = Boolean(runDefaultModalDescription?.value.trim());
+        runDefaultModalConfirm.disabled = !isReady;
+        runDefaultModalConfirm.classList.toggle("bg-[#004895]", isReady);
+        runDefaultModalConfirm.classList.toggle("text-white", isReady);
+        runDefaultModalConfirm.classList.toggle("hover:bg-[#002B5E]", isReady);
+        runDefaultModalConfirm.classList.toggle("bg-[#dadada]", !isReady);
+        runDefaultModalConfirm.classList.toggle("text-[#b1b1b1]", !isReady);
+        runDefaultModalConfirm.classList.toggle("cursor-not-allowed", !isReady);
+      };
+      const showRunDefaultModal = () => {
+        if (!runDefaultModal) return;
+        if (runDefaultModalDescription) runDefaultModalDescription.value = "";
+        updateRunDefaultModalState();
+        runDefaultModal.classList.remove("hidden");
+        runDefaultModal.classList.add("flex");
+      };
+      const hideRunDefaultModal = () => {
+        if (!runDefaultModal) return;
+        runDefaultModal.classList.add("hidden");
+        runDefaultModal.classList.remove("flex");
       };
 
       const chainOptions = {
@@ -6478,6 +6577,33 @@
       });
       runModalCancel?.addEventListener("click", hideRunModal);
       runModalDescription?.addEventListener("input", updateRunModalState);
+
+      runDefaultModalCancel?.addEventListener("click", hideRunDefaultModal);
+      runDefaultModalDescription?.addEventListener("input", updateRunDefaultModalState);
+      runDefaultModalConfirm?.addEventListener("click", () => {
+        const description = runDefaultModalDescription?.value.trim() || "Run with default parameters";
+        hideRunDefaultModal();
+        const displayPortfolio = normalizePortfolioLabel(
+          portfolioSelected || portfolioSelectValue?.textContent || "1NA"
+        );
+        const scenario = {
+          id: getNextScenarioId(),
+          description,
+          portfolio: displayPortfolio,
+          status: "In progress",
+          runningTime: "Running for 00hh 05mm",
+          ptsImpact: "$0",
+        };
+        createScenario(scenario);
+        setView("workspace");
+        renderTable();
+        workspaceView?.classList.remove("hidden");
+        scenarioView?.classList.add("hidden");
+        baselineView?.classList.add("hidden");
+        defineParametersView?.classList.add("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
       outputBack?.addEventListener("click", () => {
         setView("workspace");
         renderTable();
@@ -7181,7 +7307,7 @@
               </span>
             </div>
             ${renderDateCell(scenario)}
-            <div class="px-2 text-[14px]">${scenario.ptsImpact}</div>
+            <div class="px-2 text-[14px]">${formatPtsImpact(scenario.ptsImpact)}</div>
           </div>
         `;
       }
@@ -7195,6 +7321,86 @@
           const statusPass =
             statusSet.size === 0 || statusSet.has(scenario.status);
           return portfolioPass && statusPass;
+        });
+      }
+
+      function applyWorkspaceSearch(list, term) {
+        const t = (term || "").trim().toLowerCase();
+        if (!t) return list;
+        return list.filter((scenario) => {
+          const dateText = scenario.runningTime || scenario.dateModified || "";
+          const ptsText = formatPtsImpact(scenario.ptsImpact);
+          const parts = [
+            scenario.id || "",
+            scenario.description || "",
+            scenario.portfolio || "",
+            scenario.owner || "",
+            scenario.status || "",
+            dateText,
+            ptsText,
+          ];
+          return parts.some((s) => String(s).toLowerCase().includes(t));
+        });
+      }
+
+      function parseScenarioIdNumber(id) {
+        if (id == null || id === "") return 0;
+        const match = String(id).match(/SC-(\d+)/i);
+        return match ? Number(match[1]) : 0;
+      }
+
+      function parseDateModifiedToTimestamp(scenario) {
+        if (scenario.runningTime) return Number.MAX_SAFE_INTEGER;
+        const s = (scenario.dateModified || "").trim();
+        if (!s) return 0;
+        const parts = s.split(/\s+/);
+        if (parts.length < 3) return 0;
+        const month = parseInt(parts[0], 10) || 0;
+        const day = parseInt(parts[1].replace(/,/g, ""), 10) || 0;
+        const year = parseInt(parts[2], 10) || 0;
+        const d = new Date(year, month - 1, day);
+        return isNaN(d.getTime()) ? 0 : d.getTime();
+      }
+
+      function applySort(list, column, direction) {
+        const dir = direction === "desc" ? -1 : 1;
+        return [...list].sort((a, b) => {
+          let cmp = 0;
+          switch (column) {
+            case "scenarioId": {
+              const na = parseScenarioIdNumber(a.id);
+              const nb = parseScenarioIdNumber(b.id);
+              cmp = na - nb;
+              break;
+            }
+            case "description":
+              cmp = (a.description || "").localeCompare(b.description || "", undefined, { sensitivity: "base" });
+              break;
+            case "portfolio":
+              cmp = (a.portfolio || "").localeCompare(b.portfolio || "", undefined, { sensitivity: "base" });
+              break;
+            case "owner":
+              cmp = (a.owner || "").localeCompare(b.owner || "", undefined, { sensitivity: "base" });
+              break;
+            case "status":
+              cmp = (a.status || "").localeCompare(b.status || "", undefined, { sensitivity: "base" });
+              break;
+            case "dateModified": {
+              const ta = parseDateModifiedToTimestamp(a);
+              const tb = parseDateModifiedToTimestamp(b);
+              cmp = ta - tb;
+              break;
+            }
+            case "ptsImpact": {
+              const pa = parsePtsImpactToMillions(a.ptsImpact) ?? 0;
+              const pb = parsePtsImpactToMillions(b.ptsImpact) ?? 0;
+              cmp = pa - pb;
+              break;
+            }
+            default:
+              return 0;
+          }
+          return cmp * dir;
         });
       }
 
@@ -7346,17 +7552,53 @@
       }
 
       function renderTable() {
-        const visibleScenarios = applyFilters(getVisibleScenarios());
-        const { pageItems, totalPages } = getWorkspacePagination(
-          visibleScenarios
+        const afterFilters = applyFilters(getVisibleScenarios());
+        const afterSearch = applyWorkspaceSearch(
+          afterFilters,
+          workspaceSearchTerm
         );
+        const sorted = applySort(
+          afterSearch,
+          workspaceSortColumn,
+          workspaceSortDirection
+        );
+        const { pageItems, totalPages } = getWorkspacePagination(sorted);
         tableBody.innerHTML = pageItems.map(renderRow).join("");
         totalCount.textContent = pageItems.length;
         bindSelectionHandlers();
         updateSelectionState();
         updateChipCounts();
         updateWorkspacePaginationUI(totalPages);
+        updateWorkspaceSortHeaders();
       }
+
+      function updateWorkspaceSortHeaders() {
+        document.querySelectorAll(".workspace-sort-header").forEach((btn) => {
+          const icon = btn.querySelector(".workspace-sort-icon");
+          if (!icon) return;
+          const col = btn.dataset.sort;
+          if (col === workspaceSortColumn) {
+            icon.textContent = workspaceSortDirection === "asc" ? "arrow_upward" : "arrow_downward";
+          } else {
+            icon.textContent = "unfold_more";
+          }
+        });
+      }
+
+      workspaceView?.addEventListener("click", (event) => {
+        const btn = event.target.closest(".workspace-sort-header");
+        if (!btn) return;
+        const col = btn.dataset.sort;
+        if (!col) return;
+        if (col === workspaceSortColumn) {
+          workspaceSortDirection = workspaceSortDirection === "asc" ? "desc" : "asc";
+        } else {
+          workspaceSortColumn = col;
+          workspaceSortDirection = col === "dateModified" ? "desc" : "asc";
+        }
+        workspacePage = 1;
+        renderTable();
+      });
 
       tableBody.addEventListener("click", (event) => {
         const link = event.target.closest("[data-scenario-id]");
@@ -7389,11 +7631,40 @@
         renderTable();
       });
       workspaceLastPage?.addEventListener("click", () => {
+        const afterFilters = applyFilters(getVisibleScenarios());
+        const visibleScenarios = applyWorkspaceSearch(
+          afterFilters,
+          workspaceSearchTerm
+        );
         const totalPages = Math.max(
           1,
-          Math.ceil(applyFilters(getVisibleScenarios()).length / WORKSPACE_PAGE_SIZE)
+          Math.ceil(visibleScenarios.length / WORKSPACE_PAGE_SIZE)
         );
         workspacePage = totalPages;
+        renderTable();
+      });
+
+      workspaceSearchToggle?.addEventListener("click", () => {
+        if (!workspaceSearchExpanded || !workspaceSearchInput) return;
+        workspaceSearchToggle.classList.add("hidden");
+        workspaceSearchExpanded.classList.remove("hidden");
+        workspaceSearchExpanded.classList.add("flex");
+        workspaceSearchInput.value = workspaceSearchTerm;
+        setTimeout(() => workspaceSearchInput.focus(), 0);
+      });
+      workspaceSearchCancel?.addEventListener("click", () => {
+        if (!workspaceSearchExpanded || !workspaceSearchToggle) return;
+        workspaceSearchTerm = "";
+        if (workspaceSearchInput) workspaceSearchInput.value = "";
+        workspaceSearchExpanded.classList.add("hidden");
+        workspaceSearchExpanded.classList.remove("flex");
+        workspaceSearchToggle.classList.remove("hidden");
+        workspacePage = 1;
+        renderTable();
+      });
+      workspaceSearchInput?.addEventListener("input", () => {
+        workspaceSearchTerm = workspaceSearchInput?.value.trim() ?? "";
+        workspacePage = 1;
         renderTable();
       });
 
@@ -8102,12 +8373,23 @@
         return `${sign}${Math.abs(Math.round(value))}`;
       }
 
+      /** Parse scenario.ptsImpact (e.g. "$1,180M") to total savings in millions (e.g. 1.18). Same scale as workspace PTS Impact. */
+      function parsePtsImpactToMillions(ptsImpact) {
+        if (ptsImpact == null || ptsImpact === "") return null;
+        const raw = Number(String(ptsImpact).replace(/[$,M]/g, "").replace(/,/g, "").trim()) || 0;
+        return raw / 1000;
+      }
+
       function buildOutputData(scenario) {
         const seed = Number(String(scenario.id).replace(/\D/g, "")) || 1;
         const random = createSeededRandom(seed);
         const randomBetween = (min, max) => min + random() * (max - min);
 
-        const totalSavings = randomBetween(0.95, 3.1);
+        const totalSavingsFromPts = parsePtsImpactToMillions(scenario.ptsImpact);
+        const totalSavings =
+          totalSavingsFromPts != null && totalSavingsFromPts >= 0
+            ? totalSavingsFromPts
+            : randomBetween(0.95, 3.1);
         const marginPoints = randomBetween(2.4, 4.1);
         const reduction = randomBetween(9.5, 13.2);
         const laborSavings = totalSavings * randomBetween(0.62, 0.78);
@@ -8155,15 +8437,15 @@
           stores: Math.round(randomBetween(180, 320)),
           annualNr: formatMoneyMillions(randomBetween(12, 22)),
           annualCases: formatMillions(randomBetween(2.5, 4.5)),
-          totalSavings: `$${totalSavings.toFixed(2)}M`,
+          totalSavings: `$${totalSavings.toFixed(2)}MM`,
           improvement: `+${marginPoints.toFixed(1)} Points Margin Improvement`,
           summaryLine1: `The proposed optimization generates <span class="font-bold text-[#2d2d2d]">$${totalSavings.toFixed(
             2
-          )}M in total savings</span>, driven largely by a <span class="font-bold text-[#2d2d2d]">${reduction.toFixed(
+          )}MM in total savings</span>, driven largely by a <span class="font-bold text-[#2d2d2d]">${reduction.toFixed(
             1
           )}% reduction in overall spend</span>. Labor costs are reduced by <span class="font-bold text-[#2d2d2d]">$${laborSavings.toFixed(
             2
-          )}M</span> through a targeted headcount reduction of ${headcountReduction} positions and scheduling changes.`,
+          )}MM</span> through a targeted headcount reduction of ${headcountReduction} positions and scheduling changes.`,
           summaryLine2: `The fleet is streamlined by ${fleetReduction} units, improving route efficiency and lowering miles by ${Math.abs(
             weeklyMiles
           )} per week. Additionally, improved sequencing has <span class="font-bold text-[#2d2d2d]">boosted revenue per drop by ${revenueBoost.toFixed(
@@ -8195,17 +8477,17 @@
           sensitivities: [
             {
               label: "Labor Efficiency (+/- 10%)",
-              worse: "($1.5)MM",
+              worse: `(${(totalSavings * 0.3).toFixed(2)})MM`,
               base: "-10%",
-              better: "$1.1MM",
-              range: "($.3)MM - $3.2MM",
+              better: `$${(totalSavings * 0.9).toFixed(2)}MM`,
+              range: `(${(totalSavings * 0.2).toFixed(2)})MM - $${(totalSavings * 1.4).toFixed(2)}MM`,
             },
             {
               label: "Wage Rates (+/- 5%)",
-              worse: "($0.7)MM",
+              worse: `(${(totalSavings * 0.2).toFixed(2)})MM`,
               base: "-5%",
-              better: "$0.7MM",
-              range: "$0.5MM - $1.9MM",
+              better: `$${(totalSavings * 0.6).toFixed(2)}MM`,
+              range: `$${(totalSavings * 0.4).toFixed(2)}MM - $${(totalSavings * 1.2).toFixed(2)}MM`,
             },
           ],
         };
